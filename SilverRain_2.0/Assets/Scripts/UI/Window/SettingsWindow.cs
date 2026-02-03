@@ -405,7 +405,7 @@ public class SettingsWindow : UIWindow
         private void Back()
         {
             Cancel();
-            CloseWindow();
+            UIManager.Instance.Pop();
         }
 
         private void Apply()
@@ -421,18 +421,6 @@ public class SettingsWindow : UIWindow
             Settings.ImportJsonSnapshot(_snapshotJson, false);
             SyncUIFromSettings();
         }
-
-        private void CloseWindow()
-        {
-            if (OnCloseWindow != null)
-            {
-                OnCloseWindow.Invoke();
-            }
-            else
-            {
-                // Default: just deactivate
-                gameObject.SetActive(false);
-            }
-        }
+        
         #endregion
 }
