@@ -70,15 +70,3 @@ public class WeaponStats : MonoBehaviour
         size = 0f;
     }
 }
-
-
-
-//TEMPORARY to avoid errors ---DELETE THIS--- ☺
-public enum StatType
-{
-    Damage,
-    Cooldown,
-    Duration,
-    ProjectileSpeed,
-    Size
-}

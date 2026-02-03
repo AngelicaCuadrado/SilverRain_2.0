@@ -47,5 +47,3 @@ public abstract class Weapon : MonoBehaviour, ITemporary
 
 
 //TEMPORARY to avoid errors ---DELETE THIS--- ☺
-public interface IUpgradeable{}
-public interface ITemporary{}

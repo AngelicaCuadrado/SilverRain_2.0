@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class StatModification : Modification
 {
-    public abstract float GetModifyValue();
+    public abstract float GetModifyValue(StatType type);
 }

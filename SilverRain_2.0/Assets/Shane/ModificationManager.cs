@@ -32,6 +32,27 @@ public class ModificationManager : MonoBehaviour
 
     float GetStatModifications(StatType type) 
     {
+        float value = 0f;
+        foreach (Modification modification in currentModifications)
+        {
+            if(modification is StatModification statModification)
+            {
+                value += statModification.GetModifyValue(type);
+            }
+        }
+        return value;
+    }
 
+    float GetWeaponStatModification(WeaponType weapon, StatType stat) 
+    {
+        float value = 0f;
+        foreach (Modification modification in currentModifications)
+        {
+            if(modification is WeaponModification weaponModification)
+            {
+                value += weaponModification.GetModifyValue(weapon, stat);
+            }
+        }
+        return value;
     }
 }

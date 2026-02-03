@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class WeaponModification : Modification
 {
-    public abstract float GetWeaponStatModification(WeaponType weapon, StatType stat);
+    public abstract float GetModifyValue(WeaponType weapon, StatType stat);
 }
