@@ -19,7 +19,7 @@ public class WeaponStats : MonoBehaviour
     {
         switch (type)
         {
-            case StatType.Damage:
+            case StatType.AttackDamage:
                 damage = weaponData.baseDamage +
                     (weaponData.perLevelDamage * weapon.WeaponLevel) +
                     GetModificationStats(weapon.WeaponType, type);

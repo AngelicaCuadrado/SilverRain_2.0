@@ -25,12 +25,17 @@ public class ModificationManager : MonoBehaviour
         }
     }
 
-   private void ResetModifications()
+    public void RemoveModification(Modification modification) 
+    {
+        currentModifications.Remove(modification);
+    }
+
+   public void ResetModifications()
     {
         currentModifications.Clear();
     }
 
-    float GetStatModifications(StatType type) 
+    public float GetStatModifications(StatType type) 
     {
         float value = 0f;
         foreach (Modification modification in currentModifications)
@@ -43,7 +48,7 @@ public class ModificationManager : MonoBehaviour
         return value;
     }
 
-    float GetWeaponStatModification(WeaponType weapon, StatType stat) 
+    public float GetWeaponStatModification(WeaponType weapon, StatType stat) 
     {
         float value = 0f;
         foreach (Modification modification in currentModifications)

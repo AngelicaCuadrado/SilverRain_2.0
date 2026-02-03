@@ -42,6 +42,11 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public abstract IEnumerator OnCooldown();
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
+
+    public void SetAvailable(bool isAvailable)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 
