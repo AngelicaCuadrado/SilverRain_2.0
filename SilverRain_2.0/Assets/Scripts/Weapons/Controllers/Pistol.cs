@@ -61,7 +61,7 @@ public class Pistol : Weapon
         if (weaponLevel >= maxWeaponLevel) return;
         //Increase weapon level and recalculate stats
         weaponLevel++;
-        weaponStats.CalculateStat(StatType.Damage);
+        weaponStats.CalculateStat(StatType.AttackDamage);
         weaponStats.CalculateStat(StatType.Cooldown);
         weaponStats.CalculateStat(StatType.ProjectileSpeed);
         //Update UI
@@ -70,7 +70,7 @@ public class Pistol : Weapon
         //Check if we've reached max level
         if (weaponLevel >= maxWeaponLevel)
         {
-            SetAvailability(false);
+            SetAvailable(false);
         }
 
     }
@@ -103,10 +103,10 @@ public class Pistol : Weapon
         OnWeaponLevelChanged?.Invoke(this);
         weaponUI.UpdateDescription();
         //Reset availability
-        SetAvailability(true);
+        SetAvailable(true);
     }
 
-    public override void SetAvailability(bool availability)
+    public override void SetAvailable(bool availability)
     {
         isAvailable = availability;
         OnAvailabilityChanged?.Invoke(this);

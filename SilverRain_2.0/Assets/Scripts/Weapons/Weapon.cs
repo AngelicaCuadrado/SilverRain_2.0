@@ -46,14 +46,10 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public abstract void LevelUp();
     public abstract void ResetLevels();
     public abstract void UpdateDescription();
-    public abstract void SetAvailability(bool availability);
+    public abstract void SetAvailable(bool availability);
     public abstract void OnActivate();
     public abstract IEnumerator OnCooldown();
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
     public abstract void HandleWeaponHit(Vector3 pos);
 }
-
-
-
-//TEMPORARY to avoid errors ---DELETE THIS--- ☺

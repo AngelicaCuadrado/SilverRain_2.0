@@ -68,7 +68,7 @@ public class WeaponManager : MonoBehaviour
                 {
                     if (!currentWeapons.ContainsKey(weaponType))
                     {
-                        allWeapons[weaponType].SetAvailability(false);
+                        allWeapons[weaponType].SetAvailable(false);
                     }
                 }
             }
