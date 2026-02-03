@@ -31,7 +31,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     //Events
     public UnityEvent<ITemporary> OnWeaponLevelChanged;
     public UnityEvent<ITemporary> OnAvailabilityChanged;
-    public UnityEvent<WeaponType, Vector3> OnWeaponHit;
+    public UnityEvent<WeaponType, GameObject> OnWeaponHit;
 
     //Properties
     public int WeaponLevel => weaponLevel;
@@ -51,5 +51,5 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public abstract IEnumerator OnCooldown();
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
-    public abstract void HandleWeaponHit(Vector3 pos);
+    public abstract void HandleWeaponHit(GameObject obj);
 }

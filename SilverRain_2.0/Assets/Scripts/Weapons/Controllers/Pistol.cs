@@ -18,9 +18,6 @@ public class Pistol : Weapon
     //Properties
     public string ProjectilePoolKey => projectilePoolKey;
 
-    //Events
-    public UnityEvent<Vector3> OnBulletHit;
-
     private void Start()
     {
         //Cache the main camera transform
@@ -117,8 +114,8 @@ public class Pistol : Weapon
         weaponUI.UpdateDescription();
     }
 
-    public override void HandleWeaponHit(Vector3 pos)
+    public override void HandleWeaponHit(GameObject obj)
     {
-        OnWeaponHit?.Invoke(weaponType, pos);
+        OnWeaponHit?.Invoke(weaponType, obj);
     }
 }
