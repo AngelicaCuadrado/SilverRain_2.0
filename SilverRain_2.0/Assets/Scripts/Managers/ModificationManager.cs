@@ -1,37 +1,52 @@
-using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ModificationManager : MonoBehaviour
 {
-    List<Modification> allModifications;
+    public List<Modification> allModifications;
     List<Modification> currentModifications;
 
     public static ModificationManager instance;
 
-    private void Start()
+    private void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
         {
-            instance = this;
+            Destroy(gameObject);
+            return;
         }
+
+        instance = this;
+        currentModifications = new List<Modification>();
+
+        DontDestroyOnLoad(gameObject);
     }
 
-   public void AddModification(Modification modification) 
-    {
-        if (!currentModifications.Contains(modification)) 
+   public void AddModification(Modification modification)
+   {
+        if (!currentModifications.Any(m => m.GetId() == modification.GetId()))
         {
             currentModifications.Add(modification);
-        }
-    }
 
-    public void RemoveModification(Modification modification) 
-    {
-        currentModifications.Remove(modification);
-    }
+            var catalogItem = allModifications.FirstOrDefault(m => m.GetId() == modification.GetId());
+            if (catalogItem != null)
+            {
+                catalogItem.SetAvailable(false);
+            }
+        }
+   }
 
    public void ResetModifications()
     {
+        foreach (Modification modification in currentModifications) 
+        {
+            var catalogItem = allModifications.FirstOrDefault(m => m.GetId() == modification.GetId());
+            if (catalogItem != null)
+            {
+                catalogItem.ResetLevels();
+            }
+        }
         currentModifications.Clear();
     }
 

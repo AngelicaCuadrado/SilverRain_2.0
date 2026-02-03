@@ -31,9 +31,9 @@ public class WeaponStats : MonoBehaviour
     {
         return
             //Player stats
-            StatManager.Instance.GetStat(type) +
+            //StatManager.Instance.GetStat(type) +
             //Modification stats
-            ModificationManager.Instance.GetWeaponStatModification(weapon.WeaponType, type) +
+            ModificationManager.instance.GetWeaponStatModification(weapon.WeaponType, type) +
             //Base weapon stats
             weaponData.GetBaseStat(type) +
             //Per-level weapon stats
