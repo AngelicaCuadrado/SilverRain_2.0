@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 /// <summary>
 /// Represents configuration data for a weapon, including its base attributes and per-level scaling values.
@@ -22,4 +23,38 @@ public class WeaponData : ScriptableObject
     public float perLevelDuration;
     public float perLevelProjectileSpeed;
     public float perLevelSize;
+
+    /// <summary>
+    /// Returns the base stat for the given <see cref="StatType"/>.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when an unsupported StatType is provided.</exception>
+    public float GetBaseStat(StatType type)
+    {
+        return type switch
+        {
+            StatType.Damage => baseDamage,
+            StatType.Cooldown => baseCooldown,
+            StatType.Duration => baseDuration,
+            StatType.ProjectileSpeed => baseProjectileSpeed,
+            StatType.Size => baseSize,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Unsupported stat type"),
+        };
+    }
+
+    /// <summary>
+    /// Returns the per-level increment for the given <see cref="StatType"/>.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when an unsupported StatType is provided.</exception>
+    public float GetPerLevelStat(StatType type)
+    {
+        return type switch
+        {
+            StatType.Damage => perLevelDamage,
+            StatType.Cooldown => perLevelCooldown,
+            StatType.Duration => perLevelDuration,
+            StatType.ProjectileSpeed => perLevelProjectileSpeed,
+            StatType.Size => perLevelSize,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Unsupported stat type"),
+        };
+    }
 }

@@ -2,7 +2,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
-
+/// <summary>
+/// Represents an abstract base class for all weapon types, providing common properties, events, and behaviors for
+/// weapons in the game.
+/// </summary>
+/// <remarks>Inherit from this class to implement specific weapon functionality, including leveling, activation,
+/// cooldown, and attack logic. The Weapon class integrates with Unity's MonoBehaviour and supports temporary
+/// availability through the ITemporary interface. It exposes events for upgrade and availability changes, and provides
+/// access to associated components such as stats and UI. All weapon-specific logic should be implemented in derived
+/// classes.</remarks>
 public abstract class Weapon : MonoBehaviour, ITemporary
 {
     [SerializeField,Tooltip("Current weapon level, 0 = unaquired")]
@@ -21,8 +29,9 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     protected bool isAvailable;
 
     //Events
-    public UnityEvent<IUpgradeable> OnUpgradeLevelChanged;
+    public UnityEvent<ITemporary> OnWeaponLevelChanged;
     public UnityEvent<ITemporary> OnAvailabilityChanged;
+    public UnityEvent<WeaponType, Vector3> OnWeaponHit;
 
     //Properties
     public int WeaponLevel => weaponLevel;
@@ -42,10 +51,11 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public abstract IEnumerator OnCooldown();
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
+    public abstract void HandleWeaponHit(Vector3 pos);
 }
 
 
 
-//TEMPORARY to avoid errors ---DELETE THIS--- ☺
+//---------------------------- TEMPORARY TO AVOID ERRORS, DELETE ALL OF THIS ----------------------------
 public interface IUpgradeable{}
 public interface ITemporary{}
