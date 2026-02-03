@@ -33,7 +33,7 @@ public class WeaponStats : MonoBehaviour
             //Player stats
             StatManager.Instance.GetStat(type) +
             //Modification stats
-            ModificationManager.Instance.GetWeaponStatModification(weapon.WeaponType, type) +
+            ModificationManager.instance.GetWeaponStatModification(weapon.WeaponType, type) +
             //Base weapon stats
             weaponData.GetBaseStat(type) +
             //Per-level weapon stats
@@ -47,5 +47,27 @@ public class WeaponStats : MonoBehaviour
         duration = 0f;
         projectileSpeed = 0f;
         size = 0f;
+    }
+}
+
+//-------------------------------------DELETE THIS---------------------------------------------------
+public class StatManager
+{
+    private static StatManager instance;
+    public static StatManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new StatManager();
+            }
+            return instance;
+        }
+    }
+    public float GetStat(StatType type)
+    {
+        // Placeholder implementation
+        return 0f;
     }
 }

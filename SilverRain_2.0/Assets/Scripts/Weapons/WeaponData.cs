@@ -32,7 +32,7 @@ public class WeaponData : ScriptableObject
     {
         return type switch
         {
-            StatType.Damage => baseDamage,
+            StatType.AttackDamage => baseDamage,
             StatType.Cooldown => baseCooldown,
             StatType.Duration => baseDuration,
             StatType.ProjectileSpeed => baseProjectileSpeed,
@@ -49,7 +49,7 @@ public class WeaponData : ScriptableObject
     {
         return type switch
         {
-            StatType.Damage => perLevelDamage,
+            StatType.AttackDamage => perLevelDamage,
             StatType.Cooldown => perLevelCooldown,
             StatType.Duration => perLevelDuration,
             StatType.ProjectileSpeed => perLevelProjectileSpeed,

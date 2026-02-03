@@ -38,7 +38,7 @@ public class PistolProjectile : MonoBehaviour, IPoolable
         {
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
-            parentGun.HandleWeaponHit(transform.position);
+            parentGun.HandleWeaponHit(other.gameObject);
         }
         //Return the projectile to the pool
         WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject);
