@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2015655100803647861}
   - component: {fileID: 7469974996897628985}
+  - component: {fileID: 5377634349175015253}
+  - component: {fileID: 1721987703521397912}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -47,10 +49,10 @@ MonoBehaviour:
   weaponLevel: 0
   maxWeaponLevel: 5
   weaponType: 1
-  projectilePoolKey: 
+  projectilePoolKey: SwordProjectile
   weaponVisual: {fileID: 0}
-  weaponStats: {fileID: 0}
-  weaponUI: {fileID: 0}
+  weaponStats: {fileID: 5377634349175015253}
+  weaponUI: {fileID: 1721987703521397912}
   isAvailable: 0
   OnWeaponLevelChanged:
     m_PersistentCalls:
@@ -66,3 +68,38 @@ MonoBehaviour:
       m_Calls: []
   playerTrans: {fileID: 0}
   spawnAngleOffset: 90
+--- !u!114 &5377634349175015253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8922651863981849895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57842124c2e358d4988e0dc14dd610e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponStats
+  weapon: {fileID: 7469974996897628985}
+  weaponData: {fileID: 11400000, guid: cb1326a899eda214da0fe7d96e6d7e8e, type: 2}
+  damage: 0
+  cooldown: 0
+  duration: 0
+  projectileSpeed: 0
+  size: 0
+--- !u!114 &1721987703521397912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8922651863981849895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827dbf0a98ed8e542b07b8c7c1089fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponUI
+  weapon: {fileID: 7469974996897628985}
+  weaponIcon: {fileID: 0}
+  weaponName: Sword
+  weaponDescription: 
