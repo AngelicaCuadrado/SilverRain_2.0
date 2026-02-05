@@ -57,7 +57,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapons = new Dictionary<WeaponType, Weapon>();
     }
 
-    private void AddWeapon(WeaponType type)
+    public void AddWeapon(WeaponType type)
     {
         //Level up weapon if already present
         if (currentWeapons.ContainsKey(type))
@@ -73,6 +73,8 @@ public class WeaponManager : MonoBehaviour
                 return;
             }
             currentWeapons.Add(type, allWeapons[type]);
+            //Increase level to 1
+            currentWeapons[type].LevelUp();
             //Activate the weapon
             currentWeapons[type].OnActivate();
             //Check if max weapon amount reached
@@ -90,7 +92,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
     
-    private void ResetWeapons()
+    public void ResetWeapons()
     {
         //Reset all current weapons
         foreach (var weapon in currentWeapons.Values)

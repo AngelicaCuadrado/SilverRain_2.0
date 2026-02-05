@@ -12,6 +12,9 @@ public class GrenadeProjectile : Projectile
         parentWeapon = parent;
         damage = dmg;
         explosionRadius = size;
+
+        //Apply modifications
+        parentWeapon.HandleProjectileSpawn();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,8 +76,6 @@ public class GrenadeProjectile : Projectile
         {
             lifeCoroutine = StartCoroutine(LifeTimer());
         }
-        //Apply modifications
-        parentWeapon.HandleProjectileSpawn();
     }
 
     public override void OnReturnToPool()

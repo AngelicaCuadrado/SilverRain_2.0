@@ -13,6 +13,9 @@ public class PistolProjectile : Projectile
         damage = dmg;
         direction = dir.normalized;
         speed = spd;
+
+        //Apply modifications
+        parentWeapon.HandleProjectileSpawn();
     }
 
     private void Update()
@@ -52,8 +55,6 @@ public class PistolProjectile : Projectile
         {
             lifeCoroutine = StartCoroutine(LifeTimer());
         }
-        //Apply modifications
-        parentWeapon.HandleProjectileSpawn();
     }
 
     //Called before the pool deactivates this instance

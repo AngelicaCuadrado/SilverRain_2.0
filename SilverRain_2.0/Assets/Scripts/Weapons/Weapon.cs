@@ -24,8 +24,8 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     [SerializeField, Tooltip("The key used to spawn projectiles from the pool")]
     protected string projectilePoolKey;
     [Header("Components")]
-    [SerializeField,Tooltip("Optional renderer for the weapon visuals")]
-    protected Renderer weaponVisual;
+    [SerializeField,Tooltip("Optional GameObject for the weapon visuals")]
+    protected GameObject weaponVisual;
     [SerializeField,Tooltip("Stats component, must be attached to the weapon's GameObject")]
     protected WeaponStats weaponStats;
     [SerializeField, Tooltip("UI handling component, must be attached to the weapon's GameObject")]
@@ -44,7 +44,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public int WeaponLevel => weaponLevel;
     public int MaxWeaponLevel => maxWeaponLevel;
     public WeaponType WeaponType => weaponType;
-    public Renderer WeaponVisual => weaponVisual;
+    public GameObject WeaponVisual => weaponVisual;
     public WeaponStats WeaponStats => weaponStats;
     public WeaponUI WeaponUI => weaponUI;
     public bool IsAvailable => isAvailable;
@@ -57,7 +57,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
         //Activate visual if possible
         if (weaponVisual != null)
         {
-            weaponVisual.enabled = true;
+            weaponVisual.SetActive(true);
         }
         //Start duration coroutine
         StartCoroutine(OnDuration());

@@ -20,7 +20,7 @@ public class Pistol : Weapon
         //Deactivate visual if possible
         if (weaponVisual != null)
         {
-            weaponVisual.enabled = false;
+            weaponVisual.SetActive(false);
         }
     }
 

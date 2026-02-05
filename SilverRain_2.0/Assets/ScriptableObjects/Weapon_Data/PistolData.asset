@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4466c0a87e8ce040853fda2d4a3cf9d, type: 3}
   m_Name: PistolData
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  baseDamage: 0
-  baseCooldown: 0
+  baseDamage: 5
+  baseCooldown: 3
   baseDuration: 0
-  baseProjectileSpeed: 0
+  baseProjectileSpeed: 4
   baseSize: 0
-  perLevelDamage: 0
-  perLevelCooldown: 0
+  perLevelDamage: 3
+  perLevelCooldown: -0.4
   perLevelDuration: 0
-  perLevelProjectileSpeed: 0
+  perLevelProjectileSpeed: 0.4
   perLevelSize: 0

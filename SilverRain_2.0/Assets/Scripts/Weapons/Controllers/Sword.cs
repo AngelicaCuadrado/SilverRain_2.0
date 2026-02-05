@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
-    [SerializeField, Tooltip("The position from which bullets will spawn")]
+    [SerializeField, Tooltip("The center of the sword's rotation")]
     private Transform playerTrans;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
     private float spawnAngleOffset = 90f;
@@ -13,7 +13,7 @@ public class Sword : Weapon
         //Deactivate visual if possible
         if (weaponVisual != null)
         {
-            weaponVisual.enabled = false;
+            weaponVisual.SetActive(false);
         }
     }
     public override void Attack()
@@ -30,7 +30,7 @@ public class Sword : Weapon
             Destroy(projObj);
             return;
         }
-        proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size);
+        proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
     }
 
     public override void LevelUp()
