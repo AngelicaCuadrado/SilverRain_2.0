@@ -55,7 +55,7 @@ public class ModificationManager : MonoBehaviour
         float value = 0f;
         foreach (Modification modification in currentModifications)
         {
-            if(modification is StatModification statModification)
+            if(modification is IStatModifier statModification)
             {
                 value += statModification.GetModifyValue(type);
             }
@@ -68,7 +68,7 @@ public class ModificationManager : MonoBehaviour
         float value = 0f;
         foreach (Modification modification in currentModifications)
         {
-            if(modification is WeaponModification weaponModification)
+            if(modification is IWeaponModifier weaponModification)
             {
                 value += weaponModification.GetModifyValue(weapon, stat);
             }

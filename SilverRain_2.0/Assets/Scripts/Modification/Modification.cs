@@ -6,7 +6,7 @@ public abstract class Modification : MonoBehaviour, ITemporary
 {
     [SerializeField] string modificationName; //For UI
     [SerializeField] string description;
-    [SerializeField] string id; //For object identification
+    [SerializeField] ModificationID id; //For object identification
     bool isAvailable;
     public UnityEvent<ITemporary> OnAvailabilityChanged;
     public void LevelUp()
@@ -47,6 +47,9 @@ public abstract class Modification : MonoBehaviour, ITemporary
         return description; 
     }
 
-    public string GetId() {  return id; }
+    public ModificationID GetId() 
+    { 
+        return id;
+    }
 
 }

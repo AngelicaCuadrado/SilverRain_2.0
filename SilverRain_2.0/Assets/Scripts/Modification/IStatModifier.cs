@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class StatModification : Modification
+public interface IStatModifier
 {
     public abstract float GetModifyValue(StatType type);
 }
