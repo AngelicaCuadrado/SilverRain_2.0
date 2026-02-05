@@ -1,16 +1,34 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PermanentUpgrade : MonoBehaviour
+public class PermanentUpgrade : IUpgradeable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    int level;
+    int maxLevel;
+    PermanentUpgradeData data;
+    StatType statType;
+
+    UnityEvent<StatType> OnPermanentUpgradeLevelChanged;
+    public void LevelUp()
     {
-        
+        if (level >= maxLevel) return;
+        level++;
+        OnPermanentUpgradeLevelChanged?.Invoke(statType);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetLevels()
     {
-        
+        level = 0;
+    }
+
+    public void UpdateDescription()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public float Calculate()
+    {
+        return data.BaseAmount + (data.AmountPerLevel * level);
     }
 }

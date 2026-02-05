@@ -1,16 +1,49 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class TemporaryUpgrade : MonoBehaviour
+public class TemporaryUpgrade : ITemporary
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    int level;
+    int maxLevel;
+    TemporaryUpgradeData data;
+    bool isAvailable;
+    StatType statType;
+
+    UnityEvent<ITemporary, bool> OnAvailabilityChanged;
+    UnityEvent<StatType> OnTemporaryUpgradeLevelChanged;
+
+    public void LevelUp()
     {
-        
+        if (level >= maxLevel) return;
+        level++;
+        OnTemporaryUpgradeLevelChanged?.Invoke(statType);
+
+        if (level >= maxLevel)
+        {
+            SetAvailable(false);
+            OnAvailabilityChanged?.Invoke(this, false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetLevels()
     {
-        
+        level = 0;
+        SetAvailable(true);
+    }
+
+    public void SetAvailable(bool available)
+    {
+        isAvailable = available;
+    }
+
+    public void UpdateDescription()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public float Calculate()
+    {
+        return data.BaseAmount + (data.AmountPerLevel * level);
     }
 }

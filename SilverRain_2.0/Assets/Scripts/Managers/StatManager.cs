@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,8 +9,7 @@ public class StatManager : MonoBehaviour
     Dictionary<StatType, TemporaryUpgrade> allTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
     Dictionary<StatType, TemporaryUpgrade> currentTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
     int maxTempUpgrades;
-    UnityEvent<StatType, float> OnPermStatChanged;
-    UnityEvent<StatType, float> OnTempStatChanged;
+    UnityEvent<StatType, float> OnStatChanged;
 
     float AttackDamage;
     float Cooldown;
@@ -50,5 +50,22 @@ public class StatManager : MonoBehaviour
             StatType.HealthRegen => HealthRegen,
             _ => 0f,
         };
+    }
+    
+    public float CalculateStat(StatType type)
+    {
+        float finalStat = 0f;
+        if (allPermUpgrades.ContainsKey(type))
+        {
+            finalStat += allPermUpgrades[type].Calculate();
+        }
+
+        if (currentTempUpgrades.ContainsKey(type))
+        {
+            finalStat += currentTempUpgrades[type].Calculate();
+        }
+
+        finalStat += ModificationManager.instance.GetStatModifications(type);
+        return finalStat;
     }
 }
