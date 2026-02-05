@@ -1,24 +1,40 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class PistolProjectile : Projectile
+public class SwordProjectile : Projectile
 {
-    //Movement
-    private Vector3 direction;
-    private float speed;
+    float angle = 0f;
+    float rotationRadius = 0f;
+    Transform playerTrans;
 
-    public void Init(Pistol parent, float dmg, Vector3 dir, float spd)
+    public void Init(Sword parent,Transform player, float dmg, float duration, float size)
     {
         parentWeapon = parent;
+        playerTrans = player;
         damage = dmg;
-        direction = dir.normalized;
-        speed = spd;
-    }
+        lifeTime = duration;
+        rotationRadius = size;
 
+        //Start lifetime countdown
+        if (lifeTime > 0f)
+        {
+            lifeCoroutine = StartCoroutine(LifeTimer());
+        }
+    }
     private void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        angle += 180f * Time.deltaTime;
+        float rad = angle * Mathf.Deg2Rad;
+        Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * rotationRadius;
+
+        transform.position = playerTrans.position + offset;
+
+        Vector3 dir = (playerTrans.position - transform.position).normalized;
+        Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
+        transform.rotation = look * Quaternion.Euler(-90f, 0f, 0f);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         //Try to find EnemyHealth on the object or its parent
@@ -33,13 +49,10 @@ public class PistolProjectile : Projectile
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
             GameObject[] hits = new[] { other.gameObject };
-            parentWeapon.HandleWeaponHit(hits, transform.position);   
+            parentWeapon.HandleWeaponHit(hits, transform.position);
         }
-        //Return the projectile to the pool
-        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject);
     }
 
-    //Called once when the pool initially creates the instance
     public override void OnCreatedPool()
     {
     }
@@ -47,11 +60,6 @@ public class PistolProjectile : Projectile
     //Called whenever the pool spawns this instance
     public override void OnSpawnFromPool()
     {
-        //Start lifetime countdown
-        if (lifeTime > 0f)
-        {
-            lifeCoroutine = StartCoroutine(LifeTimer());
-        }
         //Apply modifications
         parentWeapon.HandleProjectileSpawn();
     }
@@ -66,7 +74,7 @@ public class PistolProjectile : Projectile
             lifeCoroutine = null;
         }
 
-        direction = Vector3.zero;
+        angle = 0f;
         parentWeapon = null;
     }
 }

@@ -354,7 +354,7 @@ MonoBehaviour:
   creditsButton: {fileID: 1833537723195832174}
   quitButton: {fileID: 356071225393618063}
   tutorialWindowPrefab: {fileID: 291343633982955395, guid: 3d4c055cc14490b4b99a1aa94e5dca71, type: 3}
-  settingsWindowPrefab: {fileID: 4660428183325919334, guid: c6f93a4a6c942bb43bc4fb49cf05dc22, type: 3}
+  settingsWindowPrefab: {fileID: 5568955877430933138, guid: c6f93a4a6c942bb43bc4fb49cf05dc22, type: 3}
   creditsWindowPrefab: {fileID: 1835804248090040368, guid: 712811fe7703bbc41a99df05e1e6dbd8, type: 3}
   levelSelectWindowPrefab: {fileID: 80134916395358303, guid: 7af5d81e8131be34bae21213050fe8fe, type: 3}
 --- !u!1 &2740951464690024878

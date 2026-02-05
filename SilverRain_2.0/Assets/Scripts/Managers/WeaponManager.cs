@@ -9,8 +9,10 @@ public class WeaponManager : MonoBehaviour
 
     //Serialized fields
     [SerializeField, Tooltip("List of all weapons currently implemented")]
+    private List<WeaponEntry> allWeaponsList;
+    //Dictionary of all weapons
     private Dictionary<WeaponType, Weapon> allWeapons;
-    [SerializeField, Tooltip("List of weapons active in the current level")]
+    //Dictionary of weapons active in the current level
     private Dictionary<WeaponType, Weapon> currentWeapons;
     [SerializeField, Tooltip("Maximum amount of weapon allowed to be active in a level")]
     private int maxWeapons;
@@ -37,6 +39,19 @@ public class WeaponManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+        //Initialize all weapons dictionary
+        allWeapons = new Dictionary<WeaponType, Weapon>();
+        foreach (var entry in allWeaponsList)
+        {
+            if (!allWeapons.ContainsKey(entry.type))
+            {
+                allWeapons.Add(entry.type, entry.weapon);
+            }
+            else
+            {
+                Debug.LogWarning($"Duplicate weapon type {entry.type} found in allWeaponsList.");
+            }
         }
         //Initialize current weapons dictionary
         currentWeapons = new Dictionary<WeaponType, Weapon>();
@@ -84,16 +99,5 @@ public class WeaponManager : MonoBehaviour
         }
         //Reset current weapons list
         currentWeapons.Clear();
-    }
-    
-    //Ido - I'm not sure if we need to find a specific weapon from
-    //the current weapons,if this has 0 references we should delete it
-    public Weapon GetOneCurrentWeapon(WeaponType type)
-    {
-        if (currentWeapons.ContainsKey(type))
-        {
-            return currentWeapons[type];
-        }
-        return null;
     }
 }
