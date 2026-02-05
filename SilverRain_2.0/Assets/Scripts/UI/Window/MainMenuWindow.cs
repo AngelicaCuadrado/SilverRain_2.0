@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,8 @@ public class MainMenuWindow : UIWindow
         settingsButton.onClick.AddListener(OpenSettings);
         creditsButton.onClick.AddListener(OpenCredits);
         quitButton.onClick.AddListener(Quit);
+        
+        AudioManager.Instance.PlayBGM("bgm_main");
     }
 
     public override void OnPopped()
@@ -33,6 +36,13 @@ public class MainMenuWindow : UIWindow
         settingsButton.onClick.RemoveListener(OpenSettings);
         creditsButton.onClick.RemoveListener(OpenCredits);
         quitButton.onClick.RemoveListener(Quit);
+        
+        //AudioManager.Instance.StopBGM();
+    }
+
+    private void OnEnable()
+    {
+        AudioManager.Instance.PlayBGM("bgm_main");
     }
 
     /// <summary>

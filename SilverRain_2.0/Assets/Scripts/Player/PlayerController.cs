@@ -76,10 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && IsGrounded())
         {
-            if (jumpSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(jumpSound);
-            }
+            AudioManager.Instance.PlaySFX("sfx_jump");
 
             float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics.gravity.y * gravityScale));
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);

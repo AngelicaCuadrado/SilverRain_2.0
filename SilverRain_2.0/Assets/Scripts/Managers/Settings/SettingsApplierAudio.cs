@@ -1,8 +1,8 @@
 public static class SettingsApplierAudio
 {
-    private const string MasterParam = "Master";
-    private const string BgmParam = "BGM";
-    private const string SfxParam = "SFX";
+    private const string MasterParam = "MasterVol";
+    private const string BgmParam = "BGMVol";
+    private const string SfxParam = "SFXVol";
 
     public static void Apply(AudioSettings a)
     {

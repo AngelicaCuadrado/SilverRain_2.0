@@ -59,7 +59,13 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (_bgm.clip == clip && _bgm.isPlaying) return;
+        //if (_bgm.clip == clip && _bgm.isPlaying) return;
+        
+        if (_bgm.isPlaying)
+        {
+            if (_bgm.clip == clip) return;
+            _bgm.Stop();
+        }
 
         _bgm.clip = clip;
         _bgm.Play();
