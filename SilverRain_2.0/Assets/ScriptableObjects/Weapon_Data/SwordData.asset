@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4466c0a87e8ce040853fda2d4a3cf9d, type: 3}
   m_Name: SwordData
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  baseDamage: 0
-  baseCooldown: 0
-  baseDuration: 0
-  baseProjectileSpeed: 0
-  baseSize: 0
-  perLevelDamage: 0
-  perLevelCooldown: 0
-  perLevelDuration: 0
-  perLevelProjectileSpeed: 0
-  perLevelSize: 0
+  baseDamage: 10
+  baseCooldown: 5
+  baseDuration: 5
+  baseProjectileSpeed: 1
+  baseSize: 1
+  perLevelDamage: 4
+  perLevelCooldown: -0.2
+  perLevelDuration: 0.2
+  perLevelProjectileSpeed: 0.1
+  perLevelSize: 0.1

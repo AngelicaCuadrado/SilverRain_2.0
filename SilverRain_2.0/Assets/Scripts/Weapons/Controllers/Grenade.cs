@@ -3,30 +3,44 @@ using UnityEngine;
 
 public class Grenade : Weapon
 {
-    [SerializeField, Tooltip("The main camera transform that the grenade follows")]
-    private Transform cam;
     [Header("Throw Settings")]
     [SerializeField, Tooltip("How far forward the grenade will be thrown")]
     private float throwForce = 12f;
     [SerializeField, Tooltip("How far upward the grenade will be thrown")]
     private float upwardForce = 4f;
+    [Header("Spawn Position Offsets")]
     [SerializeField, Tooltip("How far forward the grenade will spawn relative to the camera")]
-    private float spawnOffsetForward = 1.2f;
+    private float spawnOffsetForward = 0.6f;
     [SerializeField, Tooltip("How far above the grenade will spawn relative to the camera")]
-    private float spawnOffsetUp = 0f;
+    private float spawnOffsetUp = 3.5f;
+    [SerializeField, Tooltip("How far to the side the grenade will spawn relative to the camera")]
+    private float spawnOffsetSide = 0.5f;
+    [Header("References")]
+    [SerializeField, Tooltip("The position from which grenades will spawn")]
+    private Transform firePoint;
 
     private void Start()
     {
         //Deactivate visual if possible
         if (weaponVisual != null)
         {
-            weaponVisual.enabled = false;
+            weaponVisual.SetActive(false);
         }
+    }
+
+    private void Update()
+    {
+        if (cam == null) return;
+        //Make the grenade launcher follow the camera's position and rotation
+        Vector3 desiredPos = cam.position + (cam.forward * spawnOffsetForward) + (cam.up * spawnOffsetUp) + (cam.right * spawnOffsetSide);
+        transform.position = desiredPos;
+        transform.rotation = Quaternion.LookRotation(-cam.forward, Vector3.up);
     }
 
     public override void Attack()
     {
-        Vector3 spawnPos = cam.position + (cam.forward * spawnOffsetForward) + (cam.up * spawnOffsetUp);
+        Vector3 spawnPos = firePoint.position;
+        //Vector3 spawnPos = cam.position + (cam.forward * spawnOffsetForward) + (cam.up * spawnOffsetUp) + (cam.right * spawnOffsetSide);
         Quaternion spawnRot = cam.rotation;
 
         var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, spawnPos, spawnRot);

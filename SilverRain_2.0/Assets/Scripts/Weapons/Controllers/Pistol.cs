@@ -6,8 +6,6 @@ public class Pistol : Weapon
 {
     [SerializeField, Tooltip("The position from which bullets will spawn")]
     private Transform firePoint;
-    [SerializeField, Tooltip("The main camera transform that the pistol follows")]
-    private Transform cam;
     [SerializeField, Tooltip("How far forward the pistol is positioned relative to the camera")]
     private float spawnOffsetForward = 1f;
     [SerializeField, Tooltip("How far above the pistol is positioned relative to the camera")]
@@ -20,7 +18,7 @@ public class Pistol : Weapon
         //Deactivate visual if possible
         if (weaponVisual != null)
         {
-            weaponVisual.enabled = false;
+            weaponVisual.SetActive(false);
         }
     }
 

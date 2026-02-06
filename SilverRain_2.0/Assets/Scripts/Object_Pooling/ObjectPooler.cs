@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 /// <summary>
 /// Manages object pooling for multiple prefab types, enabling efficient reuse of GameObjects.
 /// </summary>
@@ -39,7 +40,12 @@ public class ObjectPooler : MonoBehaviour
                 obj.SetActive(false);
 
                 //Notify the object it has been created in the pool
-                obj.GetComponent<IPoolable>()?.OnCreatedPool();
+                if (obj.TryGetComponent<IPoolable>(out var poolable))
+                {
+                    poolable.OnCreatedPool();
+                    poolable.PoolKey = pool.Key;
+                }
+
                 //Enqueue the object
                 queue.Enqueue(obj);
             }
@@ -77,6 +83,12 @@ public class ObjectPooler : MonoBehaviour
             {
                 var extra = Instantiate(def.Prefab, poolRoot);
                 extra.SetActive(false);
+
+                if (extra.TryGetComponent<IPoolable>(out var poolable))
+                {
+                    poolable.PoolKey = def.Key;
+                }
+
                 queue.Enqueue(extra);
             }
             //If not expandable, return null
@@ -99,9 +111,6 @@ public class ObjectPooler : MonoBehaviour
         //Notify the object it has been spawned
         obj.GetComponent<IPoolable>()?.OnSpawnFromPool();
 
-        //Re-enqueue for circular reuse
-        queue.Enqueue(obj);
-
         return obj;
     }
 
@@ -113,7 +122,7 @@ public class ObjectPooler : MonoBehaviour
     /// typically used to recycle objects for reuse and improve performance by minimizing instantiation and
     /// destruction.</remarks>
     /// <param name="obj">The GameObject to return to the pool. If null, the method does nothing.</param>
-    public void ReturnToPool(GameObject obj)
+    public void ReturnToPool(GameObject obj, string key)
     {
         if (obj == null) return;
 
@@ -123,5 +132,8 @@ public class ObjectPooler : MonoBehaviour
         //Deactivate and reparent
         obj.SetActive(false);
         obj.transform.SetParent(poolRoot);
+
+        if (poolDictionary.TryGetValue(key, out var queue)) { queue.Enqueue(obj); }
+        else { Debug.LogWarning($"Trying to return object to unknown pool '{key}'. Destroying instead."); Destroy(obj); }
     }
 }

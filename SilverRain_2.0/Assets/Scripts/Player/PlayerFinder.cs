@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerFinder : MonoBehaviour
 {
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private static PlayerFinder instance;
 
     public GameObject Player => player;
@@ -21,6 +21,8 @@ public class PlayerFinder : MonoBehaviour
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        FindPlayer();
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

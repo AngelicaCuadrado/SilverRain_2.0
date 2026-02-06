@@ -24,12 +24,14 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     [SerializeField, Tooltip("The key used to spawn projectiles from the pool")]
     protected string projectilePoolKey;
     [Header("Components")]
-    [SerializeField,Tooltip("Optional renderer for the weapon visuals")]
-    protected Renderer weaponVisual;
+    [SerializeField,Tooltip("Optional GameObject for the weapon visuals")]
+    protected GameObject weaponVisual;
     [SerializeField,Tooltip("Stats component, must be attached to the weapon's GameObject")]
     protected WeaponStats weaponStats;
     [SerializeField, Tooltip("UI handling component, must be attached to the weapon's GameObject")]
     protected WeaponUI weaponUI;
+    [SerializeField, Tooltip("The main camera transform that the weapon follows")]
+    protected Transform cam;
     [Header("Availability")]
     [SerializeField, Tooltip("Represents whether the weapon can appear as an option when leveling up")]
     protected bool isAvailable;
@@ -44,11 +46,12 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public int WeaponLevel => weaponLevel;
     public int MaxWeaponLevel => maxWeaponLevel;
     public WeaponType WeaponType => weaponType;
-    public Renderer WeaponVisual => weaponVisual;
+    public string ProjectilePoolKey => projectilePoolKey;
+    public GameObject WeaponVisual => weaponVisual;
     public WeaponStats WeaponStats => weaponStats;
     public WeaponUI WeaponUI => weaponUI;
+    public Transform Cam => cam;
     public bool IsAvailable => isAvailable;
-    public string ProjectilePoolKey => projectilePoolKey;
 
     //Methods
     public abstract void LevelUp();
@@ -57,7 +60,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
         //Activate visual if possible
         if (weaponVisual != null)
         {
-            weaponVisual.enabled = true;
+            weaponVisual.SetActive(true);
         }
         //Start duration coroutine
         StartCoroutine(OnDuration());
@@ -83,7 +86,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public virtual void SetAvailable(bool availability)
     {
         isAvailable = availability;
-        OnAvailabilityChanged?.Invoke(this);
+        WeaponManager.Instance.HandleAvailabilityChange(this, availability);
     }
     public virtual void UpdateDescription()
     {
