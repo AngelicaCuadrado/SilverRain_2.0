@@ -7,7 +7,7 @@ public class StatManager : MonoBehaviour
 {
     List<PermanentUpgradeEntry> allPermUpgradesList;
     List<TemporaryUpgradeEntry> allTempUpgradesList;
-    List<TemporaryUpgradeEntry> currentTempUpgradesList;
+    //List<TemporaryUpgradeEntry> currentTempUpgradesList;
     Dictionary<StatType, PermanentUpgrade> allPermUpgrades = new Dictionary<StatType, PermanentUpgrade>();
     Dictionary<StatType, TemporaryUpgrade> allTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
     Dictionary<StatType, TemporaryUpgrade> currentTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
@@ -25,18 +25,43 @@ public class StatManager : MonoBehaviour
     float XpMult;
     float HealthRegen;
 
-    private static StatManager instance;
-    public static StatManager Instance
+    public static StatManager Instance { get; private set; }
+    private void Awake()
     {
-        get
+        if (Instance == null)
         {
-            if (instance == null)
-            {
-                instance = new StatManager();
-            }
-            return instance;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+        foreach (var entry in allPermUpgradesList)
+        {
+            if (!allPermUpgrades.ContainsKey(entry.statType))
+            {
+                allPermUpgrades.Add(entry.statType, entry.permanentUpgrade);
+            }
+            else
+            {
+                Debug.LogWarning($"Duplicate permanent upgrade type {entry.statType} found in allPermUpgradesList.");
+            }
+        }
+        foreach (var entry in allTempUpgradesList)
+        {
+            if (!allTempUpgrades.ContainsKey(entry.statType))
+            {
+                allTempUpgrades.Add(entry.statType, entry.temporaryUpgrade);
+            }
+            else
+            {
+                Debug.LogWarning($"Duplicate temporary upgrade type {entry.statType} found in allTempUpgradesList.");
+            }
+        }
+        maxTempUpgrades = 3;
     }
+
     public float GetStat(StatType type)
     {
         return type switch
@@ -117,8 +142,7 @@ public class StatManager : MonoBehaviour
     public void ApplyPermanentStatsAtGameStart()
     {
         foreach (var type in allPermUpgrades.Keys)
-        {
-            UpdatePermStats(type);               
+        {            
             OnStatChanged?.Invoke(type, GetStat(type));
         }
     }
@@ -131,7 +155,16 @@ public class StatManager : MonoBehaviour
             return;
         }
 
-        currentTempUpgrades.Add(type, allTempUpgrades[type]);
+        if (currentTempUpgrades.ContainsKey(type))
+        {
+            UpdateTempStats(type);
+        }
+        else
+        {
+            currentTempUpgrades.Add(type, allTempUpgrades[type]);
+            Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
+            Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
+        }
 
         if (currentTempUpgrades.Count >= maxTempUpgrades)
         {
