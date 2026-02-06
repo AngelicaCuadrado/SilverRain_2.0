@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
     PlayerHealth targetPlayerHealth;
     float deathTime = 10f;
     
-    private ObjectPooler pooler;
+    public ObjectPooler pooler;
     public string PoolKey { get; set; }
     
     #region IPoolable Implementation
@@ -31,11 +32,6 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
     }
     
     #endregion
-    
-    public void SetPooler(ObjectPooler pooler)
-    {
-        this.pooler = pooler;
-    }
 
     public void ReturnToPool(GameObject obj)
     {

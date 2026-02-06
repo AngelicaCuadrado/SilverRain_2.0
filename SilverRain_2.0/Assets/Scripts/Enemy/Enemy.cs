@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, IPoolable
     private Renderer[] renderers;
 
     // ObjectPool References
-    private ObjectPooler pooler;
+    public ObjectPooler pooler;
     public string PoolKey { get; set; }
 
     private void Awake()
@@ -57,11 +57,6 @@ public class Enemy : MonoBehaviour, IPoolable
     }
     
     #endregion
-
-    public void SetPooler(ObjectPooler pooler)
-    {
-        this.pooler = pooler;
-    }
 
     public void ReturnToPool()
     {
@@ -142,4 +137,13 @@ public class Enemy : MonoBehaviour, IPoolable
     {
         return scoreValue;
     }
+    
+    #if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1f);
+        
+    }
+    #endif
 }
