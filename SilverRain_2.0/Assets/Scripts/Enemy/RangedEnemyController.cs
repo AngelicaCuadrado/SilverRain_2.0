@@ -34,13 +34,13 @@ public class RangedEnemyController : EnemyController
                 GameObject go = //Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
                     pooler.Spawn(poolKey, firePoint.position, Quaternion.LookRotation(dir));
                 
-                //projectile.GetComponent<EnemyProjectile>().Initialize(dir, enemy.damage, player);
+                go.GetComponent<EnemyProjectile>().Initialize(dir, enemy.damage, player);
                 if (go == null) return;
                 
                 var projectile = go.GetComponent<EnemyProjectile>();
                 if (projectile != null)
                 {
-                    projectile.SetPooler(pooler);
+                    projectile.pooler = EnemyManager.Instance.enemyProjectilePool;
                     projectile.PoolKey = poolKey;
                 }
             }
@@ -84,8 +84,8 @@ public class RangedEnemyController : EnemyController
         animator = GetComponentInChildren<Animator>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
         agent.speed = moveSpeed;
-        
-        pooler = FindAnyObjectByType<ObjectPooler>();
+
+        pooler = EnemyManager.Instance.enemyProjectilePool;
     }
 
     // Update is called once per frame

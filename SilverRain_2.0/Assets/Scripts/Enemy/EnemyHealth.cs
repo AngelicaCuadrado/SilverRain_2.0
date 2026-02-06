@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     private Enemy enemy;
     private EnemyController controller;
     private PlayerExperience player;
-    private AudioSource audioSource;
+    //private AudioSource audioSource;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<EnemyController>();
         player = FindFirstObjectByType<PlayerExperience>();
-        audioSource = gameObject.AddComponent<AudioSource>();
+        //audioSource = gameObject.AddComponent<AudioSource>();
     }
     public void TakeDamage(int damage)
     {

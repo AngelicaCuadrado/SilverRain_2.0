@@ -28,8 +28,8 @@ public class EnemySpawner : MonoBehaviour
     public LayerMask blockingLayers = ~0;
     
     [Header("Object Pooling")]
-    public ObjectPooler objectPooler;
-    public List<string> enemyPoolKeys = new List<string>();
+    private ObjectPooler objectPooler;
+    [SerializeField] private List<string> enemyPoolKeys = new List<string>();
     
     bool _spawning = false;
     Bounds _areaBounds;
@@ -44,6 +44,8 @@ public class EnemySpawner : MonoBehaviour
             if (p != null) player = p;
         }
 
+        objectPooler = EnemyManager.Instance.enemyPooler;
+        
         UpdateSpawnAreaBounds();
         StartSpawning();
     }
@@ -229,7 +231,7 @@ public class EnemySpawner : MonoBehaviour
             var enemy = go.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.SetPooler(objectPooler);
+                enemy.pooler = EnemyManager.Instance.enemyPooler;
                 enemy.PoolKey = poolKey;
             }
             

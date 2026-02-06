@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private Vector2 lookInput;
     private float xRotation = 0f;
-    private AudioSource audioSource;
+    //private AudioSource audioSource;
     
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        audioSource = gameObject.AddComponent<AudioSource>();
+        //audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public bool IsGrounded()

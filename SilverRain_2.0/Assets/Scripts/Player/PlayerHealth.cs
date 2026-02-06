@@ -17,14 +17,14 @@ public class PlayerHealth : MonoBehaviour
     public static event Action<bool> onDie;
 
     public bool isInvincible = false;
-    private AudioSource audioSource;
+    //private AudioSource audioSource;
 
     
     private void Start()
     {
         //maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
         currentHealth = maxHealth;
-        audioSource = gameObject.AddComponent<AudioSource>();
+        //audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void TakeDamage(float amount)
