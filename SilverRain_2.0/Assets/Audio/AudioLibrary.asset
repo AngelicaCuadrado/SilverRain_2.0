@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1615bb3f929c27b499861fcc1fd7d2cd, type: 3}
+  m_Name: AudioLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::AudioLibrary
+  clips:
+  - id: bgm_main
+    clip: {fileID: 8300000, guid: 6a5d728a33baea544b75e3cb7a97eb5c, type: 3}
+  - id: bgm_level1
+    clip: {fileID: 8300000, guid: 477a160614aa0fa46be9b6524e20fe9c, type: 3}
+  - id: bgm_level_select
+    clip: {fileID: 8300000, guid: bc35a4a75253a8047baeef79cec93aa3, type: 3}
+  - id: sfx_click
+    clip: {fileID: 8300000, guid: 56f929836c340a94aa089f721088620a, type: 3}
+  - id: sfx_jump
+    clip: {fileID: 8300000, guid: a7e57cccb2b9b03409644ebc01bb3ea5, type: 3}
+  - id: sfx_player_hurt
+    clip: {fileID: 8300000, guid: 313ce54dffd42e14cbd3679c1c6ce011, type: 3}
+  - id: sfx_enemy1_hurt
+    clip: {fileID: 8300000, guid: 303e31791c6df284baef9160af6420ab, type: 3}
+  - id: sfx_enemy2_hurt
+    clip: {fileID: 8300000, guid: 2d3a379a133615e48bf3c00572521d76, type: 3}
+  - id: sfx_enemy3_hurt
+    clip: {fileID: 8300000, guid: 3cb32de8750e72c4b9837cd085bf1bbe, type: 3}
+  - id: sfx_gun
+    clip: {fileID: 8300000, guid: 15e422c74da95e94c8cff4a36ef5ff34, type: 3}

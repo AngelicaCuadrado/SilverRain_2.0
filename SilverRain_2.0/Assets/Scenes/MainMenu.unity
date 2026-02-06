@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 313404223}
   - component: {fileID: 313404224}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: '@UIManager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,13 +145,13 @@ Transform:
   m_GameObject: {fileID: 313404222}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.06741, y: 0, z: 7.58524}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 708242917}
   - {fileID: 1324445552}
-  m_Father: {fileID: 462918817}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &313404224
 MonoBehaviour:
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 348148352}
   - component: {fileID: 348148353}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: '@AudioManager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 462918817}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &348148353
 MonoBehaviour:
@@ -214,40 +214,6 @@ MonoBehaviour:
   library: {fileID: 11400000, guid: cba9b157bd876c745b54739b1ab5b785, type: 2}
   bgmGroup: {fileID: -5161538769669860160, guid: 17beda3fb8eb2454c9cc8c2fca26f56f, type: 2}
   sfxGroup: {fileID: 4940404762310661352, guid: 17beda3fb8eb2454c9cc8c2fca26f56f, type: 2}
---- !u!1 &462918816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 462918817}
-  m_Layer: 0
-  m_Name: '@Manager'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &462918817
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462918816}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.06741, y: 0, z: -7.58524}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 313404223}
-  - {fileID: 348148352}
-  - {fileID: 1146028348}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &708242915
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +620,7 @@ GameObject:
   - component: {fileID: 1146028348}
   - component: {fileID: 1146028349}
   m_Layer: 0
-  m_Name: SettingsManager
+  m_Name: '@SettingsManager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,7 +639,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 462918817}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1146028349
 MonoBehaviour:

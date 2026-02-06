@@ -16,11 +16,13 @@ public class LevelSelectWindow : UIWindow
     public override void OnPushed()
     {
         BindUIEvents();
+        AudioManager.Instance.PlayBGM("bgm_level_select");
     }
 
     public override void OnPopped()
     {
         UnbindUIEvents();
+        //AudioManager.Instance.StopBGM();
     }
     
     private void BindUIEvents()

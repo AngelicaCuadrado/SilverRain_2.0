@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     private float xRotation = 0f;
     private AudioSource audioSource;
-
+    
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     private void Start()
@@ -76,10 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && IsGrounded())
         {
-            if (jumpSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(jumpSound);
-            }
+            AudioManager.Instance.PlaySFX("sfx_jump");
 
             float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics.gravity.y * gravityScale));
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
@@ -95,23 +92,5 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = Vector3.zero;
     }
-
-    // public void EnemyKilled(string enemyType)
-    // {
-    //     var hud = FindAnyObjectByType<HUDController>();
-    //     if (hud != null)
-    //     {
-    //         hud.SpownKillInfo(enemyType);
-    //     }
-    //
-    //     var playerLevel = GetComponent<PlayerLevel>();
-    //     var stats = GetComponent<PlayerStats>();
-    //
-    //     if (playerLevel != null)
-    //     {
-    //         float baseXp = 10f;
-    //         float xpMod = (stats != null) ? stats.experienceMod : 1f;
-    //         playerLevel.GainXP(baseXp * xpMod);
-    //     }
-    // }
+    
 }

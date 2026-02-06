@@ -33,10 +33,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        if (hurtSound != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(hurtSound);
-        }
+        AudioManager.Instance.PlaySFX("sfx_player_hurt");
 
         onTakeDamage?.Invoke();
         onPlayerHealthChanged?.Invoke();

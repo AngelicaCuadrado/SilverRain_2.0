@@ -8,7 +8,7 @@ public class TemporaryUpgrade : ITemporary
     int maxLevel;
     TemporaryUpgradeData data;
     bool isAvailable;
-    StatType statType;
+    public StatType StatType;
 
     UnityEvent<ITemporary, bool> OnAvailabilityChanged;
     UnityEvent<StatType> OnTemporaryUpgradeLevelChanged;
@@ -17,7 +17,7 @@ public class TemporaryUpgrade : ITemporary
     {
         if (level >= maxLevel) return;
         level++;
-        OnTemporaryUpgradeLevelChanged?.Invoke(statType);
+        OnTemporaryUpgradeLevelChanged?.Invoke(StatType);
 
         if (level >= maxLevel)
         {

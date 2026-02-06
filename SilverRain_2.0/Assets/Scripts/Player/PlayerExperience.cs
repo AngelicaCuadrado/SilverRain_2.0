@@ -8,11 +8,13 @@ public class PlayerExperience : MonoBehaviour
     [Header("Player Experience Settings")]
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private float currentExp = 0f;
-    [SerializeField] private float requriedExp = 0f;
+    [SerializeField] private float requriedExp = 100f;
     [SerializeField] private float expGrowthRate = 1.5f;
     
     public UnityEvent OnExpChanged;
     public UnityEvent OnLevelUp;
+
+    private float expMult = 1f;
     
     public int CurrentLevel => currentLevel;
     public float CurrentExp => currentExp;
@@ -22,10 +24,26 @@ public class PlayerExperience : MonoBehaviour
     {
         CalculateRequriedExp();
     }
-    
-    private void GainExp(float amount)
+
+    private void OnEnable()
     {
-        currentExp += amount;
+        //StatsManager.Instance.OnStatChanged.AddListener(HandleExpMult);
+        //expMult = StatsManager.Instance.GetStat(StatType.XpMult);
+    }
+
+    private void OnDisable()
+    {
+        //StatsManager.Instance.OnStatChanged.RemoveListener(HandleExpMult);
+    }
+
+    private void HandleExpMult(StatType statType, float value)
+    {
+        if (statType == StatType.XpMult) expMult = value;
+    }
+
+    public void GainExp(float amount)
+    {
+        currentExp += amount * expMult;
         OnExpChanged.Invoke();
         
         if (currentExp >= requriedExp)
