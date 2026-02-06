@@ -26,9 +26,6 @@ public class EnemySpawner : MonoBehaviour
     [Header("Collision checks")]
     public float spawnCheckRadius = 0.5f;
     public LayerMask blockingLayers = ~0;
-
-    [Header("Optional")]
-    public Transform spawnParent;
     
     [Header("Object Pooling")]
     public ObjectPooler objectPooler;
@@ -48,9 +45,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         UpdateSpawnAreaBounds();
-
-        if (spawnParent == null) spawnParent = transform;
-        
         StartSpawning();
     }
 

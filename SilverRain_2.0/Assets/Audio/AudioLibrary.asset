@@ -20,7 +20,7 @@ MonoBehaviour:
   - id: bgm_level_select
     clip: {fileID: 8300000, guid: bc35a4a75253a8047baeef79cec93aa3, type: 3}
   - id: sfx_click
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 56f929836c340a94aa089f721088620a, type: 3}
   - id: sfx_jump
     clip: {fileID: 8300000, guid: a7e57cccb2b9b03409644ebc01bb3ea5, type: 3}
   - id: sfx_player_hurt

@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour, IPoolable
     public void ReturnToPool()
     {
         if (pooler != null)
-            pooler.ReturnToPool(gameObject);
+            pooler.ReturnToPool(gameObject, PoolKey);
         else
             Destroy(gameObject);
     }

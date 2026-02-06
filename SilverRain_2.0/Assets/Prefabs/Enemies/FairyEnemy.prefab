@@ -967,6 +967,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1102,9 +1103,9 @@ GameObject:
   - component: {fileID: 471130600971330446}
   - component: {fileID: 8812589260272143275}
   - component: {fileID: 8171431734536988271}
-  - component: {fileID: 5577015776767700120}
-  - component: {fileID: 9149116179258776539}
   - component: {fileID: 4890185124704701064}
+  - component: {fileID: 9149116179258776539}
+  - component: {fileID: 5577015776767700120}
   m_Layer: 8
   m_Name: FairyEnemy
   m_TagString: Enemy
@@ -1159,8 +1160,54 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
-  hurtSound: {fileID: 8300000, guid: 3cb32de8750e72c4b9837cd085bf1bbe, type: 3}
+  sfxID: sfx_enemy2_hurt
   animator: {fileID: 0}
+--- !u!114 &4890185124704701064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4596657270728130862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174443c45f5cadf4f845c7cb46df8e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangedEnemyController
+  moveSpeed: 3
+  targetPlayer: {fileID: 0}
+  agent: {fileID: 0}
+  animator: {fileID: 0}
+  enemy: {fileID: 0}
+  timeBetweenShots: 2
+  firePoint: {fileID: 8067650495102958602}
+  projectilePrefab: {fileID: 2950361553670207421, guid: cf641f75b2f8f6d499633ede35d8cc86, type: 3}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackRange: 18
+--- !u!195 &9149116179258776539
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4596657270728130862}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 14
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!136 &5577015776767700120
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1184,52 +1231,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.1, z: 0}
---- !u!195 &9149116179258776539
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596657270728130862}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 14
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &4890185124704701064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596657270728130862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 174443c45f5cadf4f845c7cb46df8e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RangedEnemyController
-  moveSpeed: 3
-  targetPlayer: {fileID: 0}
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  enemy: {fileID: 0}
-  timeBetweenShots: 2
-  firePoint: {fileID: 8067650495102958602}
-  projectilePrefab: {fileID: 2950361553670207421, guid: cf641f75b2f8f6d499633ede35d8cc86, type: 3}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  attackRange: 18
 --- !u!1 &4621478852995147773
 GameObject:
   m_ObjectHideFlags: 0

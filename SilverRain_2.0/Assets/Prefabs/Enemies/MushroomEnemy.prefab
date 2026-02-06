@@ -548,6 +548,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -587,8 +588,8 @@ GameObject:
   m_Component:
   - component: {fileID: 774982199035952458}
   - component: {fileID: 6246851165708670800}
-  - component: {fileID: 4061326125157589883}
   - component: {fileID: 1393219349111478000}
+  - component: {fileID: 4061326125157589883}
   - component: {fileID: 5859134246545887740}
   - component: {fileID: 8973529461620218559}
   m_Layer: 8
@@ -629,6 +630,23 @@ MonoBehaviour:
   scoreValue: 30
   xpValue: 50
   damage: 500
+--- !u!114 &1393219349111478000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440275271134425223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f172d2c42e4281b4ab4bda814b820302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 300
+  currentHealth: 0
+  bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
+  sfxID: sfx_enemy1_hurt
+  animator: {fileID: 0}
 --- !u!114 &4061326125157589883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,25 +667,8 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8
   attackRange: 2
---- !u!114 &1393219349111478000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440275271134425223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f172d2c42e4281b4ab4bda814b820302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 300
-  currentHealth: 0
-  bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
-  hurtSound: {fileID: 8300000, guid: 2d3a379a133615e48bf3c00572521d76, type: 3}
-  animator: {fileID: 0}
 --- !u!195 &5859134246545887740
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,10 @@ public class RangedEnemyController : EnemyController
     private LayerMask playerLayer;
     [SerializeField]
     private float attackRange = 10f;
+    
+    private ObjectPooler pooler;
+    private string poolKey = "EnemyProjectilePool";
+    
 
     public override void Attack(PlayerHealth player)
     {
@@ -25,8 +30,19 @@ public class RangedEnemyController : EnemyController
             {
                 animator.SetTrigger("attacking");
                 Vector3 dir = (targetPlayer.transform.position - firePoint.position).normalized;
-                GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-                projectile.GetComponent<EnemyProjectile>().Initialize(dir, enemy.damage, player);
+                
+                GameObject go = //Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+                    pooler.Spawn(poolKey, firePoint.position, Quaternion.LookRotation(dir));
+                
+                //projectile.GetComponent<EnemyProjectile>().Initialize(dir, enemy.damage, player);
+                if (go == null) return;
+                
+                var projectile = go.GetComponent<EnemyProjectile>();
+                if (projectile != null)
+                {
+                    projectile.SetPooler(pooler);
+                    projectile.PoolKey = poolKey;
+                }
             }
             shootTimer = 0;
         }
@@ -68,6 +84,8 @@ public class RangedEnemyController : EnemyController
         animator = GetComponentInChildren<Animator>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
         agent.speed = moveSpeed;
+        
+        pooler = FindAnyObjectByType<ObjectPooler>();
     }
 
     // Update is called once per frame

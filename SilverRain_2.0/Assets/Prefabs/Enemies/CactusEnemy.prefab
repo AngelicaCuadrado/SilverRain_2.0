@@ -751,8 +751,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3510763164666414736}
   - component: {fileID: 7842748707009033513}
-  - component: {fileID: 163084990868255089}
   - component: {fileID: 3510234485674128552}
+  - component: {fileID: 163084990868255089}
   - component: {fileID: 3824639954641308652}
   - component: {fileID: 4962455910974841826}
   m_Layer: 8
@@ -793,6 +793,23 @@ MonoBehaviour:
   scoreValue: 20
   xpValue: 20
   damage: 1000
+--- !u!114 &3510234485674128552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937696551812037509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f172d2c42e4281b4ab4bda814b820302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 150
+  currentHealth: 0
+  bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
+  sfxID: sfx_enemy1_hurt
+  animator: {fileID: 0}
 --- !u!114 &163084990868255089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,25 +830,8 @@ MonoBehaviour:
   timeBetweenAttacks: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   attackRange: 2
---- !u!114 &3510234485674128552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937696551812037509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f172d2c42e4281b4ab4bda814b820302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 150
-  currentHealth: 0
-  bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
-  hurtSound: {fileID: 8300000, guid: 2d3a379a133615e48bf3c00572521d76, type: 3}
-  animator: {fileID: 0}
 --- !u!195 &3824639954641308652
 NavMeshAgent:
   m_ObjectHideFlags: 0

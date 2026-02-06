@@ -1,17 +1,48 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour, IPoolable
 {
     Vector3 direction;
     float damage;
     float speed = 10f;
     PlayerHealth targetPlayerHealth;
-    float deathTimer = 10f;
-
-    // Update is called once per frame
-    void Update()
+    float deathTime = 10f;
+    
+    private ObjectPooler pooler;
+    public string PoolKey { get; set; }
+    
+    #region IPoolable Implementation
+    public void OnCreatedPool()
     {
-        transform.position += direction * speed * Time.deltaTime;
+    }
+
+    public void OnSpawnFromPool()
+    {
+        if (deathTime > 0f)
+        {
+            StartCoroutine(LifeTimer());
+        }
+    }
+
+    public void OnReturnToPool()
+    {
+    }
+    
+    #endregion
+    
+    public void SetPooler(ObjectPooler pooler)
+    {
+        this.pooler = pooler;
+    }
+
+    public void ReturnToPool(GameObject obj)
+    {
+        if (pooler != null)
+            pooler.ReturnToPool(obj, PoolKey);
+        else
+            Destroy(obj);
     }
 
     public void Initialize(Vector3 direction, float damage, PlayerHealth target)
@@ -21,16 +52,27 @@ public class EnemyProjectile : MonoBehaviour
         targetPlayerHealth = target;
     }
 
+    void Update()
+    {
+        transform.position += direction * speed * Time.deltaTime;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             targetPlayerHealth.TakeDamage(damage);
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        ReturnToPool(gameObject);
     }
-    private void Start()
+    
+    public IEnumerator LifeTimer()
     {
-        Destroy(gameObject, deathTimer);
+        yield return new WaitForSeconds(deathTime);
+        if (gameObject.activeInHierarchy)
+        {
+            ReturnToPool(gameObject);
+        }
     }
 }

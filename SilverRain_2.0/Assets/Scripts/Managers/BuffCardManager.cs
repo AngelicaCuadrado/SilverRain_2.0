@@ -116,26 +116,26 @@ public class BuffCardManager : MonoBehaviour
 //-------------------------------------------------------------DELETE THIS-------------------------------------------------------------
 
 
-public class TemporaryUpgrade : ITemporary
-{
-    public StatType StatType;
-    public void LevelUp()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void ResetLevels()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void SetAvailable(bool isAvailable)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void UpdateDescription()
-    {
-        throw new System.NotImplementedException();
-    }
-}
+// public class TemporaryUpgrade : ITemporary
+// {
+//     public StatType StatType;
+//     public void LevelUp()
+//     {
+//         throw new System.NotImplementedException();
+//     }
+//
+//     public void ResetLevels()
+//     {
+//         throw new System.NotImplementedException();
+//     }
+//
+//     public void SetAvailable(bool isAvailable)
+//     {
+//         throw new System.NotImplementedException();
+//     }
+//
+//     public void UpdateDescription()
+//     {
+//         throw new System.NotImplementedException();
+//     }
+// }
