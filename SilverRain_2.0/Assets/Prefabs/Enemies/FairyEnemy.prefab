@@ -1145,6 +1145,7 @@ MonoBehaviour:
   scoreValue: 100
   xpValue: 10
   damage: 100
+  pooler: {fileID: 0}
 --- !u!114 &8171431734536988271
 MonoBehaviour:
   m_ObjectHideFlags: 0
