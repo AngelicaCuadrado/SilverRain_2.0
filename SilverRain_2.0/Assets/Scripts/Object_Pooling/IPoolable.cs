@@ -6,12 +6,15 @@
 /// objects.</remarks>
 public interface IPoolable
 {
+    //The key identifying the pool this object belongs to
+    public string PoolKey { get; set; }
+
     //Called once when the object is first created
-    void OnCreatedPool();
+    public void OnCreatedPool();
 
     //Called whenever the pool hands out this instance
-    void OnSpawnFromPool();
+    public void OnSpawnFromPool();
 
     //Called when returning to pool
-    void OnReturnToPool();
+    public void OnReturnToPool();
 }

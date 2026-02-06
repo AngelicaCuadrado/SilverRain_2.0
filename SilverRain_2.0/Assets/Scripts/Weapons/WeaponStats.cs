@@ -47,7 +47,7 @@ public class WeaponStats : MonoBehaviour
         SetStat(type, statValue);
     }
 
-    public void SetStat(StatType type, float value)
+    private void SetStat(StatType type, float value)
     {
         switch (type)
         {
@@ -96,6 +96,10 @@ public class StatManager
             }
             return instance;
         }
+    }
+    public void AddTempUpgrade(StatType type)
+    {
+        // Placeholder implementation
     }
     public float GetStat(StatType type)
     {

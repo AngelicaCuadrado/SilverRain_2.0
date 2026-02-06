@@ -3,10 +3,18 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
+    [Header("Projectile Settings")]
     [SerializeField, Tooltip("The center of the sword's rotation")]
     private Transform playerTrans;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
     private float spawnAngleOffset = 90f;
+    [Header("Spawn Position Offsets")]
+    [SerializeField, Tooltip("How far forward the sword is positioned relative to the camera")]
+    private float spawnOffsetForward = 1f;
+    [SerializeField, Tooltip("How far above the sword is positioned relative to the camera")]
+    private float spawnOffsetUp = -0.4f;
+    [SerializeField, Tooltip("How far to the side the sword is positioned relative to the camera")]
+    private float spawnOffsetSide = 0f;
 
     private void Start()
     {
@@ -16,6 +24,16 @@ public class Sword : Weapon
             weaponVisual.SetActive(false);
         }
     }
+
+    private void Update()
+    {
+        if (cam == null) return;
+        //Make the pistol follow the camera's position and rotation
+        Vector3 desiredPos = cam.position + (cam.forward * spawnOffsetForward) + (cam.up * spawnOffsetUp) + (cam.right * spawnOffsetSide);
+        transform.position = desiredPos;
+        transform.rotation = Quaternion.LookRotation(-cam.forward, Vector3.up);
+    }
+
     public override void Attack()
     {
         //Calculate spawn rotation so the projectile faces forward
@@ -56,12 +74,16 @@ public class Sword : Weapon
 
     public override void OnActivate()
     {
+        //Cache the player transform
         playerTrans = PlayerFinder.Instance.Player.transform;
         if (playerTrans == null)
         {
             Debug.LogError("Sword: Could not find player transform.");
             return;
         }
+        //Cache the main camera transform
+        if (Camera.main != null) { cam = Camera.main.transform; }
+        else { Debug.LogWarning("Sword: no Camera.main found. Ensure a camera has the MainCamera tag."); }
         base.OnActivate();
     }
 

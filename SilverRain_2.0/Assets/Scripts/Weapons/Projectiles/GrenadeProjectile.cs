@@ -62,7 +62,7 @@ public class GrenadeProjectile : Projectile
             parentWeapon.HandleWeaponHit(hitEnemies, transform.position);
         }
         //Return to pool
-        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject);
+        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
     }
 
     public override void OnCreatedPool()

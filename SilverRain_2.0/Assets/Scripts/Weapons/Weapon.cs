@@ -30,6 +30,8 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     protected WeaponStats weaponStats;
     [SerializeField, Tooltip("UI handling component, must be attached to the weapon's GameObject")]
     protected WeaponUI weaponUI;
+    [SerializeField, Tooltip("The main camera transform that the weapon follows")]
+    protected Transform cam;
     [Header("Availability")]
     [SerializeField, Tooltip("Represents whether the weapon can appear as an option when leveling up")]
     protected bool isAvailable;
@@ -44,11 +46,12 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public int WeaponLevel => weaponLevel;
     public int MaxWeaponLevel => maxWeaponLevel;
     public WeaponType WeaponType => weaponType;
+    public string ProjectilePoolKey => projectilePoolKey;
     public GameObject WeaponVisual => weaponVisual;
     public WeaponStats WeaponStats => weaponStats;
     public WeaponUI WeaponUI => weaponUI;
+    public Transform Cam => cam;
     public bool IsAvailable => isAvailable;
-    public string ProjectilePoolKey => projectilePoolKey;
 
     //Methods
     public abstract void LevelUp();
@@ -83,7 +86,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public virtual void SetAvailable(bool availability)
     {
         isAvailable = availability;
-        OnAvailabilityChanged?.Invoke(this);
+        WeaponManager.Instance.HandleAvailabilityChange(this, availability);
     }
     public virtual void UpdateDescription()
     {

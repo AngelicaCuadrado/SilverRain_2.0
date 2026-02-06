@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class WeaponManager : MonoBehaviour
     public int MaxWeapons => maxWeapons;
     public Weapon InitialWeapon { get => initialWeapon; set => initialWeapon = value; }
     public ObjectPooler ProjectilePool => projectilePool;
+
+    //Events
+    public UnityEvent<ITemporary, bool> OnWeaponAvailabilityChange;
 
     private void Awake()
     {
@@ -101,5 +105,10 @@ public class WeaponManager : MonoBehaviour
         }
         //Reset current weapons list
         currentWeapons.Clear();
+    }
+
+    public void HandleAvailabilityChange(ITemporary weapon, bool isAvailable)
+    {
+        OnWeaponAvailabilityChange.Invoke(weapon, isAvailable);
     }
 }
