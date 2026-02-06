@@ -81,29 +81,3 @@ public class WeaponStats : MonoBehaviour
         size = 0f;
     }
 }
-
-//-------------------------------------DELETE THIS---------------------------------------------------
-public class StatManager
-{
-    private static StatManager instance;
-    public static StatManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new StatManager();
-            }
-            return instance;
-        }
-    }
-    public void AddTempUpgrade(StatType type)
-    {
-        // Placeholder implementation
-    }
-    public float GetStat(StatType type)
-    {
-        // Placeholder implementation
-        return 0f;
-    }
-}
