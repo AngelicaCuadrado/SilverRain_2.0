@@ -19,15 +19,6 @@ public class Grenade : Weapon
     [SerializeField, Tooltip("The position from which grenades will spawn")]
     private Transform firePoint;
 
-    private void Start()
-    {
-        //Deactivate visual if possible
-        if (weaponVisual != null)
-        {
-            weaponVisual.SetActive(false);
-        }
-    }
-
     private void Update()
     {
         if (cam == null) return;

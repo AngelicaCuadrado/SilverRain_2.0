@@ -121,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
         //Ensure we have a playerTrans reference
         if (player == null)
         {
-            var p = GameManager.Instance.Player;
+            var p = PlayerFinder.Instance.Player;
             if (p != null) player = p;
         }
 

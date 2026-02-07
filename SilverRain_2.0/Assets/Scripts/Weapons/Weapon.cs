@@ -35,6 +35,8 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     [Header("Availability")]
     [SerializeField, Tooltip("Represents whether the weapon can appear as an option when leveling up")]
     protected bool isAvailable;
+    [SerializeField, Tooltip("Represents whether the weapon is available when the level starts")]
+    protected bool isAvailableAtStart;
 
     [Header("Events")]
     public UnityEvent<ITemporary> OnWeaponLevelChanged;
@@ -52,17 +54,28 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public WeaponUI WeaponUI => weaponUI;
     public Transform Cam => cam;
     public bool IsAvailable => isAvailable;
+    public bool IsAvailableAtStart => isAvailableAtStart;
 
     //Methods
+    public virtual void Start()
+    {
+        // Make available in BuffCardManager
+        SetAvailable(isAvailableAtStart);
+        // Deactivate visual if possible
+        if (weaponVisual != null)
+        {
+            weaponVisual.SetActive(false);
+        }
+    }
     public abstract void LevelUp();
     public virtual void OnActivate()
     {
-        //Activate visual if possible
+        // Activate visual if possible
         if (weaponVisual != null)
         {
             weaponVisual.SetActive(true);
         }
-        //Start duration coroutine
+        // Start duration coroutine
         StartCoroutine(OnDuration());
     }
     public virtual IEnumerator OnCooldown()
@@ -74,13 +87,13 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public abstract void Attack();
     public virtual void ResetLevels()
     {
-        //Reset level and stats
+        // Reset level and stats
         weaponLevel = 0;
         weaponStats.ResetWeaponStats();
-        //Update UI
+        // Update UI
         OnWeaponLevelChanged?.Invoke(this);
         weaponUI.UpdateDescription();
-        //Reset availability
+        // Reset availability
         SetAvailable(true);
     }
     public virtual void SetAvailable(bool availability)

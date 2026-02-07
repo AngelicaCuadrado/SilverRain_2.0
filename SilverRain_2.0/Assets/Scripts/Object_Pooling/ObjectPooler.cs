@@ -59,8 +59,8 @@ public class ObjectPooler : MonoBehaviour
     /// </summary>
     /// <remarks>If the pool is empty and not expandable, or if the specified key does not correspond to an
     /// existing pool, the method returns null. The spawned object is activated and its transform is set to the
-    /// specified position and rotation. The object is immediately re-enqueued for future reuse. If the object
-    /// implements IPoolable, its OnSpawnFromPool method is called upon spawning.</remarks>
+    /// specified position and rotation. If the object implements IPoolable, its OnSpawnFromPool method is 
+    /// called upon spawning and it is given the pool's key.</remarks>
     /// <param name="key">The key identifying the object pool from which to spawn the object. Must correspond to an existing pool.</param>
     /// <param name="position">The world position at which to spawn the object.</param>
     /// <param name="rotation">The rotation to apply to the spawned object.</param>
