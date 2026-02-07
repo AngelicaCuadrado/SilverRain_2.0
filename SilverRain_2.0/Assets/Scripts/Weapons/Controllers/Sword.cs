@@ -16,15 +16,6 @@ public class Sword : Weapon
     [SerializeField, Tooltip("How far to the side the sword is positioned relative to the camera")]
     private float spawnOffsetSide = 0f;
 
-    private void Start()
-    {
-        //Deactivate visual if possible
-        if (weaponVisual != null)
-        {
-            weaponVisual.SetActive(false);
-        }
-    }
-
     private void Update()
     {
         if (cam == null) return;

@@ -11,17 +11,6 @@ public class Pistol : Weapon
     [SerializeField, Tooltip("How far above the pistol is positioned relative to the camera")]
     private float spawnOffsetUp = -0.4f;
 
-    private void Start()
-    {
-        //Ensure firePoint is assigned
-        if (firePoint == null) { firePoint = transform; Debug.LogWarning("Pistol: no firePoint was assigned, defaulting to pistol trsnform"); }
-        //Deactivate visual if possible
-        if (weaponVisual != null)
-        {
-            weaponVisual.SetActive(false);
-        }
-    }
-
     private void Update()
     {
         if (cam == null) return;
