@@ -1,11 +1,12 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class TemporaryUpgrade : ITemporary
 {
-    int level;
-    int maxLevel;
+    int currentLevel;
+    //int maxLevel;
+    string description;
     TemporaryUpgradeData data;
     bool isAvailable;
     public StatType StatType;
@@ -15,11 +16,11 @@ public class TemporaryUpgrade : ITemporary
 
     public void LevelUp()
     {
-        if (level >= maxLevel) return;
-        level++;
+        if (currentLevel >= data.MaxLevel) return;
+        currentLevel++;
         OnTemporaryUpgradeLevelChanged?.Invoke(StatType);
 
-        if (level >= maxLevel)
+        if (currentLevel >= data.MaxLevel)
         {
             SetAvailable(false);
             OnAvailabilityChanged?.Invoke(this, false);
@@ -28,7 +29,7 @@ public class TemporaryUpgrade : ITemporary
 
     public void ResetLevels()
     {
-        level = 0;
+        currentLevel = 0;
         SetAvailable(true);
     }
 
@@ -39,11 +40,21 @@ public class TemporaryUpgrade : ITemporary
 
     public void UpdateDescription()
     {
-        throw new System.NotImplementedException();
+        float currentValue = Calculate();
+
+        if (currentLevel >= data.MaxLevel)
+        {
+            description = $"+{currentValue} (MAX)";
+        }
+        else
+        {
+            float nextValue = data.BaseAmount + data.AmountPerLevel * (currentLevel + 1);
+            description = $"+{currentValue} → +{nextValue}";
+        }
     }
 
     public float Calculate()
     {
-        return data.BaseAmount + (data.AmountPerLevel * level);
+        return data.BaseAmount + (data.AmountPerLevel * currentLevel);
     }
 }

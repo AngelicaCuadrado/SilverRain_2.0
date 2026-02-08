@@ -1,34 +1,46 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PermanentUpgrade : IUpgradeable
 {
-    int level;
-    int maxLevel;
+    int currentLevel;
+    //int maxcurrentLevel;
     PermanentUpgradeData data;
+    string description;
     StatType statType;
 
     UnityEvent<StatType> OnPermanentUpgradeLevelChanged;
     public void LevelUp()
     {
-        if (level >= maxLevel) return;
-        level++;
+        if (currentLevel >= data.MaxLevel) return;
+        currentLevel++;
         OnPermanentUpgradeLevelChanged?.Invoke(statType);
     }
 
     public void ResetLevels()
     {
-        level = 0;
+        currentLevel = 0;
     }
 
     public void UpdateDescription()
     {
-        throw new System.NotImplementedException();
+        float currentValue = Calculate();
+
+        if (currentLevel >= data.MaxLevel)
+        {
+            description = $"+{currentValue} (MAX)";
+        }
+        else
+        {
+            float nextValue = data.BaseAmount + data.AmountPerLevel * (currentLevel + 1);
+            description = $"+{currentValue} → +{nextValue}";
+        }
     }
+
 
     public float Calculate()
     {
-        return data.BaseAmount + (data.AmountPerLevel * level);
+        return data.BaseAmount + (data.AmountPerLevel * currentLevel);
     }
 }
