@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface ITemporary : IUpgradeable
 {
-    void SetAvailable(bool isAvailable);
+    public void SetAvailable(bool isAvailable);
+    public UITemporary UIData {  get; }
 }

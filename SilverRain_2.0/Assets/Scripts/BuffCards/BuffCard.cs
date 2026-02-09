@@ -26,5 +26,10 @@ public class BuffCard : MonoBehaviour
     public void SetupCard(ITemporary buffToAssign)
     {
         assignedBuff = buffToAssign;
+        UITemporary buffInfo = buffToAssign.UIData;
+        buffName.text = buffInfo.buffName;
+        buffLevel.text = buffInfo.buffLevel;
+        buffDescription.text = buffInfo.finalBuffDescription;
+        buffIcon.sprite = buffInfo.buffIcon;
     }
 }

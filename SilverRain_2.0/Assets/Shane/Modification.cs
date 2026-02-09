@@ -5,10 +5,21 @@ using UnityEngine.Events;
 
 public abstract class Modification : MonoBehaviour, ITemporary
 {
-    [SerializeField] string modificationName;
-    [SerializeField] string description;
-    bool isAvailable;
+    [SerializeField, Tooltip("")]
+    private string modificationName;
+    [SerializeField, Tooltip("")]
+    private string description;
+    [SerializeField, Tooltip("")]
+    private bool isAvailable;
+    [SerializeField, Tooltip("")]
+    private UITemporary uiData;
+
+    //Events
     UnityEvent<ITemporary> OnAvailabilityChanged;
+
+    //Properties
+    public UITemporary UIData {  get { return uiData; } }
+
     public void LevelUp()
     {
         try

@@ -77,10 +77,9 @@ public class PlayerHealth : MonoBehaviour
     {
         // Death logic here
         onDie?.Invoke(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        GameManager.Instance.PauseGame();
         Debug.Log("Player Died");
-        SceneManager.LoadScene("LevelSelector");
+        //GameManager.Instance.ChangeLevel("LevelSelector");
     }
 
     public float GetHealthPercentage()

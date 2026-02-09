@@ -92,4 +92,12 @@ public class Grenade : Weapon
         StartCoroutine(OnCooldown());
         yield break;
     }
+
+    public override void UpdateDescription()
+    {
+        uiData.UpdateDescription(weaponLevel,
+            "Damage", weaponStats.GetCurrentStatsForUI(StatType.AttackDamage), weaponStats.GetNextLevelStatsForUI(StatType.AttackDamage),
+            "Cooldown", weaponStats.GetCurrentStatsForUI(StatType.Cooldown), weaponStats.GetNextLevelStatsForUI(StatType.Cooldown),
+            "Size", weaponStats.GetCurrentStatsForUI(StatType.Size), weaponStats.GetNextLevelStatsForUI(StatType.Size));
+    }
 }

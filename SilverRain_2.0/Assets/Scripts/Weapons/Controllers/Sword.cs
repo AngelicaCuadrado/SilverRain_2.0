@@ -25,23 +25,6 @@ public class Sword : Weapon
         transform.rotation = Quaternion.LookRotation(-cam.forward, Vector3.up);
     }
 
-    public override void Attack()
-    {
-        //Calculate spawn rotation so the projectile faces forward
-        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + spawnAngleOffset, 0f);
-        //Instantiate projectile
-        var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position, spawnRot);
-        //Initialize projectile
-        var proj = projObj.GetComponent<SwordProjectile>();
-        if (proj == null)
-        {
-            Debug.LogWarning("Sword: The instantiated projectile does not have a SwordProjectile component.");
-            Destroy(projObj);
-            return;
-        }
-        proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
-    }
-
     public override void LevelUp()
     {
         //Ensure we don't exceed max level
@@ -83,5 +66,32 @@ public class Sword : Weapon
         Attack();
         yield return new WaitForSeconds(weaponStats.Duration);
         StartCoroutine(OnCooldown());
+    }
+
+    public override void Attack()
+    {
+        //Calculate spawn rotation so the projectile faces forward
+        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + spawnAngleOffset, 0f);
+        //Instantiate projectile
+        var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position, spawnRot);
+        //Initialize projectile
+        var proj = projObj.GetComponent<SwordProjectile>();
+        if (proj == null)
+        {
+            Debug.LogWarning("Sword: The instantiated projectile does not have a SwordProjectile component.");
+            Destroy(projObj);
+            return;
+        }
+        proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+    }
+
+    public override void UpdateDescription()
+    {
+        uiData.UpdateDescription(weaponLevel, 
+            "Damage", weaponStats.GetCurrentStatsForUI(StatType.AttackDamage), weaponStats.GetNextLevelStatsForUI(StatType.AttackDamage),
+            "Cooldown", weaponStats.GetCurrentStatsForUI(StatType.Cooldown), weaponStats.GetNextLevelStatsForUI(StatType.Cooldown),
+            "Duration", weaponStats.GetCurrentStatsForUI(StatType.Duration), weaponStats.GetNextLevelStatsForUI(StatType.Duration),
+            "Speed", weaponStats.GetCurrentStatsForUI(StatType.ProjectileSpeed), weaponStats.GetNextLevelStatsForUI(StatType.ProjectileSpeed),
+            "Size", weaponStats.GetCurrentStatsForUI(StatType.Size), weaponStats.GetNextLevelStatsForUI(StatType.Size));
     }
 }

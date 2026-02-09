@@ -37,9 +37,15 @@ public class BuffCardManager : MonoBehaviour
         //Singleton pattern implementation
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+
+        //Subscribe to availability change events for weapons, temporary upgrades, and modifications
+        //StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
+        WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
+        //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
     }
     private void Start()
     {
+        print("Start");
         //Find PlayerExperience
         if (playerExperience == null)
         {
@@ -50,12 +56,7 @@ public class BuffCardManager : MonoBehaviour
                 playerExperience = playerXP;
             }
         }
-        playerExperience.OnLevelUp.AddListener(DisplayBuffCards);
-
-        //Subscribe to availability change events for weapons, temporary upgrades, and modifications
-        WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
-        //StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
-        //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
+        if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(DisplayBuffCards); }
 
         //Create maximum amount of buff cards
         for (int i = 0; i < maxBuffCards; i++)
@@ -67,22 +68,39 @@ public class BuffCardManager : MonoBehaviour
             buffCards.Add(card);
             buffObj.SetActive(false);
         }
+
+        foreach (var buff in availableChoices)
+        {
+            Debug.Log("Hello");
+        }
+        print("End");
     }
 
     private void DisplayBuffCards()
     {
+        // Initialize choices lists
         currentChoices.Clear();
-
-        //Copy available choices
         List<ITemporary> choicePool = new(availableChoices);
 
-        for (int i = 0; i < choiceAmount; i++)
+        // Ensure that there are enough available choices for each choice amount
+        int buffAmount = Mathf.Min(choiceAmount, choicePool.Count);
+
+        //------------------------------------------------------------------------------------------------------------------
+        // If there are no available choices left when you level up we may want to reward
+        // the player with something else, like score, full heal, reveal all enemies, etc.
+        if (buffAmount <= 0) { return; }
+        //------------------------------------------------------------------------------------------------------------------
+
+        // Pause the game
+        GameManager.Instance.PauseGame();
+
+        for (int i = 0; i < buffAmount; i++)
         {
-            //Randomly choose an ITemporary
+            // Randomly choose an ITemporary
             ITemporary choice = PickRandomChoice(choicePool);
             currentChoices.Add(choice);
 
-            //Setup and activate the buff card
+            // Setup and activate the buff card
             buffCards[i].SetupCard(choice);
             buffCards[i].gameObject.SetActive(true);
         }
@@ -95,6 +113,9 @@ public class BuffCardManager : MonoBehaviour
     }
     private void HideBuffCards()
     {
+        // Unpause the game
+        GameManager.Instance.UnpauseGame();
+
         foreach (var card in buffCards)
         {
             card.gameObject.SetActive(false);
@@ -102,11 +123,12 @@ public class BuffCardManager : MonoBehaviour
     }
     private ITemporary PickRandomChoice(List<ITemporary> pool)
     {
-        if (pool.Count == 0) return null;
+        if (pool.Count == 0) { Debug.Log("BuffCardManager - Available pool is empty"); return null; }
 
         int index = Random.Range(0, pool.Count);
         ITemporary chosen = pool[index];
-        pool.RemoveAt(index); // ensures uniqueness
+        // Ensures uniqueness
+        pool.RemoveAt(index);
         return chosen;
     }
 
@@ -122,6 +144,9 @@ public class BuffCardManager : MonoBehaviour
                 break;
             case Modification modification:
                 ModificationManager.instance.AddModification(modification);
+                break;
+            default:
+                Debug.Log("BuffCardManager - ITemporary type not recognized");
                 break;
         }
 

@@ -69,4 +69,12 @@ public class Pistol : Weapon
         StartCoroutine(OnCooldown());
         yield break;
     }
+
+    public override void UpdateDescription()
+    {
+        uiData.UpdateDescription(weaponLevel,
+            "Damage", weaponStats.GetCurrentStatsForUI(StatType.AttackDamage), weaponStats.GetNextLevelStatsForUI(StatType.AttackDamage),
+            "Cooldown", weaponStats.GetCurrentStatsForUI(StatType.Cooldown), weaponStats.GetNextLevelStatsForUI(StatType.Cooldown),
+            "Speed", weaponStats.GetCurrentStatsForUI(StatType.ProjectileSpeed), weaponStats.GetNextLevelStatsForUI(StatType.ProjectileSpeed));
+    }
 }

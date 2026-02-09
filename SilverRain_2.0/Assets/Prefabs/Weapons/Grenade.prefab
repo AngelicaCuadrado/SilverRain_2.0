@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1721398068177321597}
   - component: {fileID: 6501333127623952714}
   - component: {fileID: 8612061753811787792}
+  - component: {fileID: 2429271256713669232}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Untagged
@@ -53,7 +54,9 @@ MonoBehaviour:
   weaponVisual: {fileID: 0}
   weaponStats: {fileID: 6501333127623952714}
   weaponUI: {fileID: 8612061753811787792}
+  cam: {fileID: 0}
   isAvailable: 0
+  isAvailableAtStart: 0
   OnWeaponLevelChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -66,11 +69,12 @@ MonoBehaviour:
   OnWeaponHit:
     m_PersistentCalls:
       m_Calls: []
-  cam: {fileID: 0}
   throwForce: 12
   upwardForce: 4
   spawnOffsetForward: 1.2
   spawnOffsetUp: 0
+  spawnOffsetSide: 0.5
+  firePoint: {fileID: 0}
 --- !u!114 &6501333127623952714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,3 +110,19 @@ MonoBehaviour:
   weaponIcon: {fileID: 0}
   weaponName: Grenade
   weaponDescription: 
+--- !u!114 &2429271256713669232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535900841454448885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITemporary
+  buffName: Grenade
+  buffLevel: 1
+  buffDescription: explodes
+  buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

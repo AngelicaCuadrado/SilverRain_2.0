@@ -1391,12 +1391,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
+    m_Left: 100
+    m_Right: 100
+    m_Top: 50
+    m_Bottom: 50
+  m_ChildAlignment: 1
+  m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1963,6 +1963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1220391925}
+  - component: {fileID: 1220391926}
   - component: {fileID: 1220391924}
   m_Layer: 0
   m_Name: GameManager
@@ -1999,6 +2000,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1220391926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220391923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36734ec7e5e14d8687c8af4ae242cbc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1 &1280090476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,6 +2377,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 671726898}
   - {fileID: 1280090478}
   - {fileID: 571597479}
   - {fileID: 135736912}
@@ -2373,7 +2387,6 @@ SceneRoots:
   - {fileID: 359638765}
   - {fileID: 138048537}
   - {fileID: 1118176356}
-  - {fileID: 671726898}
   - {fileID: 1203305465}
   - {fileID: 2054693291}
   - {fileID: 1660783930}

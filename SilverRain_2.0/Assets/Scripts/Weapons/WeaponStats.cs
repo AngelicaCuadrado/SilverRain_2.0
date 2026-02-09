@@ -80,4 +80,14 @@ public class WeaponStats : MonoBehaviour
         projectileSpeed = 0f;
         size = 0f;
     }
+
+    public float GetCurrentStatsForUI(StatType type)
+    {
+        return (weaponData.GetBaseStat(type) + (weaponData.GetPerLevelStat(type) * weapon.WeaponLevel));
+    }
+
+    public float GetNextLevelStatsForUI(StatType type)
+    {
+        return (weaponData.GetBaseStat(type) + (weaponData.GetPerLevelStat(type) * (weapon.WeaponLevel + 1)));
+    }
 }
