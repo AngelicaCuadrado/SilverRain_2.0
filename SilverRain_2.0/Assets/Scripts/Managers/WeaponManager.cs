@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class WeaponManager : MonoBehaviour
 
     //Serialized fields
     [SerializeField, Tooltip("List of all weapons currently implemented")]
+    private List<WeaponEntry> allWeaponsList;
+    //Dictionary of all weapons
     private Dictionary<WeaponType, Weapon> allWeapons;
-    [SerializeField, Tooltip("List of weapons active in the current level")]
+    //Dictionary of weapons active in the current level
     private Dictionary<WeaponType, Weapon> currentWeapons;
     [SerializeField, Tooltip("Maximum amount of weapon allowed to be active in a level")]
     private int maxWeapons;
@@ -26,6 +29,9 @@ public class WeaponManager : MonoBehaviour
     public Weapon InitialWeapon { get => initialWeapon; set => initialWeapon = value; }
     public ObjectPooler ProjectilePool => projectilePool;
 
+    //Events
+    public UnityEvent<ITemporary, bool> OnWeaponAvailabilityChange;
+
     private void Awake()
     {
         //Singleton pattern
@@ -38,11 +44,24 @@ public class WeaponManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //Initialize all weapons dictionary
+        allWeapons = new Dictionary<WeaponType, Weapon>();
+        foreach (var entry in allWeaponsList)
+        {
+            if (!allWeapons.ContainsKey(entry.type))
+            {
+                allWeapons.Add(entry.type, entry.weapon);
+            }
+            else
+            {
+                Debug.LogWarning($"Duplicate weapon type {entry.type} found in allWeaponsList.");
+            }
+        }
         //Initialize current weapons dictionary
         currentWeapons = new Dictionary<WeaponType, Weapon>();
     }
 
-    private void AddWeapon(WeaponType type)
+    public void AddWeapon(WeaponType type)
     {
         //Level up weapon if already present
         if (currentWeapons.ContainsKey(type))
@@ -58,6 +77,8 @@ public class WeaponManager : MonoBehaviour
                 return;
             }
             currentWeapons.Add(type, allWeapons[type]);
+            //Increase level to 1
+            currentWeapons[type].LevelUp();
             //Activate the weapon
             currentWeapons[type].OnActivate();
             //Check if max weapon amount reached
@@ -75,7 +96,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
     
-    private void ResetWeapons()
+    public void ResetWeapons()
     {
         //Reset all current weapons
         foreach (var weapon in currentWeapons.Values)
@@ -85,15 +106,9 @@ public class WeaponManager : MonoBehaviour
         //Reset current weapons list
         currentWeapons.Clear();
     }
-    
-    //Ido - I'm not sure if we need to find a specific weapon from
-    //the current weapons,if this has 0 references we should delete it
-    public Weapon GetOneCurrentWeapon(WeaponType type)
+
+    public void HandleAvailabilityChange(ITemporary weapon, bool isAvailable)
     {
-        if (currentWeapons.ContainsKey(type))
-        {
-            return currentWeapons[type];
-        }
-        return null;
+        OnWeaponAvailabilityChange.Invoke(weapon, isAvailable);
     }
 }

@@ -27,9 +27,15 @@ public class WeaponStats : MonoBehaviour
     public float ProjectileSpeed => projectileSpeed;
     public float Size => size;
 
-    public float CalculateStat(StatType type)
+    public void CalculateStat(StatType type)
     {
-        return
+        //-----------------------------DEBUGGING CODE--------------------------------------
+        Debug.Log("Calculating stat: " + type.ToString());
+        SetStat(type, 1f);
+        return;
+        //---------------------------------------------------------------------------------
+
+        float statValue =
             //Player stats
             //StatManager.Instance.GetStat(type) +
             //Modification stats
@@ -38,6 +44,32 @@ public class WeaponStats : MonoBehaviour
             weaponData.GetBaseStat(type) +
             //Per-level weapon stats
             (weaponData.GetPerLevelStat(type) * weapon.WeaponLevel);
+        SetStat(type, statValue);
+    }
+
+    private void SetStat(StatType type, float value)
+    {
+        switch (type)
+        {
+            case StatType.AttackDamage:
+                damage = value;
+                break;
+            case StatType.Cooldown:
+                cooldown = value;
+                break;
+            case StatType.Duration:
+                duration = value;
+                break;
+            case StatType.ProjectileSpeed:
+                projectileSpeed = value;
+                break;
+            case StatType.Size:
+                size = value;
+                break;
+            default:
+                Debug.LogWarning("WeaponStats: Attempted to set unknown stat type: " + type.ToString());
+                break;
+        }
     }
 
     public void ResetWeaponStats()

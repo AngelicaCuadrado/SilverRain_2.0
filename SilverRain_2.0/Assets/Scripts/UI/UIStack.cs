@@ -32,6 +32,7 @@ public class UIStack : MonoBehaviour
 
         _stack.Push(instance);
         instance.OnPushed();
+        UISFXBinder.BindButtons(instance, "sfx_click", includeInactive: true);
         return instance;
     }
 

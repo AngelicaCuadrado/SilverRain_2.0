@@ -13,43 +13,105 @@ using UnityEngine.Rendering;
 /// classes.</remarks>
 public abstract class Weapon : MonoBehaviour, ITemporary
 {
+    [Header("Level")]
     [SerializeField,Tooltip("Current weapon level, 0 = unaquired")]
     protected int weaponLevel = 0;
     [SerializeField,Tooltip("Maximum weapon level")]
     protected int maxWeaponLevel = 5;
+    [Header("Identification")]
     [SerializeField,Tooltip("Key used for identification")]
     protected WeaponType weaponType;
-    [SerializeField,Tooltip("GameObject of the weapon")]
-    protected GameObject weaponPrefab;
+    [SerializeField, Tooltip("The key used to spawn projectiles from the pool")]
+    protected string projectilePoolKey;
+    [Header("Components")]
+    [SerializeField,Tooltip("Optional GameObject for the weapon visuals")]
+    protected GameObject weaponVisual;
     [SerializeField,Tooltip("Stats component, must be attached to the weapon's GameObject")]
     protected WeaponStats weaponStats;
     [SerializeField, Tooltip("UI handling component, must be attached to the weapon's GameObject")]
     protected WeaponUI weaponUI;
+    [SerializeField, Tooltip("The main camera transform that the weapon follows")]
+    protected Transform cam;
+    [Header("Availability")]
     [SerializeField, Tooltip("Represents whether the weapon can appear as an option when leveling up")]
     protected bool isAvailable;
+    [SerializeField, Tooltip("Represents whether the weapon is available when the level starts")]
+    protected bool isAvailableAtStart;
 
-    //Events
+    [Header("Events")]
     public UnityEvent<ITemporary> OnWeaponLevelChanged;
     public UnityEvent<ITemporary> OnAvailabilityChanged;
-    public UnityEvent<WeaponType, Vector3> OnWeaponHit;
+    public UnityEvent<WeaponType, Weapon> OnWeaponProjectileSpawn;
+    public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
 
     //Properties
     public int WeaponLevel => weaponLevel;
     public int MaxWeaponLevel => maxWeaponLevel;
     public WeaponType WeaponType => weaponType;
-    public GameObject WeaponPrefab => weaponPrefab;
+    public string ProjectilePoolKey => projectilePoolKey;
+    public GameObject WeaponVisual => weaponVisual;
     public WeaponStats WeaponStats => weaponStats;
     public WeaponUI WeaponUI => weaponUI;
+    public Transform Cam => cam;
     public bool IsAvailable => isAvailable;
+    public bool IsAvailableAtStart => isAvailableAtStart;
 
     //Methods
+    public virtual void Start()
+    {
+        // Make available in BuffCardManager
+        SetAvailable(isAvailableAtStart);
+        // Deactivate visual if possible
+        if (weaponVisual != null)
+        {
+            weaponVisual.SetActive(false);
+        }
+    }
     public abstract void LevelUp();
-    public abstract void ResetLevels();
-    public abstract void UpdateDescription();
-    public abstract void SetAvailable(bool availability);
-    public abstract void OnActivate();
-    public abstract IEnumerator OnCooldown();
+    public virtual void OnActivate()
+    {
+        // Activate visual if possible
+        if (weaponVisual != null)
+        {
+            weaponVisual.SetActive(true);
+        }
+        // Start duration coroutine
+        StartCoroutine(OnDuration());
+    }
+    public virtual IEnumerator OnCooldown()
+    {
+        yield return new WaitForSeconds(weaponStats.Cooldown);
+        StartCoroutine(OnDuration());
+    }
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
-    public abstract void HandleWeaponHit(Vector3 pos);
+    public virtual void ResetLevels()
+    {
+        // Reset level and stats
+        weaponLevel = 0;
+        weaponStats.ResetWeaponStats();
+        // Update UI
+        OnWeaponLevelChanged?.Invoke(this);
+        weaponUI.UpdateDescription();
+        // Reset availability
+        SetAvailable(true);
+    }
+    public virtual void SetAvailable(bool availability)
+    {
+        isAvailable = availability;
+        WeaponManager.Instance.HandleAvailabilityChange(this, availability);
+    }
+    public virtual void UpdateDescription()
+    {
+        weaponUI.UpdateDescription();
+    }
+    public virtual void HandleProjectileSpawn()
+    {
+        OnWeaponProjectileSpawn?.Invoke(weaponType, this);
+    }
+
+    public virtual void HandleWeaponHit(GameObject[] obj, Vector3 pos)
+    {
+        OnWeaponHit?.Invoke(weaponType, obj, pos);
+    }
 }

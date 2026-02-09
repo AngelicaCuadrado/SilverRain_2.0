@@ -1,30 +1,27 @@
 using System.Collections;
 using UnityEngine;
 
-public class PistolProjectile : MonoBehaviour, IPoolable
+public class PistolProjectile : Projectile
 {
-    private Pistol parentGun;
-    private float damage;
     //Movement
     private Vector3 direction;
     private float speed;
-    //Lifetime before returning to pool
-    [SerializeField] private float lifeTime = 5f;
-    private Coroutine lifeCoroutine;
 
     public void Init(Pistol parent, float dmg, Vector3 dir, float spd)
     {
-        parentGun = parent;
+        parentWeapon = parent;
         damage = dmg;
         direction = dir.normalized;
         speed = spd;
+
+        //Apply modifications
+        parentWeapon.HandleProjectileSpawn();
     }
 
     private void Update()
     {
         transform.position += direction * speed * Time.deltaTime;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         //Try to find EnemyHealth on the object or its parent
@@ -38,28 +35,20 @@ public class PistolProjectile : MonoBehaviour, IPoolable
         {
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
-            parentGun.HandleWeaponHit(transform.position);
+            GameObject[] hits = new[] { other.gameObject };
+            parentWeapon.HandleWeaponHit(hits, transform.position);   
         }
         //Return the projectile to the pool
-        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject);
-    }
-
-    private IEnumerator LifeTimer()
-    {
-        yield return new WaitForSeconds(lifeTime);
-        if (gameObject.activeInHierarchy)
-        {
-            WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject);
-        }
+        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
     }
 
     //Called once when the pool initially creates the instance
-    public void OnCreatedPool()
+    public override void OnCreatedPool()
     {
     }
 
     //Called whenever the pool spawns this instance
-    public void OnSpawnFromPool()
+    public override void OnSpawnFromPool()
     {
         //Start lifetime countdown
         if (lifeTime > 0f)
@@ -69,7 +58,7 @@ public class PistolProjectile : MonoBehaviour, IPoolable
     }
 
     //Called before the pool deactivates this instance
-    public void OnReturnToPool()
+    public override void OnReturnToPool()
     {
         //Stop any running timers and reset state
         if (lifeCoroutine != null)
@@ -79,13 +68,6 @@ public class PistolProjectile : MonoBehaviour, IPoolable
         }
 
         direction = Vector3.zero;
-        parentGun = null;
+        parentWeapon = null;
     }
-}
-
-
-//---------------------------- TEMPORARY TO AVOID ERRORS, DELETE ALL OF THIS ----------------------------
-public class EnemyHealth : MonoBehaviour
-{
-    public void TakeDamage(int damageAmount) { }
 }
