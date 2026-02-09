@@ -45,7 +45,6 @@ public class BuffCardManager : MonoBehaviour
     }
     private void Start()
     {
-        print("Start");
         //Find PlayerExperience
         if (playerExperience == null)
         {
@@ -68,12 +67,6 @@ public class BuffCardManager : MonoBehaviour
             buffCards.Add(card);
             buffObj.SetActive(false);
         }
-
-        foreach (var buff in availableChoices)
-        {
-            Debug.Log("Hello");
-        }
-        print("End");
     }
 
     private void DisplayBuffCards()

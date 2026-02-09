@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5182050940608234337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3635339336812097835}
   - component: {fileID: 5596106329357065321}
   - component: {fileID: 3923140885524237589}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WeaponManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6561772962399388389}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectilePool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,6 +158,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3635339336812097835}
     m_Modifications:
+    - target: {fileID: -8092103013527875831, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: buffLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8092103013527875831, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: baseBuffDescription
+      value: Shoots bullets
+      objectReference: {fileID: 0}
+    - target: {fileID: -8092103013527875831, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: finalBuffDescription
+      value: Shoots bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 2290405111503472805, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: uiData
       value: 
@@ -173,6 +185,14 @@ PrefabInstance:
     - target: {fileID: 2290405111503472805, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: spawnOffsetForward
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2306755288756455233, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664889763849317599, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4664889763849317599, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: m_IsActive
@@ -193,6 +213,22 @@ PrefabInstance:
     - target: {fileID: 4863098311042264114, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002224817211162561, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485112445784217726, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650592632985279317, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820515782391575958, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6862354304134343003, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -238,7 +274,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7466004224300229527, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6996589554935578726, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -339,6 +380,10 @@ PrefabInstance:
       value: Sword_Model
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c8a3ffc92292d484daff88d76d056d01, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c8a3ffc92292d484daff88d76d056d01, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -393,9 +438,25 @@ PrefabInstance:
       propertyPath: spawnOffsetForward
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 2429271256713669232, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
+      propertyPath: buffLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429271256713669232, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
+      propertyPath: baseBuffDescription
+      value: Throws exploding projectiles
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429271256713669232, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
+      propertyPath: finalBuffDescription
+      value: Throws exploding projectiles
+      objectReference: {fileID: 0}
     - target: {fileID: 2535900841454448885, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
       propertyPath: m_Name
       value: Grenade
+      objectReference: {fileID: 0}
+    - target: {fileID: 2535900841454448885, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5570407992221264794, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
       propertyPath: m_LocalPosition.x
@@ -437,7 +498,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8612061753811787792, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5570407992221264794, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
@@ -544,8 +606,12 @@ PrefabInstance:
       value: GrenadeLauncher_Model
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -570,6 +636,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3635339336812097835}
     m_Modifications:
+    - target: {fileID: -5112293186830276709, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
+      propertyPath: buffLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5112293186830276709, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
+      propertyPath: baseBuffDescription
+      value: Spins around the player
+      objectReference: {fileID: 0}
+    - target: {fileID: -5112293186830276709, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
+      propertyPath: finalBuffDescription
+      value: Spins around the player
+      objectReference: {fileID: 0}
     - target: {fileID: 2015655100803647861, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -638,7 +716,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8922651863981849895, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1721987703521397912, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2015655100803647861, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}

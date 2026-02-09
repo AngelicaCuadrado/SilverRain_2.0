@@ -95,7 +95,7 @@ public class Grenade : Weapon
 
     public override void UpdateDescription()
     {
-        uiData.UpdateDescription(weaponLevel,
+        uiData.UpdateDescription(weaponLevel, maxWeaponLevel,
             "Damage", weaponStats.GetCurrentStatsForUI(StatType.AttackDamage), weaponStats.GetNextLevelStatsForUI(StatType.AttackDamage),
             "Cooldown", weaponStats.GetCurrentStatsForUI(StatType.Cooldown), weaponStats.GetNextLevelStatsForUI(StatType.Cooldown),
             "Size", weaponStats.GetCurrentStatsForUI(StatType.Size), weaponStats.GetNextLevelStatsForUI(StatType.Size));

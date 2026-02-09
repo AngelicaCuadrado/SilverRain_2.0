@@ -72,7 +72,7 @@ public class Pistol : Weapon
 
     public override void UpdateDescription()
     {
-        uiData.UpdateDescription(weaponLevel,
+        uiData.UpdateDescription(weaponLevel, maxWeaponLevel,
             "Damage", weaponStats.GetCurrentStatsForUI(StatType.AttackDamage), weaponStats.GetNextLevelStatsForUI(StatType.AttackDamage),
             "Cooldown", weaponStats.GetCurrentStatsForUI(StatType.Cooldown), weaponStats.GetNextLevelStatsForUI(StatType.Cooldown),
             "Speed", weaponStats.GetCurrentStatsForUI(StatType.ProjectileSpeed), weaponStats.GetNextLevelStatsForUI(StatType.ProjectileSpeed));

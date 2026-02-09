@@ -70,6 +70,8 @@ public abstract class Weapon : MonoBehaviour, ITemporary
         {
             weaponVisual.SetActive(false);
         }
+        //Update UI for buff cards
+        UpdateDescription();
     }
     public abstract void LevelUp();
     public virtual void OnActivate()

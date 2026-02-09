@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class BuffCard : MonoBehaviour
 {
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The text element that will display the name of the buff")]
     private TMP_Text buffName;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The text element that will display the level of the buff")]
     private TMP_Text buffLevel;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The text element that will display the description of the buff")]
     private TMP_Text buffDescription;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The image element that will display the icon of the buff")]
     private Image buffIcon;
-
+    [Tooltip("The item (Weapon, Upgrade or Modification) assigned to this buff card")]
     private ITemporary assignedBuff;
 
     //Events
@@ -27,9 +27,9 @@ public class BuffCard : MonoBehaviour
     {
         assignedBuff = buffToAssign;
         UITemporary buffInfo = buffToAssign.UIData;
-        buffName.text = buffInfo.buffName;
-        buffLevel.text = buffInfo.buffLevel;
-        buffDescription.text = buffInfo.finalBuffDescription;
-        buffIcon.sprite = buffInfo.buffIcon;
+        buffName.text = buffInfo.BuffName;
+        buffLevel.text = buffInfo.BuffLevel;
+        buffDescription.text = buffInfo.FinalBuffDescription;
+        buffIcon.sprite = buffInfo.BuffIcon;
     }
 }

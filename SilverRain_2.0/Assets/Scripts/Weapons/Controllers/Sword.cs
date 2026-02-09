@@ -87,7 +87,7 @@ public class Sword : Weapon
 
     public override void UpdateDescription()
     {
-        uiData.UpdateDescription(weaponLevel, 
+        uiData.UpdateDescription(weaponLevel, maxWeaponLevel,
             "Damage", weaponStats.GetCurrentStatsForUI(StatType.AttackDamage), weaponStats.GetNextLevelStatsForUI(StatType.AttackDamage),
             "Cooldown", weaponStats.GetCurrentStatsForUI(StatType.Cooldown), weaponStats.GetNextLevelStatsForUI(StatType.Cooldown),
             "Duration", weaponStats.GetCurrentStatsForUI(StatType.Duration), weaponStats.GetNextLevelStatsForUI(StatType.Duration),

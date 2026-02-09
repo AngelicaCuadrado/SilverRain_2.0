@@ -4,7 +4,9 @@ using UnityEngine;
 public class GrenadeProjectile : Projectile
 {
     [Header("Explosion Settings")]
+    [SerializeField, Tooltip("How large the explosion is")]
     private float explosionRadius;
+    [SerializeField, Tooltip("What layer will be hit by the explosion")]
     private LayerMask hitMask;
 
     public void Init(Grenade parent, float dmg, float size)
