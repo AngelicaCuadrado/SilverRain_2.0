@@ -9,9 +9,13 @@ public abstract class Modification : MonoBehaviour, ITemporary
     [SerializeField] ModificationID id; //For object identification
     bool isAvailable;
     public UnityEvent<ITemporary> OnAvailabilityChanged;
+    UITemporary uiData;
+
+    public UITemporary UIData => uiData;
+
     public void LevelUp()
     {
-       ModificationManager.instance.AddModification(this);
+       ModificationManager.Instance.AddModification(this);
     }
 
     public void ResetLevels()

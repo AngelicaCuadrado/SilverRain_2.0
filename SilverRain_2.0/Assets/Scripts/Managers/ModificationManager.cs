@@ -7,17 +7,17 @@ public class ModificationManager : MonoBehaviour
     public List<Modification> allModifications;
     List<Modification> currentModifications;
 
-    public static ModificationManager instance;
+    public static ModificationManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        instance = this;
+        Instance = this;
         currentModifications = new List<Modification>();
 
         DontDestroyOnLoad(gameObject);
