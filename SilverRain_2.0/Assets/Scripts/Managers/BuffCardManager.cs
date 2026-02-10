@@ -25,6 +25,8 @@ public class BuffCardManager : MonoBehaviour
     [SerializeField, Tooltip("PlayerExperience component used to subscribe to LevelUp event")]
     private PlayerExperience playerExperience;
 
+    private object _pauseToken;
+    private object _inputToken;
     //Properties
     public int ChoiceAmount
     {
@@ -85,8 +87,10 @@ public class BuffCardManager : MonoBehaviour
         //------------------------------------------------------------------------------------------------------------------
 
         // Pause the game
-        GameManager.Instance.PauseGame();
-
+        //GameManager.Instance.PauseGame();
+        _pauseToken = PauseManager.Instance.Acquire("BuffCard");
+        _inputToken = InputManager.Instance.Acquire(InputMode.UI, "BuffCard");
+        
         for (int i = 0; i < buffAmount; i++)
         {
             // Randomly choose an ITemporary
@@ -107,8 +111,19 @@ public class BuffCardManager : MonoBehaviour
     private void HideBuffCards()
     {
         // Unpause the game
-        GameManager.Instance.UnpauseGame();
+        //GameManager.Instance.UnpauseGame();
+        if (_pauseToken != null)
+        {
+            PauseManager.Instance.Release(_pauseToken);
+            _pauseToken = null;
+        }
 
+        if (_inputToken != null)
+        {
+            InputManager.Instance.Release(_inputToken);
+            _inputToken = null;
+        }
+        
         foreach (var card in buffCards)
         {
             card.gameObject.SetActive(false);

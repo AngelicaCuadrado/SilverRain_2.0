@@ -26,42 +26,42 @@ public class GameManager : MonoBehaviour
     }
 
     #region Pause Management
-    public void PauseGame()
-    {
-        // Increment pause counter
-        pauseCounter++;
-        // Pause game
-        Time.timeScale = 0f;
-        // Disable player inputs
-        //playerInput.enabled = false;
-
-        //Make cursor unlocked and visible
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        // Call event
-        OnGamePaused?.Invoke();
-    }
-
-    public void UnpauseGame()
-    {
-        // Decrement pause counter
-        pauseCounter = Mathf.Max(0, pauseCounter - 1);
-        // Unpause game if all instances of pause are done
-        if (pauseCounter == 0)
-        {
-            Time.timeScale = 1f;
-            // Enable player inputs
-            //playerInput.enabled = true;
-
-            //Make cursor locked and invisible
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
-            // Call event
-            OnGameUnpaused?.Invoke();
-        }
-    }
+    // public void PauseGame()
+    // {
+    //     // Increment pause counter
+    //     pauseCounter++;
+    //     // Pause game
+    //     Time.timeScale = 0f;
+    //     // Disable player inputs
+    //     //playerInput.enabled = false;
+    //
+    //     //Make cursor unlocked and visible
+    //     Cursor.lockState = CursorLockMode.None;
+    //     Cursor.visible = true;
+    //
+    //     // Call event
+    //     OnGamePaused?.Invoke();
+    // }
+    //
+    // public void UnpauseGame()
+    // {
+    //     // Decrement pause counter
+    //     pauseCounter = Mathf.Max(0, pauseCounter - 1);
+    //     // Unpause game if all instances of pause are done
+    //     if (pauseCounter == 0)
+    //     {
+    //         Time.timeScale = 1f;
+    //         // Enable player inputs
+    //         //playerInput.enabled = true;
+    //
+    //         //Make cursor locked and invisible
+    //         Cursor.lockState = CursorLockMode.Locked;
+    //         Cursor.visible = false;
+    //
+    //         // Call event
+    //         OnGameUnpaused?.Invoke();
+    //     }
+    // }
     #endregion
 
     public void ChangeLevel(string levelName)
