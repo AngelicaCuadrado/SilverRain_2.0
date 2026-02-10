@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     // jump state
     private float _lastGroundedTime;
     private float _lastJumpPressedTime;
-    public bool _isGrounded;
+    private bool _isGrounded;
     private bool _wasGroundedLastFrame;
 
     
@@ -98,20 +98,7 @@ public class PlayerController : MonoBehaviour
         if (!IsGameplayModeActive()) return;
 
         HandleMovement();
-        // var moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
-        // var targetVelocity = moveDirection.normalized * moveSpeed;
-        // Vector3 velocityChange = new(targetVelocity.x - _rb.linearVelocity.x, 0, targetVelocity.z - _rb.linearVelocity.z);
-        // _rb.AddForce(velocityChange, ForceMode.VelocityChange);
-        //
-        // if (lookInput.magnitude > 0.1f)
-        // {
-        //     transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
-        //
-        //     xRotation -= lookInput.y * mouseSensitivity;
-        //     xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
-        //     var targetRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //     cameraTransform.localRotation = Quaternion.Lerp(cameraTransform.localRotation, targetRotation, Time.deltaTime * rotationSmoothSpeed);
-        // }
+        
     }
 
     private void LateUpdate()
@@ -234,27 +221,6 @@ public class PlayerController : MonoBehaviour
         // Play jump sound
         AudioManager.Instance.PlaySFX(jumpSfxId);
     }
-
-    // public void OnMove(InputAction.CallbackContext context)
-    // {
-    //     movementInput = context.ReadValue<Vector2>();
-    // }
-    //
-    // public void OnLook(InputAction.CallbackContext context)
-    // {
-    //     lookInput = context.ReadValue<Vector2>();
-    // }
-
-    // public void OnJump(InputAction.CallbackContext context)
-    // {
-    //     if (context.performed && IsGrounded())
-    //     {
-    //         AudioManager.Instance.PlaySFX("sfx_jump");
-    //
-    //         float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics.gravity.y * gravityScale));
-    //         _rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
-    //     }
-    // }
     
     private bool CheckGrounded()
     {
