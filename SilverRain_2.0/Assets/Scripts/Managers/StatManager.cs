@@ -94,7 +94,7 @@ public class StatManager : MonoBehaviour
             finalStat += currentTempUpgrades[type].Calculate();
         }
 
-        finalStat += ModificationManager.instance.GetStatModifications(type);
+        finalStat += ModificationManager.Instance.GetStatModifications(type);
         return finalStat;
     }
 

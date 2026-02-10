@@ -8,6 +8,8 @@ public class GrenadeProjectile : Projectile
     private float explosionRadius;
     [SerializeField, Tooltip("What layer will be hit by the explosion")]
     private LayerMask hitMask;
+    [SerializeField, Tooltip("The key used to access the pool containing the explosion VFX")]
+    private string explosionVFXPoolKey;
 
     public void Init(Grenade parent, float dmg, float size)
     {
@@ -15,7 +17,7 @@ public class GrenadeProjectile : Projectile
         damage = dmg;
         explosionRadius = size;
 
-        //Apply modifications
+        // Apply modifications
         parentWeapon.HandleProjectileSpawn();
     }
 
@@ -26,6 +28,10 @@ public class GrenadeProjectile : Projectile
 
     private void Explode()
     {
+        //Play the explosion VFX
+        var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, transform.position, Quaternion.identity);
+        explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey,explosionRadius);
+
         //Get all colliders in the explosion radius
         Collider[] hits;
         if (hitMask.value != 0)

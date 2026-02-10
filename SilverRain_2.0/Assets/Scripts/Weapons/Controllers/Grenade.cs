@@ -8,6 +8,7 @@ public class Grenade : Weapon
     private float throwForce = 12f;
     [SerializeField, Tooltip("How far upward the grenade will be thrown")]
     private float upwardForce = 4f;
+
     [Header("Spawn Position Offsets")]
     [SerializeField, Tooltip("How far forward the grenade will spawn relative to the camera")]
     private float spawnOffsetForward = 0.6f;
@@ -15,6 +16,7 @@ public class Grenade : Weapon
     private float spawnOffsetUp = 3.5f;
     [SerializeField, Tooltip("How far to the side the grenade will spawn relative to the camera")]
     private float spawnOffsetSide = 0.5f;
+
     [Header("References")]
     [SerializeField, Tooltip("The position from which grenades will spawn")]
     private Transform firePoint;

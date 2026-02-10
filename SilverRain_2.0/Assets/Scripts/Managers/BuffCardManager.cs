@@ -136,7 +136,7 @@ public class BuffCardManager : MonoBehaviour
                 StatManager.Instance.AddTempUpgrade(upgrade.StatType);
                 break;
             case Modification modification:
-                ModificationManager.instance.AddModification(modification);
+                ModificationManager.Instance.AddModification(modification);
                 break;
             default:
                 Debug.Log("BuffCardManager - ITemporary type not recognized");

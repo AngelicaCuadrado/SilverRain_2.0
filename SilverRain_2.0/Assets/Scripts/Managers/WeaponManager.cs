@@ -19,8 +19,12 @@ public class WeaponManager : MonoBehaviour
     private int maxWeapons;
     [SerializeField, Tooltip("The weapon active at the start of a level")]
     private Weapon initialWeapon;
+
+    [Header("Pools")]
     [SerializeField, Tooltip("ObjectPooler reference containing all the projectile pools")]
     private ObjectPooler projectilePool;
+    [SerializeField, Tooltip("ObjectPooler reference containing all the VFX pools")]
+    private ObjectPooler effectsPool;
 
     //Properties
     public Dictionary<WeaponType, Weapon> AllWeapons => allWeapons;
@@ -28,6 +32,7 @@ public class WeaponManager : MonoBehaviour
     public int MaxWeapons => maxWeapons;
     public Weapon InitialWeapon { get => initialWeapon; set => initialWeapon = value; }
     public ObjectPooler ProjectilePool => projectilePool;
+    public ObjectPooler EffectsPool => effectsPool;
 
     //Events
     public UnityEvent<ITemporary, bool> OnWeaponAvailabilityChange;

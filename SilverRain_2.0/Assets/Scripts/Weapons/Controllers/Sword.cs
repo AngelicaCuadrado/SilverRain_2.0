@@ -8,6 +8,7 @@ public class Sword : Weapon
     private Transform playerTrans;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
     private float spawnAngleOffset = 90f;
+
     [Header("Spawn Position Offsets")]
     [SerializeField, Tooltip("How far forward the sword is positioned relative to the camera")]
     private float spawnOffsetForward = 1f;

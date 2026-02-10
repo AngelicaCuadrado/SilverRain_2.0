@@ -25,8 +25,11 @@ public class BuffCard : MonoBehaviour
     }
     public void SetupCard(ITemporary buffToAssign)
     {
+        //Assign the buff and get the UI data
         assignedBuff = buffToAssign;
         UITemporary buffInfo = buffToAssign.UIData;
+
+        // Put the data in the corresponding field
         buffName.text = buffInfo.BuffName;
         buffLevel.text = buffInfo.BuffLevel;
         buffDescription.text = buffInfo.FinalBuffDescription;

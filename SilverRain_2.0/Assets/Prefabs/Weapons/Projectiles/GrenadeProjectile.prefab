@@ -54,6 +54,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 128
+  explosionVFXPoolKey: GrenadeExplosion
 --- !u!54 &-5843985347241325524
 Rigidbody:
   m_ObjectHideFlags: 0

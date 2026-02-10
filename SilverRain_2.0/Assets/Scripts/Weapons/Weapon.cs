@@ -106,7 +106,6 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     {
         isAvailable = availability;
         WeaponManager.Instance.HandleAvailabilityChange(this, availability);
-        print("Available");
     }
     public abstract void UpdateDescription();
     public virtual void HandleProjectileSpawn()
