@@ -142,8 +142,8 @@ public class Enemy : MonoBehaviour, IPoolable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1f);
-        
+        Collider c = GetComponent<Collider>();
+        Gizmos.DrawWireSphere(c.bounds.center, c.bounds.extents.x);
     }
     #endif
 }
