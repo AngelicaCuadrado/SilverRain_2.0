@@ -10,6 +10,9 @@ public class TemporaryUpgrade : ITemporary
     TemporaryUpgradeData data;
     bool isAvailable;
     public StatType StatType;
+    [SerializeField, Tooltip("")]
+    private UITemporary uiData;
+    public UITemporary UIData { get { return uiData; } }
 
     UnityEvent<ITemporary, bool> OnAvailabilityChanged;
     UnityEvent<StatType> OnTemporaryUpgradeLevelChanged;

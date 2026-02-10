@@ -64,9 +64,9 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public void ChangeLevel(int levelIndex)
+    public void ChangeLevel(string levelName)
     {
-
+        SceneManager.LoadScene(levelName);
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

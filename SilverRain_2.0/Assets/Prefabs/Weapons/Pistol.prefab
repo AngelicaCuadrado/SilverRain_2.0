@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 2290405111503472805}
   - component: {fileID: 1155752976437145188}
   - component: {fileID: 6996589554935578726}
+  - component: {fileID: -8092103013527875831}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -540,7 +541,9 @@ MonoBehaviour:
   weaponVisual: {fileID: 4664889763849317599}
   weaponStats: {fileID: 1155752976437145188}
   weaponUI: {fileID: 6996589554935578726}
+  cam: {fileID: 0}
   isAvailable: 0
+  isAvailableAtStart: 0
   OnWeaponLevelChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -554,7 +557,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   firePoint: {fileID: 2176060859186047120}
-  cam: {fileID: 0}
   spawnOffsetForward: 1
   spawnOffsetUp: -0.4
 --- !u!114 &1155752976437145188
@@ -592,3 +594,19 @@ MonoBehaviour:
   weaponIcon: {fileID: 0}
   weaponName: Pistol
   weaponDescription: Placeholder description
+--- !u!114 &-8092103013527875831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7466004224300229527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITemporary
+  buffName: Pistol
+  buffLevel: 1
+  buffDescription: shoots
+  buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

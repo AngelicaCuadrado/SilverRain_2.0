@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - PlayerProjectile
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,9 +15,9 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
+  - Enemy
+  - Projectile
+  - SpawnArea
   - 
   - 
   - 

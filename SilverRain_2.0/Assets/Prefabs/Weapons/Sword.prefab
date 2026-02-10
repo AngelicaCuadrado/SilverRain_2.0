@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7469974996897628985}
   - component: {fileID: 5377634349175015253}
   - component: {fileID: 1721987703521397912}
+  - component: {fileID: -5112293186830276709}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -53,7 +54,9 @@ MonoBehaviour:
   weaponVisual: {fileID: 0}
   weaponStats: {fileID: 5377634349175015253}
   weaponUI: {fileID: 1721987703521397912}
+  cam: {fileID: 0}
   isAvailable: 0
+  isAvailableAtStart: 0
   OnWeaponLevelChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -68,6 +71,9 @@ MonoBehaviour:
       m_Calls: []
   playerTrans: {fileID: 0}
   spawnAngleOffset: 90
+  spawnOffsetForward: 1
+  spawnOffsetUp: -0.4
+  spawnOffsetSide: 0
 --- !u!114 &5377634349175015253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,3 +109,19 @@ MonoBehaviour:
   weaponIcon: {fileID: 0}
   weaponName: Sword
   weaponDescription: 
+--- !u!114 &-5112293186830276709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8922651863981849895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITemporary
+  buffName: Sword
+  buffLevel: 1
+  buffDescription: swings
+  buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

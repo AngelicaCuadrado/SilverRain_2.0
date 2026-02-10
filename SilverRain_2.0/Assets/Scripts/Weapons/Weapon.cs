@@ -18,20 +18,23 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     protected int weaponLevel = 0;
     [SerializeField,Tooltip("Maximum weapon level")]
     protected int maxWeaponLevel = 5;
+
     [Header("Identification")]
     [SerializeField,Tooltip("Key used for identification")]
     protected WeaponType weaponType;
     [SerializeField, Tooltip("The key used to spawn projectiles from the pool")]
     protected string projectilePoolKey;
+
     [Header("Components")]
     [SerializeField,Tooltip("Optional GameObject for the weapon visuals")]
     protected GameObject weaponVisual;
     [SerializeField,Tooltip("Stats component, must be attached to the weapon's GameObject")]
     protected WeaponStats weaponStats;
-    [SerializeField, Tooltip("UI handling component, must be attached to the weapon's GameObject")]
-    protected WeaponUI weaponUI;
     [SerializeField, Tooltip("The main camera transform that the weapon follows")]
     protected Transform cam;
+    [SerializeField, Tooltip("UI handling component, must be attached to the weapon's GameObject")]
+    protected UITemporary uiData;
+
     [Header("Availability")]
     [SerializeField, Tooltip("Represents whether the weapon can appear as an option when leveling up")]
     protected bool isAvailable;
@@ -44,6 +47,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public UnityEvent<WeaponType, Weapon> OnWeaponProjectileSpawn;
     public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
 
+
     //Properties
     public int WeaponLevel => weaponLevel;
     public int MaxWeaponLevel => maxWeaponLevel;
@@ -51,8 +55,8 @@ public abstract class Weapon : MonoBehaviour, ITemporary
     public string ProjectilePoolKey => projectilePoolKey;
     public GameObject WeaponVisual => weaponVisual;
     public WeaponStats WeaponStats => weaponStats;
-    public WeaponUI WeaponUI => weaponUI;
     public Transform Cam => cam;
+    public UITemporary UIData { get { return uiData; } }
     public bool IsAvailable => isAvailable;
     public bool IsAvailableAtStart => isAvailableAtStart;
 
@@ -66,6 +70,8 @@ public abstract class Weapon : MonoBehaviour, ITemporary
         {
             weaponVisual.SetActive(false);
         }
+        //Update UI for buff cards
+        UpdateDescription();
     }
     public abstract void LevelUp();
     public virtual void OnActivate()
@@ -92,7 +98,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
         weaponStats.ResetWeaponStats();
         // Update UI
         OnWeaponLevelChanged?.Invoke(this);
-        weaponUI.UpdateDescription();
+        UpdateDescription();
         // Reset availability
         SetAvailable(true);
     }
@@ -101,10 +107,7 @@ public abstract class Weapon : MonoBehaviour, ITemporary
         isAvailable = availability;
         WeaponManager.Instance.HandleAvailabilityChange(this, availability);
     }
-    public virtual void UpdateDescription()
-    {
-        weaponUI.UpdateDescription();
-    }
+    public abstract void UpdateDescription();
     public virtual void HandleProjectileSpawn()
     {
         OnWeaponProjectileSpawn?.Invoke(weaponType, this);

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6118783390932333410}
   - component: {fileID: 8807470617852649807}
   - component: {fileID: -5843985347241325524}
-  m_Layer: 0
+  - component: {fileID: 349846060432380088}
+  m_Layer: 8
   m_Name: GrenadeProjectile
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +50,11 @@ MonoBehaviour:
   parentWeapon: {fileID: 0}
   damage: 0
   lifeTime: 5
+  explosionRadius: 0
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 128
+  explosionVFXPoolKey: GrenadeExplosion
 --- !u!54 &-5843985347241325524
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -76,6 +82,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &349846060432380088
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775851412311874551}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 776
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!1001 &6071039528834636125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,9 +167,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8246905073193043635, guid: 42bd9cdbc69e50d4a9f7e236627bc16f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 42bd9cdbc69e50d4a9f7e236627bc16f, type: 3}
       propertyPath: m_Name
       value: Grenade_Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 42bd9cdbc69e50d4a9f7e236627bc16f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108629213487684686, guid: 42bd9cdbc69e50d4a9f7e236627bc16f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
