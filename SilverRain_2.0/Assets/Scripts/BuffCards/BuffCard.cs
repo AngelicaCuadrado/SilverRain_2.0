@@ -13,17 +13,14 @@ public class BuffCard : MonoBehaviour
     private TMP_Text buffDescription;
     [SerializeField, Tooltip("The image element that will display the icon of the buff")]
     private Image buffIcon;
-    [Tooltip("The item (Weapon, Upgrade or Modification) assigned to this buff card")]
-    private ITemporary assignedBuff;
-
-    //Events
-    public UnityEvent<ITemporary> OnBuffCardClicked;
+    [Tooltip("The buff (Weapon, Upgrade or Modification) assigned to this buff card")]
+    private TemporaryBuff assignedBuff;
 
     public void OnCardClicked()
     {
-        OnBuffCardClicked?.Invoke(assignedBuff);
+        BuffCardManager.Instance.ChooseBuffCard(assignedBuff);
     }
-    public void SetupCard(ITemporary buffToAssign)
+    public void SetupCard(TemporaryBuff buffToAssign)
     {
         //Assign the buff and get the UI data
         assignedBuff = buffToAssign;

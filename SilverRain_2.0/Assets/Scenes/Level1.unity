@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6304079590716785013, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
+      propertyPath: maxHealth
+      value: 1e+11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -428,7 +432,7 @@ GameObject:
   - component: {fileID: 359638764}
   - component: {fileID: 359638763}
   - component: {fileID: 359638762}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ModificationManager : MonoBehaviour
 {
-    public List<Modification> allModifications;
-    List<Modification> currentModifications;
+    [SerializeField, Tooltip("")]
+    private List<Modification> allModifications;
+    [Tooltip("")]
+    private List<Modification> currentModifications;
 
     public static ModificationManager Instance { get; private set; }
 
@@ -16,8 +18,8 @@ public class ModificationManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
+
         currentModifications = new List<Modification>();
 
         DontDestroyOnLoad(gameObject);
@@ -25,11 +27,11 @@ public class ModificationManager : MonoBehaviour
 
    public void AddModification(Modification modification)
    {
-        if (!currentModifications.Any(m => m.GetId() == modification.GetId()))
+        if (!currentModifications.Any(m => m.Id == modification.Id))
         {
             currentModifications.Add(modification);
 
-            var catalogItem = allModifications.FirstOrDefault(m => m.GetId() == modification.GetId());
+            var catalogItem = allModifications.FirstOrDefault(m => m.Id == modification.Id);
             if (catalogItem != null)
             {
                 catalogItem.SetAvailable(false);
@@ -41,7 +43,7 @@ public class ModificationManager : MonoBehaviour
     {
         foreach (Modification modification in currentModifications) 
         {
-            var catalogItem = allModifications.FirstOrDefault(m => m.GetId() == modification.GetId());
+            var catalogItem = allModifications.FirstOrDefault(m => m.Id == modification.Id);
             if (catalogItem != null)
             {
                 catalogItem.ResetLevels();

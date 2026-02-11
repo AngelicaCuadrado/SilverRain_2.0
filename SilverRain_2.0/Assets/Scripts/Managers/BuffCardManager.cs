@@ -7,9 +7,9 @@ public class BuffCardManager : MonoBehaviour
 
     [Header("Choices settings")]
     [SerializeField, Tooltip("The choices currently offered for level up")]
-    private List<ITemporary> currentChoices = new();
+    private List<TemporaryBuff> currentChoices = new();
     [SerializeField, Tooltip("All available choices that may be offered on level up")]
-    private HashSet<ITemporary> availableChoices = new();
+    private HashSet<TemporaryBuff> availableChoices = new();
     [SerializeField, Min(1), Tooltip("The amount of choices that will be offered on level up")]
     private int choiceAmount = 3;
 
@@ -63,7 +63,6 @@ public class BuffCardManager : MonoBehaviour
             GameObject buffObj = Instantiate(buffCardPrefab, buffCardParent);
             BuffCard card = buffObj.GetComponent<BuffCard>();
 
-            card.OnBuffCardClicked.AddListener(ChooseBuffCard);
             buffCards.Add(card);
             buffObj.SetActive(false);
         }
@@ -73,7 +72,7 @@ public class BuffCardManager : MonoBehaviour
     {
         // Initialize choices lists
         currentChoices.Clear();
-        List<ITemporary> choicePool = new(availableChoices);
+        List<TemporaryBuff> choicePool = new(availableChoices);
 
         // Ensure that there are enough available choices for each choice amount
         int buffAmount = Mathf.Min(choiceAmount, choicePool.Count);
@@ -90,7 +89,7 @@ public class BuffCardManager : MonoBehaviour
         for (int i = 0; i < buffAmount; i++)
         {
             // Randomly choose an ITemporary
-            ITemporary choice = PickRandomChoice(choicePool);
+            TemporaryBuff choice = PickRandomChoice(choicePool);
             currentChoices.Add(choice);
 
             // Setup and activate the buff card
@@ -114,18 +113,18 @@ public class BuffCardManager : MonoBehaviour
             card.gameObject.SetActive(false);
         }
     }
-    private ITemporary PickRandomChoice(List<ITemporary> pool)
+    private TemporaryBuff PickRandomChoice(List<TemporaryBuff> pool)
     {
         if (pool.Count == 0) { Debug.Log("BuffCardManager - Available pool is empty"); return null; }
 
         int index = Random.Range(0, pool.Count);
-        ITemporary chosen = pool[index];
+        TemporaryBuff chosen = pool[index];
         // Ensures uniqueness
         pool.RemoveAt(index);
         return chosen;
     }
 
-    private void ChooseBuffCard(ITemporary buffClicked)
+    public void ChooseBuffCard(TemporaryBuff buffClicked)
     {
         switch (buffClicked)
         {
@@ -148,7 +147,7 @@ public class BuffCardManager : MonoBehaviour
 
 
     //This method is called whenever a weapon, temporary upgrade, or modification changes availability.
-    private void UpdateAvailableChoices(ITemporary temp, bool isAvailable)
+    private void UpdateAvailableChoices(TemporaryBuff temp, bool isAvailable)
     {
         if (isAvailable)
             availableChoices.Add(temp);
