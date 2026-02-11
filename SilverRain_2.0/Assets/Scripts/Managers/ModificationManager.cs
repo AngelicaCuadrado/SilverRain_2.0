@@ -75,4 +75,12 @@ public class ModificationManager : MonoBehaviour
         }
         return value;
     }
+
+    private void Start()
+    {
+        foreach (var weapon in WeaponManager.Instance.AllWeapons.Values) 
+        {
+            weapon.OnWeaponHit.AddListener();
+        }
+    }
 }

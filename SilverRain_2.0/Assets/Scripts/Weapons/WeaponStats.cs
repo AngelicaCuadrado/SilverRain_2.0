@@ -30,13 +30,13 @@ public class WeaponStats : MonoBehaviour
 
     public void CalculateStat(StatType type)
     {
-        float statValue = 0;
+        float statValue = 1;
         // Player stats
         if (StatManager.Instance != null) statValue += StatManager.Instance.GetStat(type);
         // Modification stats
         if (ModificationManager.Instance != null) statValue += ModificationManager.Instance.GetWeaponStatModification(weapon.WeaponType, type);
         // Base weapon stats
-        statValue += weaponData.GetBaseStat(type) +
+        statValue *= weaponData.GetBaseStat(type) +
            // Per-level weapon stats
            (weaponData.GetPerLevelStat(type) * weapon.WeaponLevel);
         // Save the calculation

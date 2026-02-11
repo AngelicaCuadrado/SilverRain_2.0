@@ -4,10 +4,10 @@ using UnityEngine.Events;
 
 public abstract class Modification : MonoBehaviour, ITemporary
 {
-    [SerializeField] string modificationName; //For UI
-    [SerializeField] string description;
-    [SerializeField] ModificationID id; //For object identification
-    bool isAvailable;
+    [SerializeField] protected string modificationName; //For UI
+    [SerializeField] protected string description;
+    [SerializeField] protected ModificationID id; //For object identification
+    protected bool isAvailable;
     public UnityEvent<ITemporary> OnAvailabilityChanged;
     UITemporary uiData;
 
@@ -56,4 +56,8 @@ public abstract class Modification : MonoBehaviour, ITemporary
         return id;
     }
 
+    private void HandleWeaponHit() 
+    {
+
+    }
 }
