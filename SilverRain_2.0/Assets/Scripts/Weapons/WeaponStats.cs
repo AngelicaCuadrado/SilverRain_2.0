@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class WeaponStats : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField, Tooltip("The weapon controller that is attached to the same weapon object")]
     private Weapon weapon;
     [SerializeField, Tooltip("The scriptable object holding the default, and per-level properties")]
     private WeaponData weaponData;
+    [Space]
 
-    //Cached stats
+    [Header("Stats")]
     [SerializeField, Tooltip("How much damage the weapon deals")]
     private float damage;
     [SerializeField, Tooltip("How long the weapon waits before attacking again")]
@@ -38,7 +40,7 @@ public class WeaponStats : MonoBehaviour
         // Base weapon stats
         statValue *= weaponData.GetBaseStat(type) +
            // Per-level weapon stats
-           (weaponData.GetPerLevelStat(type) * weapon.WeaponLevel);
+           (weaponData.GetPerLevelStat(type) * weapon.Level);
         // Save the calculation
         SetStat(type, statValue);
     }
@@ -79,11 +81,11 @@ public class WeaponStats : MonoBehaviour
 
     public float GetCurrentStatsForUI(StatType type)
     {
-        return (weaponData.GetBaseStat(type) + (weaponData.GetPerLevelStat(type) * weapon.WeaponLevel));
+        return (weaponData.GetBaseStat(type) + (weaponData.GetPerLevelStat(type) * weapon.Level));
     }
 
     public float GetNextLevelStatsForUI(StatType type)
     {
-        return (weaponData.GetBaseStat(type) + (weaponData.GetPerLevelStat(type) * (weapon.WeaponLevel + 1)));
+        return (weaponData.GetBaseStat(type) + (weaponData.GetPerLevelStat(type) * (weapon.Level + 1)));
     }
 }

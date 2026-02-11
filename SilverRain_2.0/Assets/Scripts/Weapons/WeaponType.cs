@@ -6,6 +6,7 @@
 /// used to determine behavior or capabilities associated with each weapon type.</remarks>
 public enum WeaponType
 {
+    None,
     Pistol,
     Sword,
     Grenade

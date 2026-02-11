@@ -13,7 +13,7 @@ public class StatManager : MonoBehaviour
     Dictionary<StatType, TemporaryUpgrade> currentTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
     int maxTempUpgrades;
     UnityEvent<StatType, float> OnStatChanged;
-    UnityEvent<ITemporary, bool> OnTempUpgradeAvailabilityChange;
+    UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
 
     float AttackDamage;
     float Cooldown;
@@ -238,7 +238,7 @@ public class StatManager : MonoBehaviour
         }
     }
 
-    public void HandleTempStatAvailabilityChange(ITemporary tempUpgrade, bool isAvailable)
+    public void HandleTempStatAvailabilityChange(TemporaryBuff tempUpgrade, bool isAvailable)
     {
         OnTempUpgradeAvailabilityChange?.Invoke(tempUpgrade, isAvailable);
     }

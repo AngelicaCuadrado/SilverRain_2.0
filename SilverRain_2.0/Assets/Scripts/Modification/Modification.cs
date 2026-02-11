@@ -2,62 +2,45 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Modification : MonoBehaviour, ITemporary
+public abstract class Modification : TemporaryBuff
 {
-    [SerializeField] protected string modificationName; //For UI
-    [SerializeField] protected string description;
-    [SerializeField] protected ModificationID id; //For object identification
-    protected bool isAvailable;
-    public UnityEvent<ITemporary> OnAvailabilityChanged;
-    UITemporary uiData;
+    [SerializeField, Tooltip("")]
+    private string modificationName; //For UI
+    [SerializeField, Tooltip("")]
+    private string description;
+    [SerializeField, Tooltip("")]
+    private ModificationID id; //For object identification
 
-    public UITemporary UIData => uiData;
+    // Properties
+    public string ModificationName => modificationName;
+    public string Description => description;
+    public ModificationID Id => id;
 
-    public void LevelUp()
+    public override void LevelUp()
     {
-       ModificationManager.Instance.AddModification(this);
+        ModificationManager.Instance.AddModification(this);
     }
 
-    public void ResetLevels()
+    public override void ResetLevels()
     {
         SetAvailable(true);
     }
 
-    public void SetAvailable(bool isAvailable)
+    public override void SetAvailable(bool availability)
     {
-        this.isAvailable = isAvailable;
-        OnAvailabilityChanged?.Invoke(this);
+        isAvailable = availability;
+        OnAvailabilityChanged?.Invoke(this, availability);
     }
 
-    public void UpdateDescription()
-    { 
+    public override void UpdateDescription()
+    {
 
     }
 
-    public virtual void Activate() 
+    public virtual void Activate()
     {
 
     }
 
     public abstract void ApplyEffect();
-
-    public string GetName() 
-    {
-        return modificationName;
-    }
-
-    public string GetDescription()
-    { 
-        return description; 
-    }
-
-    public ModificationID GetId() 
-    { 
-        return id;
-    }
-
-    private void HandleWeaponHit() 
-    {
-
-    }
 }

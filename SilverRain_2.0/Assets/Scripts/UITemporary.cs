@@ -17,7 +17,6 @@ public class UITemporary : MonoBehaviour
     // Properties
     public string BuffName => buffName;
     public string BuffLevel => buffLevel;
-    public string BaseBuffDescription => baseBuffDescription;
     public string FinalBuffDescription => finalBuffDescription;
     public Sprite BuffIcon => buffIcon;
 

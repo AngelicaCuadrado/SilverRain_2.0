@@ -49,6 +49,7 @@ public class SwordProjectile : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
+        print("sword hit");
         //Try to find EnemyHealth on the object or its parent
         var enemyHealth = other.GetComponent<EnemyHealth>();
         if (enemyHealth == null)

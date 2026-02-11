@@ -2,62 +2,35 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TemporaryUpgrade : ITemporary
+public class TemporaryUpgrade : TemporaryBuff
 {
-    int currentLevel;
-    //int maxLevel;
-    string description;
-    TemporaryUpgradeData data;
-    bool isAvailable;
-    public StatType StatType;
-    [SerializeField, Tooltip("")]
-    private UITemporary uiData;
-    public UITemporary UIData { get { return uiData; } }
+    [SerializeField,Tooltip("The data for base and per-level stat values")]
+    private TemporaryUpgradeData data;
+    [SerializeField, Tooltip("Identifier for the stat this upgrade handles")]
+    private StatType statType;
 
-    UnityEvent<ITemporary, bool> OnAvailabilityChanged;
-    UnityEvent<StatType> OnTemporaryUpgradeLevelChanged;
+    // Properties
+    public TemporaryUpgradeData Data => data;
+    public StatType StatType => statType;
 
-    public void LevelUp()
+    public override void SetAvailable(bool availability)
     {
-        if (currentLevel >= data.MaxLevel) return;
-        currentLevel++;
-        OnTemporaryUpgradeLevelChanged?.Invoke(StatType);
-
-        if (currentLevel >= data.MaxLevel)
-        {
-            SetAvailable(false);
-            OnAvailabilityChanged?.Invoke(this, false);
-        }
+        isAvailable = availability;
+        StatManager.Instance.HandleTempStatAvailabilityChange(this, availability);
     }
 
-    public void ResetLevels()
+    public override void UpdateDescription()
     {
-        currentLevel = 0;
-        SetAvailable(true);
-    }
-
-    public void SetAvailable(bool available)
-    {
-        isAvailable = available;
-    }
-
-    public void UpdateDescription()
-    {
-        float currentValue = Calculate();
-
-        if (currentLevel >= data.MaxLevel)
-        {
-            description = $"+{currentValue} (MAX)";
-        }
-        else
-        {
-            float nextValue = data.BaseAmount + data.AmountPerLevel * (currentLevel + 1);
-            description = $"+{currentValue} → +{nextValue}";
-        }
+        uiData.UpdateDescription(level, maxLevel, Calculate(), CalculateNextLevel());
     }
 
     public float Calculate()
     {
-        return data.BaseAmount + (data.AmountPerLevel * currentLevel);
+        return data.BaseAmount + (data.AmountPerLevel * level);
+    }
+
+    private float CalculateNextLevel()
+    {
+        return data.BaseAmount + (data.AmountPerLevel * (level + 1));
     }
 }
