@@ -53,6 +53,7 @@ public class LevelSelectWindow : UIWindow
             SceneManager.LoadSceneAsync(levelName);
             UIManager.Instance.ShowLoading(false);
             UIManager.Instance.Clear();
+            InputManager.Instance.Apply(InputMode.Gameplay);
         };
     }
 

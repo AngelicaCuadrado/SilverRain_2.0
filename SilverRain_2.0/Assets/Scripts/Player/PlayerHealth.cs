@@ -9,7 +9,6 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public float maxHealth;
     public float currentHealth;
-    [SerializeField] private AudioClip hurtSound;
 
     [Header("Events")]
     private UnityEvent onPlayerHealthChanged;
@@ -17,8 +16,8 @@ public class PlayerHealth : MonoBehaviour
     public static event Action<bool> onDie;
 
     public bool isInvincible = false;
-    //private AudioSource audioSource;
 
+    private object _pauseToken;
     
     private void Start()
     {
@@ -77,8 +76,15 @@ public class PlayerHealth : MonoBehaviour
     {
         // Death logic here
         onDie?.Invoke(false);
-        GameManager.Instance.PauseGame();
+        //GameManager.Instance.PauseGame();
+        
+        // FOR TESTING HERE ONLY
+        _pauseToken = PauseManager.Instance.Acquire("Die");
         Debug.Log("Player Died");
+        
+        // when player die, push GameOverWindow, when UIWindow is pushed,
+        // acquired pause token, when leave this window, release the token.
+        
         //GameManager.Instance.ChangeLevel("LevelSelector");
     }
 
