@@ -29,7 +29,7 @@ public abstract class TemporaryBuff : MonoBehaviour, IUpgradeable
     public int MaxLevel => maxLevel;
     public bool IsAvailable => isAvailable;
     public bool IsAvailableAtStart => isAvailableAtStart;
-    public UITemporary UIData { get; }
+    public UITemporary UIData { get { return uiData; } }
 
     public virtual void Start()
     {

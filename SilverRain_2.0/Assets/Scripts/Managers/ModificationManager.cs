@@ -82,7 +82,7 @@ public class ModificationManager : MonoBehaviour
     {
         foreach (var weapon in WeaponManager.Instance.AllWeapons.Values) 
         {
-            weapon.OnWeaponHit.AddListener();
+            //weapon.OnWeaponHit.AddListener();
         }
     }
 }

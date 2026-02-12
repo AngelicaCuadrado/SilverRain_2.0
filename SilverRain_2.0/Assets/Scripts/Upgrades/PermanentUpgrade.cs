@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PermanentUpgrade : IUpgradeable
+public class PermanentUpgrade : MonoBehaviour, IUpgradeable
 {
     int currentLevel;
     //int maxcurrentLevel;
@@ -37,7 +37,6 @@ public class PermanentUpgrade : IUpgradeable
             description = $"+{currentValue} → +{nextValue}";
         }
     }
-
 
     public float Calculate()
     {

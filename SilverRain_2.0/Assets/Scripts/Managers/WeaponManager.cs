@@ -31,6 +31,7 @@ public class WeaponManager : MonoBehaviour
     private ObjectPooler effectsPool;
 
     //Properties
+    public Dictionary<WeaponType, Weapon> AllWeapons => allWeapons;
     public WeaponType InitialWeapon { get => initialWeapon; set => initialWeapon = value; }
     public ObjectPooler ProjectilePool => projectilePool;
     public ObjectPooler EffectsPool => effectsPool;

@@ -114,14 +114,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponManager
   allWeaponsList:
-  - type: 0
-    weapon: {fileID: 1887529471089843336}
   - type: 1
-    weapon: {fileID: 3177799074721167781}
+    weapon: {fileID: 1887529471089843336}
   - type: 2
+    weapon: {fileID: 3177799074721167781}
+  - type: 3
     weapon: {fileID: 974517051810806968}
   maxWeapons: 2
-  initialWeapon: {fileID: 1887529471089843336}
+  initialWeapon: 0
   projectilePool: {fileID: 3923140885524237589}
   effectsPool: {fileID: 5067260411644754154}
   OnWeaponAvailabilityChange:
@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: uiData
       value: 
       objectReference: {fileID: 741948741947153188}
+    - target: {fileID: 2290405111503472805, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: weaponType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2290405111503472805, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: spawnOffsetUp
       value: -0.2
@@ -470,6 +474,10 @@ PrefabInstance:
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 5182050940608234337}
+    - target: {fileID: 1721398068177321597, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
+      propertyPath: weaponType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1721398068177321597, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
       propertyPath: weaponVisual
       value: 
@@ -744,6 +752,10 @@ PrefabInstance:
       propertyPath: uiData
       value: 
       objectReference: {fileID: 8268078588862340359}
+    - target: {fileID: 7469974996897628985, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
+      propertyPath: weaponType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7469974996897628985, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
       propertyPath: weaponVisual
       value: 

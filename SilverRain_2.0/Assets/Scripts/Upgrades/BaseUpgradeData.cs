@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BaseUpgradeData", menuName = "Scriptable Objects/BaseUpgradeData")]
 public abstract class BaseUpgradeData : ScriptableObject
 {
      string id;
