@@ -1,22 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BaseUpgradeData", menuName = "Scriptable Objects/BaseUpgradeData")]
+//[System.Serializable]
 public abstract class BaseUpgradeData : ScriptableObject
 {
-     string id;
-    StatType statType;
-    float baseAmount;
-    float amountPerLevel;
-    string upgradeName;
-    //string description;
-    int maxLevel;
+    [SerializeField, Tooltip("")]
+    protected float baseAmount;
+    [SerializeField, Tooltip("")]
+    protected float amountPerLevel;
 
-    public string Id => id;
-    public StatType StatType => statType;
     public float BaseAmount => baseAmount;
     public float AmountPerLevel => amountPerLevel;
-    public string Name => upgradeName;
-    //public string Description => description;
-    public int MaxLevel => maxLevel;
-
 }

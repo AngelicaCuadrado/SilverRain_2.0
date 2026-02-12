@@ -27,6 +27,7 @@ public class BuffCardManager : MonoBehaviour
 
     private object _pauseToken;
     private object _inputToken;
+
     //Properties
     public int ChoiceAmount
     {
@@ -41,7 +42,7 @@ public class BuffCardManager : MonoBehaviour
         Instance = this;
 
         //Subscribe to availability change events for weapons, temporary upgrades, and modifications
-        //StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
+        StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
         WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
         //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
     }
@@ -178,7 +179,7 @@ public class BuffCardManager : MonoBehaviour
             playerExperience.OnLevelUp.RemoveListener(DisplayBuffCards);
         }
         WeaponManager.Instance.OnWeaponAvailabilityChange.RemoveListener(UpdateAvailableChoices);
-        //StatManager.Instance.OnTempUpgradeAvailabilityChange.RemoveListener(UpdateAvailableChoices);
+        StatManager.Instance.OnTempUpgradeAvailabilityChange.RemoveListener(UpdateAvailableChoices);
         //ModificationManager.Instance.OnModificationAvailabilityChange.RemoveListener(UpdateAvailableChoices);
     }
 }

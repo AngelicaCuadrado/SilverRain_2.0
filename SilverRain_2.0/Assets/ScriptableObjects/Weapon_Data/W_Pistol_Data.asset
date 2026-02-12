@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4466c0a87e8ce040853fda2d4a3cf9d, type: 3}
-  m_Name: GrenadeData
+  m_Name: W_Pistol_Data
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  baseDamage: 20
-  baseCooldown: 15
+  baseDamage: 5
+  baseCooldown: 3
   baseDuration: 0
-  baseProjectileSpeed: 0
-  baseSize: 1
-  perLevelDamage: 5
-  perLevelCooldown: -1
+  baseProjectileSpeed: 4
+  baseSize: 0
+  perLevelDamage: 3
+  perLevelCooldown: -0.4
   perLevelDuration: 0
-  perLevelProjectileSpeed: 0
-  perLevelSize: 1
+  perLevelProjectileSpeed: 0.4
+  perLevelSize: 0

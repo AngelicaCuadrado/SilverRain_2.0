@@ -41,6 +41,11 @@ public class UITemporary : MonoBehaviour
         {
             buffLevel = $"{level} -> {level + 1}";
         }
+        // If level is 0 display curStat as 0
+        if (level == 0)
+        {
+            curStat = 0;
+        }
         // Display the current stats and the next level stats
         finalBuffDescription = $"{baseBuffDescription}\n%{curStat} -> %{nextStat}";
     }

@@ -5,28 +5,50 @@ using UnityEngine.Events;
 
 public class StatManager : MonoBehaviour
 {
-    List<PermanentUpgradeEntry> allPermUpgradesList;
-    List<TemporaryUpgradeEntry> allTempUpgradesList;
-    //List<TemporaryUpgradeEntry> currentTempUpgradesList;
-    Dictionary<StatType, PermanentUpgrade> allPermUpgrades = new Dictionary<StatType, PermanentUpgrade>();
-    Dictionary<StatType, TemporaryUpgrade> allTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
-    Dictionary<StatType, TemporaryUpgrade> currentTempUpgrades = new Dictionary<StatType, TemporaryUpgrade>();
-    int maxTempUpgrades;
-    UnityEvent<StatType, float> OnStatChanged;
-    UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
-
-    float AttackDamage;
-    float Cooldown;
-    float Duration;
-    float ProjectSpeed;
-    float Size;
-    float MaxHealth;
-    float MovementSpeed;
-    float Armor;
-    float XpMult;
-    float HealthRegen;
-
     public static StatManager Instance { get; private set; }
+
+    [Header("Upgrade Lists")]
+    [SerializeField, Tooltip("")]
+    private List<PermanentUpgradeEntry> allPermUpgradesList;
+    [SerializeField, Tooltip("")]
+    private List<TemporaryUpgradeEntry> allTempUpgradesList;
+    private Dictionary<StatType, PermanentUpgrade> allPermUpgrades = new();
+    private Dictionary<StatType, TemporaryUpgrade> allTempUpgrades = new();
+    private Dictionary<StatType, TemporaryUpgrade> currentTempUpgrades = new();
+    [Space]
+
+    [Header("Upgrade Amount")]
+    [SerializeField, Tooltip("")]
+    private int maxTempUpgrades;
+    [Space]
+
+    [Header("Events")]
+    public UnityEvent<StatType, float> OnStatChanged;
+    public UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
+    [Space]
+
+    [Header("Stats")]
+    [SerializeField, Tooltip("")]
+    private float attackDamage;
+    [SerializeField, Tooltip("")]
+    private float cooldown;
+    [SerializeField, Tooltip("")]
+    private float duration;
+    [SerializeField, Tooltip("")]
+    private float projectSpeed;
+    [SerializeField, Tooltip("")]
+    private float size;
+    [SerializeField, Tooltip("")]
+    private float maxHealth;
+    [SerializeField, Tooltip("")]
+    private float movementSpeed;
+    [SerializeField, Tooltip("")]
+    private float armor;
+    [SerializeField, Tooltip("")]
+    private float xpMult;
+    [SerializeField, Tooltip("")]
+    private float healthRegen;
+
     private void Awake()
     {
         if (Instance == null)
@@ -67,20 +89,20 @@ public class StatManager : MonoBehaviour
     {
         return type switch
         {
-            StatType.AttackDamage => AttackDamage,
-            StatType.Cooldown => Cooldown,
-            StatType.Duration => Duration,
-            StatType.ProjectileSpeed => ProjectSpeed,
-            StatType.Size => Size,
-            StatType.MaxHealth => MaxHealth,
-            StatType.MovementSpeed => MovementSpeed,
-            StatType.Armor => Armor,
-            StatType.XpMult => XpMult,
-            StatType.HealthRegen => HealthRegen,
+            StatType.AttackDamage => attackDamage,
+            StatType.Cooldown => cooldown,
+            StatType.Duration => duration,
+            StatType.ProjectileSpeed => projectSpeed,
+            StatType.Size => size,
+            StatType.MaxHealth => maxHealth,
+            StatType.MovementSpeed => movementSpeed,
+            StatType.Armor => armor,
+            StatType.XpMult => xpMult,
+            StatType.HealthRegen => healthRegen,
             _ => 0f,
         };
     }
-    
+
     public float CalculateStat(StatType type)
     {
         float finalStat = 0f;
@@ -94,7 +116,10 @@ public class StatManager : MonoBehaviour
             finalStat += currentTempUpgrades[type].Calculate();
         }
 
-        finalStat += ModificationManager.Instance.GetStatModifications(type);
+        if (ModificationManager.Instance != null)
+        {
+            finalStat += ModificationManager.Instance.GetStatModifications(type);
+        }
         return finalStat;
     }
 
@@ -106,34 +131,34 @@ public class StatManager : MonoBehaviour
             switch (type)
             {
                 case StatType.AttackDamage:
-                    AttackDamage = newValue;
+                    attackDamage = newValue;
                     break;
                 case StatType.Cooldown:
-                    Cooldown = newValue;
+                    cooldown = newValue;
                     break;
                 case StatType.Duration:
-                    Duration = newValue;
+                    duration = newValue;
                     break;
                 case StatType.ProjectileSpeed:
-                    ProjectSpeed = newValue;
+                    projectSpeed = newValue;
                     break;
                 case StatType.Size:
-                    Size = newValue;
+                    size = newValue;
                     break;
                 case StatType.MaxHealth:
-                    MaxHealth = newValue;
+                    maxHealth = newValue;
                     break;
                 case StatType.MovementSpeed:
-                    MovementSpeed = newValue;
+                    movementSpeed = newValue;
                     break;
                 case StatType.Armor:
-                    Armor = newValue;
+                    armor = newValue;
                     break;
                 case StatType.XpMult:
-                    XpMult = newValue;
+                    xpMult = newValue;
                     break;
                 case StatType.HealthRegen:
-                    HealthRegen = newValue;
+                    healthRegen = newValue;
                     break;
             }
             //OnStatChanged?.Invoke(type, newValue);
@@ -143,7 +168,7 @@ public class StatManager : MonoBehaviour
     public void ApplyPermanentStatsAtGameStart()
     {
         foreach (var type in allPermUpgrades.Keys)
-        {            
+        {
             OnStatChanged?.Invoke(type, GetStat(type));
         }
     }
@@ -156,22 +181,21 @@ public class StatManager : MonoBehaviour
             return;
         }
 
-        if (currentTempUpgrades.ContainsKey(type))
-        {
-            UpdateTempStats(type);
-        }
-        else
+        if (!currentTempUpgrades.ContainsKey(type))
         {
             currentTempUpgrades.Add(type, allTempUpgrades[type]);
             Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
             Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
         }
 
+        currentTempUpgrades[type].LevelUp();
+        UpdateTempStats(type);
+
         if (currentTempUpgrades.Count >= maxTempUpgrades)
         {
-            foreach(var statType in allTempUpgrades.Keys)
+            foreach (var statType in allTempUpgrades.Keys)
             {
-                if(!currentTempUpgrades.ContainsKey(statType))
+                if (!currentTempUpgrades.ContainsKey(statType))
                 {
                     allTempUpgrades[statType].SetAvailable(false);
                 }
@@ -187,34 +211,34 @@ public class StatManager : MonoBehaviour
             switch (type)
             {
                 case StatType.AttackDamage:
-                    AttackDamage = newValue;
+                    attackDamage = newValue;
                     break;
                 case StatType.Cooldown:
-                    Cooldown = newValue;
+                    cooldown = newValue;
                     break;
                 case StatType.Duration:
-                    Duration = newValue;
+                    duration = newValue;
                     break;
                 case StatType.ProjectileSpeed:
-                    ProjectSpeed = newValue;
+                    projectSpeed = newValue;
                     break;
                 case StatType.Size:
-                    Size = newValue;
+                    size = newValue;
                     break;
                 case StatType.MaxHealth:
-                    MaxHealth = newValue;
+                    maxHealth = newValue;
                     break;
                 case StatType.MovementSpeed:
-                    MovementSpeed = newValue;
+                    movementSpeed = newValue;
                     break;
                 case StatType.Armor:
-                    Armor = newValue;
+                    armor = newValue;
                     break;
                 case StatType.XpMult:
-                    XpMult = newValue;
+                    xpMult = newValue;
                     break;
                 case StatType.HealthRegen:
-                    HealthRegen = newValue;
+                    healthRegen = newValue;
                     break;
             }
             OnStatChanged?.Invoke(type, newValue);
