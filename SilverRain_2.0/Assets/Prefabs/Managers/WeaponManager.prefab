@@ -227,6 +227,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 741948741947153188}
     - target: {fileID: 2290405111503472805, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
+      propertyPath: maxLevel
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290405111503472805, guid: eef74835d3d401f46b5cdfc80e212f9d, type: 3}
       propertyPath: weaponType
       value: 1
       objectReference: {fileID: 0}
@@ -470,6 +474,10 @@ PrefabInstance:
       propertyPath: uiData
       value: 
       objectReference: {fileID: 4310803708289149109}
+    - target: {fileID: 1721398068177321597, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
+      propertyPath: maxLevel
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1721398068177321597, guid: f553b951c48b3a0478f6e6943bf66349, type: 3}
       propertyPath: firePoint
       value: 
@@ -752,6 +760,10 @@ PrefabInstance:
       propertyPath: uiData
       value: 
       objectReference: {fileID: 8268078588862340359}
+    - target: {fileID: 7469974996897628985, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
+      propertyPath: maxLevel
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7469974996897628985, guid: 91255cbc066fd6c4bae5bc09450cf19f, type: 3}
       propertyPath: weaponType
       value: 2

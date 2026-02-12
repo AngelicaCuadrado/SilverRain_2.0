@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class StatManager : MonoBehaviour
 {
     public static StatManager Instance { get; private set; }
-    
+
     [Header("Upgrade Lists")]
     [SerializeField, Tooltip("")]
     private List<PermanentUpgradeEntry> allPermUpgradesList;
@@ -116,7 +116,10 @@ public class StatManager : MonoBehaviour
             finalStat += currentTempUpgrades[type].Calculate();
         }
 
-        finalStat += ModificationManager.Instance.GetStatModifications(type);
+        if (ModificationManager.Instance != null)
+        {
+            finalStat += ModificationManager.Instance.GetStatModifications(type);
+        }
         return finalStat;
     }
 
@@ -178,16 +181,15 @@ public class StatManager : MonoBehaviour
             return;
         }
 
-        if (currentTempUpgrades.ContainsKey(type))
-        {
-            UpdateTempStats(type);
-        }
-        else
+        if (!currentTempUpgrades.ContainsKey(type))
         {
             currentTempUpgrades.Add(type, allTempUpgrades[type]);
             Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
             Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
         }
+
+        currentTempUpgrades[type].LevelUp();
+        UpdateTempStats(type);
 
         if (currentTempUpgrades.Count >= maxTempUpgrades)
         {

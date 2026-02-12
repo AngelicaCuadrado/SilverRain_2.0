@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 649e1c215adfdff489bbb1a73af8bf06, type: 3}
   m_Name: P_MovementSpeed_Data
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgradeData
-  cost: 0
-  costIncreasePerLevel: 0
+  baseAmount: 1
+  amountPerLevel: 0.5
+  cost: 10
+  costIncreasePerLevel: 5

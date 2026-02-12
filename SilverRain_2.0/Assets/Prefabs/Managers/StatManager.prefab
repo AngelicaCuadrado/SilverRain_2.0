@@ -227,6 +227,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1868607431150268756}
     m_Modifications:
+    - target: {fileID: 1234453041469912145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 468581acd87858b41a7024ad61cb9c94, type: 2}
+    - target: {fileID: 1234453041469912145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
+      propertyPath: statType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234453041469912145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6046024553626018382, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -376,6 +388,18 @@ PrefabInstance:
     - target: {fileID: 687879255902885780, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
       propertyPath: m_Name
       value: PermUpgrade_MovementSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646732679348808045, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: fe45eec0035aff64c86db3266e4408e0, type: 2}
+    - target: {fileID: 2646732679348808045, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+      propertyPath: statType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646732679348808045, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5078558032121805364, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -632,6 +656,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6595136440307351064, guid: 3076429765d848445861066d2007a911, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 96f66e76cecab5340a14434c5253a4a7, type: 2}
+    - target: {fileID: 6595136440307351064, guid: 3076429765d848445861066d2007a911, type: 3}
+      propertyPath: statType
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595136440307351064, guid: 3076429765d848445861066d2007a911, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7297839391844276454, guid: 3076429765d848445861066d2007a911, type: 3}
       propertyPath: m_Name
       value: PermUpgrade_XPMult
@@ -665,6 +701,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1868607431150268756}
     m_Modifications:
+    - target: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: c89d89aa9ef5476438f46cee63df513b, type: 2}
+    - target: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7358759432237759634, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
       propertyPath: m_Name
       value: PermUpgrade_AttackDamage
@@ -928,6 +972,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PermUpgrade_Duration
       objectReference: {fileID: 0}
+    - target: {fileID: 9042273181602829302, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 8233f4477f4312e45b06706ea2f7015f, type: 2}
+    - target: {fileID: 9042273181602829302, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
+      propertyPath: statType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042273181602829302, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1000,6 +1056,18 @@ PrefabInstance:
     - target: {fileID: 4765163495429120666, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
       propertyPath: m_Name
       value: PermUpgrade_Cooldown
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044101721345836353, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bbf1f8fb380a954bb90ddbe3c8b271c, type: 2}
+    - target: {fileID: 9044101721345836353, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+      propertyPath: statType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044101721345836353, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1399,6 +1467,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PermUpgrade_MaxHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 2512161023926566215, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 632c34e0b9e780a48ae6964de2ffda2b, type: 2}
+    - target: {fileID: 2512161023926566215, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
+      propertyPath: statType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512161023926566215, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2879919417158928218, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1512,6 +1592,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PermUpgrade_ProjectileSpeed
       objectReference: {fileID: 0}
+    - target: {fileID: 5031309317184016687, guid: 1f4f3781768e978439b281147b06d157, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a619c95c6914ad49959b42aedec83c6, type: 2}
+    - target: {fileID: 5031309317184016687, guid: 1f4f3781768e978439b281147b06d157, type: 3}
+      propertyPath: statType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031309317184016687, guid: 1f4f3781768e978439b281147b06d157, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1544,6 +1636,18 @@ PrefabInstance:
     - target: {fileID: 2616686584707566649, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
       propertyPath: m_Name
       value: PermUpgrade_Armor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879451921878493447, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: bd70017f557b3a74f9e287aed71d1be9, type: 2}
+    - target: {fileID: 2879451921878493447, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
+      propertyPath: statType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879451921878493447, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7011303219741053961, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1614,6 +1718,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1868607431150268756}
     m_Modifications:
+    - target: {fileID: 123433418348846499, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 04f61c8fdacad1a41a639e623724c542, type: 2}
+    - target: {fileID: 123433418348846499, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+      propertyPath: statType
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 123433418348846499, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+      propertyPath: maxcurrentLevel
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1394288446002695293, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
