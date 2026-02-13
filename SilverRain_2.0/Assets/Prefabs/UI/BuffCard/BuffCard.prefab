@@ -173,7 +173,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &10231209640109417
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -527,8 +527,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.7249, y: 71.6793}
-  m_SizeDelta: {x: 487.191, y: 646.2927}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6123164831106211503
 CanvasRenderer:
@@ -610,9 +610,6 @@ MonoBehaviour:
   buffLevel: {fileID: 3246623912129217854}
   buffDescription: {fileID: 1866528735018084647}
   buffIcon: {fileID: 6955619139784622643}
-  OnBuffCardClicked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7508222460300250844
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,27 +12,29 @@ public class BuffCardManager : MonoBehaviour
     private HashSet<TemporaryBuff> availableChoices = new();
     [SerializeField, Min(1), Tooltip("The amount of choices that will be offered on level up")]
     private int choiceAmount = 3;
-
-    [Header("Buff Card Settings")]
-    [SerializeField, Min(1), Tooltip("The maximum amount of buff cards, used to create them in 'Start'")]
-    private int maxBuffCards = 5;
-    [SerializeField, Tooltip("A list of all buff cards")]
-    private List<BuffCard> buffCards = new();
-    [SerializeField, Tooltip("Prefab for the buff card UI element")]
-    private GameObject buffCardPrefab;
-    [SerializeField, Tooltip("Parent where the buff card will spawn")]
-    private Transform buffCardParent;
+    
+    // [Header("Buff Card Settings")]
+    // [SerializeField, Min(1), Tooltip("The maximum amount of buff cards, used to create them in 'Start'")]
+    // private int maxBuffCards = 5;
+    // [SerializeField, Tooltip("A list of all buff cards")]
+    // private List<BuffCard> buffCards = new();
+    // [SerializeField, Tooltip("Prefab for the buff card UI element")]
+    // private GameObject buffCardPrefab;
+    // [SerializeField, Tooltip("Parent where the buff card will spawn")]
+    // private Transform buffCardParent;
     [SerializeField, Tooltip("PlayerExperience component used to subscribe to LevelUp event")]
     private PlayerExperience playerExperience;
-
-    private object _pauseToken;
-    private object _inputToken;
+    
+    [Header("UI")]
+    [SerializeField, Tooltip("BuffCardsWindow prefab to push via UIManager")]
+    private UIWindow buffCardsWindowPrefab;
 
     //Properties
+    public List<TemporaryBuff> CurrentChoices => currentChoices;
     public int ChoiceAmount
     {
         get { return choiceAmount; }
-        set { choiceAmount = Mathf.Clamp(value, 1, maxBuffCards); }
+        set { choiceAmount = Mathf.Max(value, 1); }
     }
 
     private void Awake()
@@ -61,14 +63,14 @@ public class BuffCardManager : MonoBehaviour
         if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(DisplayBuffCards); }
 
         //Create maximum amount of buff cards
-        for (int i = 0; i < maxBuffCards; i++)
-        {
-            GameObject buffObj = Instantiate(buffCardPrefab, buffCardParent);
-            BuffCard card = buffObj.GetComponent<BuffCard>();
-
-            buffCards.Add(card);
-            buffObj.SetActive(false);
-        }
+        // for (int i = 0; i < maxBuffCards; i++)
+        // {
+        //     GameObject buffObj = Instantiate(buffCardPrefab, buffCardParent);
+        //     BuffCard card = buffObj.GetComponent<BuffCard>();
+        //
+        //     buffCards.Add(card);
+        //     buffObj.SetActive(false);
+        // }
     }
 
     private void DisplayBuffCards()
@@ -88,8 +90,8 @@ public class BuffCardManager : MonoBehaviour
 
         // Pause the game
         //GameManager.Instance.PauseGame();
-        _pauseToken = PauseManager.Instance.Acquire("BuffCard");
-        _inputToken = InputManager.Instance.Acquire(InputMode.UI, "BuffCard");
+        // _pauseToken = PauseManager.Instance.Acquire("BuffCard");
+        // _inputToken = InputManager.Instance.Acquire(InputMode.UI, "BuffCard");
         
         for (int i = 0; i < buffAmount; i++)
         {
@@ -98,37 +100,39 @@ public class BuffCardManager : MonoBehaviour
             currentChoices.Add(choice);
 
             // Setup and activate the buff card
-            buffCards[i].SetupCard(choice);
-            buffCards[i].gameObject.SetActive(true);
+            // buffCards[i].SetupCard(choice);
+            // buffCards[i].gameObject.SetActive(true);
         }
 
         // Hide unused cards
-        for (int i = choiceAmount; i < buffCards.Count; i++)
-        {
-            buffCards[i].gameObject.SetActive(false);
-        }
+        // for (int i = choiceAmount; i < buffCards.Count; i++)
+        // {
+        //     buffCards[i].gameObject.SetActive(false);
+        // }
+        UIManager.Instance.Push(buffCardsWindowPrefab);
     }
-    private void HideBuffCards()
-    {
-        // Unpause the game
-        //GameManager.Instance.UnpauseGame();
-        if (_pauseToken != null)
-        {
-            PauseManager.Instance.Release(_pauseToken);
-            _pauseToken = null;
-        }
-
-        if (_inputToken != null)
-        {
-            InputManager.Instance.Release(_inputToken);
-            _inputToken = null;
-        }
-        
-        foreach (var card in buffCards)
-        {
-            card.gameObject.SetActive(false);
-        }
-    }
+    // private void HideBuffCards()
+    // {
+    //     // Unpause the game
+    //     //GameManager.Instance.UnpauseGame();
+    //     if (_pauseToken != null)
+    //     {
+    //         PauseManager.Instance.Release(_pauseToken);
+    //         _pauseToken = null;
+    //     }
+    //
+    //     if (_inputToken != null)
+    //     {
+    //         InputManager.Instance.Release(_inputToken);
+    //         _inputToken = null;
+    //     }
+    //     
+    //     foreach (var card in buffCards)
+    //     {
+    //         card.gameObject.SetActive(false);
+    //     }
+    // }
+    
     private TemporaryBuff PickRandomChoice(List<TemporaryBuff> pool)
     {
         if (pool.Count == 0) { Debug.Log("BuffCardManager - Available pool is empty"); return null; }
@@ -158,7 +162,8 @@ public class BuffCardManager : MonoBehaviour
                 break;
         }
 
-        HideBuffCards();
+        //HideBuffCards();
+        UIManager.Instance.Pop();
     }
 
 
