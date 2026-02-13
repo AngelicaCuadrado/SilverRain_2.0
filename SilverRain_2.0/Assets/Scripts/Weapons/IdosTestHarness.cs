@@ -21,7 +21,8 @@ public class IdosTestHarness : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            playerExp.OnLevelUp?.Invoke();
+            //playerExp.OnLevelUp?.Invoke();
+            playerExp.GainExp(playerExp.RequiredExp -  playerExp.CurrentExp);
         }
     }
 }

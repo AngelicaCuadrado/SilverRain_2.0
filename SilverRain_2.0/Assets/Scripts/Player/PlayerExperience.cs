@@ -8,7 +8,7 @@ public class PlayerExperience : MonoBehaviour
     [Header("Player Experience Settings")]
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private float currentExp = 0f;
-    [SerializeField] private float requriedExp = 100f;
+    [SerializeField] private float requiredExp = 100f;
     [SerializeField] private float expGrowthRate = 1.5f;
     
     public UnityEvent OnExpChanged;
@@ -18,9 +18,9 @@ public class PlayerExperience : MonoBehaviour
     
     public int CurrentLevel => currentLevel;
     public float CurrentExp => currentExp;
-    public float RequriedExp => requriedExp;
+    public float RequiredExp => requiredExp;
 
-    private void Start()
+    private void Awake()
     {
         CalculateRequriedExp();
     }
@@ -44,9 +44,9 @@ public class PlayerExperience : MonoBehaviour
     public void GainExp(float amount)
     {
         currentExp += amount * expMult;
-        OnExpChanged.Invoke();
+        OnExpChanged?.Invoke();
         
-        if (currentExp >= requriedExp)
+        if (currentExp >= requiredExp)
         {
             LevelUp();
         }
@@ -55,20 +55,20 @@ public class PlayerExperience : MonoBehaviour
     private void LevelUp()
     {
         currentLevel++;
-        currentExp -= requriedExp;
+        currentExp -= requiredExp;
         CalculateRequriedExp();
         
-        OnExpChanged.Invoke();
-        OnLevelUp.Invoke();
+        OnExpChanged?.Invoke();
+        OnLevelUp?.Invoke();
     }
 
     private void CalculateRequriedExp()
     {
-        requriedExp = 100f * Mathf.Pow(expGrowthRate, CurrentLevel - 1);
+        requiredExp = 100f * Mathf.Pow(expGrowthRate, CurrentLevel - 1);
     }
     
     public float GetExpPersentage()
     {
-        return currentExp /  requriedExp;
+        return currentExp /  requiredExp;
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private int pauseCounter = 0;
 
     [Header("Events")]
     public static UnityEvent OnLevelStart;
@@ -14,6 +13,10 @@ public class GameManager : MonoBehaviour
     public static UnityEvent OnLevelLost;
     public static UnityEvent OnGamePaused;
     public static UnityEvent OnGameUnpaused;
+    
+    [Header("UI")]
+    [SerializeField] private MainMenuWindow mainMenuWindowPrefab;
+    [SerializeField] private HUDWindow hudWindowPrefab;
 
     private void Awake()
     {
@@ -24,46 +27,7 @@ public class GameManager : MonoBehaviour
         //Subscribe to events
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
-    #region Pause Management
-    // public void PauseGame()
-    // {
-    //     // Increment pause counter
-    //     pauseCounter++;
-    //     // Pause game
-    //     Time.timeScale = 0f;
-    //     // Disable player inputs
-    //     //playerInput.enabled = false;
-    //
-    //     //Make cursor unlocked and visible
-    //     Cursor.lockState = CursorLockMode.None;
-    //     Cursor.visible = true;
-    //
-    //     // Call event
-    //     OnGamePaused?.Invoke();
-    // }
-    //
-    // public void UnpauseGame()
-    // {
-    //     // Decrement pause counter
-    //     pauseCounter = Mathf.Max(0, pauseCounter - 1);
-    //     // Unpause game if all instances of pause are done
-    //     if (pauseCounter == 0)
-    //     {
-    //         Time.timeScale = 1f;
-    //         // Enable player inputs
-    //         //playerInput.enabled = true;
-    //
-    //         //Make cursor locked and invisible
-    //         Cursor.lockState = CursorLockMode.Locked;
-    //         Cursor.visible = false;
-    //
-    //         // Call event
-    //         OnGameUnpaused?.Invoke();
-    //     }
-    // }
-    #endregion
-
+    
     public void ChangeLevel(string levelName)
     {
         SceneManager.LoadScene(levelName);
@@ -71,9 +35,32 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //--TODO--
-        //Find out if the scene is a playable level or a menu
-        //Call the appropriate "Start of Level" methods on managers
+        Debug.Log($"[GameManager] OnSceneLoaded: {scene.name}, IsPlayable: {IsPlayableLevel(scene)}");
+        // Clean up all UI from previous scene
+        UIManager.Instance.Clear();
+        UIManager.Instance.ClearAllOverlay();
+
+        if (IsPlayableLevel(scene))
+        {
+            InputManager.Instance.Apply(InputMode.Gameplay);
+            UIManager.Instance.ShowOverlay("HUD", hudWindowPrefab);
+            OnLevelStart?.Invoke();
+        }
+        else
+        {
+            InputManager.Instance.Apply(InputMode.UI);
+            UIManager.Instance.Push(mainMenuWindowPrefab);
+        }
+    }
+
+    private bool IsPlayableLevel(Scene scene)
+    {
+        return scene.name != "MainMenu";
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     //------------------------------------Move this to score manager-------------------------------

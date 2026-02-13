@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -58,12 +59,12 @@ public class UIOverlay : MonoBehaviour
     /// </summary>
     public void ClearAll()
     {
-        foreach (var kv in _channels)
+        foreach (var kv in _channels.Where(kv => kv.Value != null))
         {
-            if (kv.Value == null) continue;
             kv.Value.OnPopped();
             Destroy(kv.Value.gameObject);
         }
+
         _channels.Clear();
     }
 

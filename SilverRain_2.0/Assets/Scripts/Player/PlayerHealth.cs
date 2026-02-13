@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     [Header("Events")]
-    private UnityEvent onPlayerHealthChanged;
+    public UnityEvent onPlayerHealthChanged;
     public UnityEvent onTakeDamage;
     public static event Action<bool> onDie;
 
@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
     private object _pauseToken;
     
-    private void Start()
+    private void Awake()
     {
         //maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
         currentHealth = maxHealth;

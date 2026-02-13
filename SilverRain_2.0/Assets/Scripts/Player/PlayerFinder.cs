@@ -9,7 +9,7 @@ public class PlayerFinder : MonoBehaviour
     public GameObject Player => player;
     public static PlayerFinder Instance => instance;
 
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
         {
