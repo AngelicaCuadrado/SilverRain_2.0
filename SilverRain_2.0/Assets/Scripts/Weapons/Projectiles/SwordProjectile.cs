@@ -4,10 +4,16 @@ using UnityEngine.Rendering;
 
 public class SwordProjectile : Projectile
 {
-    float angle = 90f;
-    float rotationRadius = 0f;
-    float rotationSpeed;
-    Transform playerTrans;
+    [SerializeField, Tooltip("The current angele of the sword projectile")]
+    private float angle = 90f;
+    [SerializeField, Tooltip("The radius of the circle the sword projectile makes around the player")]
+    private float rotationRadius = 0f;
+    [SerializeField, Tooltip("The speed of the sword projectile's rotation")]
+    private float rotationSpeed;
+    [SerializeField, Tooltip("The player position and center of the sword projectile's rotation")]
+    private Transform playerTrans;
+    [SerializeField, Tooltip("The height offset relative to the player transform")]
+    private float heightOffset;
 
     public void Init(Sword parent, Transform player, float dmg, float duration, float size, float speed)
     {
@@ -36,20 +42,22 @@ public class SwordProjectile : Projectile
         //Rotate around the player
         angle += rotationSpeed * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
-        Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * rotationRadius;
+        Vector3 offset = new Vector3(Mathf.Cos(rad), 0f, Mathf.Sin(rad)) * rotationRadius;
+
+        // Off set the player position with the height offset
+        var playerPos = playerTrans.position + (Vector3.up * heightOffset);
 
         //Stay centered on the player
-        transform.position = playerTrans.position + offset;
+        transform.position = playerPos + offset;
 
         //Ignore player's rotation
-        Vector3 dir = (playerTrans.position - transform.position).normalized;
+        Vector3 dir = (playerPos - transform.position).normalized;
         Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
         transform.rotation = look * Quaternion.Euler(-90f, 0f, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print("sword hit");
         //Try to find EnemyHealth on the object or its parent
         var enemyHealth = other.GetComponent<EnemyHealth>();
         if (enemyHealth == null)
@@ -66,15 +74,10 @@ public class SwordProjectile : Projectile
         }
     }
 
-    public override void OnCreatedPool()
-    {
-    }
+    public override void OnCreatedPool() { }
 
     //Called whenever the pool spawns this instance
-    public override void OnSpawnFromPool()
-    {
-
-    }
+    public override void OnSpawnFromPool() { }
 
     //Called before the pool deactivates this instance
     public override void OnReturnToPool()

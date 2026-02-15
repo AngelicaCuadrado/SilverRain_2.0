@@ -9,5 +9,7 @@ public enum WeaponType
     None,
     Pistol,
     Sword,
-    Grenade
+    Grenade,
+    Hammer,
+    Chakram
 }

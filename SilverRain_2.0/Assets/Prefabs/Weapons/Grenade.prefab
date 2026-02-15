@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1218279253656401726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733895225789564400}
+  m_Layer: 3
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &733895225789564400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218279253656401726}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.031, y: 0.08, z: -0.184}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5570407992221264794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2535900841454448885
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +42,6 @@ GameObject:
   - component: {fileID: 5570407992221264794}
   - component: {fileID: 1721398068177321597}
   - component: {fileID: 6501333127623952714}
-  - component: {fileID: 8612061753811787792}
   - component: {fileID: 2429271256713669232}
   m_Layer: 0
   m_Name: Grenade
@@ -32,7 +62,9 @@ Transform:
   m_LocalPosition: {x: -0, y: -0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 733895225789564400}
+  - {fileID: 1422477130949675739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1721398068177321597
@@ -47,22 +79,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f031f1fc6cff6fa459f5532afdee6bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grenade
-  weaponLevel: 0
-  maxWeaponLevel: 5
-  weaponType: 2
-  projectilePoolKey: GrenadeProjectile
-  weaponVisual: {fileID: 0}
-  weaponStats: {fileID: 6501333127623952714}
-  weaponUI: {fileID: 8612061753811787792}
-  cam: {fileID: 0}
+  level: 0
+  maxLevel: 5
   isAvailable: 0
-  isAvailableAtStart: 0
-  OnWeaponLevelChanged:
-    m_PersistentCalls:
-      m_Calls: []
+  isAvailableAtStart: 1
+  uiData: {fileID: 2429271256713669232}
   OnAvailabilityChanged:
     m_PersistentCalls:
       m_Calls: []
+  weaponType: 3
+  projectilePoolKey: GrenadeProjectile
+  weaponVisual: {fileID: 1798756790816411745}
+  weaponStats: {fileID: 6501333127623952714}
+  cam: {fileID: 0}
+  spawnOffsetForward: 1.2
+  spawnOffsetUp: 0
+  spawnOffsetSide: 0.5
   OnWeaponProjectileSpawn:
     m_PersistentCalls:
       m_Calls: []
@@ -71,10 +103,7 @@ MonoBehaviour:
       m_Calls: []
   throwForce: 12
   upwardForce: 4
-  spawnOffsetForward: 1.2
-  spawnOffsetUp: 0
-  spawnOffsetSide: 0.5
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 733895225789564400}
 --- !u!114 &6501333127623952714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,22 +123,6 @@ MonoBehaviour:
   duration: 0
   projectileSpeed: 0
   size: 0
---- !u!114 &8612061753811787792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2535900841454448885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827dbf0a98ed8e542b07b8c7c1089fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponUI
-  weapon: {fileID: 1721398068177321597}
-  weaponIcon: {fileID: 0}
-  weaponName: Grenade
-  weaponDescription: 
 --- !u!114 &2429271256713669232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +136,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Grenade
-  buffLevel: 1
-  buffDescription: explodes
+  buffLevel: 0
+  baseBuffDescription: 
+  finalBuffDescription: 
   buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!1001 &1456666077972016432
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5570407992221264794}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.21645457
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.72980624
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.64315814
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.08293315
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_Name
+      value: GrenadeLauncher_Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+--- !u!4 &1422477130949675739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+  m_PrefabInstance: {fileID: 1456666077972016432}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1798756790816411745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 38230c8c1cebd8c4d9e91c4b9cf0899b, type: 3}
+  m_PrefabInstance: {fileID: 1456666077972016432}
+  m_PrefabAsset: {fileID: 0}

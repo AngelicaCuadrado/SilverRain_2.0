@@ -17,6 +17,10 @@ public class GrenadeProjectile : Projectile
         damage = dmg;
         explosionRadius = size;
 
+        //Scale the gameobject based on size
+        if (size < 1f) size = 1f;
+        transform.localScale = Vector3.one * size;
+
         // Apply modifications
         parentWeapon.HandleProjectileSpawn();
     }
@@ -30,7 +34,7 @@ public class GrenadeProjectile : Projectile
     {
         //Play the explosion VFX
         var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, transform.position, Quaternion.identity);
-        explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey,explosionRadius);
+        explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey, explosionRadius);
 
         //Get all colliders in the explosion radius
         Collider[] hits;
@@ -73,9 +77,7 @@ public class GrenadeProjectile : Projectile
         WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
     }
 
-    public override void OnCreatedPool()
-    {
-    }
+    public override void OnCreatedPool() { }
 
     public override void OnSpawnFromPool()
     {

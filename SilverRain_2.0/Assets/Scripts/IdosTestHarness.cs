@@ -24,5 +24,13 @@ public class IdosTestHarness : MonoBehaviour
             //playerExp.OnLevelUp?.Invoke();
             playerExp.GainExp(playerExp.RequiredExp -  playerExp.CurrentExp);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            WeaponManager.Instance.AddWeapon(WeaponType.Hammer);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            WeaponManager.Instance.AddWeapon(WeaponType.Chakram);
+        }
     }
 }

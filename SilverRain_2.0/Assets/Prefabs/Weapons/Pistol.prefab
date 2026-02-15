@@ -85,7 +85,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4664889763849317599}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -175,7 +175,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5002224817211162561}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -265,7 +265,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5485112445784217726}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -355,7 +355,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6650592632985279317}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -445,7 +445,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6820515782391575958}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -497,7 +497,6 @@ GameObject:
   - component: {fileID: 6862354304134343003}
   - component: {fileID: 2290405111503472805}
   - component: {fileID: 1155752976437145188}
-  - component: {fileID: 6996589554935578726}
   - component: {fileID: -8092103013527875831}
   m_Layer: 0
   m_Name: Pistol
@@ -534,22 +533,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67aeb1fa8ca180f46917a19c7e727034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pistol
-  weaponLevel: 0
-  maxWeaponLevel: 5
-  weaponType: 0
-  projectilePoolKey: PistolProjectile
-  weaponVisual: {fileID: 4664889763849317599}
-  weaponStats: {fileID: 1155752976437145188}
-  weaponUI: {fileID: 6996589554935578726}
-  cam: {fileID: 0}
+  level: 0
+  maxLevel: 5
   isAvailable: 0
-  isAvailableAtStart: 0
-  OnWeaponLevelChanged:
-    m_PersistentCalls:
-      m_Calls: []
+  isAvailableAtStart: 1
+  uiData: {fileID: -8092103013527875831}
   OnAvailabilityChanged:
     m_PersistentCalls:
       m_Calls: []
+  weaponType: 1
+  projectilePoolKey: PistolProjectile
+  weaponVisual: {fileID: 4664889763849317599}
+  weaponStats: {fileID: 1155752976437145188}
+  cam: {fileID: 0}
+  spawnOffsetForward: 1
+  spawnOffsetUp: -0.4
+  spawnOffsetSide: 0
   OnWeaponProjectileSpawn:
     m_PersistentCalls:
       m_Calls: []
@@ -557,8 +556,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   firePoint: {fileID: 2176060859186047120}
-  spawnOffsetForward: 1
-  spawnOffsetUp: -0.4
 --- !u!114 &1155752976437145188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,22 +575,6 @@ MonoBehaviour:
   duration: 0
   projectileSpeed: 0
   size: 0
---- !u!114 &6996589554935578726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7466004224300229527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827dbf0a98ed8e542b07b8c7c1089fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponUI
-  weapon: {fileID: 2290405111503472805}
-  weaponIcon: {fileID: 0}
-  weaponName: Pistol
-  weaponDescription: Placeholder description
 --- !u!114 &-8092103013527875831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Pistol
-  buffLevel: 1
-  buffDescription: shoots
+  buffLevel: 0
+  baseBuffDescription: 
+  finalBuffDescription: 
   buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

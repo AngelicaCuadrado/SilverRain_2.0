@@ -1,18 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-public class Sword : Weapon
+public class Chakram : Weapon
 {
-    [Header("Projectile Settings")]
-    [SerializeField, Tooltip("The center of the sword's rotation")]
+    [Header("References")]
+    [SerializeField, Tooltip("The player's location that the chakram returns to")]
     private Transform playerTrans;
+    [SerializeField, Tooltip("")]
+    private Vector3 firePointOffset;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
     private float spawnAngleOffset = 90f;
 
     private void Update()
     {
         if (cam == null) return;
-        //Make the sword visual follow the camera's position and rotation
+        //Make the chakram visual follow the camera's position and rotation
         Vector3 desiredPos = cam.position + (cam.forward * spawnOffsetForward) + (cam.up * spawnOffsetUp) + (cam.right * spawnOffsetSide);
         transform.position = desiredPos;
         transform.rotation = Quaternion.LookRotation(-cam.forward, Vector3.up);
@@ -48,7 +50,7 @@ public class Sword : Weapon
         playerTrans = PlayerFinder.Instance.Player.transform;
         if (playerTrans == null)
         {
-            Debug.LogError("Sword: Could not find player transform.");
+            Debug.LogError("Chakram: Could not find player transform.");
             return;
         }
         base.OnActivate();
@@ -64,18 +66,18 @@ public class Sword : Weapon
     public override void Attack()
     {
         //Calculate spawn rotation so the projectile faces forward
-        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + spawnAngleOffset, 0f);
+        Quaternion spawnRot = Quaternion.Euler(playerTrans.eulerAngles.x + spawnAngleOffset, 0f, 0f);
         //Instantiate projectile
-        var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position, spawnRot);
+        var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position + firePointOffset, spawnRot);
         //Initialize projectile
-        var proj = projObj.GetComponent<SwordProjectile>();
+        var proj = projObj.GetComponent<ChakramProjectile>();
         if (proj == null)
         {
-            Debug.LogWarning("Sword: The instantiated projectile does not have a SwordProjectile component.");
+            Debug.LogWarning("Chakram: The instantiated projectile does not have a ChakramProjectile component.");
             Destroy(projObj);
             return;
         }
-        proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+        proj.Init(this, playerTrans, cam.forward, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
     }
     #endregion
 }

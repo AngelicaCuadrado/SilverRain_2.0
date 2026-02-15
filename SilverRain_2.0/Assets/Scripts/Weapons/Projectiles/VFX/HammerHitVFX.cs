@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class GrenadeExplosionVFX : MonoBehaviour, IPoolable
+public class HammerHitVFX : MonoBehaviour, IPoolable
 {
     [SerializeField, Tooltip("")]
     private ParticleSystem ps;
-    [SerializeField, Tooltip("")]
-    private float sizeScaler = 3f;
 
     public string PoolKey { get; set; }
 
@@ -19,11 +17,10 @@ public class GrenadeExplosionVFX : MonoBehaviour, IPoolable
     public void Init(string poolKey, float size)
     {
         PoolKey = poolKey;
-        if (ps ==  null) { ps = GetComponent<ParticleSystem>(); }
+        if (ps == null) { ps = GetComponent<ParticleSystem>(); }
         // Scale the explosion VFX
         var main = ps.main;
-        // Ido Isaac - I multiplied by 3 to offset the animation we have being small
-        main.startSize = new ParticleSystem.MinMaxCurve(size * sizeScaler);
+        main.startSize = new ParticleSystem.MinMaxCurve(size);
         ps.Play();
         StartCoroutine(ReturnWhenDone());
     }
