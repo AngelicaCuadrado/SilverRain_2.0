@@ -44,7 +44,7 @@ public class EnemyHealth : MonoBehaviour
 
         bloodSplatter.Play();
 
-        if (!GlobalInvisibilityManager.Instance.isActive)
+        if (!GlobalInvisibilityManager.Instance.IsActive)
         {
             enemy.RevealTimed(5f);
         }

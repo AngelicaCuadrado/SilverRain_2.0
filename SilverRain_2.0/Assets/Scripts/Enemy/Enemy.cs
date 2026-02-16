@@ -32,9 +32,9 @@ public class Enemy : MonoBehaviour, IPoolable
     private void Initialize()
     {
         Hide();
-        if (GlobalInvisibilityManager.Instance.isActive)
+        if (GlobalInvisibilityManager.Instance.IsActive)
         {
-            float remaining = GlobalInvisibilityManager.Instance.invisibilityTimer;
+            float remaining = GlobalInvisibilityManager.Instance.InvisibilityTimer;
             RevealTimed(remaining);
         }
     }
@@ -69,13 +69,13 @@ public class Enemy : MonoBehaviour, IPoolable
     private void OnEnable()
     {
         //Subscribe to reveal all event
-        EnemyEvents.OnGlobalReveal += RevealTimed;
+        GlobalInvisibilityManager.Instance.OnGlobalReveal.AddListener(RevealTimed);
     }
 
     private void OnDisable()
     {
         //Unsubscribe to reveal all event
-        EnemyEvents.OnGlobalReveal -= RevealTimed;
+        GlobalInvisibilityManager.Instance.OnGlobalReveal.RemoveListener(RevealTimed);
     }
 
     private void Update()

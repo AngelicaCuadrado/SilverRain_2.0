@@ -42,11 +42,6 @@ public class BuffCardManager : MonoBehaviour
         //Singleton pattern implementation
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-
-        //Subscribe to availability change events for weapons, temporary upgrades, and modifications
-        StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
-        WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
-        //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
     }
     private void Start()
     {
@@ -62,6 +57,11 @@ public class BuffCardManager : MonoBehaviour
         }
         if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(DisplayBuffCards); }
 
+        //Subscribe to availability change events for weapons, temporary upgrades, and modifications
+        StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
+        WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
+        //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
+        
         //Create maximum amount of buff cards
         // for (int i = 0; i < maxBuffCards; i++)
         // {
