@@ -22,7 +22,7 @@ public class BloodSplatterReveal : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy != null && !GlobalInvisibilityManager.Instance.isActive) 
+        if (enemy != null && !GlobalInvisibilityManager.Instance.IsActive) 
         {
            enemy.RevealTimed(5f);
         }
