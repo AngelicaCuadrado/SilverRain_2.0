@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Look Settings")]
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private float mouseSensitivity = 2f;
+    [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private float rotationSmoothSpeed = 10f;
     [SerializeField] private float minVerticalAngle = -90f;
     [SerializeField] private float maxVerticalAngle = 90f;
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody _rb;
     private float _xRotation;
+    private float _yRotation;
     private bool _canMove = true;
     // private Vector2 movementInput;
     // private Vector2 lookInput;
@@ -62,6 +63,8 @@ public class PlayerController : MonoBehaviour
             if (cam != null) 
                 cameraTransform = cam.transform;
         }
+        
+        _yRotation = transform.eulerAngles.y;
 
         InputManager.Instance.OnJump.AddListener(OnJumpInput);
         InputManager.Instance.OnPause.AddListener(OnPauseInput);
@@ -154,23 +157,21 @@ public class PlayerController : MonoBehaviour
     {
         var lookInput = InputManager.Instance?.Look ?? Vector2.zero;
 
-        if (lookInput.sqrMagnitude < 0.001f) return;
-
         // Horizontal rotation (rotate player body)
-        transform.Rotate(Vector3.up, lookInput.x * mouseSensitivity);
+        //transform.Rotate(Vector3.up, lookInput.x * mouseSensitivity);
+        _yRotation += lookInput.x * mouseSensitivity;
 
         // Vertical rotation (rotate camera)
         _xRotation -= lookInput.y * mouseSensitivity;
         _xRotation = Mathf.Clamp(_xRotation, minVerticalAngle, maxVerticalAngle);
 
+        // Set player horizontal rotation
+        transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
+        
+        // set camera vertical rotation
         if (cameraTransform)
         {
-            var targetRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-            cameraTransform.localRotation = Quaternion.Slerp(
-                cameraTransform.localRotation,
-                targetRotation,
-                Time.deltaTime * rotationSmoothSpeed
-            );
+            cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         }
     }
 

@@ -11,7 +11,7 @@ public class Chakram : Weapon
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
     private float spawnAngleOffset = 90f;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the chakram visual follow the camera's position and rotation
