@@ -13,18 +13,20 @@ public class BuffCardManager : MonoBehaviour
     [SerializeField, Min(1), Tooltip("The amount of choices that will be offered on level up")]
     private int choiceAmount = 3;
     
-    // [Header("Buff Card Settings")]
-    // [SerializeField, Min(1), Tooltip("The maximum amount of buff cards, used to create them in 'Start'")]
-    // private int maxBuffCards = 5;
-    // [SerializeField, Tooltip("A list of all buff cards")]
-    // private List<BuffCard> buffCards = new();
-    // [SerializeField, Tooltip("Prefab for the buff card UI element")]
-    // private GameObject buffCardPrefab;
-    // [SerializeField, Tooltip("Parent where the buff card will spawn")]
-    // private Transform buffCardParent;
+    [Header("Reroll and Ban settings")]
+    [SerializeField, Tooltip("The maximum amount of times the player can reroll choices on level up")]
+    private int startingRerollAmount;
+    [SerializeField, Tooltip("The amount of rerolls currently available to the player")]
+    private int rerollsAvailable;
+    [SerializeField, Tooltip("The maximum amount of times the player can ban choices on level up")]
+    private int startingBanAmount;
+    [SerializeField, Tooltip("The amount of bans currently available to the player")]
+    private int bansAvailable;
+
+    [Header("References")]
     [SerializeField, Tooltip("PlayerExperience component used to subscribe to LevelUp event")]
     private PlayerExperience playerExperience;
-    
+
     [Header("UI")]
     [SerializeField, Tooltip("BuffCardsWindow prefab to push via UIManager")]
     private UIWindow buffCardsWindowPrefab;
@@ -35,6 +37,16 @@ public class BuffCardManager : MonoBehaviour
     {
         get { return choiceAmount; }
         set { choiceAmount = Mathf.Max(value, 1); }
+    }
+    public int RerollsAvailable
+    {
+        get { return rerollsAvailable; }
+        set { rerollsAvailable = Mathf.Clamp(value, 0, maxRerollAmount); }
+    }
+    public int BansAvailable
+    {
+        get { return bansAvailable; }
+        set { bansAvailable = Mathf.Clamp(value, 0, maxBandAmount); }
     }
 
     private void Awake()
