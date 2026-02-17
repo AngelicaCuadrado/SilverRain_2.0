@@ -245,14 +245,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cameraTransform: {fileID: 4378820671996339642}
-  mouseSensitivity: 2
+  mouseSensitivity: 1
   rotationSmoothSpeed: 15
   minVerticalAngle: -85
   maxVerticalAngle: 90
   coyoteTime: 0.15
   jumpBufferTime: 0.1
   jumpSfxId: sfx_jump
-  _isGrounded: 0
 --- !u!114 &6304079590716785013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 10000
   currentHealth: 0
-  hurtSound: {fileID: 0}
+  onPlayerHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -286,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerExperience
   currentLevel: 1
   currentExp: 0
-  requriedExp: 100
+  requiredExp: 100
   expGrowthRate: 1.5
   OnExpChanged:
     m_PersistentCalls:

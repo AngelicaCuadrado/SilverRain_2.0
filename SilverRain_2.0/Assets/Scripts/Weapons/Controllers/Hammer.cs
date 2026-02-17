@@ -11,7 +11,7 @@ public class Hammer : Weapon
     [SerializeField, Tooltip("The position from which the hammer projectile will spawn")]
     private Transform firePoint;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the hammer visual follow the camera's position and rotation

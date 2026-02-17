@@ -8,7 +8,7 @@ public class Pistol : Weapon
     [SerializeField, Tooltip("The position from which bullets will spawn")]
     private Transform firePoint;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the pistol visual follow the camera's position and rotation
