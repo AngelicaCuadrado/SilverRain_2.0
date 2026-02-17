@@ -20,6 +20,7 @@ public abstract class Pickup : MonoBehaviour, IPoolable
     protected float spinSpeed = 150f;
 
     public string PoolKey { get { return poolKey; } set { poolKey = value; } }
+    public int LocationIndex { get { return locationIndex; } set { locationIndex = value; } }
 
     public virtual void Update()
     {

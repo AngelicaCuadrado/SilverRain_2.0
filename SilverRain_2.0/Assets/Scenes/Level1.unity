@@ -1499,11 +1499,15 @@ MonoBehaviour:
   pools:
   - key: SilverIodide
     prefab: {fileID: 543164799779643779, guid: 4ea90e450679a6a4894c4b1707971c4b, type: 3}
-    initialSize: 5
+    initialSize: 3
     isExpandable: 1
   - key: HealthPotion
     prefab: {fileID: 755965317808234906, guid: 9e582d89d0ecfc1458295f08ee862e53, type: 3}
-    initialSize: 5
+    initialSize: 3
+    isExpandable: 1
+  - key: InvincibilityShield
+    prefab: {fileID: 5819934601621374388, guid: 3177aaa8831398542ab6fd40506ddc47, type: 3}
+    initialSize: 3
     isExpandable: 1
 --- !u!114 &1491406033
 MonoBehaviour:
@@ -1520,6 +1524,7 @@ MonoBehaviour:
   allPickupPrefabs:
   - {fileID: 543164799779643779, guid: 4ea90e450679a6a4894c4b1707971c4b, type: 3}
   - {fileID: 755965317808234906, guid: 9e582d89d0ecfc1458295f08ee862e53, type: 3}
+  - {fileID: 5819934601621374388, guid: 3177aaa8831398542ab6fd40506ddc47, type: 3}
   spawnLocations:
   - {fileID: 706129104}
   - {fileID: 258440060}

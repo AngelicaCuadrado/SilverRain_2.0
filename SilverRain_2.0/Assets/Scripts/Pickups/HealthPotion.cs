@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HealthPotion : Pickup
 {
+    [Header("Health Potion Settings")]
     [SerializeField,Tooltip("The amount of health the potion will restore.")]
     private float healAmount = 50f;
 

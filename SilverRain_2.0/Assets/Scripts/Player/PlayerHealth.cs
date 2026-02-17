@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     public static event Action<bool> onDie;
 
     public bool isInvincible = false;
+    private float invincibilityTimer = 0f;
 
     private object _pauseToken;
     
@@ -24,6 +25,24 @@ public class PlayerHealth : MonoBehaviour
         //maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
         currentHealth = maxHealth;
         //audioSource = gameObject.AddComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (isInvincible)
+        {
+            invincibilityTimer -= Time.deltaTime;
+            if (invincibilityTimer <= 0f)
+            {
+                isInvincible = false;
+            }
+        }
+    }
+
+    public void ActivateInvincibility(float duration)
+    {
+        isInvincible = true;
+        invincibilityTimer = duration;
     }
 
     public void TakeDamage(float amount)
