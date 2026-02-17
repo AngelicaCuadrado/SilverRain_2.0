@@ -41,12 +41,12 @@ public class BuffCardManager : MonoBehaviour
     public int RerollsAvailable
     {
         get { return rerollsAvailable; }
-        set { rerollsAvailable = Mathf.Clamp(value, 0, maxRerollAmount); }
+        set { rerollsAvailable = Mathf.Clamp(value, 0, startingRerollAmount); }
     }
     public int BansAvailable
     {
         get { return bansAvailable; }
-        set { bansAvailable = Mathf.Clamp(value, 0, maxBandAmount); }
+        set { bansAvailable = Mathf.Clamp(value, 0, startingBanAmount); }
     }
 
     private void Awake()
