@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPoolable
@@ -16,17 +17,33 @@ public class Enemy : MonoBehaviour, IPoolable
     // ObjectPool References
     public ObjectPooler pooler;
     public string PoolKey { get; set; }
+    
+    // Stage VFX
+    [Header("Stage VFX")]
+    [SerializeField] private ParticleSystem stageParticlePrefab;
+    private ParticleSystem _stageParticleInstance;
+    private MaterialPropertyBlock _mpb;
+    private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
 
     private void Awake()
     {
         health = GetComponent<EnemyHealth>();
         controller = GetComponent<EnemyController>();
         renderers = GetComponentsInChildren<Renderer>();
+        _mpb = new MaterialPropertyBlock();
+
+        if (stageParticlePrefab != null)
+        {
+            _stageParticleInstance = Instantiate(stageParticlePrefab, transform);
+            _stageParticleInstance.Stop();
+        }
     }
 
     private void Start()
     {
         Initialize();
+        if (StageManager.Instance != null)
+            ApplyStageVFX(StageManager.Instance.CurrentStage);
     }
 
     private void Initialize()
@@ -49,6 +66,8 @@ public class Enemy : MonoBehaviour, IPoolable
     {
         health?.ResetHealth();
         Initialize();
+        if (StageManager.Instance != null)
+            ApplyStageVFX(StageManager.Instance.CurrentStage);
     }
 
     public void OnReturnToPool()
@@ -70,12 +89,16 @@ public class Enemy : MonoBehaviour, IPoolable
     {
         //Subscribe to reveal all event
         GlobalInvisibilityManager.Instance.OnGlobalReveal.AddListener(RevealTimed);
+        if (StageManager.Instance != null)
+            StageManager.Instance.OnStageChanged.AddListener(ApplyStageVFX);
     }
 
     private void OnDisable()
     {
         //Unsubscribe to reveal all event
         GlobalInvisibilityManager.Instance.OnGlobalReveal.RemoveListener(RevealTimed);
+        if (StageManager.Instance != null)
+            StageManager.Instance.OnStageChanged.RemoveListener(ApplyStageVFX);
     }
 
     private void Update()
@@ -136,6 +159,34 @@ public class Enemy : MonoBehaviour, IPoolable
     public int RewardScore()
     {
         return scoreValue;
+    }
+
+    private void ApplyStageVFX(int stage)
+    {
+        if (StageManager.Instance == null) return;
+
+        Color emissionColor = StageManager.Instance.GetStageEmissionColor();
+        _mpb.SetColor(EmissionColorID, emissionColor);
+        foreach (var r in renderers)
+        {
+            r.SetPropertyBlock(_mpb);
+        }
+
+        if (_stageParticleInstance != null)
+        {
+            float rate = StageManager.Instance.GetStageParticleRate();
+            var emission =  _stageParticleInstance.emission;
+            emission.rateOverTime = rate;
+
+            if (rate > 0f)
+            {
+                if (!_stageParticleInstance.isPlaying) _stageParticleInstance.Play();
+            }
+            else
+            {
+                _stageParticleInstance.Stop();
+            }
+        }
     }
     
     #if UNITY_EDITOR

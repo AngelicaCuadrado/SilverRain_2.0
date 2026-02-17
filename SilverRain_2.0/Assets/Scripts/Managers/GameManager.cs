@@ -17,12 +17,19 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private MainMenuWindow mainMenuWindowPrefab;
     [SerializeField] private HUDWindow hudWindowPrefab;
-
+    
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        // Initialize state events
+        OnLevelStart ??= new UnityEvent();
+        OnLevelWon ??= new UnityEvent();
+        OnLevelLost ??= new UnityEvent();
+        OnGamePaused ??= new UnityEvent();
+        OnGameUnpaused ??= new UnityEvent();
 
         //Subscribe to events
         SceneManager.sceneLoaded += OnSceneLoaded;
