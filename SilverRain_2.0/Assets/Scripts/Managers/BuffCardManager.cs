@@ -31,6 +31,9 @@ public class BuffCardManager : MonoBehaviour
     [SerializeField, Tooltip("BuffCardsWindow prefab to push via UIManager")]
     private UIWindow buffCardsWindowPrefab;
 
+    private int pendingLevelUp;
+    private bool isProcessingLevelUp;
+
     //Properties
     public List<TemporaryBuff> CurrentChoices => currentChoices;
     public int ChoiceAmount
@@ -67,83 +70,71 @@ public class BuffCardManager : MonoBehaviour
                 playerExperience = playerXP;
             }
         }
-        if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(DisplayBuffCards); }
+        if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(AddToLevelUpQueue); }
 
         //Subscribe to availability change events for weapons, temporary upgrades, and modifications
         StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
         WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
+        if (StatManager.Instance == null) { Debug.Log("BuffCardManager - StatManager instance is null"); }
         //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
-        
-        //Create maximum amount of buff cards
-        // for (int i = 0; i < maxBuffCards; i++)
-        // {
-        //     GameObject buffObj = Instantiate(buffCardPrefab, buffCardParent);
-        //     BuffCard card = buffObj.GetComponent<BuffCard>();
-        //
-        //     buffCards.Add(card);
-        //     buffObj.SetActive(false);
-        // }
+
+        InitializeAvailableChoices();
     }
 
+    private void AddToLevelUpQueue()
+    {
+        pendingLevelUp++;
+
+    }
+
+    private void Update()
+    {
+        if (pendingLevelUp > 0 && !isProcessingLevelUp)
+        {
+            DisplayBuffCards();
+            
+        }
+    }
+
+    private void InitializeAvailableChoices()
+    {
+        foreach (var weapon in WeaponManager.Instance.AllWeapons)
+        {
+            if (weapon.Value.IsAvailable) { availableChoices.Add(weapon.Value); }
+        }
+        foreach (var upgrade in StatManager.Instance.AllTempUpgrades)
+        {
+            if (upgrade.Value.IsAvailable) { availableChoices.Add(upgrade.Value); }
+        }
+        //foreach (var modification in ModificationManager.Instance.AllModifications)
+        //{
+        //    if (modification.Value.IsAvailable) { availableChoices.Add(modification.Value); }
+        //}
+    }
     private void DisplayBuffCards()
     {
+        isProcessingLevelUp = true;
         // Initialize choices lists
         currentChoices.Clear();
         List<TemporaryBuff> choicePool = new(availableChoices);
 
         // Ensure that there are enough available choices for each choice amount
         int buffAmount = Mathf.Min(choiceAmount, choicePool.Count);
-
         //------------------------------------------------------------------------------------------------------------------
         // If there are no available choices left when you level up we may want to reward
         // the player with something else, like score, full heal, reveal all enemies, etc.
         if (buffAmount <= 0) { return; }
         //------------------------------------------------------------------------------------------------------------------
-
-        // Pause the game
-        //GameManager.Instance.PauseGame();
-        // _pauseToken = PauseManager.Instance.Acquire("BuffCard");
-        // _inputToken = InputManager.Instance.Acquire(InputMode.UI, "BuffCard");
         
         for (int i = 0; i < buffAmount; i++)
         {
             // Randomly choose an ITemporary
             TemporaryBuff choice = PickRandomChoice(choicePool);
             currentChoices.Add(choice);
-
-            // Setup and activate the buff card
-            // buffCards[i].SetupCard(choice);
-            // buffCards[i].gameObject.SetActive(true);
         }
 
-        // Hide unused cards
-        // for (int i = choiceAmount; i < buffCards.Count; i++)
-        // {
-        //     buffCards[i].gameObject.SetActive(false);
-        // }
         UIManager.Instance.Push(buffCardsWindowPrefab);
     }
-    // private void HideBuffCards()
-    // {
-    //     // Unpause the game
-    //     //GameManager.Instance.UnpauseGame();
-    //     if (_pauseToken != null)
-    //     {
-    //         PauseManager.Instance.Release(_pauseToken);
-    //         _pauseToken = null;
-    //     }
-    //
-    //     if (_inputToken != null)
-    //     {
-    //         InputManager.Instance.Release(_inputToken);
-    //         _inputToken = null;
-    //     }
-    //     
-    //     foreach (var card in buffCards)
-    //     {
-    //         card.gameObject.SetActive(false);
-    //     }
-    // }
     
     private TemporaryBuff PickRandomChoice(List<TemporaryBuff> pool)
     {
@@ -174,8 +165,9 @@ public class BuffCardManager : MonoBehaviour
                 break;
         }
 
-        //HideBuffCards();
         UIManager.Instance.Pop();
+        isProcessingLevelUp = false;
+        pendingLevelUp--;
     }
 
 
