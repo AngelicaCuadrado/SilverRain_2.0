@@ -49,6 +49,10 @@ public class StatManager : MonoBehaviour
     [SerializeField, Tooltip("")]
     private float healthRegen;
 
+    // Properties
+    public Dictionary<StatType, PermanentUpgrade> AllPermUpgrades => allPermUpgrades;
+    public Dictionary<StatType, TemporaryUpgrade> AllTempUpgrades => allTempUpgrades;
+
     private void Awake()
     {
         if (Instance == null)
