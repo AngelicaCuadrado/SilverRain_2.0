@@ -690,11 +690,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuffCardManager
   currentChoices: []
   choiceAmount: 3
-  startingRerollAmount: 0
+  startingRerollAmount: 20
   rerollsAvailable: 0
-  startingBanAmount: 0
+  startingBanAmount: 20
   bansAvailable: 0
-  playerExperience: {fileID: 135736915}
   buffCardsWindowPrefab: {fileID: 3913967386060442326, guid: f90c1f5b9b696c346ac9bb59c3343399, type: 3}
 --- !u!4 &671726898
 Transform:

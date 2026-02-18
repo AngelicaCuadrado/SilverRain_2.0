@@ -71,4 +71,4 @@ MonoBehaviour:
   buffLevel: 0
   baseBuffDescription: Increases movement speed
   finalBuffDescription: 
-  buffIcon: {fileID: 0}
+  buffIcon: {fileID: 21300000, guid: 6960c6bd5088317429f7e0e033bee813, type: 3}

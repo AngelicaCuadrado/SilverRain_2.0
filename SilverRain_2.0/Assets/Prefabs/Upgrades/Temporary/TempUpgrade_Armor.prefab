@@ -71,4 +71,4 @@ MonoBehaviour:
   buffLevel: 0
   baseBuffDescription: Reduces damage taken
   finalBuffDescription: 
-  buffIcon: {fileID: 0}
+  buffIcon: {fileID: 21300000, guid: f6b8b85cbdc82ce439a41ae3d56d57ee, type: 3}
