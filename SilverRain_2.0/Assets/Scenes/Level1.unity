@@ -4300,7 +4300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.34
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8583,7 +8583,7 @@ Transform:
   m_GameObject: {fileID: 258440059}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.45, y: 0, z: -1.88}
+  m_LocalPosition: {x: -3.45, y: 1, z: -1.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12094,7 +12094,7 @@ Transform:
   m_GameObject: {fileID: 362596819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.7, y: 0, z: -0.6}
+  m_LocalPosition: {x: 6.7, y: 1, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15648,7 +15648,7 @@ Transform:
   m_GameObject: {fileID: 471055418}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.1, y: 0, z: -4.37}
+  m_LocalPosition: {x: 3.1, y: 1, z: -4.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21928,11 +21928,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuffCardManager
   currentChoices: []
   choiceAmount: 3
-  startingRerollAmount: 0
+  startingRerollAmount: 20
   rerollsAvailable: 0
-  startingBanAmount: 0
+  startingBanAmount: 20
   bansAvailable: 0
-  playerExperience: {fileID: 135736915}
   buffCardsWindowPrefab: {fileID: 3913967386060442326, guid: f90c1f5b9b696c346ac9bb59c3343399, type: 3}
 --- !u!4 &671726898
 Transform:
@@ -40879,7 +40878,7 @@ Transform:
   m_GameObject: {fileID: 1194435481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.73, y: 0, z: 3.24}
+  m_LocalPosition: {x: 2.73, y: 1, z: 3.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62755,7 +62754,7 @@ Transform:
   m_GameObject: {fileID: 1827072010}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.36, y: 0, z: 3.41}
+  m_LocalPosition: {x: -4.36, y: 1, z: 3.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72316,6 +72315,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5596106329357065321, guid: 00f9e0202cdba85419b090485e892798, type: 3}
+      propertyPath: initialWeapon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6941092582187873988, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: m_Name
       value: WeaponManager
@@ -72394,6 +72397,7 @@ SceneRoots:
   - {fileID: 1118176356}
   - {fileID: 671726898}
   - {fileID: 4838419213209670889}
+  - {fileID: 2374046901245661210}
   - {fileID: 1430284582}
   - {fileID: 685716700}
   - {fileID: 1002890397}

@@ -14,7 +14,7 @@ public class Grenade : Weapon
     [SerializeField, Tooltip("The position from which grenades will spawn")]
     private Transform firePoint;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the grenade launcher follow the camera's position and rotation

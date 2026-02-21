@@ -20,6 +20,12 @@ public class BuffCard : MonoBehaviour
     {
         BuffCardManager.Instance.ChooseBuffCard(assignedBuff);
     }
+
+    public void OnCardBanned()
+    {
+        BuffCardManager.Instance.BanChoice(assignedBuff);
+    }
+
     public void SetupCard(TemporaryBuff buffToAssign)
     {
         //Assign the buff and get the UI data

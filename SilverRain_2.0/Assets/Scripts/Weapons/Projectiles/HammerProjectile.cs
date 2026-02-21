@@ -13,7 +13,6 @@ public class HammerProjectile : Projectile
     protected float spawnOffsetUp;
     [SerializeField, Tooltip("The camera position that the hammer projectile follows")]
     private Transform cam;
-    [Space]
 
     [Header("Hit Settings")]
     [SerializeField, Tooltip("The position from which the hammer sphere casts to check for hits")]
@@ -22,7 +21,6 @@ public class HammerProjectile : Projectile
     private float hitRadius;
     [SerializeField, Tooltip("What layer will be hit by the hammer")]
     private LayerMask hitMask;
-    [Space]
 
     [Header("Swing Settings")]
     [Tooltip("The current state of the swing, true = down")]
@@ -31,10 +29,9 @@ public class HammerProjectile : Projectile
     private float currentRotation;
     [SerializeField, Tooltip("The speed that the hammer swings up and down")]
     private float swingSpeed = 180f;
-    //[Space]
 
-    //[SerializeField, Tooltip("The key used to access the pool containing the hit VFX")]
-    //private string hitVFXPoolKey;
+    [SerializeField, Tooltip("The key used to access the pool containing the hit VFX")]
+    private string hitVFXPoolKey;
 
 
 
@@ -150,7 +147,6 @@ public class HammerProjectile : Projectile
             StopCoroutine(lifeCoroutine);
             lifeCoroutine = null;
         }
-        parentWeapon = null;
     }
 
     private void OnDrawGizmosSelected()

@@ -106,7 +106,7 @@ MonoBehaviour:
   buffLevel: 0
   baseBuffDescription: 
   finalBuffDescription: 
-  buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  buffIcon: {fileID: 21300000, guid: d31aa8412a4d374458c912d11686642a, type: 3}
 --- !u!1001 &4006536520372888409
 PrefabInstance:
   m_ObjectHideFlags: 0
