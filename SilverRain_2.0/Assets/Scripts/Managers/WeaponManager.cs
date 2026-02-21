@@ -68,13 +68,16 @@ public class WeaponManager : MonoBehaviour
         // Initialize current weapons dictionary
         currentWeapons = new Dictionary<WeaponType, Weapon>();
 
+    }
+
+    private void Start()
+    {
         // Add the initial weapon
         if (initialWeapon != WeaponType.None)
         {
             AddWeapon(initialWeapon);
         }
     }
-
     public void AddWeapon(WeaponType type)
     {
         if (type == WeaponType.None) { return; }

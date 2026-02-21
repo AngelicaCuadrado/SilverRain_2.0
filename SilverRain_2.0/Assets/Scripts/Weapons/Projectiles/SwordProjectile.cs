@@ -90,6 +90,5 @@ public class SwordProjectile : Projectile
         }
 
         angle = 0f;
-        parentWeapon = null;
     }
 }

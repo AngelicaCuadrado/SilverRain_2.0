@@ -111,8 +111,6 @@ public class ChakramProjectile : Projectile, IPoolable
             StopCoroutine(lifeCoroutine);
             lifeCoroutine = null;
         }
-
-        parentWeapon = null;
         returning = false;
     }
 }

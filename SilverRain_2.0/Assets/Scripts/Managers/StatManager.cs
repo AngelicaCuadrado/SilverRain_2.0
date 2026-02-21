@@ -188,8 +188,8 @@ public class StatManager : MonoBehaviour
         if (!currentTempUpgrades.ContainsKey(type))
         {
             currentTempUpgrades.Add(type, allTempUpgrades[type]);
-            Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
-            Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
+            //Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
+            //Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
         }
 
         currentTempUpgrades[type].LevelUp();

@@ -96,7 +96,6 @@ public class GrenadeProjectile : Projectile
             StopCoroutine(lifeCoroutine);
             lifeCoroutine = null;
         }
-        parentWeapon = null;
     }
 
     private void OnDrawGizmosSelected()
