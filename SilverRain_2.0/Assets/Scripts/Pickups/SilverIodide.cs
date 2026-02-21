@@ -8,8 +8,7 @@ public class SilverIodide : Pickup
 
     public override void OnPickup()
     {
-        GlobalInvisibilityManager.Instance.OnGlobalReveal?.Invoke(revealTime);
-        GlobalInvisibilityManager.Instance.SetTimer(revealTime);
+        GlobalInvisibilityManager.Instance.ActivateInvisibility(revealTime);
         base.OnPickup();
     }
 }
