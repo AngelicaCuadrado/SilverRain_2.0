@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [FormerlySerializedAs("maxHealth")]
     [Header("Health")]
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int baseHealth = 100;
     [SerializeField] private int currentHealth;
     [SerializeField] private ParticleSystem bloodSplatterPrefab;
     [SerializeField] private string sfxID;
@@ -19,13 +21,16 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        float multiplier = (StageManager.Instance != null) ? StageManager.Instance.GetHealthMultiplier() : 1f;
+        currentHealth = Mathf.RoundToInt(baseHealth * multiplier);
+        
         enemy = GetComponent<Enemy>();
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<EnemyController>();
         player = FindFirstObjectByType<PlayerExperience>();
         //audioSource = gameObject.AddComponent<AudioSource>();
     }
+    
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -54,7 +59,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void ResetHealth()
     {
-        currentHealth = maxHealth;
+        float multiplier = (StageManager.Instance != null) ? StageManager.Instance.GetHealthMultiplier() : 1f;
+        currentHealth = Mathf.RoundToInt(baseHealth * multiplier);
+        
         foreach (var col in GetComponentsInChildren<Collider>())
         {
             col.enabled = true;
