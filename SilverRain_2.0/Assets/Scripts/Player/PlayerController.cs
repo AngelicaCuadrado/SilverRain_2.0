@@ -280,15 +280,15 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(rayOrigin, Vector3.down * (groundCheckDistance + 0.1f));
     }
 
-    private void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 300, 150));
-        GUILayout.Label($"Position Y: {transform.position.y:F3}");
-        GUILayout.Label($"Velocity Y: {(_rb != null ? _rb.linearVelocity.y : 0):F3}");
-        GUILayout.Label($"Grounded: {_isGrounded}");
-        GUILayout.Label($"Can Jump: {CanJump()}");
-        GUILayout.Label($"Coyote Time Left: {Mathf.Max(0, coyoteTime - (Time.time - _lastGroundedTime)):F2}s");
-        GUILayout.EndArea();
-    }
+    //private void OnGUI()
+    //{
+    //    GUILayout.BeginArea(new Rect(10, 10, 300, 150));
+    //    GUILayout.Label($"Position Y: {transform.position.y:F3}");
+    //    GUILayout.Label($"Velocity Y: {(_rb != null ? _rb.linearVelocity.y : 0):F3}");
+    //    GUILayout.Label($"Grounded: {_isGrounded}");
+    //    GUILayout.Label($"Can Jump: {CanJump()}");
+    //    GUILayout.Label($"Coyote Time Left: {Mathf.Max(0, coyoteTime - (Time.time - _lastGroundedTime)):F2}s");
+    //    GUILayout.EndArea();
+    //}
 #endif
 }

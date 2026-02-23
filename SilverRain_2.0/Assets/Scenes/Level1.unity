@@ -4004,7 +4004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlobalInvisibilityManager
   invisibilityTimer: 0
-  isActive: 1
+  isActive: 0
   OnGlobalReveal:
     m_PersistentCalls:
       m_Calls: []
@@ -4950,6 +4950,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 057ee56c9112a9e4383608c8ded669cf, type: 3}
+--- !u!1001 &162828484
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.96047
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.57193
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.11748
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957391505545846434, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621879135702085268, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
+      propertyPath: m_Name
+      value: '@UIManager'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a62cc0106ca4d8c479dfb8eb38df8d55, type: 3}
 --- !u!4 &162907602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1445370697798738481, guid: c9bed54e384ab0b44b3a17143cb343d6, type: 3}
@@ -33114,7 +33171,7 @@ MonoBehaviour:
   spawnArea: {fileID: 359638761}
   minDistance: 5
   maxDistance: 30
-  spawnDelay: 1
+  spawnDelay: 5
   maxAttemptsPerSpawn: 20
   spawnCheckRadius: 0.5
   blockingLayers:
@@ -47621,10 +47678,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2055901961011960990, guid: 472ebb669b880cd4ba580eb6515ad83e, type: 3}
-      propertyPath: ShapeModule.m_Scale.x
-      value: 25.56
-      objectReference: {fileID: 0}
     - target: {fileID: 2258854987701357354, guid: 472ebb669b880cd4ba580eb6515ad83e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 71.17794
@@ -61991,6 +62044,7 @@ SceneRoots:
   - {fileID: 1430284582}
   - {fileID: 1002890397}
   - {fileID: 2133767562}
+  - {fileID: 162828484}
   - {fileID: 358472285}
   - {fileID: 151505630}
   - {fileID: 1491406034}

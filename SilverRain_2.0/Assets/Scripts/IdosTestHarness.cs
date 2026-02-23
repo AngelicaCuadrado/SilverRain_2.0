@@ -32,5 +32,9 @@ public class IdosTestHarness : MonoBehaviour
         {
             WeaponManager.Instance.AddWeapon(WeaponType.Chakram);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            GlobalInvisibilityManager.Instance.ActivateInvisibility(10f);
+        }
     }
 }
