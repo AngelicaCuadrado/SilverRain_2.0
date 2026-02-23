@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4765163495429120666
+--- !u!1 &6893354567848116588
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3431489376452734991}
-  - component: {fileID: 9044101721345836353}
+  - component: {fileID: 3722907887053462922}
+  - component: {fileID: 1449229070775479783}
   m_Layer: 0
-  m_Name: PermUpgrade_Cooldown
+  m_Name: GoldManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3431489376452734991
+--- !u!4 &3722907887053462922
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4765163495429120666}
+  m_GameObject: {fileID: 6893354567848116588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25522, y: -0, z: -0.33682}
+  m_LocalPosition: {x: 2.09959, y: 0, z: 2.09958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9044101721345836353
+--- !u!114 &1449229070775479783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4765163495429120666}
+  m_GameObject: {fileID: 6893354567848116588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f11059c564b3de44bfc21977b927119, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgrade
-  level: 0
-  maxLevel: 10
-  data: {fileID: 11400000, guid: 3bbf1f8fb380a954bb90ddbe3c8b271c, type: 2}
-  statType: 1
-  description: 
-  OnPermanentUpgradeLevelChanged:
-    m_PersistentCalls:
-      m_Calls: []
+  m_EditorClassIdentifier: Assembly-CSharp::GoldManager
+  currentGold: 10000

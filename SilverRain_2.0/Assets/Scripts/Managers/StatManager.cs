@@ -270,4 +270,14 @@ public class StatManager : MonoBehaviour
     {
         OnTempUpgradeAvailabilityChange?.Invoke(tempUpgrade, isAvailable);
     }
+
+    public PermanentUpgrade GetPermanentUpgrade(StatType type)
+    {
+        if (allPermUpgrades.TryGetValue(type, out PermanentUpgrade upgrade))
+        {
+            return upgrade;
+        }
+        Debug.LogWarning($"StatManager Cannot find PermanentUpgrade is {type} !");
+        return null;
+    }
 }

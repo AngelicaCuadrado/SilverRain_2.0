@@ -8,7 +8,7 @@ public class PermanentUpgrade : MonoBehaviour, IUpgradeable
     [SerializeField, Tooltip("")]
     private int level;
     [SerializeField, Tooltip("")]
-    private int maxLevel;
+    private int maxLevel = 10;
     [Space]
 
     [Header("References")]
@@ -24,6 +24,12 @@ public class PermanentUpgrade : MonoBehaviour, IUpgradeable
 
     // Events
     public UnityEvent<StatType> OnPermanentUpgradeLevelChanged;
+
+    //Getters
+    public int Level => level;
+    public int MaxLevel => maxLevel;
+    public StatType Type => statType;
+    public string Description => description;
 
     public void LevelUp()
     {
@@ -55,5 +61,11 @@ public class PermanentUpgrade : MonoBehaviour, IUpgradeable
     public float Calculate()
     {
         return data.BaseAmount + (data.AmountPerLevel * level);
+    }
+
+    public float GetNextLevelCost()
+    {
+        if (level >= maxLevel) return 0f;
+        return data.Cost + (data.CostIncreasePerLevel * level);
     }
 }
