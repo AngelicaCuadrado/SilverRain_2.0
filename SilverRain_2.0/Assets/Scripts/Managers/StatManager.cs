@@ -83,6 +83,11 @@ public class StatManager : MonoBehaviour
             }
         }
         maxTempUpgrades = 3;
+
+        foreach (var statType in allPermUpgrades.Keys)
+        {
+            UpdatePermStats(statType);
+        }
     }
 
     public float GetStat(StatType type)
