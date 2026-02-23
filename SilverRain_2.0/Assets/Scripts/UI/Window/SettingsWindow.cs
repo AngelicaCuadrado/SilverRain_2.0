@@ -63,10 +63,12 @@ public class SettingsWindow : UIWindow
         private void OnEnable()
         {
             Initialize();
+            UIManager.Instance.Hide("HUD");
         }
 
         private void OnDisable()
         {
+            UIManager.Instance.UnHide("HUD");
             Cleanup();
         }
 
