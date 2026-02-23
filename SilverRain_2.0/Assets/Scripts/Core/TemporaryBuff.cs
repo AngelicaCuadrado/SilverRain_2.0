@@ -47,11 +47,6 @@ public abstract class TemporaryBuff : MonoBehaviour, IUpgradeable
         level++;
         //Update UI
         UpdateDescription();
-        //Check if we've reached max level
-        if (level >= maxLevel)
-        {
-            SetAvailable(false);
-        }
     }
 
     public virtual void ResetLevels()
@@ -61,7 +56,7 @@ public abstract class TemporaryBuff : MonoBehaviour, IUpgradeable
         // Update UI
         UpdateDescription();
         // Reset availability
-        SetAvailable(true);
+        SetAvailable(isAvailableAtStart);
     }
 
     public abstract void UpdateDescription();

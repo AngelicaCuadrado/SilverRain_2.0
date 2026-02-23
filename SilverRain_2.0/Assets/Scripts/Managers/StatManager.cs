@@ -25,6 +25,7 @@ public class StatManager : MonoBehaviour
     [Header("Events")]
     public UnityEvent<StatType, float> OnStatChanged;
     public UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
+    public UnityEvent<StatType> OnStatMaxLevelReached;
     [Space]
 
     [Header("Stats")]
@@ -269,5 +270,10 @@ public class StatManager : MonoBehaviour
     public void HandleTempStatAvailabilityChange(TemporaryBuff tempUpgrade, bool isAvailable)
     {
         OnTempUpgradeAvailabilityChange?.Invoke(tempUpgrade, isAvailable);
+    }
+
+    public void HandleMaxLevelReached(StatType type)
+    {
+        OnStatMaxLevelReached?.Invoke(type);
     }
 }

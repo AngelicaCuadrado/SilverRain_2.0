@@ -19,6 +19,17 @@ public class TemporaryUpgrade : TemporaryBuff
         StatManager.Instance.HandleTempStatAvailabilityChange(this, availability);
     }
 
+    public override void LevelUp()
+    {
+        base.LevelUp();
+        // Check if max level reached
+        if (level >= maxLevel)
+        { 
+            SetAvailable(false);
+            StatManager.Instance.HandleMaxLevelReached(statType);
+        }
+    }
+
     public override void UpdateDescription()
     {
         uiData.UpdateDescription(level, maxLevel, Calculate(), CalculateNextLevel());

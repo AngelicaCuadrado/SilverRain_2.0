@@ -64,6 +64,12 @@ public abstract class Weapon : TemporaryBuff
     public override void LevelUp()
     {
         base.LevelUp();
+        // Check if max level reached
+        if (level >= maxLevel)
+        {
+            SetAvailable(false);
+            WeaponManager.Instance.HandleMaxLevelReached(weaponType);
+        }
     }
     public override void ResetLevels()
     {
