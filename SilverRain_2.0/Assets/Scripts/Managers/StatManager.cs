@@ -88,6 +88,11 @@ public class StatManager : MonoBehaviour
             }
         }
         maxTempUpgrades = 3;
+
+        foreach (var statType in allPermUpgrades.Keys)
+        {
+            UpdatePermStats(statType);
+        }
     }
 
     public float GetStat(StatType type)
@@ -275,5 +280,15 @@ public class StatManager : MonoBehaviour
     public void HandleMaxLevelReached(StatType type)
     {
         OnStatMaxLevelReached?.Invoke(type);
+    }
+    
+    public PermanentUpgrade GetPermanentUpgrade(StatType type)
+    {
+        if (allPermUpgrades.TryGetValue(type, out PermanentUpgrade upgrade))
+        {
+            return upgrade;
+        }
+        Debug.LogWarning($"StatManager Cannot find PermanentUpgrade is {type} !");
+        return null;
     }
 }

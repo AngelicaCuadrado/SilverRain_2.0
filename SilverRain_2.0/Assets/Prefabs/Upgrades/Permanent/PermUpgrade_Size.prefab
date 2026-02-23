@@ -44,3 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgrade
+  level: 0
+  maxLevel: 10
+  data: {fileID: 11400000, guid: 468581acd87858b41a7024ad61cb9c94, type: 2}
+  statType: 4
+  description: 
+  OnPermanentUpgradeLevelChanged:
+    m_PersistentCalls:
+      m_Calls: []
