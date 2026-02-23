@@ -176,6 +176,9 @@ MonoBehaviour:
   OnTempUpgradeAvailabilityChange:
     m_PersistentCalls:
       m_Calls: []
+  OnStatMaxLevelReached:
+    m_PersistentCalls:
+      m_Calls: []
   attackDamage: 0
   cooldown: 0
   duration: 0
@@ -706,6 +709,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c89d89aa9ef5476438f46cee63df513b, type: 2}
     - target: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 3748618939089249307}
+    - target: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
       propertyPath: maxcurrentLevel
       value: 10
       objectReference: {fileID: 0}
@@ -756,14 +763,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7358759432237759634, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3748618939089249307}
   m_SourcePrefab: {fileID: 100100000, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
 --- !u!114 &5186122571516697807 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
   m_PrefabInstance: {fileID: 1887988948420111802}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8947785241404608808}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -774,6 +784,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8251235398526377604, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
   m_PrefabInstance: {fileID: 1887988948420111802}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8947785241404608808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7358759432237759634, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+  m_PrefabInstance: {fileID: 1887988948420111802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3748618939089249307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947785241404608808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Attack Damage
+  baseUpgradeDescription: Increases damage dealt by weapons
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
 --- !u!1001 &3980595609760086885
 PrefabInstance:
   m_ObjectHideFlags: 0
