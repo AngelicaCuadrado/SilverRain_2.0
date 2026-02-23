@@ -1,9 +1,12 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public static event Action<EnemyHealth> OnEnemyKilled;
+
     [Header("Health")]
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth;
@@ -15,11 +18,13 @@ public class EnemyHealth : MonoBehaviour
     private Enemy enemy;
     private EnemyController controller;
     private PlayerExperience player;
+    private bool isDead;
     //private AudioSource audioSource;
 
     void Start()
     {
         currentHealth = maxHealth;
+        isDead = false;
         enemy = GetComponent<Enemy>();
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<EnemyController>();
@@ -28,6 +33,8 @@ public class EnemyHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         
         AudioManager.Instance.PlaySFX(sfxID);
@@ -55,6 +62,7 @@ public class EnemyHealth : MonoBehaviour
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        isDead = false;
         foreach (var col in GetComponentsInChildren<Collider>())
         {
             col.enabled = true;
@@ -63,6 +71,11 @@ public class EnemyHealth : MonoBehaviour
     
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
+        OnEnemyKilled?.Invoke(this);
+
         foreach (var col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
