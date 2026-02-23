@@ -43,6 +43,8 @@ public class UIManager : MonoBehaviour
     public void ClearOverlay() => _root.Overlay.Clear("Default");
     public void ClearOverlay(string channel) => _root.Overlay.Clear(channel);
     public void ClearAllOverlay() => _root.Overlay.ClearAll();
+    public void Hide(string channel) => _root.Overlay.Hide(channel);
+    public void UnHide(string channel) => _root.Overlay.UnHide(channel);
     
     // Loading indicator
     public void ShowLoading(bool show)
