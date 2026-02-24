@@ -38,6 +38,7 @@ public class UpgradeWindow : UIWindow
         {
             SelectUpgradeByType(upgradeSlots[0].statType);
         }
+        UpdateAllSlotsUI();
     }
 
     public override void OnPopped()
@@ -129,6 +130,7 @@ public class UpgradeWindow : UIWindow
             StatManager.Instance.UpdatePermStats(_selectedUpgrade.StatType);
             SelectUpgrade(_selectedUpgrade);
         }
+        UpdateAllSlotsUI();
     }
 
     private void OnResetClicked()
@@ -145,6 +147,7 @@ public class UpgradeWindow : UIWindow
         {
             SelectUpgrade(_selectedUpgrade);
         }
+        UpdateAllSlotsUI();
     }
 
     private void UpdateGoldUI()
@@ -154,6 +157,21 @@ public class UpgradeWindow : UIWindow
             goldText.text = $"Gold: {GoldManager.Instance.CurrentGold}";
         }
         UpdateButtonState();
+    }
+
+    private void UpdateAllSlotsUI()
+    {
+        foreach (var slot in upgradeSlots)
+        {
+            if (slot.slotLevelText != null)
+            {
+                var upgrade = StatManager.Instance.GetPermanentUpgrade(slot.statType);
+                if (upgrade != null)
+                {
+                    slot.slotLevelText.text = $"{upgrade.Level}";
+                }
+            }
+        }
     }
 
     private void Back()
@@ -166,5 +184,6 @@ public class UpgradeWindow : UIWindow
     {
         public Button button;
         public StatType statType;
+        public TextMeshProUGUI slotLevelText;
     }
 }
