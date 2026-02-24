@@ -95,7 +95,7 @@ public class UpgradeWindow : UIWindow
         _selectedUpgrade.UpdateDescription();
 
         nameText.text = _selectedUpgrade.UIData.UpgradeName;
-        levelText.text = $"{_selectedUpgrade.Level} / {_selectedUpgrade.MaxLevel}";
+        levelText.text = $"Lv:{_selectedUpgrade.Level} / {_selectedUpgrade.MaxLevel}";
         descriptionText.text = _selectedUpgrade.UIData.FinalUpgradeDescription;
 
         UpdateButtonState();
