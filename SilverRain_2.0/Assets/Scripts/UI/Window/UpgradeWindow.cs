@@ -95,7 +95,7 @@ public class UpgradeWindow : UIWindow
         _selectedUpgrade.UpdateDescription();
 
         nameText.text = _selectedUpgrade.UIData.UpgradeName;
-        levelText.text = $"Lv: {_selectedUpgrade.Level} / {_selectedUpgrade.MaxLevel}";
+        levelText.text = $"{_selectedUpgrade.Level} / {_selectedUpgrade.MaxLevel}";
         descriptionText.text = _selectedUpgrade.UIData.FinalUpgradeDescription;
 
         UpdateButtonState();
@@ -154,7 +154,7 @@ public class UpgradeWindow : UIWindow
     {
         if (goldText != null)
         {
-            goldText.text = $"Gold: {GoldManager.Instance.CurrentGold}";
+            goldText.text = $"Gold: {GoldManager.Instance.CurrentGold}G";
         }
         UpdateButtonState();
     }
