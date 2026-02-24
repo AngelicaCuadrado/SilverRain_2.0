@@ -20,6 +20,8 @@ public class BuffCardsWindow : UIWindow
     {
         _pauseToken = PauseManager.Instance.Acquire("BuffCard");
         _inputToken = InputManager.Instance.Acquire(InputMode.UI, "BuffCard");
+        
+        UIManager.Instance.Hide("HUD");
 
         DisplayCards();
         BindUIEvents();
@@ -39,6 +41,8 @@ public class BuffCardsWindow : UIWindow
             InputManager.Instance.Release(_inputToken);
             _inputToken = null;
         }
+        
+        UIManager.Instance.UnHide("HUD");
         
         UnbindUIEvents();
     }

@@ -68,6 +68,32 @@ public class UIOverlay : MonoBehaviour
         _channels.Clear();
     }
 
+    /// <summary>
+    /// Temperately hide/un-hide the overlay
+    /// </summary>
+    /// <param name="channel"></param>
+    public void Hide(string channel = "Default")
+    {
+        channel = NormalizeChannel(channel);
+        if (!_channels.TryGetValue(channel, out var win) || win == null)
+        {
+            return;
+        }
+        win.gameObject.SetActive(false);
+    }
+
+    public void UnHide(string channel = "Default")
+    {
+        channel = NormalizeChannel(channel);
+        if (!_channels.TryGetValue(channel, out var win) || win == null)
+        {
+            return;
+        }
+        win.gameObject.SetActive(true);
+    }
+    
+
+
     private static string NormalizeChannel(string channel)
         => string.IsNullOrEmpty(channel) ? "Default" : channel;
 }

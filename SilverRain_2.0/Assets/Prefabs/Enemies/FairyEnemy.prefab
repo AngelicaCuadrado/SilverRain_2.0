@@ -1147,7 +1147,7 @@ MonoBehaviour:
   xpValue: 10
   damage: 100
   pooler: {fileID: 0}
-  stageParticlePrefab: {fileID: 5208833309911684746, guid: 7beaf625042fb12439fcf2e2d8b4826d, type: 3}
+  stageParticlePrefab: {fileID: 0}
 --- !u!114 &8171431734536988271
 MonoBehaviour:
   m_ObjectHideFlags: 0
