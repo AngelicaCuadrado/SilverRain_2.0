@@ -59,6 +59,8 @@ public class Pistol : Weapon
             return;
         }
         proj.Init(this, weaponStats.Damage, firePoint.forward, weaponStats.ProjectileSpeed);
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
     }
     #endregion
 }

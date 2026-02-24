@@ -76,6 +76,8 @@ public class Sword : Weapon
             return;
         }
         proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
     }
     #endregion
 }

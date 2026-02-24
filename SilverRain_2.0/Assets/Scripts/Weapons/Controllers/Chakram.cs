@@ -78,6 +78,8 @@ public class Chakram : Weapon
             return;
         }
         proj.Init(this, playerTrans, cam.forward, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
     }
     #endregion
 }

@@ -22,7 +22,7 @@ public abstract class TemporaryBuff : MonoBehaviour, IUpgradeable
     protected UITemporary uiData;
 
     // Events
-    public UnityEvent<TemporaryBuff, bool> OnAvailabilityChanged;
+    //public UnityEvent<TemporaryBuff, bool> OnAvailabilityChanged;
 
     // Properties
     public int Level => level;

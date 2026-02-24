@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ModificationManager : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class ModificationManager : MonoBehaviour
     [Tooltip("")]
     private List<Modification> currentModifications;
 
+    // Events
     public static ModificationManager Instance { get; private set; }
+    public UnityEvent<Modification, bool> OnModificationAvailabilityChange;
+    public UnityEvent<WeaponType, StatType> OnWeaponStatModificationChange;
+
+    // Properties
+    public List<Modification> AllModifications => allModifications;
 
     private void Awake()
     {
@@ -30,6 +37,8 @@ public class ModificationManager : MonoBehaviour
         if (!currentModifications.Any(m => m.Id == modification.Id))
         {
             currentModifications.Add(modification);
+            // Activate the modification's effects
+            modification.Activate();
 
             var catalogItem = allModifications.FirstOrDefault(m => m.Id == modification.Id);
             if (catalogItem != null)
@@ -76,6 +85,16 @@ public class ModificationManager : MonoBehaviour
             }
         }
         return value;
+    }
+
+    public void HandleAvailabilityChange(Modification modification, bool isAvailable)
+    {
+        OnModificationAvailabilityChange.Invoke(modification, isAvailable);
+    }
+
+    public void HandleWeaponStatModificationChange(WeaponType weapon, StatType stat)
+    {
+        OnWeaponStatModificationChange.Invoke(weapon, stat);
     }
 
     private void Start()

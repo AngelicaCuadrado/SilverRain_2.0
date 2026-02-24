@@ -3,9 +3,18 @@ using UnityEngine;
 
 public class ModificationLightMetal : Modification, IWeaponModifier
 {
-    public override void ApplyEffect()
+    public override void Start()
     {
-        return;
+        base.Start();
+        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
+    }
+
+    public override void Activate()
+    {
+        base.Activate();
+        // Invoke the event to update the weapon stats
+        ModificationManager.Instance.OnWeaponStatModificationChange.Invoke(WeaponType.Sword, StatType.AttackDamage);
+        ModificationManager.Instance.OnWeaponStatModificationChange.Invoke(WeaponType.Sword, StatType.Cooldown);
     }
 
     public float GetModifyValue(WeaponType weapon, StatType stat)
@@ -19,7 +28,24 @@ public class ModificationLightMetal : Modification, IWeaponModifier
                 default: return 0;
             }
         }
-
         return 0;
+    }
+
+    public void OnRequirementMet(WeaponType type)
+    {
+        if (type == WeaponType.Sword)
+        {
+            SetAvailable(true);
+            return;
+        }
+        return;
+    }
+
+    public void OnDestroy()
+    {
+        if (WeaponManager.Instance != null)
+        {
+            WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
+        }
     }
 }
