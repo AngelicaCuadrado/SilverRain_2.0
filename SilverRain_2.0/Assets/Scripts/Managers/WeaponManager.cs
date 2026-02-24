@@ -36,8 +36,9 @@ public class WeaponManager : MonoBehaviour
     public ObjectPooler ProjectilePool => projectilePool;
     public ObjectPooler EffectsPool => effectsPool;
 
-    //Events
+    [Header("Events")]
     public UnityEvent<TemporaryBuff, bool> OnWeaponAvailabilityChange;
+    public UnityEvent<WeaponType> OnWeaponMaxLevelReached;
 
     private void Awake()
     {
@@ -68,13 +69,16 @@ public class WeaponManager : MonoBehaviour
         // Initialize current weapons dictionary
         currentWeapons = new Dictionary<WeaponType, Weapon>();
 
+    }
+
+    private void Start()
+    {
         // Add the initial weapon
         if (initialWeapon != WeaponType.None)
         {
             AddWeapon(initialWeapon);
         }
     }
-
     public void AddWeapon(WeaponType type)
     {
         if (type == WeaponType.None) { return; }
@@ -111,7 +115,7 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
-    
+
     public void ResetWeapons()
     {
         //Reset all current weapons
@@ -123,8 +127,15 @@ public class WeaponManager : MonoBehaviour
         currentWeapons.Clear();
     }
 
+    #region Event Handling
     public void HandleAvailabilityChange(TemporaryBuff weapon, bool isAvailable)
     {
         OnWeaponAvailabilityChange.Invoke(weapon, isAvailable);
     }
+
+    public void HandleMaxLevelReached(WeaponType type)
+    {
+        OnWeaponMaxLevelReached.Invoke(type);
+    }
+    #endregion
 }

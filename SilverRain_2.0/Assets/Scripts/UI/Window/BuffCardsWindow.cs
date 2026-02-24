@@ -10,7 +10,7 @@ public class BuffCardsWindow : UIWindow
 
     
     [Header("Common")]
-    [SerializeField] private Button refreshButton;
+    [SerializeField] private Button rerollButton;
     [SerializeField] private Button closeButton;
     
     private object _pauseToken;
@@ -75,22 +75,22 @@ public class BuffCardsWindow : UIWindow
     
     private void BindUIEvents()
     {
-        if (refreshButton != null) refreshButton.onClick.AddListener(RefreshCards);
+        if (rerollButton != null) rerollButton.onClick.AddListener(RerollCards);
         if (closeButton != null) closeButton.onClick.AddListener(CloseCards);
     }
 
     private void UnbindUIEvents()
     {
-        if (refreshButton != null) refreshButton.onClick.RemoveListener(RefreshCards);
+        if (rerollButton != null) rerollButton.onClick.RemoveListener(RerollCards);
         if (closeButton != null) closeButton.onClick.RemoveListener(CloseCards);
     }
 
-    private void RefreshCards()
+    public void RerollCards()
     {
-        // TODO: refresh cards logic if needed
+        BuffCardManager.Instance.RerollChoices();
     }
 
-    private void CloseCards()
+    public void CloseCards()
     {
         UIManager.Instance.Pop();
     }

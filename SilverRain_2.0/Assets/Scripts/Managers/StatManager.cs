@@ -25,6 +25,7 @@ public class StatManager : MonoBehaviour
     [Header("Events")]
     public UnityEvent<StatType, float> OnStatChanged;
     public UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
+    public UnityEvent<StatType> OnStatMaxLevelReached;
     [Space]
 
     [Header("Stats")]
@@ -87,6 +88,11 @@ public class StatManager : MonoBehaviour
             }
         }
         maxTempUpgrades = 3;
+
+        foreach (var statType in allPermUpgrades.Keys)
+        {
+            UpdatePermStats(statType);
+        }
     }
 
     public float GetStat(StatType type)
@@ -188,8 +194,8 @@ public class StatManager : MonoBehaviour
         if (!currentTempUpgrades.ContainsKey(type))
         {
             currentTempUpgrades.Add(type, allTempUpgrades[type]);
-            Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
-            Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
+            //Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
+            //Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
         }
 
         currentTempUpgrades[type].LevelUp();
@@ -271,6 +277,11 @@ public class StatManager : MonoBehaviour
         OnTempUpgradeAvailabilityChange?.Invoke(tempUpgrade, isAvailable);
     }
 
+    public void HandleMaxLevelReached(StatType type)
+    {
+        OnStatMaxLevelReached?.Invoke(type);
+    }
+    
     public PermanentUpgrade GetPermanentUpgrade(StatType type)
     {
         if (allPermUpgrades.TryGetValue(type, out PermanentUpgrade upgrade))

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public abstract class Pickup : MonoBehaviour, IPoolable
 {
@@ -7,7 +8,6 @@ public abstract class Pickup : MonoBehaviour, IPoolable
     protected string poolKey;
     [SerializeField, Tooltip("The index of the spawn location for this pickup (used for tracking in the PickupManager)")]
     protected int locationIndex;
-    [Space]
 
     [Header("Visual Effect Settings")]
     [SerializeField, Tooltip("The speed at which the pickup bounces up and down for visual effect")]
@@ -18,9 +18,18 @@ public abstract class Pickup : MonoBehaviour, IPoolable
     protected float maxHeight = 1.2f;
     [SerializeField, Tooltip("The speed at which the pickup spins and bounces for visual effect")]
     protected float spinSpeed = 150f;
-
+    [Tooltip("The starting position of the pickup, used for bounce effect")]
+    protected Vector3 startPos;
+    
+    // Properties
     public string PoolKey { get { return poolKey; } set { poolKey = value; } }
     public int LocationIndex { get { return locationIndex; } set { locationIndex = value; } }
+
+
+    private void Start()
+    {
+        startPos = transform.position;
+    }
 
     public virtual void Update()
     {
@@ -29,8 +38,8 @@ public abstract class Pickup : MonoBehaviour, IPoolable
 
         // Bounce the pickup up and down for visual effect using lerp between min and max height based on a sine wave
         float newY = Mathf.Lerp(minHeight, maxHeight, (Mathf.Sin(Time.time * bounceSpeed) + 1f) / 2f);
-        Vector3 newPosition = transform.position;
-        newPosition.y = newY;
+        Vector3 newPosition = startPos;
+        newPosition.y = startPos.y + newY;
         transform.position = newPosition;
     }
 

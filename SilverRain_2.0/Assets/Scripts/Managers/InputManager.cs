@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
 
         // Bind events only if actions exist (prevents NullReference in misconfigured projects).
         if (_jump != null)
-            _jump.performed += _ => OnJump?.Invoke();
+           _jump.performed += _ => OnJump?.Invoke();
         if (_pause != null)
             _pause.performed += _ => OnPause?.Invoke();
     }

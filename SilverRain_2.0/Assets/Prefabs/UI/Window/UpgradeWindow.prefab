@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 7069616842300087095}
   - component: {fileID: 2991102132360599198}
   m_Layer: 5
-  m_Name: Hader
+  m_Name: Header
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,7 +616,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 122.5583, y: 121.47}
+  m_SizeDelta: {x: 220, y: 121.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4132809540088646253
 CanvasRenderer:
@@ -2185,7 +2185,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 121.47}
+  m_SizeDelta: {x: 170, y: 121.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4514767083117454014
 CanvasRenderer:
@@ -3898,24 +3898,34 @@ MonoBehaviour:
   upgradeSlots:
   - button: {fileID: 8045015928850473971}
     statType: 0
+    slotLevelText: {fileID: 8556593382825132554}
   - button: {fileID: 6114510551910828966}
     statType: 1
+    slotLevelText: {fileID: 2730585512336136762}
   - button: {fileID: 5406708639467120183}
     statType: 2
+    slotLevelText: {fileID: 1195521720951277848}
   - button: {fileID: 3210068153045591258}
     statType: 3
+    slotLevelText: {fileID: 1069336662421341995}
   - button: {fileID: 8862625956635964996}
     statType: 4
+    slotLevelText: {fileID: 5826658539091043140}
   - button: {fileID: 6305177592351956717}
     statType: 5
+    slotLevelText: {fileID: 7405824318711985009}
   - button: {fileID: 7366652681433243272}
     statType: 6
+    slotLevelText: {fileID: 6922340400666542047}
   - button: {fileID: 7696926512524011251}
     statType: 7
+    slotLevelText: {fileID: 4169404134519365614}
   - button: {fileID: 5065901108914723452}
     statType: 8
+    slotLevelText: {fileID: 4411631601705285764}
   - button: {fileID: 3964583672868888546}
     statType: 9
+    slotLevelText: {fileID: 8877165841339496182}
 --- !u!1 &7497044567107019739
 GameObject:
   m_ObjectHideFlags: 0

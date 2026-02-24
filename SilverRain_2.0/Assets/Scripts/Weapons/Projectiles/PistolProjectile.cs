@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class PistolProjectile : Projectile
 {
-    //Movement
+    [Header("Movement Settings")]
+    [Tooltip("The direction that the bullet will fly in")]
     private Vector3 direction;
+    [Tooltip("The base speed for the projectile")]
     private float speed;
 
     public void Init(Pistol parent, float dmg, Vector3 dir, float spd)
@@ -36,16 +38,14 @@ public class PistolProjectile : Projectile
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
             GameObject[] hits = new[] { other.gameObject };
-            parentWeapon.HandleWeaponHit(hits, transform.position);   
+            parentWeapon.HandleWeaponHit(hits, transform.position);
         }
         //Return the projectile to the pool
         WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
     }
 
     //Called once when the pool initially creates the instance
-    public override void OnCreatedPool()
-    {
-    }
+    public override void OnCreatedPool() { }
 
     //Called whenever the pool spawns this instance
     public override void OnSpawnFromPool()
@@ -68,6 +68,5 @@ public class PistolProjectile : Projectile
         }
 
         direction = Vector3.zero;
-        parentWeapon = null;
     }
 }

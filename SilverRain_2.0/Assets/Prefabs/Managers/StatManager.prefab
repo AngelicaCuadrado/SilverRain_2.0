@@ -176,6 +176,9 @@ MonoBehaviour:
   OnTempUpgradeAvailabilityChange:
     m_PersistentCalls:
       m_Calls: []
+  OnStatMaxLevelReached:
+    m_PersistentCalls:
+      m_Calls: []
   attackDamage: 0
   cooldown: 0
   duration: 0
@@ -232,6 +235,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 468581acd87858b41a7024ad61cb9c94, type: 2}
     - target: {fileID: 1234453041469912145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 3527377553907615497}
+    - target: {fileID: 1234453041469912145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
       propertyPath: statType
       value: 4
       objectReference: {fileID: 0}
@@ -286,14 +293,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8513839930912683145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3527377553907615497}
   m_SourcePrefab: {fileID: 100100000, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
 --- !u!114 &1582765808612734846 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1234453041469912145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
   m_PrefabInstance: {fileID: 348665710509556527}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8282552728385632166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -304,6 +314,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6046024553626018382, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
   m_PrefabInstance: {fileID: 348665710509556527}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8282552728385632166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8513839930912683145, guid: 5dd22bb725afb5d4f88db27be9251c93, type: 3}
+  m_PrefabInstance: {fileID: 348665710509556527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3527377553907615497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282552728385632166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Size
+  baseUpgradeDescription: Increases projectile size
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: e32aad571b880e549a22b1cc2f2f84a2, type: 3}
 --- !u!1001 &798088532981185382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -316,6 +347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempUpgrade_Size
       objectReference: {fileID: 0}
+    - target: {fileID: 5425285552911387285, guid: b8292a47b4dd1d24cac02a6c3a4c8215, type: 3}
+      propertyPath: buffIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: e32aad571b880e549a22b1cc2f2f84a2, type: 3}
     - target: {fileID: 7696798984387671032, guid: b8292a47b4dd1d24cac02a6c3a4c8215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -394,6 +429,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: fe45eec0035aff64c86db3266e4408e0, type: 2}
     - target: {fileID: 2646732679348808045, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 1407643886321158175}
+    - target: {fileID: 2646732679348808045, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
       propertyPath: statType
       value: 6
       objectReference: {fileID: 0}
@@ -444,14 +483,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 687879255902885780, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407643886321158175}
   m_SourcePrefab: {fileID: 100100000, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+--- !u!1 &410873955022724449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 687879255902885780, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
+  m_PrefabInstance: {fileID: 880560545150094069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407643886321158175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410873955022724449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Movement Speed
+  baseUpgradeDescription: Increases movement speed
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: 6960c6bd5088317429f7e0e033bee813, type: 3}
 --- !u!114 &2919305075780592536 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2646732679348808045, guid: 3f9ebb5a4fd440041a831ac035db3c94, type: 3}
   m_PrefabInstance: {fileID: 880560545150094069}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 410873955022724449}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -547,6 +610,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempUpgrade_AttackDamage
       objectReference: {fileID: 0}
+    - target: {fileID: 6754353622359131825, guid: da4cee931c796904dadc0af0d140a9ba, type: 3}
+      propertyPath: buffIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
     - target: {fileID: 8984472526689719917, guid: da4cee931c796904dadc0af0d140a9ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -661,6 +728,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 96f66e76cecab5340a14434c5253a4a7, type: 2}
     - target: {fileID: 6595136440307351064, guid: 3076429765d848445861066d2007a911, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 9114355283037266615}
+    - target: {fileID: 6595136440307351064, guid: 3076429765d848445861066d2007a911, type: 3}
       propertyPath: statType
       value: 8
       objectReference: {fileID: 0}
@@ -675,7 +746,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7297839391844276454, guid: 3076429765d848445861066d2007a911, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9114355283037266615}
   m_SourcePrefab: {fileID: 100100000, guid: 3076429765d848445861066d2007a911, type: 3}
 --- !u!4 &3637211186719714445 stripped
 Transform:
@@ -687,12 +761,33 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6595136440307351064, guid: 3076429765d848445861066d2007a911, type: 3}
   m_PrefabInstance: {fileID: 1735849308119280298}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 9030240608881848908}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgrade
+--- !u!1 &9030240608881848908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7297839391844276454, guid: 3076429765d848445861066d2007a911, type: 3}
+  m_PrefabInstance: {fileID: 1735849308119280298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9114355283037266615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9030240608881848908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: XP Multiplier
+  baseUpgradeDescription: Increases XP gained
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: fb9bcc3943d1ca94497fd61e5e8c2fde, type: 3}
 --- !u!1001 &1887988948420111802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -705,6 +800,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: c89d89aa9ef5476438f46cee63df513b, type: 2}
+    - target: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 3748618939089249307}
     - target: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
       propertyPath: maxcurrentLevel
       value: 10
@@ -756,14 +855,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7358759432237759634, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3748618939089249307}
   m_SourcePrefab: {fileID: 100100000, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
 --- !u!114 &5186122571516697807 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6758694619263988085, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
   m_PrefabInstance: {fileID: 1887988948420111802}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8947785241404608808}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -774,6 +876,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8251235398526377604, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
   m_PrefabInstance: {fileID: 1887988948420111802}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8947785241404608808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7358759432237759634, guid: cfd068302371ad8489f6011ae4577f40, type: 3}
+  m_PrefabInstance: {fileID: 1887988948420111802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3748618939089249307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947785241404608808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Attack Damage
+  baseUpgradeDescription: Increases damage dealt by weapons
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
 --- !u!1001 &3980595609760086885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -977,6 +1100,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8233f4477f4312e45b06706ea2f7015f, type: 2}
     - target: {fileID: 9042273181602829302, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 5584335037489881380}
+    - target: {fileID: 9042273181602829302, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
       propertyPath: statType
       value: 2
       objectReference: {fileID: 0}
@@ -987,19 +1114,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7581965277342247694, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5584335037489881380}
   m_SourcePrefab: {fileID: 100100000, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
 --- !u!114 &3436036344582435646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9042273181602829302, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
   m_PrefabInstance: {fileID: 5968355090611871944}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4317639684823190470}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgrade
+--- !u!1 &4317639684823190470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7581965277342247694, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
+  m_PrefabInstance: {fileID: 5968355090611871944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5584335037489881380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4317639684823190470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Duration
+  baseUpgradeDescription: Increases weapon duration
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: f44ace9cc54d769448604c863bfbc7f9, type: 3}
 --- !u!4 &5904900828511077646 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 225663018355172806, guid: 1d2d8faea30bb7344a41eade08c86b0b, type: 3}
@@ -1062,6 +1213,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 3bbf1f8fb380a954bb90ddbe3c8b271c, type: 2}
     - target: {fileID: 9044101721345836353, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 4721667088180313456}
+    - target: {fileID: 9044101721345836353, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
       propertyPath: statType
       value: 1
       objectReference: {fileID: 0}
@@ -1072,14 +1227,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4765163495429120666, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4721667088180313456}
   m_SourcePrefab: {fileID: 100100000, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+--- !u!1 &1729347072849142961 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4765163495429120666, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
+  m_PrefabInstance: {fileID: 6187562106158499371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4721667088180313456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729347072849142961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Cooldown
+  baseUpgradeDescription: Shortens weapon cooldowns
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: 3a88d46ed00b9214a8cc55ba6e67ab09, type: 3}
 --- !u!114 &2908683703489102698 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9044101721345836353, guid: 8793c40ce5da5dd45ad5fb4f4aa51939, type: 3}
   m_PrefabInstance: {fileID: 6187562106158499371}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1729347072849142961}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -1138,6 +1317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3682373274645673397, guid: b7853f459e4d0a9489a42e718464be06, type: 3}
+      propertyPath: buffIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 9c8101d479c60d34185259c220494c61, type: 3}
     - target: {fileID: 7987190296903548726, guid: b7853f459e4d0a9489a42e718464be06, type: 3}
       propertyPath: m_Name
       value: TempUpgrade_Armor
@@ -1171,6 +1354,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2031503846407434668}
     m_Modifications:
+    - target: {fileID: 1723429976289394801, guid: c5bf489b0351213478208e3405c6fef8, type: 3}
+      propertyPath: buffIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
     - target: {fileID: 2009332093711133505, guid: c5bf489b0351213478208e3405c6fef8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1288,6 +1475,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8000011550872127333, guid: 38788ef71d6d0234ca82e03e9e21bb71, type: 3}
+      propertyPath: buffIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 00fbb4588136cde4fbf9001df788bcfb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1390,6 +1581,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2031503846407434668}
     m_Modifications:
+    - target: {fileID: 5901925933739005696, guid: 5861f70d12ff1374d911116c39fd6854, type: 3}
+      propertyPath: buffIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: f44ace9cc54d769448604c863bfbc7f9, type: 3}
     - target: {fileID: 7059267574668730126, guid: 5861f70d12ff1374d911116c39fd6854, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1472,6 +1667,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 632c34e0b9e780a48ae6964de2ffda2b, type: 2}
     - target: {fileID: 2512161023926566215, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 2251692876470442592}
+    - target: {fileID: 2512161023926566215, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
       propertyPath: statType
       value: 5
       objectReference: {fileID: 0}
@@ -1522,14 +1721,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 650591251249789650, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2251692876470442592}
   m_SourcePrefab: {fileID: 100100000, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
 --- !u!114 &5287095307820739615 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2512161023926566215, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
   m_PrefabInstance: {fileID: 7747163394967556440}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7098844286645119882}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -1540,6 +1742,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2879919417158928218, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
   m_PrefabInstance: {fileID: 7747163394967556440}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7098844286645119882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 650591251249789650, guid: 1cb6209ba70198b418b59457a3b583df, type: 3}
+  m_PrefabInstance: {fileID: 7747163394967556440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2251692876470442592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098844286645119882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Max Health
+  baseUpgradeDescription: Increases maximum health
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: bb67b03c2969d104caba950c446f8c8d, type: 3}
 --- !u!1001 &7906450312529168041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1597,6 +1820,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7a619c95c6914ad49959b42aedec83c6, type: 2}
     - target: {fileID: 5031309317184016687, guid: 1f4f3781768e978439b281147b06d157, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 6661202351487215292}
+    - target: {fileID: 5031309317184016687, guid: 1f4f3781768e978439b281147b06d157, type: 3}
       propertyPath: statType
       value: 3
       objectReference: {fileID: 0}
@@ -1607,19 +1834,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3831740764726821724, guid: 1f4f3781768e978439b281147b06d157, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6661202351487215292}
   m_SourcePrefab: {fileID: 100100000, guid: 1f4f3781768e978439b281147b06d157, type: 3}
 --- !u!114 &2912588168447268742 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5031309317184016687, guid: 1f4f3781768e978439b281147b06d157, type: 3}
   m_PrefabInstance: {fileID: 7906450312529168041}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6382807144814527989}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgrade
+--- !u!1 &6382807144814527989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3831740764726821724, guid: 1f4f3781768e978439b281147b06d157, type: 3}
+  m_PrefabInstance: {fileID: 7906450312529168041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6661202351487215292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382807144814527989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Projectile Speed
+  baseUpgradeDescription: Increases projectile speed
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: 125bb49b217257347be09ede099b888d, type: 3}
 --- !u!4 &8896367163303975179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1643642785120460706, guid: 1f4f3781768e978439b281147b06d157, type: 3}
@@ -1641,6 +1892,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: bd70017f557b3a74f9e287aed71d1be9, type: 2}
+    - target: {fileID: 2879451921878493447, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 8486459662945041819}
     - target: {fileID: 2879451921878493447, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
       propertyPath: statType
       value: 7
@@ -1692,19 +1947,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2616686584707566649, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8486459662945041819}
   m_SourcePrefab: {fileID: 100100000, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
 --- !u!4 &1295720351088465724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7011303219741053961, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
   m_PrefabInstance: {fileID: 8121808629514404661}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6117616172565188364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2616686584707566649, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
+  m_PrefabInstance: {fileID: 8121808629514404661}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8486459662945041819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6117616172565188364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Armor
+  baseUpgradeDescription: Reduces damage taken
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: 9c8101d479c60d34185259c220494c61, type: 3}
 --- !u!114 &6288058270708574770 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2879451921878493447, guid: 844e4708b0a3fc0478901602700dc595, type: 3}
   m_PrefabInstance: {fileID: 8121808629514404661}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6117616172565188364}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
@@ -1722,6 +2001,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: 04f61c8fdacad1a41a639e623724c542, type: 2}
+    - target: {fileID: 123433418348846499, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+      propertyPath: uiData
+      value: 
+      objectReference: {fileID: 5767819011075206827}
     - target: {fileID: 123433418348846499, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
       propertyPath: statType
       value: 9
@@ -1777,8 +2060,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8323797474477339205, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5767819011075206827}
   m_SourcePrefab: {fileID: 100100000, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+--- !u!1 &202822064224450133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8323797474477339205, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
+  m_PrefabInstance: {fileID: 8166292918084453392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5767819011075206827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202822064224450133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a2cf2459b19944981a1024627260ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPermanent
+  upgradeName: Health Regen
+  baseUpgradeDescription: Regenerates health over time
+  finalUpgradeDescription: 
+  upgradeIcon: {fileID: 21300000, guid: a2563f2b8dbc4044b9a50537d3a29962, type: 3}
 --- !u!4 &7065305384090224749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1394288446002695293, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
@@ -1789,7 +2096,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 123433418348846499, guid: b368a6e5d0b62ec42aaee8fddd893c0f, type: 3}
   m_PrefabInstance: {fileID: 8166292918084453392}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 202822064224450133}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512bf6fc0657eb549ac20909bf954ae2, type: 3}
