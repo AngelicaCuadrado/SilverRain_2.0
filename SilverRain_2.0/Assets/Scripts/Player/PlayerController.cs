@@ -82,10 +82,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         UpdateCursorState();
-        
+
         _wasGroundedLastFrame = _isGrounded;
         _isGrounded = CheckGrounded();
-        
+
         if (_isGrounded) _lastGroundedTime = Time.time;
 
         if (CanJump() && Time.time - _lastJumpPressedTime <= jumpBufferTime)
@@ -93,6 +93,11 @@ public class PlayerController : MonoBehaviour
             PerformJump();
             _lastJumpPressedTime = 0f;
         }
+
+        if (!_canMove) return;
+        if (!IsGameplayModeActive()) return;
+
+        HandleLook();
     }
 
     private void FixedUpdate()
@@ -101,15 +106,6 @@ public class PlayerController : MonoBehaviour
         if (!IsGameplayModeActive()) return;
 
         HandleMovement();
-        
-    }
-
-    private void LateUpdate()
-    {
-        if (!_canMove) return;
-        if (!IsGameplayModeActive()) return;
-
-        HandleLook();
     }
 
     private bool IsGameplayModeActive()
