@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: P_ProjectileSpeed_Data
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgradeData
   baseAmount: 1
-  amountPerLevel: 0.5
+  amountPerLevel: 0.1
   cost: 10
   costIncreasePerLevel: 5

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: T_ProjectileSpeed_Data
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgradeData
   baseAmount: 1
-  amountPerLevel: 0.5
+  amountPerLevel: 0.1

@@ -161,6 +161,11 @@ public class BuffCardManager : MonoBehaviour
         switch (buffClicked)
         {
             case Weapon weapon:
+                if (weapon is IWeaponEvolution)
+                {
+                    WeaponManager.Instance.AddEvolution(weapon.WeaponType);
+                    break;
+                }
                 WeaponManager.Instance.AddWeapon(weapon.WeaponType);
                 break;
             case TemporaryUpgrade upgrade:

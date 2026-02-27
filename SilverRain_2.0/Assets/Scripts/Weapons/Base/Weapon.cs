@@ -94,6 +94,16 @@ public abstract class Weapon : TemporaryBuff
     }
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
+
+    public virtual void DeactivateWeapon()
+    {
+        // Deactivate visual if possible
+        if (weaponVisual != null)
+        {
+            weaponVisual.SetActive(false);
+        }
+        StopAllCoroutines();
+    }
     #endregion
 
     #region Event Handling
