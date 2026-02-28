@@ -5,9 +5,9 @@ public class Sword : Weapon
 {
     [Header("Projectile Settings")]
     [SerializeField, Tooltip("The center of the sword's rotation")]
-    private Transform playerTrans;
+    protected Transform playerTrans;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
-    private float spawnAngleOffset = 90f;
+    protected float spawnAngleOffset = 90f;
 
     private void LateUpdate()
     {
