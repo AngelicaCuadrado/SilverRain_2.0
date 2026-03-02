@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6108446453708215581}
   - component: {fileID: 9076562400118634307}
   - component: {fileID: 3529873283349870387}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chakram_Model (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,9 +27,9 @@ Transform:
   m_GameObject: {fileID: 355332754502097662}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.3420201, w: 0.9396927}
-  m_LocalPosition: {x: 0.09, y: -0.05, z: 0.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.05, y: -0.02, z: 0.01}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4396493527941283972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -40}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 5385925688981037461}
   - component: {fileID: 4075414942642392963}
   - component: {fileID: 9201672993499557823}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chakram_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,8 +118,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4396493527941283972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 6867825171488371666}
   - component: {fileID: 613910059806733644}
   - component: {fileID: 8858043627049707859}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ChakramEvolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,6 +247,8 @@ MonoBehaviour:
   requiredStat: 6
   weaponRequirementMet: 0
   upgradeRequirementMet: 0
+  coneDegrees: 45
+  numOfProjectiles: 3
 --- !u!114 &613910059806733644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +296,7 @@ GameObject:
   - component: {fileID: 3394056647882396546}
   - component: {fileID: 578672148738360927}
   - component: {fileID: 2699899029708908979}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chakram_Model (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,9 +312,9 @@ Transform:
   m_GameObject: {fileID: 4587896654805254048}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.3420201, w: 0.9396927}
-  m_LocalPosition: {x: -0.09, y: -0.05, z: 0.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.05, y: -0.02, z: 0.01}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4396493527941283972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 40}
@@ -382,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396493527941283972}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

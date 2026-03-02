@@ -63,7 +63,7 @@ public abstract class Weapon : TemporaryBuff
             SetAvailable(false);
             // Don't trigger max level event if this weapon is an evolution
             if (this is IWeaponEvolution) { return; }
-            // Trigger max level reached event
+            // Trigger max level reached eventon
             WeaponManager.Instance.HandleMaxLevelReached(weaponType);
         }
     }

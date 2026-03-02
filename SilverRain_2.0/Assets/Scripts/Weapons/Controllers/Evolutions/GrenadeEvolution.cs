@@ -55,6 +55,41 @@ public class GrenadeEvolution : Grenade, IWeaponEvolution
     #endregion
 
     #region Weapon overrides
+    public override void LevelUp()
+    {
+        base.LevelUp();
+        weaponStats.CalculateStat(StatType.ProjectileSpeed);
+    }
+    public override void Attack()
+    {
+        //Calculate spawn rotation so the projectile faces forward
+        Quaternion rot = Quaternion.LookRotation(firePoint.forward, Vector3.up);
 
+        //Instantiate projectile
+        var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, firePoint.position, rot);
+
+        //Initialize projectile
+        var proj = projObj.GetComponent<GrenadeProjectile>();
+        if (proj != null)
+        {
+            proj.Init(this, weaponStats.Damage, weaponStats.Size);
+        }
+
+        // Set projectile velocity
+        Rigidbody rb = projObj.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 speed = firePoint.forward * throwForce * weaponStats.ProjectileSpeed;
+            rb.linearVelocity = speed;
+            print(firePoint.forward);
+            print(throwForce);
+            print(weaponStats.ProjectileSpeed);
+            print(speed);
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
+    }
     #endregion
 }

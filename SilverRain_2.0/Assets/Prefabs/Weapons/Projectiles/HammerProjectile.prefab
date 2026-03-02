@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8389421501564163831}
   - component: {fileID: 1453286378144915121}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HammerProjectile
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,6 +59,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   swingSpeed: 150
+  hitVFXPoolKey: 
 --- !u!1 &2158034643262898914
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 16604895957331308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HitPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,6 +162,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3d3b92dd20a675a4ab18b4e835aed06a, type: 3}
       propertyPath: m_Name
       value: Hammer_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d3b92dd20a675a4ab18b4e835aed06a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

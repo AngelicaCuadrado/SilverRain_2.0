@@ -48,8 +48,10 @@ public class Pistol : Weapon
     {
         //Calculate spawn rotation so the projectile faces forward
         Quaternion spawnRot = Quaternion.LookRotation(firePoint.forward, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+
         //Instantiate projectile
         var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, firePoint.position, spawnRot);
+
         //Initialize projectile
         var proj = projObj.GetComponent<PistolProjectile>();
         if (proj == null)
@@ -59,6 +61,7 @@ public class Pistol : Weapon
             return;
         }
         proj.Init(this, weaponStats.Damage, firePoint.forward, weaponStats.ProjectileSpeed);
+
         // Notify the WeaponManager about the projectile spawn
         HandleProjectileSpawn();
     }

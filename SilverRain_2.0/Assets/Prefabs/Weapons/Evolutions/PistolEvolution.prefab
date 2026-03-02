@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 804953838686724165}
   - component: {fileID: 2642103086264118581}
   - component: {fileID: 5839243828409738195}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 3302734806126303051}
   - component: {fileID: 8207137869916422198}
   - component: {fileID: 6739732925155124017}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Magazin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 3464577904489173519}
   - component: {fileID: 5832545719004936060}
   - component: {fileID: 8609642416965670938}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 7128713660577670629}
   - component: {fileID: 4247118977182305331}
   - component: {fileID: 9126101718960827406}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 6747707345446178202}
   - component: {fileID: 5795452146883389047}
   - component: {fileID: 3187290387435992479}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stock_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5678696403468554045}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 5982713082500620056}
   - component: {fileID: 4007009079197609649}
   - component: {fileID: 7843953713489178635}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PistolEvolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 8821392340248733936}
   - component: {fileID: 5603667667202320213}
   - component: {fileID: 7647337859971503007}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Uzi
   m_TagString: Untagged
   m_Icon: {fileID: 0}

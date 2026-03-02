@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2297522494002261228}
   - component: {fileID: 2904165472821207881}
   - component: {fileID: 1128534704902281091}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RocketLauncher_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488897234958890582}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.08715578, z: 0, w: 0.9961947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.075, z: 0.1}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 601351318504432012}
   - {fileID: 533630786837750265}
   m_Father: {fileID: 5475681155451352653}
-  m_LocalEulerAnglesHint: {x: 0, y: -10, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2904165472821207881
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 533630786837750265}
   - component: {fileID: 6879632318061627439}
   - component: {fileID: 1959061683869853714}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,13 +206,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5001547183063007346}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.031, y: 0.08, z: -0.184}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.08, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5475681155451352653}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5189381951551999301
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 3895061629962212555}
   - component: {fileID: 5137318885582512884}
   - component: {fileID: 1083717584984751808}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GrenadeEvolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,9 +271,9 @@ MonoBehaviour:
   weaponVisual: {fileID: 1488897234958890582}
   weaponStats: {fileID: 5137318885582512884}
   cam: {fileID: 0}
-  spawnOffsetForward: 0
-  spawnOffsetUp: 0
-  spawnOffsetSide: 0
+  spawnOffsetForward: 1
+  spawnOffsetUp: 0.35
+  spawnOffsetSide: 0.7
   throwForce: 12
   upwardForce: 4
   firePoint: {fileID: 4259453882222939424}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 601351318504432012}
   - component: {fileID: 4644930512715919406}
   - component: {fileID: 2679809139937759291}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}

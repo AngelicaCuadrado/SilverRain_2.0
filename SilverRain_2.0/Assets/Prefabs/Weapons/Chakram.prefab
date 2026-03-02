@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5366437912073211424}
   - component: {fileID: 1674865395473153244}
   - component: {fileID: 1039188430874529468}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chakram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,9 +52,6 @@ MonoBehaviour:
   isAvailable: 0
   isAvailableAtStart: 1
   uiData: {fileID: 1039188430874529468}
-  OnAvailabilityChanged:
-    m_PersistentCalls:
-      m_Calls: []
   weaponType: 5
   projectilePoolKey: ChakramProjectile
   weaponVisual: {fileID: 1094592205827557824}
@@ -63,12 +60,6 @@ MonoBehaviour:
   spawnOffsetForward: 0
   spawnOffsetUp: 0
   spawnOffsetSide: 0
-  OnWeaponProjectileSpawn:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWeaponHit:
-    m_PersistentCalls:
-      m_Calls: []
   playerTrans: {fileID: 0}
   firePointOffset: {x: 0, y: 0, z: 0}
   spawnAngleOffset: 90
@@ -163,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 95cd701f76c560641b9f65eb29f0814b, type: 3}
       propertyPath: m_Name
       value: Chakram_Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95cd701f76c560641b9f65eb29f0814b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

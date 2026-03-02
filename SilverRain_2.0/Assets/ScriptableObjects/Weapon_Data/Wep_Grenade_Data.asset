@@ -15,7 +15,7 @@ MonoBehaviour:
   baseDamage: 20
   baseCooldown: 15
   baseDuration: 0
-  baseProjectileSpeed: 0
+  baseProjectileSpeed: 1
   baseSize: 1
   perLevelDamage: 5
   perLevelCooldown: -1

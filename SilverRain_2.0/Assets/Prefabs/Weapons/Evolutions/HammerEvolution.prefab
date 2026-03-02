@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5181958307468336930}
   - component: {fileID: 5545801811968126434}
   - component: {fileID: 7130068899753207120}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hammer_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8626891604653203}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 8499395123655530304}
   - component: {fileID: 6714574658005396028}
   - component: {fileID: 1625661078399664485}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HammerEvolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}

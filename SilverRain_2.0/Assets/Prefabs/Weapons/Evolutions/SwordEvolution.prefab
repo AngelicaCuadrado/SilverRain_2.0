@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5249983789745169095}
   - component: {fileID: 3062638526345768433}
   - component: {fileID: 5444445652911524373}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SwordEvolution_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2620502875127134382}
   - component: {fileID: 2164190403603514133}
   - component: {fileID: 7108260694509112130}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SwordEvolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
