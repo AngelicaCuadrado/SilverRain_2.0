@@ -38,7 +38,7 @@ public class IdosTestHarness : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            WeaponManager.Instance.AddEvolution(WeaponType.Chakram);
+            WeaponManager.Instance.AddEvolution(WeaponType.Hammer);
         }
     }
 }

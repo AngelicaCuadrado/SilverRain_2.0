@@ -50,15 +50,15 @@ MonoBehaviour:
   damage: 0
   lifeTime: 5
   endRotation: 45
-  spawnOffsetForward: 0
-  spawnOffsetUp: 1.5
+  spawnOffsetForward: 1
+  spawnOffsetUp: 1
   cam: {fileID: 0}
   hitPosition: {fileID: 16604895957331308}
   hitRadius: 1
   hitMask:
     serializedVersion: 2
     m_Bits: 128
-  swingSpeed: 150
+  swingSpeed: 100
   hitVFXPoolKey: 
 --- !u!1 &2158034643262898914
 GameObject:

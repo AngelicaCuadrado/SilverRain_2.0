@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.08057136, y: 0.7889394, z: 0.11630344, w: 0.59796023}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3482488187845953618}
@@ -179,10 +179,10 @@ MonoBehaviour:
   weaponVisual: {fileID: 980542926451998140}
   weaponStats: {fileID: 6714574658005396028}
   cam: {fileID: 0}
-  spawnOffsetForward: 0.55
-  spawnOffsetUp: -0.25
+  spawnOffsetForward: 1
+  spawnOffsetUp: -0.75
   spawnOffsetSide: 0.5
-  startRotation: -35
+  startRotation: -45
   firePoint: {fileID: 8626891604653203}
   requiredWeapon: 4
   requiredStat: 4

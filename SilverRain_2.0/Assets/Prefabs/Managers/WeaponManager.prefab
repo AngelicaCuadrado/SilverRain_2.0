@@ -236,6 +236,10 @@ MonoBehaviour:
     prefab: {fileID: 3809173918311091030, guid: 9396a1d580d6827479807577cfbb174a, type: 3}
     initialSize: 4
     isExpandable: 1
+  - key: HammerEvolutionProjectile
+    prefab: {fileID: 279224467450168418, guid: f4c2cd56438b2fb40955e4cc935cb4c5, type: 3}
+    initialSize: 4
+    isExpandable: 1
 --- !u!114 &5067260411644754154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1065,10 @@ PrefabInstance:
     - target: {fileID: 3482488187845953618, guid: 339d21afe73a77640ab1d0ab1ede63c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499395123655530304, guid: 339d21afe73a77640ab1d0ab1ede63c5, type: 3}
+      propertyPath: projectilePoolKey
+      value: HammerEvolutionProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 8815940362621562477, guid: 339d21afe73a77640ab1d0ab1ede63c5, type: 3}
       propertyPath: m_Name
