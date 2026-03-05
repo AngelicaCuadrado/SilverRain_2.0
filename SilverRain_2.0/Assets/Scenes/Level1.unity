@@ -62098,6 +62098,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3823513951707495739, guid: 00f9e0202cdba85419b090485e892798, type: 3}
+      propertyPath: spawnOffsetSide
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 6941092582187873988, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: m_Name
       value: WeaponManager

@@ -48,12 +48,16 @@ public abstract class Weapon : TemporaryBuff
         {
             weaponVisual.SetActive(false);
         }
+
+        StatManager.Instance.OnStatChanged.AddListener(RecalculateStats);
     }
+
     public override void SetAvailable(bool availability)
     {
         isAvailable = availability;
         WeaponManager.Instance.HandleAvailabilityChange(this, availability);
     }
+
     public override void LevelUp()
     {
         base.LevelUp();
@@ -125,4 +129,9 @@ public abstract class Weapon : TemporaryBuff
         weaponStats.CalculateStat(type);
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        StatManager.Instance.OnStatChanged.RemoveListener(RecalculateStats);
+    }
 }

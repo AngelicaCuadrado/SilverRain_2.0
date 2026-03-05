@@ -43,7 +43,7 @@ public class StatManager : MonoBehaviour
     private float healthRegen;
 
     [Header("Events")]
-    public UnityEvent<StatType, float> OnStatChanged;
+    public UnityEvent<StatType> OnStatChanged;
     public UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
     public UnityEvent<StatType> OnStatMaxLevelReached;
 
@@ -167,15 +167,6 @@ public class StatManager : MonoBehaviour
                     healthRegen = newValue;
                     break;
             }
-            //OnStatChanged?.Invoke(type, newValue);
-        }
-    }
-
-    public void ApplyPermanentStatsAtGameStart()
-    {
-        foreach (var type in allPermUpgrades.Keys)
-        {
-            OnStatChanged?.Invoke(type, GetStat(type));
         }
     }
 
@@ -245,7 +236,7 @@ public class StatManager : MonoBehaviour
                     healthRegen = newValue;
                     break;
             }
-            OnStatChanged?.Invoke(type, newValue);
+            OnStatChanged?.Invoke(type);
         }
     }
 
