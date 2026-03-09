@@ -14,6 +14,7 @@ public class ModificationManager : MonoBehaviour
     public static ModificationManager Instance { get; private set; }
     public UnityEvent<Modification, bool> OnModificationAvailabilityChange;
     public UnityEvent<WeaponType, StatType> OnWeaponStatModificationChange;
+    public UnityEvent<ModificationID> OnModificationAquired;
 
     // Properties
     public List<Modification> AllModifications => allModifications;
@@ -45,6 +46,7 @@ public class ModificationManager : MonoBehaviour
             {
                 catalogItem.SetAvailable(false);
             }
+            OnModificationAquired.Invoke(modification.Id);
         }
    }
 
