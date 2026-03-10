@@ -8,54 +8,38 @@ public class PermanentUpgrade : MonoBehaviour, IUpgradeable
     [SerializeField, Tooltip("")]
     private int level;
     [SerializeField, Tooltip("")]
-    private int maxLevel = 10;
-    [Space]
+    private int maxLevel;
 
     [Header("References")]
     [SerializeField, Tooltip("")]
     private PermanentUpgradeData data;
     [SerializeField, Tooltip("")]
     private StatType statType;
-    [Space]
-
-    [Header("UI")]
     [SerializeField, Tooltip("")]
-    private string description;
+    private UIPermanent uiData;
 
     // Events
     public UnityEvent<StatType> OnPermanentUpgradeLevelChanged;
 
-    //Getters
+    // Properties 
     public int Level => level;
     public int MaxLevel => maxLevel;
-    public StatType Type => statType;
-    public string Description => description;
+    public StatType StatType => statType;
+    public UIPermanent UIData => uiData;
 
     public void LevelUp()
     {
         if (level >= maxLevel) return;
         level++;
         OnPermanentUpgradeLevelChanged?.Invoke(statType);
+        UpdateDescription();
     }
 
     public void ResetLevels()
     {
         level = 0;
-    }
-
-    public void UpdateDescription()
-    {
-        float currentValue = Calculate();
-
-        if (level >= maxLevel)
-        {
-            description = $"+{currentValue} (MAX)";
-        }
-        else
-        {
-            float nextValue = data.BaseAmount + data.AmountPerLevel * (level + 1);
-            description = $"+{currentValue} → +{nextValue}";
-        }
+        OnPermanentUpgradeLevelChanged?.Invoke(statType);
+        UpdateDescription();
     }
 
     public float Calculate()
@@ -63,9 +47,19 @@ public class PermanentUpgrade : MonoBehaviour, IUpgradeable
         return data.BaseAmount + (data.AmountPerLevel * level);
     }
 
+    public float CalculateNextLevel()
+    {
+        return data.BaseAmount + (data.AmountPerLevel * (level + 1));
+    }
+
     public float GetNextLevelCost()
     {
         if (level >= maxLevel) return 0f;
         return data.Cost + (data.CostIncreasePerLevel * level);
+    }
+
+    public void UpdateDescription()
+    {
+        uiData.UpdateDescription(level ,Calculate(), CalculateNextLevel());
     }
 }

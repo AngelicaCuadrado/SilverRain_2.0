@@ -18,7 +18,6 @@ public abstract class Weapon : TemporaryBuff
     protected WeaponType weaponType;
     [SerializeField, Tooltip("The key used to spawn projectiles from the pool")]
     protected string projectilePoolKey;
-    [Space]
 
     [Header("Components")]
     [SerializeField,Tooltip("Optional GameObject for the weapon visuals")]
@@ -27,7 +26,6 @@ public abstract class Weapon : TemporaryBuff
     protected WeaponStats weaponStats;
     [SerializeField, Tooltip("The main camera transform that the weapon follows")]
     protected Transform cam;
-    [Space]
 
     [Header("Spawn Position Offsets")]
     [SerializeField, Tooltip("How far forward the weapon will spawn relative to the camera")]
@@ -36,11 +34,6 @@ public abstract class Weapon : TemporaryBuff
     protected float spawnOffsetUp;
     [SerializeField, Tooltip("How far to the side the weapon will spawn relative to the camera")]
     protected float spawnOffsetSide;
-    [Space]
-
-    [Header("Events")]
-    public UnityEvent<WeaponType, Weapon> OnWeaponProjectileSpawn;
-    public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
 
     //Properties
     public WeaponType WeaponType => weaponType;
@@ -55,12 +48,16 @@ public abstract class Weapon : TemporaryBuff
         {
             weaponVisual.SetActive(false);
         }
+
+        StatManager.Instance.OnStatChanged.AddListener(RecalculateStats);
     }
+
     public override void SetAvailable(bool availability)
     {
         isAvailable = availability;
         WeaponManager.Instance.HandleAvailabilityChange(this, availability);
     }
+
     public override void LevelUp()
     {
         base.LevelUp();
@@ -68,6 +65,9 @@ public abstract class Weapon : TemporaryBuff
         if (level >= maxLevel)
         {
             SetAvailable(false);
+            // Don't trigger max level event if this weapon is an evolution
+            if (this is IWeaponEvolution) { return; }
+            // Trigger max level reached eventon
             WeaponManager.Instance.HandleMaxLevelReached(weaponType);
         }
     }
@@ -101,17 +101,37 @@ public abstract class Weapon : TemporaryBuff
     }
     public abstract IEnumerator OnDuration();
     public abstract void Attack();
+
+    public virtual void DeactivateWeapon()
+    {
+        // Deactivate visual if possible
+        if (weaponVisual != null)
+        {
+            weaponVisual.SetActive(false);
+        }
+        StopAllCoroutines();
+    }
     #endregion
 
     #region Event Handling
     public virtual void HandleProjectileSpawn()
     {
-        OnWeaponProjectileSpawn?.Invoke(weaponType, this);
+        WeaponManager.Instance.HandleProjectileSpawn(weaponType, this);
     }
 
     public virtual void HandleWeaponHit(GameObject[] obj, Vector3 pos)
     {
-        OnWeaponHit?.Invoke(weaponType, obj, pos);
+        WeaponManager.Instance.HandleWeaponHit(weaponType, obj, pos);
+    }
+
+    public virtual void RecalculateStats(StatType type)
+    {
+        weaponStats.CalculateStat(type);
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        StatManager.Instance.OnStatChanged.RemoveListener(RecalculateStats);
+    }
 }

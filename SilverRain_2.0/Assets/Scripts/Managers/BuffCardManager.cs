@@ -82,7 +82,7 @@ public class BuffCardManager : MonoBehaviour
         StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
         WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
         if (StatManager.Instance == null) { Debug.Log("BuffCardManager - StatManager instance is null"); }
-        //ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
+        ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
 
         InitializeAvailableChoices();
 
@@ -114,10 +114,10 @@ public class BuffCardManager : MonoBehaviour
         {
             if (upgrade.Value.IsAvailable) { availableChoices.Add(upgrade.Value); }
         }
-        //foreach (var modification in ModificationManager.Instance.AllModifications)
-        //{
-        //    if (modification.Value.IsAvailable) { availableChoices.Add(modification.Value); }
-        //}
+        foreach (var modification in ModificationManager.Instance.AllModifications)
+        {
+            if (modification.IsAvailable) { availableChoices.Add(modification); }
+        }
     }
 
     private void DisplayBuffCards()
@@ -161,6 +161,11 @@ public class BuffCardManager : MonoBehaviour
         switch (buffClicked)
         {
             case Weapon weapon:
+                if (weapon is IWeaponEvolution)
+                {
+                    WeaponManager.Instance.AddEvolution(weapon.WeaponType);
+                    break;
+                }
                 WeaponManager.Instance.AddWeapon(weapon.WeaponType);
                 break;
             case TemporaryUpgrade upgrade:

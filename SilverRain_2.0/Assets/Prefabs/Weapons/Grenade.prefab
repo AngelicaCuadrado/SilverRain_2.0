@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1721398068177321597}
   - component: {fileID: 6501333127623952714}
   - component: {fileID: 2429271256713669232}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,9 +84,6 @@ MonoBehaviour:
   isAvailable: 0
   isAvailableAtStart: 1
   uiData: {fileID: 2429271256713669232}
-  OnAvailabilityChanged:
-    m_PersistentCalls:
-      m_Calls: []
   weaponType: 3
   projectilePoolKey: GrenadeProjectile
   weaponVisual: {fileID: 1798756790816411745}
@@ -95,12 +92,6 @@ MonoBehaviour:
   spawnOffsetForward: 1.2
   spawnOffsetUp: 0
   spawnOffsetSide: 0.5
-  OnWeaponProjectileSpawn:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWeaponHit:
-    m_PersistentCalls:
-      m_Calls: []
   throwForce: 12
   upwardForce: 4
   firePoint: {fileID: 733895225789564400}

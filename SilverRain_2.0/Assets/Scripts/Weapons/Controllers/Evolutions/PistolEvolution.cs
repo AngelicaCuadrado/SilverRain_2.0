@@ -2,27 +2,37 @@ using UnityEngine;
 
 public class PistolEvolution : Pistol, IWeaponEvolution
 {
-    private StatType requiredStat = StatType.AttackDamage;
+    [Header("Evolution Requirements")]
+    [SerializeField, Tooltip("The type of weapon that must reach max level to evolve this weapon.")]
+    private WeaponType requiredWeapon = WeaponType.Pistol;
+    [SerializeField, Tooltip("The type of upgrade that must reach max level to evolve this weapon.")]
+    private StatType requiredStat = StatType.ProjectileSpeed;
+    [SerializeField, Tooltip("Indicates whether the weapon requirement has been met.")]
     private bool weaponRequirementMet = false;
+    [SerializeField, Tooltip("Indicates whether the upgrade requirement has been met.")]
     private bool upgradeRequirementMet = false;
 
     public override void Start()
     {
         base.Start();
+        // Subscribe to events
         WeaponManager.Instance.OnWeaponMaxLevelReached.AddListener(OnRequirementMet);
         StatManager.Instance.OnStatMaxLevelReached.AddListener(OnRequirementMet);
     }
+    private void OnDestroy()
+    {
+        // Unsubscribe from events
+        WeaponManager.Instance.OnWeaponMaxLevelReached.RemoveListener(OnRequirementMet);
+        StatManager.Instance.OnStatMaxLevelReached.RemoveListener(OnRequirementMet);
+    }
 
+    #region IWeaponEvolution implementation
     public void OnRequirementMet(WeaponType type)
     {
-        if (type == weaponType)
+        if (type == requiredWeapon)
         {
             weaponRequirementMet = true;
-            // Check if both requirements are met to evolve the weapon
-            if (upgradeRequirementMet)
-            {
-                EvolveWeapon();
-            }
+            CheckRequirements();
         }
     }
 
@@ -31,21 +41,20 @@ public class PistolEvolution : Pistol, IWeaponEvolution
         if (type == requiredStat)
         {
             upgradeRequirementMet = true;
-            // Check if both requirements are met to evolve the weapon
-            if (weaponRequirementMet)
-            {
-                EvolveWeapon();
-            }
+            CheckRequirements();
         }
     }
 
-    public void EvolveWeapon()
+    public void CheckRequirements()
     {
-        // Implement the logic to evolve the weapon, such as changing its appearance, stats, etc.
+        if (weaponRequirementMet && upgradeRequirementMet)
+        {
+            SetAvailable(true);
+        }
     }
-    private void OnDestroy()
-    {
-        WeaponManager.Instance.OnWeaponMaxLevelReached.RemoveListener(OnRequirementMet);
-        StatManager.Instance.OnStatMaxLevelReached.RemoveListener(OnRequirementMet);
-    }
+    #endregion
+
+    #region Weapon overrides
+
+    #endregion
 }

@@ -50,7 +50,7 @@ public class ChakramProjectile : Projectile, IPoolable
         if (playerTrans == null) return;
 
         // Rotate around itself
-        transform.Rotate(Vector3.forward, spinSpeed * flightSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, spinSpeed * flightSpeed * Time.deltaTime);
 
         if (!returning)
         {

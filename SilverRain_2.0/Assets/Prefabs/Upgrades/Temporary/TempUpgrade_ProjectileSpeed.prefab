@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 9034903219199418848}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25522, y: -0, z: -0.33682}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50,9 +50,6 @@ MonoBehaviour:
   isAvailable: 0
   isAvailableAtStart: 1
   uiData: {fileID: 2161569699155481076}
-  OnAvailabilityChanged:
-    m_PersistentCalls:
-      m_Calls: []
   data: {fileID: 11400000, guid: f59989070739b7d4ca68638bfe720b01, type: 2}
   statType: 3
 --- !u!114 &2161569699155481076
