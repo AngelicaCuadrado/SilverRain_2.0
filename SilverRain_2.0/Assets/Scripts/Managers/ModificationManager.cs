@@ -101,7 +101,6 @@ public class ModificationManager : MonoBehaviour
 
     private void Start()
     {
-        //If all weapons is going to be provate, subscribing to events needs to be handled differently
         //foreach (var weapon in WeaponManager.Instance.allWeaponsList) 
         //{
         //    weapon.OnWeaponHit.AddListener();
