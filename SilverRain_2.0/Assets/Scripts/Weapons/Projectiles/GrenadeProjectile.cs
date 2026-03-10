@@ -18,11 +18,8 @@ public class GrenadeProjectile : Projectile
         explosionRadius = size;
 
         //Scale the gameobject based on size
-        if (size < 1f) size = 1f;
-        transform.localScale = Vector3.one * size;
-
-        // Apply modifications
-        parentWeapon.HandleProjectileSpawn();
+        //if (size < 1f) size = 1f;
+        //transform.localScale = Vector3.one * size;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,7 +93,6 @@ public class GrenadeProjectile : Projectile
             StopCoroutine(lifeCoroutine);
             lifeCoroutine = null;
         }
-        parentWeapon = null;
     }
 
     private void OnDrawGizmosSelected()

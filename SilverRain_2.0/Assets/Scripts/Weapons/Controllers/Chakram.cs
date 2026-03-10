@@ -5,13 +5,13 @@ public class Chakram : Weapon
 {
     [Header("References")]
     [SerializeField, Tooltip("The player's location that the chakram returns to")]
-    private Transform playerTrans;
+    protected Transform playerTrans;
     [SerializeField, Tooltip("")]
-    private Vector3 firePointOffset;
+    protected Vector3 firePointOffset;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
-    private float spawnAngleOffset = 90f;
+    protected float spawnAngleOffset = 90f;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the chakram visual follow the camera's position and rotation
@@ -66,7 +66,7 @@ public class Chakram : Weapon
     public override void Attack()
     {
         //Calculate spawn rotation so the projectile faces forward
-        Quaternion spawnRot = Quaternion.Euler(playerTrans.eulerAngles.x + spawnAngleOffset, 0f, 0f);
+        Quaternion spawnRot = Quaternion.LookRotation(cam.forward, Vector3.up);
         //Instantiate projectile
         var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position + firePointOffset, spawnRot);
         //Initialize projectile
@@ -78,6 +78,8 @@ public class Chakram : Weapon
             return;
         }
         proj.Init(this, playerTrans, cam.forward, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
     }
     #endregion
 }

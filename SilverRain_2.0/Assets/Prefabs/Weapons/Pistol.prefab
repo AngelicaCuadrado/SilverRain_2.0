@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2176060859186047120}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4863098311042264114}
   - component: {fileID: 4704111720870542989}
   - component: {fileID: 6988339731583330724}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 6398470054520468713}
   - component: {fileID: 3429736218585989486}
   - component: {fileID: 5846994164273469703}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 2294568476092960716}
   - component: {fileID: 484826987582554642}
   - component: {fileID: 3789990504622719992}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 2209966953587644047}
   - component: {fileID: 4615448328107263723}
   - component: {fileID: 4136058002693068443}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Magazin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 2512193330541435400}
   - component: {fileID: 5076647846782542988}
   - component: {fileID: 1115379262408819514}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 2290405111503472805}
   - component: {fileID: 1155752976437145188}
   - component: {fileID: -8092103013527875831}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,9 +538,6 @@ MonoBehaviour:
   isAvailable: 0
   isAvailableAtStart: 1
   uiData: {fileID: -8092103013527875831}
-  OnAvailabilityChanged:
-    m_PersistentCalls:
-      m_Calls: []
   weaponType: 1
   projectilePoolKey: PistolProjectile
   weaponVisual: {fileID: 4664889763849317599}
@@ -549,12 +546,6 @@ MonoBehaviour:
   spawnOffsetForward: 1
   spawnOffsetUp: -0.4
   spawnOffsetSide: 0
-  OnWeaponProjectileSpawn:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWeaponHit:
-    m_PersistentCalls:
-      m_Calls: []
   firePoint: {fileID: 2176060859186047120}
 --- !u!114 &1155752976437145188
 MonoBehaviour:
@@ -591,4 +582,4 @@ MonoBehaviour:
   buffLevel: 0
   baseBuffDescription: 
   finalBuffDescription: 
-  buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  buffIcon: {fileID: 21300000, guid: fb1e48043961d8f44948225f539a83bb, type: 3}

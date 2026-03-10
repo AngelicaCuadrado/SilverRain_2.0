@@ -34,6 +34,7 @@ public class EnemySpawner : MonoBehaviour
     bool _spawning = false;
     Bounds _areaBounds;
     bool _haveAreaBounds = false;
+    private NavMeshPath _navPath;
 
     void Start()
     {
@@ -44,8 +45,10 @@ public class EnemySpawner : MonoBehaviour
             if (p != null) player = p;
         }
 
+        _navPath = new NavMeshPath();
+
         objectPooler = EnemyManager.Instance.enemyPooler;
-        
+
         UpdateSpawnAreaBounds();
         StartSpawning();
     }
@@ -221,8 +224,20 @@ public class EnemySpawner : MonoBehaviour
 
         //Check if spawning on navmesh
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(pos, out hit, 10.0f, NavMesh.AllAreas))
-        { 
+        if (!NavMesh.SamplePosition(pos, out hit, 10.0f, NavMesh.AllAreas)) return;
+
+        // Verify the spawn point is reachable from the player (not on an isolated NavMesh island)
+        if (player != null)
+        {
+            NavMeshHit playerHit;
+            if (!NavMesh.SamplePosition(player.transform.position, out playerHit, 5.0f, NavMesh.AllAreas))
+                return;
+
+            NavMesh.CalculatePath(hit.position, playerHit.position, NavMesh.AllAreas, _navPath);
+            if (_navPath.status != NavMeshPathStatus.PathComplete) return;
+        }
+
+        {
             //GameObject go = Instantiate(prefab, hit.position, Quaternion.identity, spawnParent);
             GameObject go = objectPooler.Spawn(poolKey, hit.position, Quaternion.identity);
             if (go == null) return;

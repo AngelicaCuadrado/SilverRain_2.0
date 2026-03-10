@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Look Settings")]
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private float mouseSensitivity = 2f;
+    [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private float rotationSmoothSpeed = 10f;
     [SerializeField] private float minVerticalAngle = -90f;
     [SerializeField] private float maxVerticalAngle = 90f;
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody _rb;
     private float _xRotation;
+    private float _yRotation;
     private bool _canMove = true;
     // private Vector2 movementInput;
     // private Vector2 lookInput;
@@ -62,6 +63,8 @@ public class PlayerController : MonoBehaviour
             if (cam != null) 
                 cameraTransform = cam.transform;
         }
+        
+        _yRotation = transform.eulerAngles.y;
 
         InputManager.Instance.OnJump.AddListener(OnJumpInput);
         InputManager.Instance.OnPause.AddListener(OnPauseInput);
@@ -79,10 +82,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         UpdateCursorState();
-        
+
         _wasGroundedLastFrame = _isGrounded;
         _isGrounded = CheckGrounded();
-        
+
         if (_isGrounded) _lastGroundedTime = Time.time;
 
         if (CanJump() && Time.time - _lastJumpPressedTime <= jumpBufferTime)
@@ -90,6 +93,11 @@ public class PlayerController : MonoBehaviour
             PerformJump();
             _lastJumpPressedTime = 0f;
         }
+
+        if (!_canMove) return;
+        if (!IsGameplayModeActive()) return;
+
+        HandleLook();
     }
 
     private void FixedUpdate()
@@ -98,15 +106,6 @@ public class PlayerController : MonoBehaviour
         if (!IsGameplayModeActive()) return;
 
         HandleMovement();
-        
-    }
-
-    private void LateUpdate()
-    {
-        if (!_canMove) return;
-        if (!IsGameplayModeActive()) return;
-
-        HandleLook();
     }
 
     private bool IsGameplayModeActive()
@@ -154,23 +153,21 @@ public class PlayerController : MonoBehaviour
     {
         var lookInput = InputManager.Instance?.Look ?? Vector2.zero;
 
-        if (lookInput.sqrMagnitude < 0.001f) return;
-
         // Horizontal rotation (rotate player body)
-        transform.Rotate(Vector3.up, lookInput.x * mouseSensitivity);
+        //transform.Rotate(Vector3.up, lookInput.x * mouseSensitivity);
+        _yRotation += lookInput.x * mouseSensitivity;
 
         // Vertical rotation (rotate camera)
         _xRotation -= lookInput.y * mouseSensitivity;
         _xRotation = Mathf.Clamp(_xRotation, minVerticalAngle, maxVerticalAngle);
 
+        // Set player horizontal rotation
+        transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
+        
+        // set camera vertical rotation
         if (cameraTransform)
         {
-            var targetRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-            cameraTransform.localRotation = Quaternion.Slerp(
-                cameraTransform.localRotation,
-                targetRotation,
-                Time.deltaTime * rotationSmoothSpeed
-            );
+            cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         }
     }
 
@@ -279,15 +276,15 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(rayOrigin, Vector3.down * (groundCheckDistance + 0.1f));
     }
 
-    private void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 300, 150));
-        GUILayout.Label($"Position Y: {transform.position.y:F3}");
-        GUILayout.Label($"Velocity Y: {(_rb != null ? _rb.linearVelocity.y : 0):F3}");
-        GUILayout.Label($"Grounded: {_isGrounded}");
-        GUILayout.Label($"Can Jump: {CanJump()}");
-        GUILayout.Label($"Coyote Time Left: {Mathf.Max(0, coyoteTime - (Time.time - _lastGroundedTime)):F2}s");
-        GUILayout.EndArea();
-    }
+    //private void OnGUI()
+    //{
+    //    GUILayout.BeginArea(new Rect(10, 10, 300, 150));
+    //    GUILayout.Label($"Position Y: {transform.position.y:F3}");
+    //    GUILayout.Label($"Velocity Y: {(_rb != null ? _rb.linearVelocity.y : 0):F3}");
+    //    GUILayout.Label($"Grounded: {_isGrounded}");
+    //    GUILayout.Label($"Can Jump: {CanJump()}");
+    //    GUILayout.Label($"Coyote Time Left: {Mathf.Max(0, coyoteTime - (Time.time - _lastGroundedTime)):F2}s");
+    //    GUILayout.EndArea();
+    //}
 #endif
 }

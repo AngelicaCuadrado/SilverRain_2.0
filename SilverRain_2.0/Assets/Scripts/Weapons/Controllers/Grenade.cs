@@ -5,16 +5,16 @@ public class Grenade : Weapon
 {
     [Header("Throw Settings")]
     [SerializeField, Tooltip("How far forward the grenade will be thrown")]
-    private float throwForce = 12f;
+    protected float throwForce = 12f;
     [SerializeField, Tooltip("How far upward the grenade will be thrown")]
     private float upwardForce = 4f;
     [Space]
 
     [Header("References")]
     [SerializeField, Tooltip("The position from which grenades will spawn")]
-    private Transform firePoint;
+    protected Transform firePoint;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the grenade launcher follow the camera's position and rotation
@@ -74,6 +74,8 @@ public class Grenade : Weapon
         {
             grenadeScript.Init(this, weaponStats.Damage, weaponStats.Size);
         }
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
     }
     #endregion
 }

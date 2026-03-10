@@ -23,24 +23,23 @@ public abstract class Modification : TemporaryBuff
 
     public override void ResetLevels()
     {
-        SetAvailable(true);
+        SetAvailable(isAvailableAtStart);
     }
 
     public override void SetAvailable(bool availability)
     {
         isAvailable = availability;
-        OnAvailabilityChanged?.Invoke(this, availability);
+        ModificationManager.Instance.HandleAvailabilityChange(this, availability);
     }
 
     public override void UpdateDescription()
     {
-
+        uiData.UpdateDescription();
     }
 
-    public virtual void Activate()
-    {
+    public virtual void Activate() { }
 
-    }
+    public virtual void Deactivate() { }
 
-    public abstract void ApplyEffect();
+    public virtual void ApplyEffect() { }
 }

@@ -1,13 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GlobalInvisibilityManager : MonoBehaviour
 {
     public static GlobalInvisibilityManager Instance { get; private set; }
-
-    [SerializeField, Tooltip("The duration for which the global invisibility effect will last when activated")]
-    private float invisibilityTimer = 0f;
+    [SerializeField, Tooltip("")]
+    private float invisibilityTimer;
     [SerializeField, Tooltip("Whether the global invisibility effect is currently active")]
     private bool isActive = false;
 
@@ -20,30 +20,27 @@ public class GlobalInvisibilityManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    void Update()
-    {
-        if (isActive)
-        {
-            invisibilityTimer -= Time.deltaTime;
-            if (invisibilityTimer <= 0f)
-            {
-                isActive = false;
-            }
-        }
+        if (Instance == null || Instance == this) { Instance = this; }
+        else { Destroy(gameObject); return; }
     }
 
-    public void SetTimer(float seconds)
+    public void ActivateInvisibility(float duration)
     {
-        invisibilityTimer = seconds;
+        OnGlobalReveal?.Invoke(duration);
         isActive = true;
+        RainController.Instance.StartRain();
+        StartCoroutine(InvisibilityCountdown(duration));
+    }
+
+    private IEnumerator InvisibilityCountdown(float duration)
+    {
+        invisibilityTimer = duration;
+        while (invisibilityTimer > 0f)
+        {
+            invisibilityTimer -= Time.deltaTime;
+            yield return null;
+        }
+        RainController.Instance.StopRain();
+        isActive = false;
     }
 }

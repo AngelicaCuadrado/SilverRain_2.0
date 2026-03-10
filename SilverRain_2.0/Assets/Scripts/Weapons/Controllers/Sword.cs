@@ -5,11 +5,11 @@ public class Sword : Weapon
 {
     [Header("Projectile Settings")]
     [SerializeField, Tooltip("The center of the sword's rotation")]
-    private Transform playerTrans;
+    protected Transform playerTrans;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
-    private float spawnAngleOffset = 90f;
+    protected float spawnAngleOffset = 90f;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (cam == null) return;
         //Make the sword visual follow the camera's position and rotation
@@ -76,6 +76,8 @@ public class Sword : Weapon
             return;
         }
         proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+        // Notify the WeaponManager about the projectile spawn
+        HandleProjectileSpawn();
     }
     #endregion
 }

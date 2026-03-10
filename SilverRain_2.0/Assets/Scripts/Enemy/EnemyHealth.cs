@@ -2,13 +2,14 @@ using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class EnemyHealth : MonoBehaviour
 {
     public static event Action<EnemyHealth> OnEnemyKilled;
 
     [Header("Health")]
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int baseHealth = 100;
     [SerializeField] private int currentHealth;
     [SerializeField] private ParticleSystem bloodSplatterPrefab;
     [SerializeField] private string sfxID;
@@ -31,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         player = FindFirstObjectByType<PlayerExperience>();
         //audioSource = gameObject.AddComponent<AudioSource>();
     }
+    
     public void TakeDamage(int damage)
     {
         if (isDead) return;

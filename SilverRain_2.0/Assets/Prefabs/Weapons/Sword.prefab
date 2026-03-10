@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7469974996897628985}
   - component: {fileID: 5377634349175015253}
   - component: {fileID: -5112293186830276709}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,9 +52,6 @@ MonoBehaviour:
   isAvailable: 0
   isAvailableAtStart: 1
   uiData: {fileID: -5112293186830276709}
-  OnAvailabilityChanged:
-    m_PersistentCalls:
-      m_Calls: []
   weaponType: 2
   projectilePoolKey: SwordProjectile
   weaponVisual: {fileID: 4277146880635936264}
@@ -63,12 +60,6 @@ MonoBehaviour:
   spawnOffsetForward: 1
   spawnOffsetUp: -0.4
   spawnOffsetSide: 0
-  OnWeaponProjectileSpawn:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWeaponHit:
-    m_PersistentCalls:
-      m_Calls: []
   playerTrans: {fileID: 0}
   spawnAngleOffset: 90
 --- !u!114 &5377634349175015253
@@ -106,7 +97,7 @@ MonoBehaviour:
   buffLevel: 0
   baseBuffDescription: 
   finalBuffDescription: 
-  buffIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  buffIcon: {fileID: 21300000, guid: d31aa8412a4d374458c912d11686642a, type: 3}
 --- !u!1001 &4006536520372888409
 PrefabInstance:
   m_ObjectHideFlags: 0

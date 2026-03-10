@@ -15,17 +15,10 @@ public class StatManager : MonoBehaviour
     private Dictionary<StatType, PermanentUpgrade> allPermUpgrades = new();
     private Dictionary<StatType, TemporaryUpgrade> allTempUpgrades = new();
     private Dictionary<StatType, TemporaryUpgrade> currentTempUpgrades = new();
-    [Space]
 
     [Header("Upgrade Amount")]
     [SerializeField, Tooltip("")]
-    private int maxTempUpgrades;
-    [Space]
-
-    [Header("Events")]
-    public UnityEvent<StatType, float> OnStatChanged;
-    public UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
-    [Space]
+    private int maxTempUpgrades = 3;
 
     [Header("Stats")]
     [SerializeField, Tooltip("")]
@@ -48,6 +41,15 @@ public class StatManager : MonoBehaviour
     private float xpMult;
     [SerializeField, Tooltip("")]
     private float healthRegen;
+
+    [Header("Events")]
+    public UnityEvent<StatType> OnStatChanged;
+    public UnityEvent<TemporaryBuff, bool> OnTempUpgradeAvailabilityChange;
+    public UnityEvent<StatType> OnStatMaxLevelReached;
+
+    // Properties
+    public Dictionary<StatType, PermanentUpgrade> AllPermUpgrades => allPermUpgrades;
+    public Dictionary<StatType, TemporaryUpgrade> AllTempUpgrades => allTempUpgrades;
 
     private void Awake()
     {
@@ -82,7 +84,11 @@ public class StatManager : MonoBehaviour
                 Debug.LogWarning($"Duplicate temporary upgrade type {entry.statType} found in allTempUpgradesList.");
             }
         }
-        maxTempUpgrades = 3;
+
+        foreach (var statType in allPermUpgrades.Keys)
+        {
+            UpdatePermStats(statType);
+        }
     }
 
     public float GetStat(StatType type)
@@ -161,15 +167,6 @@ public class StatManager : MonoBehaviour
                     healthRegen = newValue;
                     break;
             }
-            //OnStatChanged?.Invoke(type, newValue);
-        }
-    }
-
-    public void ApplyPermanentStatsAtGameStart()
-    {
-        foreach (var type in allPermUpgrades.Keys)
-        {
-            OnStatChanged?.Invoke(type, GetStat(type));
         }
     }
 
@@ -184,8 +181,6 @@ public class StatManager : MonoBehaviour
         if (!currentTempUpgrades.ContainsKey(type))
         {
             currentTempUpgrades.Add(type, allTempUpgrades[type]);
-            Debug.Log($"Added temporary upgrade of type {type} to currentTempUpgrades.");
-            Debug.Log($"Current temporary upgrades count: {currentTempUpgrades.Count}");
         }
 
         currentTempUpgrades[type].LevelUp();
@@ -241,7 +236,7 @@ public class StatManager : MonoBehaviour
                     healthRegen = newValue;
                     break;
             }
-            OnStatChanged?.Invoke(type, newValue);
+            OnStatChanged?.Invoke(type);
         }
     }
 
@@ -265,5 +260,20 @@ public class StatManager : MonoBehaviour
     public void HandleTempStatAvailabilityChange(TemporaryBuff tempUpgrade, bool isAvailable)
     {
         OnTempUpgradeAvailabilityChange?.Invoke(tempUpgrade, isAvailable);
+    }
+
+    public void HandleMaxLevelReached(StatType type)
+    {
+        OnStatMaxLevelReached?.Invoke(type);
+    }
+    
+    public PermanentUpgrade GetPermanentUpgrade(StatType type)
+    {
+        if (allPermUpgrades.TryGetValue(type, out PermanentUpgrade upgrade))
+        {
+            return upgrade;
+        }
+        Debug.LogWarning($"StatManager Cannot find PermanentUpgrade is {type} !");
+        return null;
     }
 }

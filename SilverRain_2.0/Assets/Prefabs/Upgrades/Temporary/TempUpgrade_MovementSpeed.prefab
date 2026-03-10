@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5583596829030803750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25522, y: -0, z: -0.33682}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50,9 +50,6 @@ MonoBehaviour:
   isAvailable: 0
   isAvailableAtStart: 1
   uiData: {fileID: 7234038881961940586}
-  OnAvailabilityChanged:
-    m_PersistentCalls:
-      m_Calls: []
   data: {fileID: 11400000, guid: c60c6c529aa0a224f8032fb3d0f15966, type: 2}
   statType: 6
 --- !u!114 &7234038881961940586
@@ -71,4 +68,4 @@ MonoBehaviour:
   buffLevel: 0
   baseBuffDescription: Increases movement speed
   finalBuffDescription: 
-  buffIcon: {fileID: 0}
+  buffIcon: {fileID: 21300000, guid: 6960c6bd5088317429f7e0e033bee813, type: 3}
