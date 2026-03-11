@@ -7,16 +7,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header("Events")]
-    public static UnityEvent OnLevelStart;
-    public static UnityEvent OnLevelWon;
-    public static UnityEvent OnLevelLost;
-    public static UnityEvent OnGamePaused;
-    public static UnityEvent OnGameUnpaused;
-    
     [Header("UI")]
-    [SerializeField] private MainMenuWindow mainMenuWindowPrefab;
-    [SerializeField] private HUDWindow hudWindowPrefab;
+    [SerializeField, Tooltip("")]
+    private MainMenuWindow mainMenuWindowPrefab;
+    [SerializeField, Tooltip("")]
+    private HUDWindow hudWindowPrefab;
+
+    [Header("Level Time")]
+    [SerializeField, Tooltip("")]
+    private float levelTimer;
+    [SerializeField, Tooltip("")]
+    private float levelDuration;
+
+    [Header("Events")]
+    [HideInInspector] public static UnityEvent OnLevelStart;
+    [HideInInspector] public static UnityEvent OnLevelWon;
+    [HideInInspector] public static UnityEvent OnLevelLost;
+    [HideInInspector] public static UnityEvent OnGamePaused;
+    [HideInInspector] public static UnityEvent OnGameUnpaused;
     
     private void Awake()
     {
@@ -69,7 +77,4 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-    //------------------------------------Move this to score manager-------------------------------
-    public void AddScore(int score) { }
 }

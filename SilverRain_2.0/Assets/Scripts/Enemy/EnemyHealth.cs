@@ -16,7 +16,7 @@ public class EnemyHealth : MonoBehaviour
     public Animator animator;
     private Enemy enemy;
     private EnemyController controller;
-    private PlayerExperience player;
+    private PlayerExperience playerExp;
     //private AudioSource audioSource;
 
     void Start()
@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         enemy = GetComponent<Enemy>();
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<EnemyController>();
-        player = FindFirstObjectByType<PlayerExperience>();
+        playerExp = PlayerFinder.Instance.Player.GetComponent<PlayerExperience>();
         //audioSource = gameObject.AddComponent<AudioSource>();
     }
     
@@ -89,12 +89,24 @@ public class EnemyHealth : MonoBehaviour
         //Destroy(controller);
         if (controller != null) controller.enabled = false;
         
-        player.GainExp(enemy.RewardXP());
-        GameManager.Instance.AddScore(enemy.RewardScore());
+        playerExp.GainExp(enemy.XPValue);
+        ScoreManager.Instance.AddScore(enemy.ScoreValue);
         
         yield return new WaitForSeconds(3);
         
         //Destroy(gameObject);
-        enemy.ReturnToPool();
+        ReturnToPool();
+    }
+
+    private void ReturnToPool()
+    {
+        if (enemy.PoolKey != null)
+        {
+            EnemyManager.Instance.EnemyPool.ReturnToPool(gameObject, enemy.PoolKey);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

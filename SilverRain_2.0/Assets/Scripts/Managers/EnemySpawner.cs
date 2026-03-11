@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
         _navPath = new NavMeshPath();
 
-        objectPooler = EnemyManager.Instance.enemyPooler;
+        objectPooler = EnemyManager.Instance.EnemyPool;
 
         UpdateSpawnAreaBounds();
         StartSpawning();
@@ -246,7 +246,6 @@ public class EnemySpawner : MonoBehaviour
             var enemy = go.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.pooler = EnemyManager.Instance.enemyPooler;
                 enemy.PoolKey = poolKey;
             }
             

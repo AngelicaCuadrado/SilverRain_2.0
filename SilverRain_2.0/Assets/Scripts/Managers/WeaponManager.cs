@@ -35,11 +35,11 @@ public class WeaponManager : MonoBehaviour
     private ObjectPooler effectsPool;
 
     [Header("Events")]
-    public UnityEvent<TemporaryBuff, bool> OnWeaponAvailabilityChange;
-    public UnityEvent<WeaponType> OnWeaponMaxLevelReached;
-    public UnityEvent<WeaponType> OnWeaponAquired;
-    public UnityEvent<WeaponType, Weapon> OnWeaponProjectileSpawn;
-    public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
+    [HideInInspector] public UnityEvent<TemporaryBuff, bool> OnWeaponAvailabilityChange;
+    [HideInInspector] public UnityEvent<WeaponType> OnWeaponMaxLevelReached;
+    [HideInInspector] public UnityEvent<WeaponType> OnWeaponAquired;
+    [HideInInspector] public UnityEvent<WeaponType, Weapon> OnWeaponProjectileSpawn;
+    [HideInInspector] public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
     
     //Properties
     public Dictionary<WeaponType, Weapon> AllWeapons => allWeapons;

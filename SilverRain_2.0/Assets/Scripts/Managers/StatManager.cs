@@ -205,21 +205,29 @@ public class StatManager : MonoBehaviour
             float newValue = CalculateStat(type);
             switch (type)
             {
+                // Stats that affect weapons (Call OnStatChanged to recalculate weapon stats)
                 case StatType.AttackDamage:
                     attackDamage = newValue;
+                    OnStatChanged?.Invoke(type);
                     break;
                 case StatType.Cooldown:
                     cooldown = newValue;
+                    OnStatChanged?.Invoke(type);
                     break;
                 case StatType.Duration:
                     duration = newValue;
+                    OnStatChanged?.Invoke(type);
                     break;
                 case StatType.ProjectileSpeed:
                     projectSpeed = newValue;
+                    OnStatChanged?.Invoke(type);
                     break;
                 case StatType.Size:
                     size = newValue;
+                    OnStatChanged?.Invoke(type);
                     break;
+
+                // Stats that don't affect weapons
                 case StatType.MaxHealth:
                     maxHealth = newValue;
                     break;
@@ -236,7 +244,6 @@ public class StatManager : MonoBehaviour
                     healthRegen = newValue;
                     break;
             }
-            OnStatChanged?.Invoke(type);
         }
     }
 
@@ -266,7 +273,7 @@ public class StatManager : MonoBehaviour
     {
         OnStatMaxLevelReached?.Invoke(type);
     }
-    
+
     public PermanentUpgrade GetPermanentUpgrade(StatType type)
     {
         if (allPermUpgrades.TryGetValue(type, out PermanentUpgrade upgrade))

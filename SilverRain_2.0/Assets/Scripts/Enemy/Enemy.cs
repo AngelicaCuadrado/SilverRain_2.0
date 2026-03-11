@@ -6,29 +6,47 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPoolable
 {
-    EnemyHealth health;
-    EnemyController controller;
-    [SerializeField] private int scoreValue;
-    [SerializeField] private float xpValue;
-    [SerializeField] public float damage;
-    //[SerializeField] private float goldValue;
-    private Renderer[] renderers;
+    [Header("References")]
+    [SerializeField, Tooltip("")]
+    private EnemyHealth health;
+    [SerializeField, Tooltip("")]
+    private EnemyController controller;
 
-    // ObjectPool References
-    public ObjectPooler pooler;
-    public string PoolKey { get; set; }
-    
-    // Stage VFX
+    [Header("Rewards")]
+    [SerializeField, Tooltip("")]
+    private int scoreValue;
+    [SerializeField, Tooltip("")]
+    private float xpValue;
+
+    [Header("Combat")]
+    [SerializeField, Tooltip("")]
+    private float damage;
+
+    [Header("Pooling")]
+    [SerializeField, Tooltip("")]
+    private string poolKey;
+
     [Header("Stage VFX")]
-    [SerializeField] private ParticleSystem stageParticlePrefab;
+    [SerializeField, Tooltip("")]
+    private ParticleSystem stageParticlePrefab;
+    [SerializeField, Tooltip("")]
     private ParticleSystem _stageParticleInstance;
+    [SerializeField, Tooltip("")]
     private MaterialPropertyBlock _mpb;
     private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
 
+    private Renderer[] renderers;
+
+    // Properties
+    public string PoolKey { get => poolKey; set => poolKey = value; }
+    public float Damage { get => damage; }
+    public int ScoreValue { get => scoreValue; }
+    public float XPValue { get => xpValue; }
+
     private void Awake()
     {
-        health = GetComponent<EnemyHealth>();
-        controller = GetComponent<EnemyController>();
+        if (health == null) health = GetComponent<EnemyHealth>();
+        if (controller == null) controller = GetComponent<EnemyController>();
         renderers = GetComponentsInChildren<Renderer>();
         _mpb = new MaterialPropertyBlock();
 
@@ -55,16 +73,15 @@ public class Enemy : MonoBehaviour, IPoolable
             RevealTimed(remaining);
         }
     }
-    
-    #region IPoolable Implementation
 
+    #region IPoolable Implementation
     public void OnCreatedPool()
     {
     }
 
     public void OnSpawnFromPool()
     {
-        health?.ResetHealth();
+        if (health != null) { health.ResetHealth(); }
         Initialize();
         if (StageManager.Instance != null)
             ApplyStageVFX(StageManager.Instance.CurrentStage);
@@ -74,20 +91,11 @@ public class Enemy : MonoBehaviour, IPoolable
     {
         StopAllCoroutines();
     }
-    
     #endregion
 
-    public void ReturnToPool()
-    {
-        if (pooler != null)
-            pooler.ReturnToPool(gameObject, PoolKey);
-        else
-            Destroy(gameObject);
-    }
-    
     private void OnEnable()
     {
-        //Subscribe to reveal all event
+        //Subscribe to events
         GlobalInvisibilityManager.Instance.OnGlobalReveal.AddListener(RevealTimed);
         if (StageManager.Instance != null)
             StageManager.Instance.OnStageChanged.AddListener(ApplyStageVFX);
@@ -95,22 +103,16 @@ public class Enemy : MonoBehaviour, IPoolable
 
     private void OnDisable()
     {
-        //Unsubscribe to reveal all event
+        //Unsubscribe from events
         GlobalInvisibilityManager.Instance.OnGlobalReveal.RemoveListener(RevealTimed);
         if (StageManager.Instance != null)
             StageManager.Instance.OnStageChanged.RemoveListener(ApplyStageVFX);
     }
 
-    private void Update()
-    {
-        //Trigger reveal when reveal all event is called
-        //health.DamageTest();
-    }
     public void Reveal()
     {
-        //Debug.Log("Enemy is Revealing");
-        foreach (var r in renderers) 
-        { 
+        foreach (var r in renderers)
+        {
             r.enabled = true;
         }
     }
@@ -123,42 +125,17 @@ public class Enemy : MonoBehaviour, IPoolable
         }
     }
 
-    public void RevealTimed(float seconds) 
+    public void RevealTimed(float seconds)
     {
-        //Debug.Log("Timed Reveal Start");
         StopAllCoroutines();
         StartCoroutine(RevealCorutine(seconds));
     }
 
-    // private void Start()
-    // {
-    //     health = GetComponent<EnemyHealth>();
-    //     controller = GetComponent<EnemyController>();
-    //     renderers = GetComponentsInChildren<Renderer>();
-    //
-    //     Hide();
-    //
-    //     if (GlobalInvisibilityManager.Instance.isActive)
-    //     {
-    //         float remaining = GlobalInvisibilityManager.Instance.invisibilityTimer;
-    //         RevealTimed(remaining);
-    //     }
-    // }
-
-    private IEnumerator RevealCorutine(float duration) 
+    private IEnumerator RevealCorutine(float duration)
     {
         Reveal();
         yield return new WaitForSeconds(duration);
         Hide();
-    }
-
-    public float RewardXP() 
-    {
-        return xpValue;
-    }
-    public int RewardScore()
-    {
-        return scoreValue;
     }
 
     private void ApplyStageVFX(int stage)
@@ -175,7 +152,7 @@ public class Enemy : MonoBehaviour, IPoolable
         if (_stageParticleInstance != null)
         {
             float rate = StageManager.Instance.GetStageParticleRate();
-            var emission =  _stageParticleInstance.emission;
+            var emission = _stageParticleInstance.emission;
             emission.rateOverTime = rate;
 
             if (rate > 0f)
@@ -188,13 +165,11 @@ public class Enemy : MonoBehaviour, IPoolable
             }
         }
     }
-    
-    #if UNITY_EDITOR
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Collider c = GetComponent<Collider>();
         Gizmos.DrawWireSphere(c.bounds.center, c.bounds.extents.x);
     }
-    #endif
 }

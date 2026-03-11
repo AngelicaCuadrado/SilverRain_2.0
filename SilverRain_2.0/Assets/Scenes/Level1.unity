@@ -16650,6 +16650,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2c7e9945b530847b32e58666b14a3e, type: 3}
+--- !u!1 &559094580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559094581}
+  m_Layer: 0
+  m_Name: PoolRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559094581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559094580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1894246097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &559532826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33211,13 +33242,14 @@ GameObject:
   - component: {fileID: 1118176356}
   - component: {fileID: 1118176355}
   - component: {fileID: 1118176357}
+  - component: {fileID: 1118176358}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1118176355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33230,8 +33262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e296ec3836f471baa38924cd1aca4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  enemyPooler: {fileID: 1172575632}
+  enemyPool: {fileID: 1172575632}
   enemyProjectilePool: {fileID: 1894246096}
+  enemyEffectsPool: {fileID: 1734560027}
+  enemiesDefeated: 0
 --- !u!4 &1118176356
 Transform:
   m_ObjectHideFlags: 0
@@ -33246,6 +33280,8 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1172575633}
+  - {fileID: 1894246097}
+  - {fileID: 1734560028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1118176357
@@ -33276,6 +33312,44 @@ MonoBehaviour:
   - FairyEnemyPool
   - GoblinEnemyPool
   - MushroomEnemyPool
+--- !u!114 &1118176358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118176354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29df3d7dda627eb4c99f27582f8bbd1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  maxStage: 5
+  stageDuration: 60
+  stageEmissionColors:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 2, g: 1.8, b: 0, a: 2}
+  - {r: 2, g: 1, b: 0, a: 2}
+  - {r: 2, g: 0, b: 0, a: 2}
+  - {r: 1, g: 0, b: 0, a: 2}
+  stageParticleRates:
+  - 0
+  - 0
+  - 5
+  - 15
+  - 30
+  healthMultipliers:
+  - 1
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.4
+  OnStageChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerUpdated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1119840338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34984,7 +35058,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 48160559}
-  - {fileID: 1894246097}
   m_Father: {fileID: 1118176356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1172707296
@@ -36847,6 +36920,9 @@ MonoBehaviour:
   OnWeaponStatModificationChange:
     m_PersistentCalls:
       m_Calls: []
+  OnModificationAquired:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1221071143
 Transform:
   m_ObjectHideFlags: 0
@@ -37671,6 +37747,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b91a7d3254c88d45a973a5af476eb3d, type: 3}
+--- !u!1 &1239950913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239950914}
+  m_Layer: 0
+  m_Name: PoolRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239950914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239950913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1734560028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1240648078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2878128787288428834, guid: 791f89068ce5d9c468b68ae86fe77036, type: 3}
@@ -51118,6 +51225,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee738a773036294ba9acd5574f0886e, type: 3}
+--- !u!1 &1734560026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734560028}
+  - component: {fileID: 1734560027}
+  m_Layer: 0
+  m_Name: EnemyEffectsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1734560027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734560026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57902c142bc69614db2cd6dbe55b324c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
+  poolRoot: {fileID: 1239950914}
+  pools: []
+--- !u!4 &1734560028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734560026}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1239950914}
+  m_Father: {fileID: 1118176356}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1735456841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55566,7 +55720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57902c142bc69614db2cd6dbe55b324c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
-  poolRoot: {fileID: 1894246097}
+  poolRoot: {fileID: 559094581}
   pools:
   - key: EnemyProjectilePool
     prefab: {fileID: 2950361553670207421, guid: cf641f75b2f8f6d499633ede35d8cc86, type: 3}
@@ -55580,12 +55734,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894246095}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1172575633}
+  m_Children:
+  - {fileID: 559094581}
+  m_Father: {fileID: 1118176356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1896867151 stripped
 Transform:
