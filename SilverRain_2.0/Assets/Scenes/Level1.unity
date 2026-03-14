@@ -29776,6 +29776,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 139208680}
+  - {fileID: 1487742546}
   m_Father: {fileID: 1221071143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &995017726
@@ -36914,6 +36915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModificationManager
   allModifications:
   - {fileID: 139208679}
+  - {fileID: 1487742547}
   OnModificationAvailabilityChange:
     m_PersistentCalls:
       m_Calls: []
@@ -44489,6 +44491,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8161332190058002734, guid: 2c8522bb8df09554bb28c5f27c19057a, type: 3}
   m_PrefabInstance: {fileID: 923734185}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1487742545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487742546}
+  - component: {fileID: 1487742547}
+  - component: {fileID: 1487742548}
+  m_Layer: 0
+  m_Name: ExplodingBullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1487742546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487742545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 993415685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487742547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487742545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb03097063cc6145a20bc62df60b471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModificationExplodingBullets
+  level: 0
+  maxLevel: 1
+  isAvailable: 1
+  isAvailableAtStart: 1
+  uiData: {fileID: 1487742548}
+  modificationName: 
+  description: 
+  id: 1
+  explosionPrefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
+  explosionRadius: 100
+  explosionDamage: 1
+--- !u!114 &1487742548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487742545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITemporary
+  buffName: Exploding Bullets
+  buffLevel: 
+  baseBuffDescription: Bullets Explode On Impact
+  finalBuffDescription: 
+  buffIcon: {fileID: 21300000, guid: 0d852f5493cecf94a90183f3f83ce947, type: 3}
 --- !u!1001 &1488082286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62256,6 +62331,10 @@ PrefabInstance:
     - target: {fileID: 3823513951707495739, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: spawnOffsetSide
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5596106329357065321, guid: 00f9e0202cdba85419b090485e892798, type: 3}
+      propertyPath: initialWeapon
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6941092582187873988, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: m_Name
