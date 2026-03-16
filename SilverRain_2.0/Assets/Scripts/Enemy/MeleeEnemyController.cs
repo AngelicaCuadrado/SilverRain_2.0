@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class MeleeEnemyController : EnemyController
 {
-     private override void Update()
+     public override void Update()
     {
         if (tutorialFrozen) return;
 
