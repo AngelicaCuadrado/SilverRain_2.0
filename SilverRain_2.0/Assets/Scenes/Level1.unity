@@ -49674,7 +49674,7 @@ MonoBehaviour:
   visibleEnemyFocusTarget: {fileID: 1149388755}
   visibleEnemyFocusDuration: 2
   visibleEnemyHoldDuration: 4
-  visibleEnemyFocusOffset: {x: 0, y: 1.2, z: 0}
+  visibleEnemyFocusOffset: {x: 0, y: -1.2, z: 0}
   visibleEnemyZoomFov: 10
   visibleEnemyZoomInDuration: 0.25
   visibleEnemyZoomOutDuration: 0.3
