@@ -34437,6 +34437,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171d04e69e856aa4583514567da64109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+--- !u!4 &1149388755 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+  m_PrefabInstance: {fileID: 1250455928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1149714876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38115,7 +38120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3871975
+      value: 21.87
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalRotation.w
@@ -49665,6 +49670,16 @@ MonoBehaviour:
   moveDistanceRequired: 8
   jumpsRequired: 3
   lookDistanceRequired: 250
+  focusCameraOnVisibleEnemyStep: 1
+  visibleEnemyFocusTarget: {fileID: 1149388755}
+  visibleEnemyFocusDuration: 2
+  visibleEnemyHoldDuration: 4
+  visibleEnemyFocusOffset: {x: 0, y: 1.2, z: 0}
+  visibleEnemyZoomFov: 10
+  visibleEnemyZoomInDuration: 0.25
+  visibleEnemyZoomOutDuration: 0.3
+  visibleEnemyShakeAmplitude: 0.08
+  visibleEnemyShakeFrequency: 22
   moveInstruction: Move using WASD to continue.
   jumpInstruction: Jump with Space.
   lookInstruction: Move the camera with the mouse.

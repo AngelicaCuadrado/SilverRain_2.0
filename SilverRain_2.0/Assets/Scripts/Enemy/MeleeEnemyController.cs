@@ -54,6 +54,8 @@ public class MeleeEnemyController : EnemyController
 
     private void Update()
     {
+        if (tutorialFrozen) return;
+
         Move();
         CheckPlayerInRange();
     }

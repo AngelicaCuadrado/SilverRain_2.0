@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -24,6 +25,18 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private float moveDistanceRequired = 8f;
     [SerializeField] private int jumpsRequired = 3;
     [SerializeField] private float lookDistanceRequired = 250f;
+
+    [Header("Danger Focus")]
+    [SerializeField] private bool focusCameraOnVisibleEnemyStep = true;
+    [SerializeField] private Transform visibleEnemyFocusTarget;
+    [SerializeField] private float visibleEnemyFocusDuration = 0.8f;
+    [SerializeField] private float visibleEnemyHoldDuration = 1.2f;
+    [SerializeField] private Vector3 visibleEnemyFocusOffset = new Vector3(0f, 1.2f, 0f);
+    [SerializeField] private float visibleEnemyZoomFov = 45f;
+    [SerializeField] private float visibleEnemyZoomInDuration = 0.25f;
+    [SerializeField] private float visibleEnemyZoomOutDuration = 0.3f;
+    [SerializeField] private float visibleEnemyShakeAmplitude = 0.08f;
+    [SerializeField] private float visibleEnemyShakeFrequency = 22f;
 
     [Header("Messages")]
     [SerializeField] private string moveInstruction = "Move using WASD to continue.";
@@ -55,6 +68,7 @@ public class TutorialManager : MonoBehaviour
     private int jumpsCompleted;
     private float lookedDistance;
     private Action activeStepUpdate;
+    private Coroutine visibleEnemyFocusRoutine;
 
     private void OnEnable()
     {
@@ -68,6 +82,27 @@ public class TutorialManager : MonoBehaviour
         EnemyHealth.OnEnemyKilled -= HandleEnemyKilled;
         PlayerController.OnJumpPerformed -= HandleJumpPerformed;
         Pickup.OnAnyPickupCollected -= HandlePickupCollected;
+
+        if (visibleEnemyFocusRoutine != null)
+        {
+            StopCoroutine(visibleEnemyFocusRoutine);
+            visibleEnemyFocusRoutine = null;
+        }
+
+        PlayerController playerController = player != null ? player.GetComponent<PlayerController>() : null;
+        if (playerController != null)
+        {
+            playerController.SetCanMove(true);
+        }
+
+        if (visibleEnemyFocusTarget != null)
+        {
+            EnemyController focusedEnemyController = visibleEnemyFocusTarget.GetComponent<EnemyController>();
+            if (focusedEnemyController != null)
+            {
+                focusedEnemyController.SetTutorialFrozen(false);
+            }
+        }
     }
 
     private void Start()
@@ -102,6 +137,11 @@ public class TutorialManager : MonoBehaviour
         if (player != null)
         {
             lastPlayerPosition = player.transform.position;
+        }
+
+        if (visibleEnemyFocusTarget == null)
+        {
+            visibleEnemyFocusTarget = FindFocusTarget("MushroomEnemyTutorial");
         }
 
         SetCurrentStep(TutorialStep.Move);
@@ -249,7 +289,19 @@ public class TutorialManager : MonoBehaviour
                 onLookStepStarted?.Invoke();
                 break;
             case TutorialStep.KillVisibleEnemy:
-                onVisibleEnemyStepStarted?.Invoke();
+                if (visibleEnemyFocusRoutine != null)
+                {
+                    StopCoroutine(visibleEnemyFocusRoutine);
+                }
+
+                if (focusCameraOnVisibleEnemyStep)
+                {
+                    visibleEnemyFocusRoutine = StartCoroutine(PlayVisibleEnemyFocusSequence());
+                }
+                else
+                {
+                    onVisibleEnemyStepStarted?.Invoke();
+                }
                 break;
             case TutorialStep.KillInvisibleEnemy:
                 onInvisibleEnemyStepStarted?.Invoke();
@@ -258,6 +310,148 @@ public class TutorialManager : MonoBehaviour
                 onPickupStepStarted?.Invoke();
                 break;
         }
+    }
+
+    private IEnumerator PlayVisibleEnemyFocusSequence()
+    {
+        onVisibleEnemyStepStarted?.Invoke();
+
+        PlayerController playerController = player != null ? player.GetComponent<PlayerController>() : null;
+        if (playerController == null || visibleEnemyFocusTarget == null || playerController.CameraTransform == null)
+        {
+            visibleEnemyFocusRoutine = null;
+            yield break;
+        }
+
+        EnemyController focusedEnemyController = visibleEnemyFocusTarget.GetComponent<EnemyController>();
+        if (focusedEnemyController != null)
+        {
+            focusedEnemyController.SetTutorialFrozen(true);
+        }
+
+        playerController.SetCanMove(false);
+        playerController.ResetVelocity();
+
+        yield return null;
+
+        Camera playerCamera = playerController.CameraTransform != null
+            ? playerController.CameraTransform.GetComponent<Camera>()
+            : null;
+        float baseFov = playerCamera != null ? playerCamera.fieldOfView : 0f;
+        Vector3 baseCameraLocalPosition = playerController.CameraTransform != null
+            ? playerController.CameraTransform.localPosition
+            : Vector3.zero;
+
+        Vector3 focusPoint = visibleEnemyFocusTarget.position + visibleEnemyFocusOffset;
+        Vector3 lookDirection = focusPoint - playerController.CameraTransform.position;
+
+        if (lookDirection.sqrMagnitude > 0.001f)
+        {
+            Vector3 flatLookDirection = Vector3.ProjectOnPlane(lookDirection, Vector3.up);
+            float targetYaw = flatLookDirection.sqrMagnitude > 0.001f
+                ? Quaternion.LookRotation(flatLookDirection, Vector3.up).eulerAngles.y
+                : playerController.CurrentYaw;
+
+            float distanceXZ = new Vector2(lookDirection.x, lookDirection.z).magnitude;
+            float targetPitch = -Mathf.Atan2(lookDirection.y, distanceXZ) * Mathf.Rad2Deg;
+
+            float elapsed = 0f;
+            float startYaw = playerController.CurrentYaw;
+            float startPitch = playerController.CurrentPitch;
+
+            while (elapsed < visibleEnemyFocusDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = visibleEnemyFocusDuration > 0f ? Mathf.Clamp01(elapsed / visibleEnemyFocusDuration) : 1f;
+                float eased = Mathf.SmoothStep(0f, 1f, t);
+
+                float yaw = Mathf.LerpAngle(startYaw, targetYaw, eased);
+                float pitch = Mathf.Lerp(startPitch, targetPitch, eased);
+                playerController.SetViewAngles(yaw, pitch);
+
+                yield return null;
+            }
+
+            playerController.SetViewAngles(targetYaw, targetPitch);
+        }
+
+        float holdElapsed = 0f;
+        while (holdElapsed < visibleEnemyHoldDuration)
+        {
+            holdElapsed += Time.deltaTime;
+            float holdT = visibleEnemyHoldDuration > 0f ? Mathf.Clamp01(holdElapsed / visibleEnemyHoldDuration) : 1f;
+
+            if (playerCamera != null)
+            {
+                float zoomInWeight = visibleEnemyZoomInDuration > 0f
+                    ? Mathf.Clamp01(holdElapsed / visibleEnemyZoomInDuration)
+                    : 1f;
+                playerCamera.fieldOfView = Mathf.Lerp(baseFov, visibleEnemyZoomFov, Mathf.SmoothStep(0f, 1f, zoomInWeight));
+            }
+
+            if (playerController.CameraTransform != null)
+            {
+                float fade = 1f - holdT;
+                float time = Time.time * visibleEnemyShakeFrequency;
+                Vector3 shakeOffset = new Vector3(
+                    Mathf.Sin(time),
+                    Mathf.Cos(time * 1.17f),
+                    0f) * (visibleEnemyShakeAmplitude * fade);
+
+                playerController.CameraTransform.localPosition = baseCameraLocalPosition + shakeOffset;
+            }
+
+            yield return null;
+        }
+
+        float zoomOutElapsed = 0f;
+        float currentFov = playerCamera != null ? playerCamera.fieldOfView : baseFov;
+        Vector3 currentCameraLocalPosition = playerController.CameraTransform != null
+            ? playerController.CameraTransform.localPosition
+            : baseCameraLocalPosition;
+
+        while (zoomOutElapsed < visibleEnemyZoomOutDuration)
+        {
+            zoomOutElapsed += Time.deltaTime;
+            float t = visibleEnemyZoomOutDuration > 0f ? Mathf.Clamp01(zoomOutElapsed / visibleEnemyZoomOutDuration) : 1f;
+            float eased = Mathf.SmoothStep(0f, 1f, t);
+
+            if (playerCamera != null)
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(currentFov, baseFov, eased);
+            }
+
+            if (playerController.CameraTransform != null)
+            {
+                playerController.CameraTransform.localPosition = Vector3.Lerp(currentCameraLocalPosition, baseCameraLocalPosition, eased);
+            }
+
+            yield return null;
+        }
+
+        if (playerCamera != null)
+        {
+            playerCamera.fieldOfView = baseFov;
+        }
+
+        if (playerController.CameraTransform != null)
+        {
+            playerController.CameraTransform.localPosition = baseCameraLocalPosition;
+        }
+
+        if (focusedEnemyController != null)
+        {
+            focusedEnemyController.SetTutorialFrozen(false);
+        }
+
+        playerController.SetCanMove(true);
+        visibleEnemyFocusRoutine = null;
+    }
+
+    private Transform FindFocusTarget(string objectName)
+    {
+        GameObject found = GameObject.Find(objectName);
+        return found != null ? found.transform : null;
     }
 
     private Action GetStepUpdater(TutorialStep step)

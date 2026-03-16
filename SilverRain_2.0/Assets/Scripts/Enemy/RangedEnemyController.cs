@@ -91,6 +91,8 @@ public class RangedEnemyController : EnemyController
     // Update is called once per frame
     void Update()
     {
+        if (tutorialFrozen) return;
+
         Move();
         CheckPlayerInRange();
     }
