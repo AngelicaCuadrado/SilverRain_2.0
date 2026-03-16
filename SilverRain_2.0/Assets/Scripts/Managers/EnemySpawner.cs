@@ -6,34 +6,41 @@ using UnityEngine.AI;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Player")]
-    public GameObject player;
-    public string playerTag = "Player";
+    [SerializeField, Tooltip("")]
+    private GameObject player;
 
     [Header("Spawn area")]
-    public GameObject spawnArea;
+    [SerializeField, Tooltip("")]
+    private GameObject spawnArea;
 
     [Header("Distance constraints")]
-    public float minDistance = 5f;
-    public float maxDistance = 30f;
+    [SerializeField, Tooltip("")]
+    private float minDistance = 5f;
+    [SerializeField, Tooltip("")]
+    private float maxDistance = 30f;
 
     [Header("Spawn timing")]
-    public float spawnDelay = 1.0f;
-    public int maxAttemptsPerSpawn = 20;
+    [SerializeField, Tooltip("")]
+    private float spawnDelay = 1.0f;
+    [SerializeField, Tooltip("")]
+    private int maxAttemptsPerSpawn = 20;
 
     // [Header("Enemy prefabs")]
     // public List<GameObject> enemyPrefabs = new List<GameObject>();
 
     [Header("Collision checks")]
-    public float spawnCheckRadius = 0.5f;
-    public LayerMask blockingLayers = ~0;
+    [SerializeField, Tooltip("")]
+    private float spawnCheckRadius = 0.5f;
+    [SerializeField, Tooltip("")]
+    private LayerMask blockingLayers = ~0;
     
     [Header("Object Pooling")]
     private ObjectPooler objectPooler;
     [SerializeField] private List<string> enemyPoolKeys = new List<string>();
     
-    bool _spawning = false;
-    Bounds _areaBounds;
-    bool _haveAreaBounds = false;
+    private bool _spawning = false;
+    private Bounds _areaBounds;
+    private bool _haveAreaBounds = false;
     private NavMeshPath _navPath;
 
     void Start()
@@ -41,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
         //Find playerTrans if not assigned
         if (player == null)
         {
-            var p = GameObject.FindGameObjectWithTag(playerTag);
+            var p = PlayerFinder.Instance.Player;
             if (p != null) player = p;
         }
 

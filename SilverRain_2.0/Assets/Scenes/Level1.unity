@@ -33302,7 +33302,7 @@ MonoBehaviour:
   spawnArea: {fileID: 359638761}
   minDistance: 5
   maxDistance: 30
-  spawnDelay: 2.5
+  spawnDelay: 10
   maxAttemptsPerSpawn: 20
   spawnCheckRadius: 0.5
   blockingLayers:
