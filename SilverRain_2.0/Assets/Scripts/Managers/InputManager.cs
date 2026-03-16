@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
     private InputAction _look;
     private InputAction _jump;
     private InputAction _pause;
+    private InputAction _resume;
     
     /// <summary>Reads current Move value. If _move is null, returns Vector2.zero.</summary>
     public Vector2 Move => _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
@@ -32,6 +33,8 @@ public class InputManager : MonoBehaviour
 
     /// <summary>Raised when Pause is performed.</summary>
     public UnityEvent OnPause;
+
+    public UnityEvent OnResume;
 
     private void Awake()
     {
@@ -50,12 +53,15 @@ public class InputManager : MonoBehaviour
         _look = Actions != null ? Actions.FindAction("Gameplay/Look", throwIfNotFound: false) : null;
         _jump = Actions != null ? Actions.FindAction("Gameplay/Jump", throwIfNotFound: false) : null;
         _pause = Actions != null ? Actions.FindAction("Gameplay/Pause", throwIfNotFound: false) : null;
+        _resume = Actions != null ? Actions.FindAction("UI/Resume", throwIfNotFound: false) : null;
 
         // Bind events only if actions exist (prevents NullReference in misconfigured projects).
         if (_jump != null)
            _jump.performed += _ => OnJump?.Invoke();
         if (_pause != null)
             _pause.performed += _ => OnPause?.Invoke();
+        if (_resume != null)
+            _resume.performed += _ => OnResume?.Invoke();
     }
 
     /// <summary>

@@ -9,36 +9,50 @@ public class EnemyHealth : MonoBehaviour
     public static event Action<EnemyHealth> OnEnemyKilled;
 
     [Header("Health")]
-    [SerializeField] private int baseHealth = 100;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private ParticleSystem bloodSplatterPrefab;
-    [SerializeField] private string sfxID;
+    [SerializeField, Tooltip("")]
+    private int baseHealth = 100;
+    [SerializeField, Tooltip("")]
+    private int currentHealth;
+    [SerializeField, Tooltip("")]
+    private ParticleSystem bloodSplatterPrefab;
+    [SerializeField, Tooltip("")]
+    private string sfxID;
 
-    [Header("Components")]
-    public Animator animator;
+    [Header("References")]
+    [SerializeField, Tooltip("")]
     private Enemy enemy;
+    [SerializeField, Tooltip("")]
+    private Rigidbody rb;
+    [SerializeField, Tooltip("")]
+    private Animator animator;
+    [SerializeField, Tooltip("")]
     private EnemyController controller;
-    private PlayerExperience player;
-    private bool isDead;
+    [SerializeField, Tooltip("")]
+    private PlayerExperience playerExp;
+    [SerializeField, Tooltip("")]
+    private NavMeshAgent agent;
     //private AudioSource audioSource;
 
     void Start()
     {
-        currentHealth = baseHealth;
-        isDead = false;
-        enemy = GetComponent<Enemy>();
-        animator = GetComponentInChildren<Animator>();
-        controller = GetComponent<EnemyController>();
-        player = FindFirstObjectByType<PlayerExperience>();
+        float multiplier = (StageManager.Instance != null) ? StageManager.Instance.GetHealthMultiplier() : 1f;
+        currentHealth = Mathf.RoundToInt(baseHealth * multiplier);
+
+        if (PlayerFinder.Instance.Player == null) { Debug.Log("EnemyHealth couldn't find player"); return; }
+        playerExp = PlayerFinder.Instance.Player.GetComponent<PlayerExperience>();
+
+        //enemy = GetComponent<Enemy>();
+        //animator = GetComponentInChildren<Animator>();
+        //controller = GetComponent<EnemyController>();
         //audioSource = gameObject.AddComponent<AudioSource>();
     }
-    
+
     public void TakeDamage(int damage)
     {
         if (isDead) return;
 
         currentHealth -= damage;
-        
+
         AudioManager.Instance.PlaySFX(sfxID);
 
         if (currentHealth <= 0)
@@ -63,46 +77,74 @@ public class EnemyHealth : MonoBehaviour
 
     public void ResetHealth()
     {
-        currentHealth = baseHealth;
-        isDead = false;
+        float multiplier = (StageManager.Instance != null) ? StageManager.Instance.GetHealthMultiplier() : 1f;
+        currentHealth = Mathf.RoundToInt(baseHealth * multiplier);
+
+        // Enable collision
         foreach (var col in GetComponentsInChildren<Collider>())
         {
             col.enabled = true;
         }
+        // Enable physics
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        // Enable components
+        if (agent != null) agent.enabled = true;
+        if (controller != null) controller.enabled = true;
     }
-    
+
     private void Die()
     {
-        if (isDead) return;
-        isDead = true;
-
-        OnEnemyKilled?.Invoke(this);
-
+        // Disable collision
         foreach (var col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
         }
-        
-        // disable NaveMeshAgent, not Destroy
-        var agent = GetComponent<NavMeshAgent>();
+        // Disable physics
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        // Disable components
         if (agent != null) agent.enabled = false;
-        
-        StartCoroutine(DeathCoroutine());
+        if (controller != null) controller.enabled = false;
+
+        // Give player rewards
+        playerExp.GainExp(enemy.XPValue);
+        ScoreManager.Instance.AddScore(enemy.ScoreValue);
+
+        // Start animation
+        animator.SetBool("isDead", true);
     }
 
-    // replace Destroy with ReturnToPool
+    // This will be called by "Death" animation event
+    // Ensure the event has exactly the same name as this method
+    public void DieAnimFinished()
+    {
+        animator.SetBool("isDead", false);
+        ReturnToPool();
+    }
+
     IEnumerator DeathCoroutine()
     {
         animator.SetBool("isDead", true);
-        //Destroy(controller);
         if (controller != null) controller.enabled = false;
-        
-        player.GainExp(enemy.RewardXP());
-        GameManager.Instance.AddScore(enemy.RewardScore());
-        
+
+        playerExp.GainExp(enemy.XPValue);
+        ScoreManager.Instance.AddScore(enemy.ScoreValue);
+
         yield return new WaitForSeconds(3);
-        
-        //Destroy(gameObject);
-        enemy.ReturnToPool();
+
+        //ReturnToPool();
+    }
+
+    private void ReturnToPool()
+    {
+        if (enemy.PoolKey != null)
+        {
+            EnemyManager.Instance.EnemyPool.ReturnToPool(gameObject, enemy.PoolKey);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

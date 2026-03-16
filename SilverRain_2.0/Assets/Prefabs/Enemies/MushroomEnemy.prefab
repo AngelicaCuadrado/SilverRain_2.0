@@ -455,7 +455,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5959297718867604428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 1bb511c8a05be7d4aab86bc7439e73f3, type: 3}
   m_Controller: {fileID: 9100000, guid: 020683beeec440dbad4cb5ded3893786, type: 2}
   m_CullingMode: 1
@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 6246851165708670800}
   - component: {fileID: 1393219349111478000}
   - component: {fileID: 4061326125157589883}
+  - component: {fileID: 7015870952126441654}
   - component: {fileID: 5859134246545887740}
   - component: {fileID: 8973529461620218559}
   - component: {fileID: 8772887970067952615}
@@ -628,11 +629,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171d04e69e856aa4583514567da64109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: {fileID: 1393219349111478000}
+  controller: {fileID: 4061326125157589883}
   scoreValue: 30
   xpValue: 30
   damage: 3
-  pooler: {fileID: 0}
+  poolKey: MushroomEnemyPool
   stageParticlePrefab: {fileID: 0}
+  _stageParticleInstance: {fileID: 0}
 --- !u!114 &1393219349111478000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +653,12 @@ MonoBehaviour:
   currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   sfxID: sfx_enemy1_hurt
-  animator: {fileID: 0}
+  enemy: {fileID: 6246851165708670800}
+  rb: {fileID: 8772887970067952615}
+  animator: {fileID: 7015870952126441654}
+  controller: {fileID: 4061326125157589883}
+  playerExp: {fileID: 0}
+  agent: {fileID: 5859134246545887740}
 --- !u!114 &4061326125157589883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,16 +671,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf3c3d3fb952f24ca318ab2bafc1c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemyController
-  moveSpeed: 3
+  enemy: {fileID: 6246851165708670800}
+  agent: {fileID: 5859134246545887740}
+  animator: {fileID: 1718652154023762019}
   targetPlayer: {fileID: 0}
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  enemy: {fileID: 0}
-  timeBetweenAttacks: 1
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  playerHealth: {fileID: 0}
+  moveSpeed: 3
+  lastKnownPlayerPos: {x: 0, y: 0, z: 0}
   attackRange: 2
+  timeBetweenAttacks: 1
+  attackTimer: 0
+--- !u!95 &7015870952126441654
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440275271134425223}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 1bb511c8a05be7d4aab86bc7439e73f3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 020683beeec440dbad4cb5ded3893786, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!195 &5859134246545887740
 NavMeshAgent:
   m_ObjectHideFlags: 0

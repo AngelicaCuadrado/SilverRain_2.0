@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8035467484488372726}
   - component: {fileID: 9073576300250767747}
   - component: {fileID: 5228954754982050912}
+  - component: {fileID: 6092674623967375512}
   - component: {fileID: 2202081110830949105}
   m_Layer: 0
   m_Name: '@GameManager'
@@ -50,6 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   mainMenuWindowPrefab: {fileID: 8869591147819472989, guid: b67c1eda66df19949978e4c9f8c48e63, type: 3}
   hudWindowPrefab: {fileID: 8067879667487446795, guid: d36fde660ca62174181d521cb39ae09c, type: 3}
+  levelTimer: 0
+  levelDuration: 0
 --- !u!114 &8035467484488372726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +100,18 @@ MonoBehaviour:
   OnChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6092674623967375512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4236082319897380130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eaf9a0e12c580c4e89fea194081467d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
 --- !u!114 &2202081110830949105
 MonoBehaviour:
   m_ObjectHideFlags: 0

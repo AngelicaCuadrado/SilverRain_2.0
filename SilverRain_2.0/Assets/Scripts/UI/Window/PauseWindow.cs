@@ -1,4 +1,5 @@
 using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,13 +22,17 @@ public class PauseWindow : UIWindow
         resumeButton.onClick.AddListener(Resume);
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(Quit);
+
+        InputManager.Instance.OnResume.AddListener(Resume);
     }
-    
+
     public override void OnPopped()
     {
         resumeButton.onClick.RemoveListener(Resume);
         settingsButton.onClick.RemoveListener(OpenSettings);
         quitButton.onClick.RemoveListener(Quit);
+
+        InputManager.Instance.OnResume.RemoveListener(Resume);
 
         // Release tokens (safe even if other systems still hold tokens).
         if (_pauseToken != null)

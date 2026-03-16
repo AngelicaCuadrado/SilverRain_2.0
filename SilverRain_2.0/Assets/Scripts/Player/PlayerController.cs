@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Look Settings")]
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float mouseSensitivity = 1f;
-    [SerializeField] private float rotationSmoothSpeed = 10f;
+    //[SerializeField] private float rotationSmoothSpeed = 10f;
     [SerializeField] private float minVerticalAngle = -90f;
     [SerializeField] private float maxVerticalAngle = 90f;
     

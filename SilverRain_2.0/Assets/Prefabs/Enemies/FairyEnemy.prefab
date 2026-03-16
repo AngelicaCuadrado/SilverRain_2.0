@@ -428,7 +428,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490272515637011192}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: fb4ee977e7d532a49ad9b14344240c98, type: 3}
   m_Controller: {fileID: 9100000, guid: 66f116ecdfdf5404e90dea7d753094b3, type: 2}
   m_CullingMode: 1
@@ -1104,6 +1104,7 @@ GameObject:
   - component: {fileID: 8812589260272143275}
   - component: {fileID: 8171431734536988271}
   - component: {fileID: 4890185124704701064}
+  - component: {fileID: 307207782848387410}
   - component: {fileID: 9149116179258776539}
   - component: {fileID: 5577015776767700120}
   - component: {fileID: -2476318076037045738}
@@ -1143,11 +1144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171d04e69e856aa4583514567da64109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: {fileID: 8171431734536988271}
+  controller: {fileID: 4890185124704701064}
   scoreValue: 50
   xpValue: 50
   damage: 3
-  pooler: {fileID: 0}
+  poolKey: FairyEnemyPool
   stageParticlePrefab: {fileID: 0}
+  _stageParticleInstance: {fileID: 0}
 --- !u!114 &8171431734536988271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,7 +1168,12 @@ MonoBehaviour:
   currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   sfxID: sfx_enemy2_hurt
-  animator: {fileID: 0}
+  enemy: {fileID: 8812589260272143275}
+  rb: {fileID: -2476318076037045738}
+  animator: {fileID: 307207782848387410}
+  controller: {fileID: 4890185124704701064}
+  playerExp: {fileID: 0}
+  agent: {fileID: 9149116179258776539}
 --- !u!114 &4890185124704701064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,18 +1186,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174443c45f5cadf4f845c7cb46df8e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedEnemyController
-  moveSpeed: 3
+  enemy: {fileID: 8812589260272143275}
+  agent: {fileID: 9149116179258776539}
+  animator: {fileID: 586629113460790860}
   targetPlayer: {fileID: 0}
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  enemy: {fileID: 0}
-  timeBetweenShots: 2
+  playerHealth: {fileID: 0}
+  moveSpeed: 3
+  lastKnownPlayerPos: {x: 0, y: 0, z: 0}
+  attackRange: 18
+  timeBetweenAttacks: 1
+  attackTimer: 0
   firePoint: {fileID: 8067650495102958602}
   projectilePrefab: {fileID: 2950361553670207421, guid: cf641f75b2f8f6d499633ede35d8cc86, type: 3}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  attackRange: 18
+  projectilePoolKey: EnemyProjectilePool
+--- !u!95 &307207782848387410
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4596657270728130862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: fb4ee977e7d532a49ad9b14344240c98, type: 3}
+  m_Controller: {fileID: 9100000, guid: 66f116ecdfdf5404e90dea7d753094b3, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!195 &9149116179258776539
 NavMeshAgent:
   m_ObjectHideFlags: 0

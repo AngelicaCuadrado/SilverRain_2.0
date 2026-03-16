@@ -11,9 +11,9 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     [Header("Events")]
-    public UnityEvent onPlayerHealthChanged;
-    public UnityEvent onTakeDamage;
-    public static event Action<bool> onDie;
+    [HideInInspector] public UnityEvent onPlayerHealthChanged;
+    [HideInInspector] public UnityEvent onTakeDamage;
+    [HideInInspector] public UnityEvent OnDie;
 
     public bool isInvincible = false;
     private float invincibilityTimer = 0f;
@@ -94,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         // Death logic here
-        onDie?.Invoke(false);
+        OnDie?.Invoke();
         //GameManager.Instance.PauseGame();
         
         // FOR TESTING HERE ONLY

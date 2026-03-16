@@ -10,7 +10,7 @@ public class PauseManager : MonoBehaviour
     // Each Acquire() returns a unique token. We store them in a set.
     private readonly HashSet<object> _tokens = new();
 
-    private bool IsPaused => _tokens.Count > 0;
+    public bool IsPaused => _tokens.Count > 0;
     
     private void Start()
     {
