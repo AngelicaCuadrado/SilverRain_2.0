@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static event Action OnJumpPerformed;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
@@ -217,6 +219,7 @@ public class PlayerController : MonoBehaviour
 
         // Play jump sound
         AudioManager.Instance.PlaySFX(jumpSfxId);
+        OnJumpPerformed?.Invoke();
     }
     
     private bool CheckGrounded()

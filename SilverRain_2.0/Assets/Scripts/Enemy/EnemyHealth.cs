@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = baseHealth;
         isDead = false;
         enemy = GetComponent<Enemy>();
         animator = GetComponentInChildren<Animator>();
@@ -63,7 +63,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void ResetHealth()
     {
-        currentHealth = maxHealth;
+        currentHealth = baseHealth;
         isDead = false;
         foreach (var col in GetComponentsInChildren<Collider>())
         {

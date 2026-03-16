@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IPoolable
     [SerializeField] private int scoreValue;
     [SerializeField] private float xpValue;
     [SerializeField] public float damage;
+    [SerializeField] private bool startHidden = true;
     //[SerializeField] private float goldValue;
     private Renderer[] renderers;
 
@@ -48,7 +49,15 @@ public class Enemy : MonoBehaviour, IPoolable
 
     private void Initialize()
     {
-        Hide();
+        if (startHidden)
+        {
+            Hide();
+        }
+        else
+        {
+            Reveal();
+        }
+
         if (GlobalInvisibilityManager.Instance.IsActive)
         {
             float remaining = GlobalInvisibilityManager.Instance.InvisibilityTimer;
