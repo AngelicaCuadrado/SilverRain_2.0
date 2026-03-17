@@ -15,6 +15,7 @@ public class ModificationManager : MonoBehaviour
     public UnityEvent<Modification, bool> OnModificationAvailabilityChange;
     public UnityEvent<WeaponType, StatType> OnWeaponStatModificationChange;
     public UnityEvent<ModificationID> OnModificationAquired;
+    public UnityEvent<StatType> OnStatModificationChange;
 
     // Properties
     public List<Modification> AllModifications => allModifications;
@@ -97,6 +98,11 @@ public class ModificationManager : MonoBehaviour
     public void HandleWeaponStatModificationChange(WeaponType weapon, StatType stat)
     {
         OnWeaponStatModificationChange.Invoke(weapon, stat);
+    }
+
+    public void HandleStatModificationChange(StatType stat)
+    {
+        OnStatModificationChange.Invoke(stat);
     }
 
     private void Start()

@@ -29777,6 +29777,7 @@ Transform:
   m_Children:
   - {fileID: 139208680}
   - {fileID: 1487742546}
+  - {fileID: 1151672540}
   m_Father: {fileID: 1221071143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &995017726
@@ -34365,6 +34366,76 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 113.45488, y: 26.856443, z: 113.086395}
   m_Center: {x: 0.13239098, y: 13.423526, z: -0.010353088}
+--- !u!1 &1151672538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151672540}
+  - component: {fileID: 1151672539}
+  - component: {fileID: 1151672541}
+  m_Layer: 0
+  m_Name: Frenzy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1151672539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151672538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a9ae27b81364b48a838fc5e6373fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModificationFrenzy
+  level: 0
+  maxLevel: 1
+  isAvailable: 1
+  isAvailableAtStart: 1
+  uiData: {fileID: 1151672541}
+  modificationName: 
+  description: 
+  id: 3
+--- !u!4 &1151672540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151672538}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 993415685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1151672541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151672538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITemporary
+  buffName: Frenzy
+  buffLevel: 
+  baseBuffDescription: HP<=30%, Attack Damage +50%
+  finalBuffDescription: 
+  buffIcon: {fileID: 21300000, guid: 61dab0b6e506c6a43b12d9fde15b2393, type: 3}
 --- !u!4 &1155507875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 722418011194985934, guid: 87157aa43d3c5e24cbfe349e4ef7caa7, type: 3}
@@ -36911,6 +36982,7 @@ MonoBehaviour:
   allModifications:
   - {fileID: 139208679}
   - {fileID: 1487742547}
+  - {fileID: 1151672539}
   OnModificationAvailabilityChange:
     m_PersistentCalls:
       m_Calls: []
@@ -36918,6 +36990,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnModificationAquired:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatModificationChange:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1221071143
@@ -44538,7 +44613,7 @@ MonoBehaviour:
   uiData: {fileID: 1487742548}
   modificationName: 
   description: 
-  id: 1
+  id: 2
   explosionPrefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
   explosionRadius: 100
   explosionDamage: 1
