@@ -1,11 +1,13 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [FormerlySerializedAs("maxHealth")]
+    public static event Action<EnemyHealth> OnEnemyKilled;
+
     [Header("Health")]
     [SerializeField, Tooltip("")]
     private int baseHealth = 100;
@@ -47,6 +49,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        //if (isDead) return;
+
         currentHealth -= damage;
 
         AudioManager.Instance.PlaySFX(sfxID);

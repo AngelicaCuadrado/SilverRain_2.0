@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static event Action OnJumpPerformed;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
@@ -43,6 +45,9 @@ public class PlayerController : MonoBehaviour
     
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public bool IsGrounded() => _isGrounded;
+    public Transform CameraTransform => cameraTransform;
+    public float CurrentYaw => _yRotation;
+    public float CurrentPitch => _xRotation;
 
     private void Awake()
     {
@@ -217,6 +222,7 @@ public class PlayerController : MonoBehaviour
 
         // Play jump sound
         AudioManager.Instance.PlaySFX(jumpSfxId);
+        OnJumpPerformed?.Invoke();
     }
     
     private bool CheckGrounded()
@@ -254,6 +260,19 @@ public class PlayerController : MonoBehaviour
     public void ResetVelocity()
     {
         _rb.linearVelocity = Vector3.zero;
+    }
+
+    public void SetViewAngles(float yaw, float pitch)
+    {
+        _yRotation = yaw;
+        _xRotation = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
+
+        transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
+
+        if (cameraTransform != null)
+        {
+            cameraTransform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+        }
     }
     #endregion
     

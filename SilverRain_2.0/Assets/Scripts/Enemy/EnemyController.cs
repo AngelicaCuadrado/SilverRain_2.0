@@ -14,6 +14,7 @@ public abstract class EnemyController : MonoBehaviour
     protected GameObject targetPlayer;
     [SerializeField, Tooltip("")]
     protected PlayerHealth playerHealth;
+    protected bool tutorialFrozen; //Raz
 
     [Header("Movement")]
     [SerializeField, Tooltip("")]
@@ -79,4 +80,25 @@ public abstract class EnemyController : MonoBehaviour
 
     public abstract void CheckPlayerInRange();
     public abstract void Attack();
+     public virtual void SetTutorialFrozen(bool isFrozen)
+    {
+        tutorialFrozen = isFrozen;
+
+        if (agent != null && agent.isOnNavMesh)
+        {
+            if (isFrozen)
+            {
+                agent.ResetPath();
+                agent.velocity = Vector3.zero;
+            }
+
+            agent.isStopped = isFrozen;
+        }
+
+        if (animator != null)
+        {
+            animator.SetFloat("speed", 0f);
+            animator.SetBool("isAttacking", false);
+        }
+    }
 }

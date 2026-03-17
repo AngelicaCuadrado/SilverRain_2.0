@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using System;
 
 public abstract class Pickup : MonoBehaviour, IPoolable
 {
+    public static event Action<Pickup> OnAnyPickupCollected;
+
     [Header("Identification")]
     [SerializeField, Tooltip("The key used to identify this pickup in the object pool")]
     protected string poolKey;
@@ -55,6 +58,7 @@ public abstract class Pickup : MonoBehaviour, IPoolable
     public virtual void OnPickup()
     {
         PickupManager.Instance.ClearSpawnSpot(locationIndex);
+        OnAnyPickupCollected?.Invoke(this);
     }
 
     public virtual void OnCreatedPool() { }
