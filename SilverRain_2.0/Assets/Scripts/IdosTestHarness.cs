@@ -40,5 +40,6 @@ public class IdosTestHarness : MonoBehaviour
         {
             WeaponManager.Instance.AddEvolution(WeaponType.Hammer);
         }
+        
     }
 }

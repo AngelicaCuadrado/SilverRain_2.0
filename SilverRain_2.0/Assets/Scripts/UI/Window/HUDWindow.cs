@@ -53,6 +53,11 @@ public class HUDWindow : UIWindow
             RefreshTimer(StageManager.Instance.ElapsedTime);
             RefreshStage(StageManager.Instance.CurrentStage);
         }
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.OnScoreChanged.AddListener(RefreshScore);
+            RefreshScore();
+        }
     }
 
     public override void OnPopped()
@@ -64,6 +69,8 @@ public class HUDWindow : UIWindow
             StageManager.Instance.OnTimerUpdated.RemoveListener(RefreshTimer);
             StageManager.Instance.OnStageChanged.RemoveListener(RefreshStage);
         }
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.OnScoreChanged.RemoveListener(RefreshScore);
     }
 
     private void Update()
@@ -89,15 +96,31 @@ public class HUDWindow : UIWindow
     private void RefreshTimer(float elapsed)
     {
         if (stageBar == null) return;
-        float stagePercentage = (elapsed % 60f) / 60f;
-        stageBar.value = stagePercentage;
+        int stage = StageManager.Instance.CurrentStage;
+        if (stage != 5)
+        {
+            float stagePercentage = (elapsed % 60f) / 60f;
+            stageBar.value = stagePercentage;
+        }
+        else
+        {
+            stageBar.value = 1f;
+        }
+        
     }
 
     private void RefreshStage(int stage)
     {
         if (stageText != null) 
         {
-            stageText.text = $"Stage. {stage}";
+            stageText.text = stage==5 ? "Stage. Max" : $"Stage. {stage}";
         }
+    }
+    
+    private void RefreshScore()
+    {
+        int score = ScoreManager.Instance.GetScore();
+        if (scoreText != null) 
+            scoreText.text = $"Score: {score}";
     }
 }

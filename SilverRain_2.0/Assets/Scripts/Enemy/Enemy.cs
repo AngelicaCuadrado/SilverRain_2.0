@@ -106,16 +106,16 @@ public class Enemy : MonoBehaviour, IPoolable
     {
         //Subscribe to events
         GlobalInvisibilityManager.Instance.OnGlobalReveal.AddListener(RevealTimed);
-        if (StageManager.Instance != null)
-            StageManager.Instance.OnStageChanged.AddListener(ApplyStageVFX);
+        // if (StageManager.Instance != null)
+        //     StageManager.Instance.OnStageChanged.AddListener(ApplyStageVFX);
     }
 
     private void OnDisable()
     {
         //Unsubscribe from events
         GlobalInvisibilityManager.Instance.OnGlobalReveal.RemoveListener(RevealTimed);
-        if (StageManager.Instance != null)
-            StageManager.Instance.OnStageChanged.RemoveListener(ApplyStageVFX);
+        // if (StageManager.Instance != null)
+        //     StageManager.Instance.OnStageChanged.RemoveListener(ApplyStageVFX);
     }
 
     public void Reveal()
@@ -150,29 +150,10 @@ public class Enemy : MonoBehaviour, IPoolable
     private void ApplyStageVFX(int stage)
     {
         if (StageManager.Instance == null) return;
-
-        Color emissionColor = StageManager.Instance.GetStageEmissionColor();
-        _mpb.SetColor(EmissionColorID, emissionColor);
-        foreach (var r in renderers)
-        {
-            r.SetPropertyBlock(_mpb);
-        }
-
-        if (_stageParticleInstance != null)
-        {
-            float rate = StageManager.Instance.GetStageParticleRate();
-            var emission = _stageParticleInstance.emission;
-            emission.rateOverTime = rate;
-
-            if (rate > 0f)
-            {
-                if (!_stageParticleInstance.isPlaying) _stageParticleInstance.Play();
-            }
-            else
-            {
-                _stageParticleInstance.Stop();
-            }
-        }
+    
+        EnemyEdgeGlow glow = GetComponent<EnemyEdgeGlow>();
+        if (glow != null)
+            glow.ApplyBuffVisual();
     }
 
     private void OnDrawGizmos()

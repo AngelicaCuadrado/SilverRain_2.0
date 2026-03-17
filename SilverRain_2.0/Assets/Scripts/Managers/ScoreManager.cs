@@ -1,11 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance { get; private set; }
-    private float currentScore;
-    public static UnityEvent OnScoreChanged;
+    public static ScoreManager Instance;
+    private int currentScore = 0;
+    public UnityEvent OnScoreChanged;
 
     private void Awake()
     {
@@ -18,13 +19,19 @@ public class ScoreManager : MonoBehaviour
         Instance = this;
     }
 
-    public void AddScore(float amount)
+    public void AddScore(int amount)
     {
+        currentScore += amount;
+        OnScoreChanged?.Invoke();
+    }
 
+    public int GetScore()
+    {
+        return currentScore;
     }
 
     public void ResetScore()
     {
-
+        currentScore = 0;
     }
 }

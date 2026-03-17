@@ -33538,7 +33538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   player: {fileID: 135736913}
-  playerTag: Player
   spawnArea: {fileID: 359638761}
   minDistance: 5
   maxDistance: 30
@@ -33569,16 +33568,10 @@ MonoBehaviour:
   stageDuration: 60
   stageEmissionColors:
   - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 2, g: 1.8, b: 0, a: 2}
-  - {r: 2, g: 1, b: 0, a: 2}
-  - {r: 2, g: 0, b: 0, a: 2}
-  - {r: 1, g: 0, b: 0, a: 2}
-  stageParticleRates:
-  - 0
-  - 0
-  - 5
-  - 15
-  - 30
+  - {r: 0.3, g: 0.7, b: 1, a: 1}
+  - {r: 0.7, g: 0.3, b: 1, a: 1}
+  - {r: 1, g: 0.5, b: 0.1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
   healthMultipliers:
   - 1
   - 1.1
@@ -33591,6 +33584,8 @@ MonoBehaviour:
   OnTimerUpdated:
     m_PersistentCalls:
       m_Calls: []
+  _elapsedTime: 0
+  _currentStage: 0
 --- !u!1001 &1119840338
 PrefabInstance:
   m_ObjectHideFlags: 0
