@@ -27,7 +27,7 @@ public class LevelSelectWindow : UIWindow
     
     private void BindUIEvents()
     {
-        level1Button.onClick.AddListener(LevelSelect("Level1"));
+        level1Button.onClick.AddListener(LevelSelect("Ido"));
         level2Button.onClick.AddListener(LevelSelect("Level2"));
         level3Button.onClick.AddListener(LevelSelect("Level3"));
         backButton.onClick.AddListener(Back);
@@ -36,7 +36,7 @@ public class LevelSelectWindow : UIWindow
 
     private void UnbindUIEvents()
     {
-        level1Button.onClick.RemoveListener(LevelSelect("Level1"));
+        level1Button.onClick.RemoveListener(LevelSelect("Ido"));
         level2Button.onClick.RemoveListener(LevelSelect("Level2"));
         level3Button.onClick.RemoveListener(LevelSelect("Level3"));
         backButton.onClick.RemoveListener(Back);
@@ -45,13 +45,9 @@ public class LevelSelectWindow : UIWindow
 
     private UnityAction LevelSelect(string levelName)
     {
-        // Temporary solution, may later invoke GameManager or SceneManager
-        
         return () =>
         {
-            UIManager.Instance.ShowLoading(true);
-            SceneManager.LoadSceneAsync(levelName);
-            UIManager.Instance.ShowLoading(false);
+            GameManager.Instance.ChangeLevel(levelName);
             UIManager.Instance.Clear();
             InputManager.Instance.Apply(InputMode.Gameplay);
         };

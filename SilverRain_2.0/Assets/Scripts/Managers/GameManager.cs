@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -12,6 +13,10 @@ public class GameManager : MonoBehaviour
     private MainMenuWindow mainMenuWindowPrefab;
     [SerializeField, Tooltip("")]
     private HUDWindow hudWindowPrefab;
+    [SerializeField]
+    private WinWindow winWindowPrefab;
+    [SerializeField]
+    private LostWindow lostWindowPrefab;
 
     [Header("Level Time")]
     [SerializeField, Tooltip("")]
@@ -54,20 +59,27 @@ public class GameManager : MonoBehaviour
     {
         if (PauseManager.Instance.IsPaused) return;
 
-        levelTimer += Time.deltaTime;
-        if (levelTimer >= levelDuration)
+        if (IsPlayableLevel(SceneManager.GetActiveScene()))
         {
-            WinLevel();
+            levelTimer += Time.deltaTime;
+            if (levelTimer > levelDuration)
+            {
+                WinLevel();
+            }
         }
+            
     }
 
     public void ChangeLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        UIManager.Instance.ShowLoading(true);
+        SceneManager.LoadSceneAsync(levelName);
+        UIManager.Instance.ShowLoading(false);
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        ScoreManager.Instance.ResetScore();
         //Debug.Log($"[GameManager] OnSceneLoaded: {scene.name}, IsPlayable: {IsPlayableLevel(scene)}");
         // Clean up all UI from previous scene
         UIManager.Instance.Clear();
@@ -85,6 +97,7 @@ public class GameManager : MonoBehaviour
             InputManager.Instance.Apply(InputMode.Gameplay);
             UIManager.Instance.ShowOverlay("HUD", hudWindowPrefab);
             OnLevelStart?.Invoke();
+            levelDuration = 300f;
 
             if (PlayerFinder.Instance.Player.TryGetComponent<PlayerHealth>(out PlayerHealth ph))
             {
@@ -104,14 +117,20 @@ public class GameManager : MonoBehaviour
         return scene.name != "MainMenu";
     }
 
-    private void WinLevel()
+    public void WinLevel()
     {
-
+        GoldManager.Instance.GainGold(ScoreManager.Instance.GetScore() * 1.5f);
+        InputManager.Instance.Apply(InputMode.UI);
+        UIManager.Instance.ClearOverlay("HUD");
+        UIManager.Instance.Push(winWindowPrefab);
     }
 
-    private void LoseLevel()
+    public void LoseLevel()
     {
-
+        GoldManager.Instance.GainGold(ScoreManager.Instance.GetScore() * 0.8f);
+        InputManager.Instance.Apply(InputMode.UI);
+        UIManager.Instance.ClearOverlay("HUD");
+        UIManager.Instance.Push(lostWindowPrefab);
     }
 
     private void OnDestroy()

@@ -51,8 +51,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   mainMenuWindowPrefab: {fileID: 8869591147819472989, guid: b67c1eda66df19949978e4c9f8c48e63, type: 3}
   hudWindowPrefab: {fileID: 8067879667487446795, guid: d36fde660ca62174181d521cb39ae09c, type: 3}
+  winWindowPrefab: {fileID: 5584736908731938592, guid: 473297ab69a69e849a09be0f46a2d8d3, type: 3}
+  lostWindowPrefab: {fileID: 3098151471191658049, guid: 02dc2f12485905d439df3d5e6e5668e0, type: 3}
   levelTimer: 0
   levelDuration: 0
+  playerHealth: {fileID: 0}
 --- !u!114 &8035467484488372726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +73,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnPause:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResume:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &9073576300250767747
@@ -112,6 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaf9a0e12c580c4e89fea194081467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  OnScoreChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2202081110830949105
 MonoBehaviour:
   m_ObjectHideFlags: 0

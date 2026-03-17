@@ -13,13 +13,11 @@ public class StageManager : MonoBehaviour
     [SerializeField] private Color[] stageEmissionColors =
     {
         Color.black,
-        new Color(1.0f, 0.9f, 0.0f) * 2f,
-        new Color(1.0f, 0.5f, 0.0f) * 2f,
-        new Color(1.0f, 0.0f, 0.0f) * 2f,
-        new Color(0.5f, 0.0f, 0.0f) * 2f,
+        new Color(0.3f, 0.7f, 1.0f),    // blue
+        new Color(0.7f, 0.3f, 1.0f),    // purple
+        new Color(1.0f, 0.5f, 0.1f),    // orange
+        new Color(1.0f, 0.0f, 0.0f),    // red
     };
-
-    [SerializeField] private float[] stageParticleRates = { 0f, 0f, 5f, 15f, 30f };
     
     [Header("Enemy Settings")]
     [SerializeField] private float[] healthMultipliers = { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f};
@@ -27,8 +25,8 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public UnityEvent<int> OnStageChanged;
     [HideInInspector] public UnityEvent<float> OnTimerUpdated;
     
-    private float _elapsedTime = 0f;
-    private int _currentStage = 0;
+    [SerializeField] private float _elapsedTime = 0f;
+    [SerializeField] private int _currentStage = 0;
     private bool _isRunning = false;
     
     public int CurrentStage => _currentStage;
@@ -44,12 +42,6 @@ public class StageManager : MonoBehaviour
     {
         int index = Mathf.Clamp(_currentStage - 1, 0, stageEmissionColors.Length - 1);
         return stageEmissionColors[index];
-    }
-
-    public float GetStageParticleRate()
-    {
-        int index = Mathf.Clamp(_currentStage - 1, 0, stageParticleRates.Length - 1);
-        return stageParticleRates[index];
     }
 
     private void Awake()

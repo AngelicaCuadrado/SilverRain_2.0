@@ -60,6 +60,6 @@ public class PauseWindow : UIWindow
 
     private void Quit()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        GameManager.Instance.ChangeLevel("MainMenu");
     }
 }

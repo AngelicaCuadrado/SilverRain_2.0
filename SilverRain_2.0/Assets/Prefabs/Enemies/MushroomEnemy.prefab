@@ -526,7 +526,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b14a408ea91d4c47beba346957a3d99, type: 2}
+  - {fileID: 2100000, guid: 2f18323fd6e4f0f48a13441793f6206a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -594,6 +594,7 @@ GameObject:
   - component: {fileID: 5859134246545887740}
   - component: {fileID: 8973529461620218559}
   - component: {fileID: 8772887970067952615}
+  - component: {fileID: 4148682569660442229}
   m_Layer: 7
   m_Name: MushroomEnemy
   m_TagString: Enemy
@@ -775,6 +776,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4148682569660442229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440275271134425223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fe89e3798f93c4c918e06a2061bb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEdgeGlow
+  renderers:
+  - {fileID: 4355984434015026097}
+  buffLevel: 0
+  rimPower: 4
+  rimIntensity: 1
 --- !u!1 &7960910677987272505
 GameObject:
   m_ObjectHideFlags: 0

@@ -945,7 +945,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 211a2e5fd1a88e74d82918808c385197, type: 2}
+  - {fileID: 2100000, guid: a192e842ac2cde6498123dae3aa92911, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 9149116179258776539}
   - component: {fileID: 5577015776767700120}
   - component: {fileID: -2476318076037045738}
+  - component: {fileID: 538609987553336894}
   m_Layer: 7
   m_Name: FairyEnemy
   m_TagString: Enemy
@@ -1293,6 +1294,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &538609987553336894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4596657270728130862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fe89e3798f93c4c918e06a2061bb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEdgeGlow
+  renderers:
+  - {fileID: 9000086995768781873}
+  buffLevel: 0
+  rimPower: 4
+  rimIntensity: 1
 --- !u!1 &4621478852995147773
 GameObject:
   m_ObjectHideFlags: 0
