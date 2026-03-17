@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -43,6 +44,7 @@ public class WeaponManager : MonoBehaviour
     
     //Properties
     public Dictionary<WeaponType, Weapon> AllWeapons => allWeapons;
+    public Dictionary<WeaponType, Weapon> CurrentWeapons => currentWeapons;
     public WeaponType InitialWeapon { get => initialWeapon; set => initialWeapon = value; }
     public ObjectPooler ProjectilePool => projectilePool;
     public ObjectPooler EffectsPool => effectsPool;
@@ -102,7 +104,17 @@ public class WeaponManager : MonoBehaviour
 
         // Subscribe to modification events
         ModificationManager.Instance.OnWeaponStatModificationChange.AddListener(RecalculateStats);
+        ModificationManager.Instance.OnStatModificationChange.AddListener(AllWeaponRecalculate);
     }
+
+    private void AllWeaponRecalculate(StatType stat)
+    {
+        foreach (var weaponType in currentWeapons.Keys)
+        {
+            currentWeapons[weaponType].RecalculateStats(stat);
+        }
+    }
+
     public void AddWeapon(WeaponType type)
     {
         if (type == WeaponType.None) { return; }

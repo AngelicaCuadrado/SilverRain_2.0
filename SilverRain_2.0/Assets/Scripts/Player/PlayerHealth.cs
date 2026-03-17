@@ -14,6 +14,11 @@ public class PlayerHealth : MonoBehaviour
     [HideInInspector] public UnityEvent onPlayerHealthChanged;
     [HideInInspector] public UnityEvent onTakeDamage;
     [HideInInspector] public UnityEvent OnDie;
+    [HideInInspector] public UnityEvent<bool> onLowHealthStateChanged;
+    [HideInInspector] public UnityEvent<bool> onHighHealthStateChanged;
+
+    private bool isLowHealth = false;
+    private bool isHighHealth = false;
 
     public bool isInvincible = false;
     private float invincibilityTimer = 0f;
@@ -55,6 +60,8 @@ public class PlayerHealth : MonoBehaviour
 
         onTakeDamage?.Invoke();
         onPlayerHealthChanged?.Invoke();
+        CheckLowHealthState();
+        CheckHighHealthState();
 
         if (currentHealth <= 0f)
         {
@@ -68,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         
         onPlayerHealthChanged?.Invoke();
+        CheckHighHealthState();
+        CheckLowHealthState();
     }
 
     private IEnumerator RegenHealth()
@@ -110,5 +119,25 @@ public class PlayerHealth : MonoBehaviour
     public float GetHealthPercentage()
     {
         return currentHealth / maxHealth;
+    }
+
+    private void CheckLowHealthState()
+    {
+        bool newLowHealthState = GetHealthPercentage() <= 0.3f;
+
+        if (newLowHealthState == isLowHealth) return;
+
+        isLowHealth = newLowHealthState;
+        onLowHealthStateChanged?.Invoke(isLowHealth);
+    }
+
+    private void CheckHighHealthState()
+    {
+        bool newHighHealthState = GetHealthPercentage() >= 0.8f;
+
+        if (newHighHealthState == isHighHealth) return;
+
+        isHighHealth = newHighHealthState;
+        onHighHealthStateChanged?.Invoke(isHighHealth);
     }
 }

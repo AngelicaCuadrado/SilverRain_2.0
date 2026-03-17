@@ -1,23 +1,48 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ModificationFrenzy : Modification, IStatModifier
 {
+    private bool isActive = false;
+    private PlayerHealth playerHealth;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         base.Start();
+
+        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.onLowHealthStateChanged.AddListener(OnLowHealthStateChanged);
+
+            OnLowHealthStateChanged(playerHealth.GetHealthPercentage() <= 0.3f);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnLowHealthStateChanged(bool lowHealth)
     {
-        
+        if (isActive == lowHealth) return;
+
+        isActive = lowHealth;
+        ModificationManager.Instance.HandleStatModificationChange(StatType.AttackDamage);
     }
 
     public float GetModifyValue(StatType type)
     {
-        throw new System.NotImplementedException();
+        if (!isActive) return 0f;
+
+        if (type == StatType.AttackDamage)
+        {
+            return 0.5f; // AttackDamage +50%
+        }
+
+        return 0f;
     }
 
+    private void OnDestroy()
+    {
+        if (playerHealth != null)
+        {
+            playerHealth.onLowHealthStateChanged.RemoveListener(OnLowHealthStateChanged);
+        }
+    }
 }
