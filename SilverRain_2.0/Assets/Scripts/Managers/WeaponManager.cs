@@ -104,16 +104,8 @@ public class WeaponManager : MonoBehaviour
 
         // Subscribe to modification events
         ModificationManager.Instance.OnWeaponStatModificationChange.AddListener(RecalculateStats);
-        ModificationManager.Instance.OnStatModificationChange.AddListener(AllWeaponRecalculate);
     }
 
-    private void AllWeaponRecalculate(StatType stat)
-    {
-        foreach (var weaponType in currentWeapons.Keys)
-        {
-            currentWeapons[weaponType].RecalculateStats(stat);
-        }
-    }
 
     public void AddWeapon(WeaponType type)
     {

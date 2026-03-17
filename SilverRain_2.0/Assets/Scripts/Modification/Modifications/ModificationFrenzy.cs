@@ -23,7 +23,7 @@ public class ModificationFrenzy : Modification, IStatModifier
         if (isActive == lowHealth) return;
 
         isActive = lowHealth;
-        ModificationManager.Instance.HandleStatModificationChange(StatType.AttackDamage);
+        StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
     }
 
     public float GetModifyValue(StatType type)
