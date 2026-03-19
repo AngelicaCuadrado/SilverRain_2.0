@@ -200,7 +200,7 @@ public class StatManager : MonoBehaviour
 
     public void UpdateTempStats(StatType type)
     {
-        if (currentTempUpgrades.ContainsKey(type))
+        //if (currentTempUpgrades.ContainsKey(type))
         {
             float newValue = CalculateStat(type);
             switch (type)
