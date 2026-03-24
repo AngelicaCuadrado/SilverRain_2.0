@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -72,8 +73,24 @@ public class GameManager : MonoBehaviour
 
     public void ChangeLevel(string levelName)
     {
+        StartCoroutine(ChangeLevelRoutine(levelName));
+        // UIManager.Instance.ShowLoading(true);
+        // SceneManager.LoadSceneAsync(levelName);
+        // UIManager.Instance.ShowLoading(false);
+    }
+
+    private IEnumerator ChangeLevelRoutine(string levelName)
+    {
         UIManager.Instance.ShowLoading(true);
-        SceneManager.LoadSceneAsync(levelName);
+        yield return null;
+        
+        AsyncOperation async = SceneManager.LoadSceneAsync(levelName);
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+        
         UIManager.Instance.ShowLoading(false);
     }
 
