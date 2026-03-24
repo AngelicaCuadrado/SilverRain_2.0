@@ -6,8 +6,6 @@ public enum ModificationID
     LightMetal,
     RapidFire,
 
-    ExplodingBullets,
-
     //Low HP BD
     Frenzy,
     DesperatePower,
@@ -20,5 +18,27 @@ public enum ModificationID
     StableEnergy,
     VitalRegeneration,
     CombatRecovery,
-    PrecisionShot
+    PrecisionShot,
+
+    // Weapon Modifications
+    
+    // Pistol
+    ExplodingBullets,
+    BouncingBullets,
+
+    // Sword
+    DoubleSword,
+    BeamSword,
+
+    // Grenade
+    DoubleExplosion,
+    FalloutZone,
+
+    // Hammer
+    HeavyMetal,
+    ChainReaction,
+
+    // Chakram
+    ExplodingBoomerang,
+    HalfChakram,
 }

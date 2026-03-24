@@ -41,9 +41,6 @@ public class ChakramProjectile : Projectile, IPoolable
         {
             lifeCoroutine = StartCoroutine(LifeTimer());
         }
-
-        //Apply modifications
-        parentWeapon.HandleProjectileSpawn();
     }
     private void Update()
     {

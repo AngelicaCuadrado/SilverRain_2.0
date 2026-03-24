@@ -8,6 +8,8 @@ public class Sword : Weapon
     protected Transform playerTrans;
     [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
     protected float spawnAngleOffset = 90f;
+    [SerializeField, Tooltip("")]
+    protected float startAngle = 90f;
 
     private void LateUpdate()
     {
@@ -75,9 +77,17 @@ public class Sword : Weapon
             Destroy(projObj);
             return;
         }
-        proj.Init(this, playerTrans, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
+        proj.Init(
+            this,
+            playerTrans,
+            weaponStats.Damage,
+            weaponStats.Duration,
+            weaponStats.Size,
+            weaponStats.ProjectileSpeed,
+            startAngle
+            );
         // Notify the WeaponManager about the projectile spawn
-        HandleProjectileSpawn();
+        HandleProjectileSpawn(projObj);
     }
     #endregion
 }

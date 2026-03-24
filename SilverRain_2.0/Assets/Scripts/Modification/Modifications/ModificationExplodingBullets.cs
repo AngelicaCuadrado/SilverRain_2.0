@@ -8,9 +8,11 @@ public class ModificationExplodingBullets : Modification
     float explosionRadius = 10; //Testing value, needs refinement
     [SerializeField]
     int explosionDamage = 10; //Testing value, needs refinement
-    public override void ApplyEffect()
-    {
 
+    public override void Start()
+    {
+        base.Start();
+        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
     }
 
     public override void Activate()

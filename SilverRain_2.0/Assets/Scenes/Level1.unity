@@ -4005,7 +4005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 4.21
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28485,7 +28485,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d6be8ec4afee58e488bb53c1e2d31c0f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a1508b5a1b91dd04399b4917684851bc, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &955617734 stripped
 Transform:
@@ -33542,7 +33542,7 @@ MonoBehaviour:
   spawnArea: {fileID: 359638761}
   minDistance: 5
   maxDistance: 30
-  spawnDelay: 10
+  spawnDelay: 2.5
   maxAttemptsPerSpawn: 20
   spawnCheckRadius: 0.5
   blockingLayers:
@@ -48550,7 +48550,7 @@ Transform:
   m_GameObject: {fileID: 1621451269}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -500, y: 0.2, z: -500.00003}
+  m_LocalPosition: {x: -100, y: 0.2, z: -100}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -49902,7 +49902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1664706743
 MonoBehaviour:
   m_ObjectHideFlags: 0

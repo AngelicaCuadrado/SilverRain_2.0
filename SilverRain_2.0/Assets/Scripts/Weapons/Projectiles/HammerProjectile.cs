@@ -46,9 +46,6 @@ public class HammerProjectile : Projectile
         //Scale the gameobject based on size
         //if (size < 1f) size = 1f;
         //transform.localScale = Vector3.one * size;
-
-        //Apply modifications
-        parentWeapon.HandleProjectileSpawn();
     }
 
     private void Update()

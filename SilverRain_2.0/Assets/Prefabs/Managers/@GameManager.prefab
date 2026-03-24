@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5228954754982050912}
   - component: {fileID: 6092674623967375512}
   - component: {fileID: 2202081110830949105}
+  - component: {fileID: 2617559485710036349}
   m_Layer: 0
   m_Name: '@GameManager'
   m_TagString: Untagged
@@ -134,3 +135,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFinder
   player: {fileID: 0}
+--- !u!114 &2617559485710036349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4236082319897380130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11059c564b3de44bfc21977b927119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoldManager
+  currentGold: 1000

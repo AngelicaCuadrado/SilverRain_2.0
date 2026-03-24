@@ -89,7 +89,7 @@ public class GrenadeEvolution : Grenade, IWeaponEvolution
         }
 
         // Notify the WeaponManager about the projectile spawn
-        HandleProjectileSpawn();
+        HandleProjectileSpawn(projObj);
     }
     #endregion
 }
