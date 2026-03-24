@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     private InputMode _lastInputMode = InputMode.Gameplay;
     
     // jump state
-    private float _lastGroundedTime;
-    private float _lastJumpPressedTime;
+    private float _lastGroundedTime = float.NegativeInfinity;
+    private float _lastJumpPressedTime = float.NegativeInfinity;
     private bool _isGrounded;
     private bool _wasGroundedLastFrame;
 
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
     private void PerformJump()
     {
         // Reset coyote time to prevent double jump
-        _lastGroundedTime = 0f;
+        _lastGroundedTime = float.NegativeInfinity;
 
         // Reset vertical velocity before jumping for consistent jump height
         Vector3 vel = _rb.linearVelocity;
