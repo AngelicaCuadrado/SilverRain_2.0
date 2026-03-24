@@ -8,9 +8,12 @@ public class ModificationExplodingBullets : Modification
     float explosionRadius = 10; //Testing value, needs refinement
     [SerializeField]
     int explosionDamage = 10; //Testing value, needs refinement
+    [SerializeField]
     private LayerMask hitMask;
     [SerializeField, Tooltip("The key used to access the pool containing the explosion VFX")]
     private string explosionVFXPoolKey;
+
+    private Vector3 pos;
 
     public override void Start()
     {
@@ -27,13 +30,14 @@ public class ModificationExplodingBullets : Modification
 
     public void OnWeaponHit(WeaponType type, GameObject[] objects, Vector3 position) 
     {
+        pos = position;
         if (type != WeaponType.Pistol) return;
         Explode(position);
     }
 
     private void Explode(Vector3 position) 
     {
-        var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, transform.position, Quaternion.identity);
+        var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, position, Quaternion.identity);
         explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey, explosionRadius);
 
         Collider[] hits = Physics.OverlapSphere(position, explosionRadius, hitMask);
@@ -63,6 +67,15 @@ public class ModificationExplodingBullets : Modification
         if (WeaponManager.Instance != null)
         {
             WeaponManager.Instance.OnWeaponHit.RemoveListener(OnWeaponHit);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (pos != null)
+        {
+            Gizmos.DrawWireSphere(pos, explosionRadius);
         }
     }
 

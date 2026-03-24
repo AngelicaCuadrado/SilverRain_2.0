@@ -33542,7 +33542,7 @@ MonoBehaviour:
   spawnArea: {fileID: 359638761}
   minDistance: 5
   maxDistance: 30
-  spawnDelay: 2.5
+  spawnDelay: 2
   maxAttemptsPerSpawn: 20
   spawnCheckRadius: 0.5
   blockingLayers:
@@ -44939,10 +44939,14 @@ MonoBehaviour:
   uiData: {fileID: 1487742548}
   modificationName: 
   description: 
-  id: 2
+  id: 12
   explosionPrefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
-  explosionRadius: 100
-  explosionDamage: 1
+  explosionRadius: 1.5
+  explosionDamage: 5
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 128
+  explosionVFXPoolKey: GrenadeExplosion
 --- !u!114 &1487742548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63145,7 +63149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5596106329357065321, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: initialWeapon
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6941092582187873988, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: m_Name

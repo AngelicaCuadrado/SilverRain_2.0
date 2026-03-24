@@ -795,6 +795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: {fileID: 3510234485674128552}
   controller: {fileID: 163084990868255089}
+  startHidden: 1
   scoreValue: 20
   xpValue: 20
   damage: 2
@@ -921,8 +922,8 @@ Rigidbody:
   m_GameObject: {fileID: 8937696551812037509}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 100
+  m_AngularDamping: 100
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
