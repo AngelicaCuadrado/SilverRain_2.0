@@ -63,7 +63,7 @@ public class Hammer : Weapon
         }
         proj.Init(this, cam.transform, weaponStats.Damage, weaponStats.Size, startRotation);
         // Notify the WeaponManager about the projectile spawn
-        HandleProjectileSpawn();
+        HandleProjectileSpawn(projObj);
     }
     #endregion
 }

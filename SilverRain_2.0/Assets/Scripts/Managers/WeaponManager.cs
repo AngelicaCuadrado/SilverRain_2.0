@@ -39,7 +39,7 @@ public class WeaponManager : MonoBehaviour
     [HideInInspector] public UnityEvent<TemporaryBuff, bool> OnWeaponAvailabilityChange;
     [HideInInspector] public UnityEvent<WeaponType> OnWeaponMaxLevelReached;
     [HideInInspector] public UnityEvent<WeaponType> OnWeaponAquired;
-    [HideInInspector] public UnityEvent<WeaponType, Weapon> OnWeaponProjectileSpawn;
+    [HideInInspector] public UnityEvent<WeaponType, Weapon, GameObject> OnWeaponProjectileSpawn;
     [HideInInspector] public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
     
     //Properties
@@ -130,7 +130,7 @@ public class WeaponManager : MonoBehaviour
             //Activate the weapon
             currentWeapons[type].OnActivate();
             //Invoke weapon acquired event
-            OnWeaponAquired.Invoke(type);   
+            OnWeaponAquired.Invoke(type);
             //Check if max weapon amount reached
             if (currentWeapons.Count >= maxWeapons)
             {
@@ -207,9 +207,9 @@ public class WeaponManager : MonoBehaviour
         OnWeaponHit.Invoke(weaponType, hitObjects, hitPoint);
     }
 
-    public void HandleProjectileSpawn(WeaponType weaponType, Weapon weapon)
+    public void HandleProjectileSpawn(WeaponType weaponType, Weapon weapon, GameObject proj)
     {
-        OnWeaponProjectileSpawn.Invoke(weaponType, weapon);
+        OnWeaponProjectileSpawn.Invoke(weaponType, weapon, proj);
     }
     #endregion
 }

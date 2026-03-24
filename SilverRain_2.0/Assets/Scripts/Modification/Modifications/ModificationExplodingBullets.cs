@@ -12,6 +12,12 @@ public class ModificationExplodingBullets : Modification
     [SerializeField, Tooltip("The key used to access the pool containing the explosion VFX")]
     private string explosionVFXPoolKey;
 
+    public override void Start()
+    {
+        base.Start();
+        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
+    }
+
     public override void Activate()
     {
         base.Activate();

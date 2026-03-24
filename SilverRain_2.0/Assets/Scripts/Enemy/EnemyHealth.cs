@@ -113,6 +113,8 @@ public class EnemyHealth : MonoBehaviour
 
         // Start animation
         animator.SetBool("isDead", true);
+
+        OnEnemyKilled?.Invoke(this);
     }
 
     // This will be called by "Death" animation event
@@ -121,19 +123,6 @@ public class EnemyHealth : MonoBehaviour
     {
         animator.SetBool("isDead", false);
         ReturnToPool();
-    }
-
-    IEnumerator DeathCoroutine()
-    {
-        animator.SetBool("isDead", true);
-        if (controller != null) controller.enabled = false;
-
-        playerExp.GainExp(enemy.XPValue);
-        ScoreManager.Instance.AddScore(enemy.ScoreValue);
-
-        yield return new WaitForSeconds(3);
-
-        //ReturnToPool();
     }
 
     private void ReturnToPool()

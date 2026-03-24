@@ -40,6 +40,14 @@ public class IdosTestHarness : MonoBehaviour
         {
             WeaponManager.Instance.AddEvolution(WeaponType.Hammer);
         }
-        
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            GameManager.Instance.WinLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            GameManager.Instance.LoseLevel();
+        }
+
     }
 }
