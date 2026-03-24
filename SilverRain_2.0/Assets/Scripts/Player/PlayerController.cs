@@ -141,8 +141,14 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         var moveInput = InputManager.Instance?.Move ?? Vector2.zero;
-        
-        var moveDir = transform.right * moveInput.x + transform.forward * moveInput.y;
+
+        // Calculate direction from _yRotation directly instead of transform.forward/right
+        // to avoid desync between Update (rotation) and FixedUpdate (movement)
+        Quaternion rot = Quaternion.Euler(0f, _yRotation, 0f);
+        Vector3 forward = rot * Vector3.forward;
+        Vector3 right = rot * Vector3.right;
+
+        var moveDir = right * moveInput.x + forward * moveInput.y;
         var targetVelocity = moveDir.normalized * moveSpeed;
 
         var velocityChange = new Vector3(
@@ -150,7 +156,7 @@ public class PlayerController : MonoBehaviour
             0f,
             targetVelocity.z - _rb.linearVelocity.z
         );
-        
+
         _rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
@@ -159,16 +165,15 @@ public class PlayerController : MonoBehaviour
         var lookInput = InputManager.Instance?.Look ?? Vector2.zero;
 
         // Horizontal rotation (rotate player body)
-        //transform.Rotate(Vector3.up, lookInput.x * mouseSensitivity);
         _yRotation += lookInput.x * mouseSensitivity;
 
         // Vertical rotation (rotate camera)
         _xRotation -= lookInput.y * mouseSensitivity;
         _xRotation = Mathf.Clamp(_xRotation, minVerticalAngle, maxVerticalAngle);
 
-        // Set player horizontal rotation
-        transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
-        
+        // Use MoveRotation to properly sync with physics interpolation
+        _rb.MoveRotation(Quaternion.Euler(0f, _yRotation, 0f));
+
         // set camera vertical rotation
         if (cameraTransform)
         {
@@ -267,7 +272,7 @@ public class PlayerController : MonoBehaviour
         _yRotation = yaw;
         _xRotation = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
 
-        transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
+        _rb.MoveRotation(Quaternion.Euler(0f, _yRotation, 0f));
 
         if (cameraTransform != null)
         {
