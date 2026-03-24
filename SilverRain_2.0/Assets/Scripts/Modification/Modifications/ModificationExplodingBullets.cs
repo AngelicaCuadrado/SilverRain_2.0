@@ -8,10 +8,9 @@ public class ModificationExplodingBullets : Modification
     float explosionRadius = 10; //Testing value, needs refinement
     [SerializeField]
     int explosionDamage = 10; //Testing value, needs refinement
-    public override void ApplyEffect()
-    {
-
-    }
+    private LayerMask hitMask;
+    [SerializeField, Tooltip("The key used to access the pool containing the explosion VFX")]
+    private string explosionVFXPoolKey;
 
     public override void Activate()
     {
@@ -28,12 +27,10 @@ public class ModificationExplodingBullets : Modification
 
     private void Explode(Vector3 position) 
     {
-        if (explosionPrefab != null) //Temp, change to vfx later.
-        {
-            Instantiate(explosionPrefab, position, Quaternion.identity);
-        }
+        var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, transform.position, Quaternion.identity);
+        explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey, explosionRadius);
 
-        Collider[] hits = Physics.OverlapSphere(position, explosionRadius);
+        Collider[] hits = Physics.OverlapSphere(position, explosionRadius, hitMask);
 
         foreach (Collider hit in hits) 
         {

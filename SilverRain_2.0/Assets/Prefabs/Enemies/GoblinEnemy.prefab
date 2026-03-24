@@ -12637,6 +12637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: {fileID: 8839197132019014912}
   controller: {fileID: 6850935498896519798}
+  startHidden: 1
   scoreValue: 10
   xpValue: 10
   damage: 2
