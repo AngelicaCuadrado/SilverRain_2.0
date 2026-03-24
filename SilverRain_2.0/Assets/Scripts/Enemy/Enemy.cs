@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IPoolable
     private EnemyHealth health;
     [SerializeField, Tooltip("")]
     private EnemyController controller;
+    [SerializeField] private bool startHidden = true;
 
     [Header("Rewards")]
     [SerializeField, Tooltip("")]
@@ -66,7 +67,15 @@ public class Enemy : MonoBehaviour, IPoolable
 
     private void Initialize()
     {
-        Hide();
+        if (startHidden)
+        {
+            Hide();
+        }
+        else
+        {
+            Reveal();
+        }
+
         if (GlobalInvisibilityManager.Instance.IsActive)
         {
             float remaining = GlobalInvisibilityManager.Instance.InvisibilityTimer;

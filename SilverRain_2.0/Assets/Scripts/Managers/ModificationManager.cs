@@ -31,7 +31,7 @@ public class ModificationManager : MonoBehaviour
 
         currentModifications = new List<Modification>();
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
    public void AddModification(Modification modification)

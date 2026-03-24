@@ -15,9 +15,6 @@ public class PistolProjectile : Projectile
         damage = dmg;
         direction = dir.normalized;
         speed = spd;
-
-        //Apply modifications
-        parentWeapon.HandleProjectileSpawn();
     }
 
     private void Update()

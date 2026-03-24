@@ -78,9 +78,17 @@ public class SwordEvolution : Sword, IWeaponEvolution
             return;
         }
         // Send -1 for duration will cause it to stay active
-        proj.Init(this, playerTrans, weaponStats.Damage, -1, weaponStats.Size, weaponStats.ProjectileSpeed);
+        proj.Init(
+            this, 
+            playerTrans,
+            weaponStats.Damage,
+            -1, 
+            weaponStats.Size, 
+            weaponStats.ProjectileSpeed,
+            startAngle
+            );
         // Notify the WeaponManager about the projectile spawn
-        HandleProjectileSpawn();
+        HandleProjectileSpawn(projObj);
     }
     #endregion
 }

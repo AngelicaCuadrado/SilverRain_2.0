@@ -12637,6 +12637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: {fileID: 8839197132019014912}
   controller: {fileID: 6850935498896519798}
+  startHidden: 1
   scoreValue: 10
   xpValue: 10
   damage: 2
@@ -12696,7 +12697,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3286643137425952069}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: e4c88fe2e81511d4dae9da620550ecf9, type: 3}
   m_Controller: {fileID: 9100000, guid: be94599944fb18b4ea870787648aa418, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0

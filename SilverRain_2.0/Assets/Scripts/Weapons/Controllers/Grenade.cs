@@ -75,7 +75,7 @@ public class Grenade : Weapon
             grenadeScript.Init(this, weaponStats.Damage, weaponStats.Size);
         }
         // Notify the WeaponManager about the projectile spawn
-        HandleProjectileSpawn();
+        HandleProjectileSpawn(projObj);
     }
     #endregion
 }
