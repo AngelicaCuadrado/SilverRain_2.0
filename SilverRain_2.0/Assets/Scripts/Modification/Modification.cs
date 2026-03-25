@@ -5,15 +5,11 @@ using UnityEngine.Events;
 public abstract class Modification : TemporaryBuff
 {
     [SerializeField, Tooltip("")]
-    private string modificationName; //For UI
-    [SerializeField, Tooltip("")]
-    private string description;
-    [SerializeField, Tooltip("")]
     private ModificationID id; //For object identification
+    [SerializeField,Tooltip("")]
+    private WeaponType requiredWeapon = WeaponType.None;
 
     // Properties
-    public string ModificationName => modificationName;
-    public string Description => description;
     public ModificationID Id => id;
 
     public override void LevelUp()

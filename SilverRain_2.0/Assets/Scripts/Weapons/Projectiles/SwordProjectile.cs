@@ -15,6 +15,8 @@ public class SwordProjectile : Projectile
     [SerializeField, Tooltip("The height offset relative to the player transform")]
     private float heightOffset;
 
+    public float LifeTime => lifeTime;
+
     public void Init(Sword parent, Transform player, float dmg, float duration, float size, float speed, float startAngle)
     {
         parentWeapon = parent;

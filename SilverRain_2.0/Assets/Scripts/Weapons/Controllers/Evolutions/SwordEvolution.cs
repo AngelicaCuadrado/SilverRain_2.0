@@ -77,12 +77,13 @@ public class SwordEvolution : Sword, IWeaponEvolution
             Destroy(projObj);
             return;
         }
-        // Send -1 for duration will cause it to stay active
+        // Sending a negative number for duration will cause it to stay active forever
         proj.Init(
             this, 
             playerTrans,
             weaponStats.Damage,
-            -1, 
+            // BeamSword modification divides by 6, so -18 gives the beam a cd and dur of 3 sec
+            -18, 
             weaponStats.Size, 
             weaponStats.ProjectileSpeed,
             startAngle

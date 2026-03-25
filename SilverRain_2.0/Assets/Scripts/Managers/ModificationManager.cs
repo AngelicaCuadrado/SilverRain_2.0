@@ -5,20 +5,29 @@ using UnityEngine.Events;
 
 public class ModificationManager : MonoBehaviour
 {
+    public static ModificationManager Instance { get; private set; }
+
+    [Header("Mod Lists")]
     [SerializeField, Tooltip("")]
     private List<Modification> allModifications;
     [Tooltip("")]
     private List<Modification> currentModifications;
 
-    // Events
-    public static ModificationManager Instance { get; private set; }
-    public UnityEvent<Modification, bool> OnModificationAvailabilityChange;
-    public UnityEvent<WeaponType, StatType> OnWeaponStatModificationChange;
-    public UnityEvent<ModificationID> OnModificationAquired;
-    public UnityEvent<StatType> OnStatModificationChange;
+    [Header("Pools")]
+    [SerializeField, Tooltip("ObjectPooler reference containing all the projectile pools")]
+    private ObjectPooler prefabPool;
+    [SerializeField, Tooltip("ObjectPooler reference containing all the VFX pools")]
+    private ObjectPooler effectsPool;
+
+    [HideInInspector] public UnityEvent<Modification, bool> OnModificationAvailabilityChange;
+    [HideInInspector] public UnityEvent<WeaponType, StatType> OnWeaponStatModificationChange;
+    [HideInInspector] public UnityEvent<ModificationID> OnModificationAquired;
+    [HideInInspector] public UnityEvent<StatType> OnStatModificationChange;
 
     // Properties
     public List<Modification> AllModifications => allModifications;
+    public ObjectPooler PrefabPool => prefabPool;
+    public ObjectPooler EffectsPool => effectsPool;
 
     private void Awake()
     {
@@ -34,8 +43,8 @@ public class ModificationManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
     }
 
-   public void AddModification(Modification modification)
-   {
+    public void AddModification(Modification modification)
+    {
         if (!currentModifications.Any(m => m.Id == modification.Id))
         {
             currentModifications.Add(modification);
@@ -49,11 +58,11 @@ public class ModificationManager : MonoBehaviour
             }
             OnModificationAquired.Invoke(modification.Id);
         }
-   }
+    }
 
-   public void ResetModifications()
+    public void ResetModifications()
     {
-        foreach (Modification modification in currentModifications) 
+        foreach (Modification modification in currentModifications)
         {
             var catalogItem = allModifications.FirstOrDefault(m => m.Id == modification.Id);
             if (catalogItem != null)
@@ -64,12 +73,12 @@ public class ModificationManager : MonoBehaviour
         currentModifications.Clear();
     }
 
-    public float GetStatModifications(StatType type) 
+    public float GetStatModifications(StatType type)
     {
         float value = 0f;
         foreach (Modification modification in currentModifications)
         {
-            if(modification is IStatModifier statModification)
+            if (modification is IStatModifier statModification)
             {
                 value += statModification.GetModifyValue(type);
             }
@@ -77,12 +86,12 @@ public class ModificationManager : MonoBehaviour
         return value;
     }
 
-    public float GetWeaponStatModification(WeaponType weapon, StatType stat) 
+    public float GetWeaponStatModification(WeaponType weapon, StatType stat)
     {
         float value = 0f;
         foreach (Modification modification in currentModifications)
         {
-            if(modification is IWeaponModifier weaponModification)
+            if (modification is IWeaponModifier weaponModification)
             {
                 value += weaponModification.GetModifyValue(weapon, stat);
             }

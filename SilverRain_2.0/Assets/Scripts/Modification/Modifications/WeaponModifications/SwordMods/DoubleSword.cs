@@ -1,9 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoubleSword : Modification
 {
     [SerializeField, Tooltip("")]
     private float startAngle = 270f;
+    [SerializeField, Tooltip("")]
+    private int maxSwords = 1;
+    [SerializeField, Tooltip("")]
+    private int currentSwords = 0;
 
     public override void Start()
     {
@@ -25,6 +30,12 @@ public class DoubleSword : Modification
     }
     public void OnProjectileSpawn(WeaponType type, Weapon weapon, GameObject originalProjectile)
     {
+        if (currentSwords >= maxSwords)
+        {
+            currentSwords = 0;
+            return;
+        }
+        
         if (type != WeaponType.Sword) return;
 
         // Get original rotation
@@ -61,11 +72,14 @@ public class DoubleSword : Modification
             sword,
             player,
             weapon.WeaponStats.Damage,
-            weapon.WeaponStats.Duration,
+            originalProjectile.GetComponent<SwordProjectile>().LifeTime,
             weapon.WeaponStats.Size,
             weapon.WeaponStats.ProjectileSpeed,
             startAngle
         );
+
+        currentSwords++;
+        sword.HandleProjectileSpawn(projObj);
     }
 
     public void OnRequirementMet(WeaponType type)

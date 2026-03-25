@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BeamController : MonoBehaviour
+public class BeamController : MonoBehaviour, IPoolable
 {
     [SerializeField, Tooltip("")]
     private float damage;
@@ -12,7 +12,11 @@ public class BeamController : MonoBehaviour
     [SerializeField, Tooltip("")]
     private float size;
     [SerializeField, Tooltip("")]
-    private bool firing;
+    private string poolKey = "BeamSword";
+    [SerializeField, Tooltip("")]
+    private GameObject visuals;
+
+    public string PoolKey { get => poolKey; set => poolKey = value; }
 
     public void Init(float dmg, float dur, float cd, float sz)
     {
@@ -28,8 +32,10 @@ public class BeamController : MonoBehaviour
     {
         while (true)
         {
+            // Turn visuals on
+            visuals.SetActive(true);
+
             // Fire beam
-            firing = true;
             float timer = 0f;
 
             while (timer < duration)
@@ -39,7 +45,8 @@ public class BeamController : MonoBehaviour
                 yield return null;
             }
 
-            firing = false;
+            // Turn visuals off
+            visuals.SetActive(false);
 
             // Cooldown
             yield return new WaitForSeconds(cooldown);
@@ -51,34 +58,48 @@ public class BeamController : MonoBehaviour
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
 
-        float maxDistance = size * 5f; // tweak multiplier
-
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, maxDistance, LayerMask.GetMask("Default", "Ground")))
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, size, LayerMask.GetMask("Default", "Ground")))
         {
-            maxDistance = hit.distance;
+            size = hit.distance;
         }
 
         // Damage enemies along the beam
-        RaycastHit[] hits = Physics.RaycastAll(origin, direction, maxDistance, LayerMask.GetMask("Enemy"));
+        RaycastHit[] hits = Physics.RaycastAll(origin, direction, size, LayerMask.GetMask("Enemy"));
         foreach (var h in hits)
         {
             var enemy = h.collider.GetComponent<EnemyHealth>();
             if (enemy != null)
+            {
                 enemy.TakeDamage(Mathf.RoundToInt(damage));
+            }
         }
 
         // Update visuals (line renderer, mesh, etc.)
-        UpdateBeamVisual(maxDistance);
+        UpdateBeamVisual(size);
     }
 
     private void UpdateBeamVisual(float length)
     {
-        // Example for LineRenderer
         var lr = GetComponent<LineRenderer>();
         if (lr != null)
         {
             lr.SetPosition(0, Vector3.zero);
             lr.SetPosition(1, Vector3.forward * length);
         }
+    }
+
+    public void OnCreatedPool()
+    {
+        
+    }
+
+    public void OnSpawnFromPool()
+    {
+        
+    }
+
+    public void OnReturnToPool()
+    {
+        
     }
 }

@@ -32,22 +32,25 @@ public class BeamSword : Modification
         // Spawn beam as child of the sword projectile
         //var beam = Instantiate(beamPrefab, projObj.transform);
 
-        var beam = WeaponManager.Instance.ProjectilePool.Spawn(
+        var beam = ModificationManager.Instance.PrefabPool.Spawn(
             beamPoolKey,
-            new Vector3(projObj.transform.position.x, forwardOffset, projObj.transform.position.y),
+            projObj.transform.position,
             projObj.transform.rotation
         );
         
+        // Set projectile as parent
+        beam.transform.SetParent(projObj.transform, worldPositionStays: true);
 
-        // Position at sword tip (local offset)
-        beam.transform.localPosition = new Vector3(0f, 0f, 1f); // adjust as needed
+        
+        // Position at sword tip and rotate beam to point forward
+        beam.transform.SetLocalPositionAndRotation(new Vector3(0f, forwardOffset, 0f), Quaternion.Euler(-90f, 0f, 0f));
 
         // Initialize beam controller
         var controller = beam.GetComponent<BeamController>();
         controller.Init(
             weapon.WeaponStats.Damage,
-            weapon.WeaponStats.Duration,
-            weapon.WeaponStats.Cooldown,
+            Mathf.Abs(weapon.WeaponStats.Duration)/6,
+            weapon.WeaponStats.Cooldown/6,
             weapon.WeaponStats.Size
         );
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Evo_Sword_Data
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   baseDamage: 50
-  baseCooldown: 0
-  baseDuration: 999999
+  baseCooldown: 18
+  baseDuration: 18
   baseProjectileSpeed: 1.5
   baseSize: 1.5
   perLevelDamage: 0
