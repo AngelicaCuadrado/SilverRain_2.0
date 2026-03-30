@@ -8,13 +8,19 @@ public class PistolProjectile : Projectile
     private Vector3 direction;
     [Tooltip("The base speed for the projectile")]
     private float speed;
+    [Tooltip("Indicates whether the projectile has bounced")]
+    private bool hasBounced = false;
 
-    public void Init(Pistol parent, float dmg, Vector3 dir, float spd)
+    // Properties
+    public bool HasBounced => hasBounced;
+
+    public void Init(Pistol parent, float dmg, Vector3 dir, float spd, bool bounced = false)
     {
         parentWeapon = parent;
         damage = dmg;
         direction = dir.normalized;
         speed = spd;
+        hasBounced = bounced;
     }
 
     private void Update()
@@ -35,7 +41,7 @@ public class PistolProjectile : Projectile
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
             GameObject[] hits = new[] { other.gameObject };
-            parentWeapon.HandleWeaponHit(hits, transform.position);
+            parentWeapon.HandleWeaponHit(hits, transform.position, this);
         }
         //Return the projectile to the pool
         WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
@@ -57,13 +63,16 @@ public class PistolProjectile : Projectile
     //Called before the pool deactivates this instance
     public override void OnReturnToPool()
     {
-        //Stop any running timers and reset state
-        if (lifeCoroutine != null)
-        {
-            StopCoroutine(lifeCoroutine);
-            lifeCoroutine = null;
-        }
+        // Let base handle coroutine stop and SpawnMetadata reset
+        base.OnReturnToPool();
 
         direction = Vector3.zero;
+    }
+
+    // Draw gizmos to visualize the projectile's path in the editor
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + direction * 5f);
     }
 }

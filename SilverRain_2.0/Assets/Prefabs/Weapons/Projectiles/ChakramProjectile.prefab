@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 2194873226576261488}
   - component: {fileID: 4955355940083199407}
   - component: {fileID: 1459864087757095256}
+  - component: {fileID: 8374807700853603303}
   m_Layer: 8
   m_Name: ChakramProjectile
   m_TagString: PlayerProjectile
@@ -107,7 +108,7 @@ MonoBehaviour:
   playerTrans: {fileID: 0}
   flightSpeed: 0
   flightDirection: {x: 0, y: 0, z: 0}
-  firePointOffset: {x: 0, y: 1, z: 0}
+  firePointOffset: {x: 0, y: 0, z: 0}
   spinSpeed: 120
 --- !u!54 &1459864087757095256
 Rigidbody:
@@ -136,6 +137,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8374807700853603303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7955605096005340937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a109f5dddec602a4b848179ecb9ee541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnMetadata
+  Generation: 0
+  ProcessedModIds: 
 --- !u!1 &8214518391675739563
 GameObject:
   m_ObjectHideFlags: 0

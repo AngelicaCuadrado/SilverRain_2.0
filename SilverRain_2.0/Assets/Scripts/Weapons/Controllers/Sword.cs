@@ -6,9 +6,7 @@ public class Sword : Weapon
     [Header("Projectile Settings")]
     [SerializeField, Tooltip("The center of the sword's rotation")]
     protected Transform playerTrans;
-    [SerializeField, Tooltip("The rotation which the projectile will spawn in relative to the camera")]
-    protected float spawnAngleOffset = 90f;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The starting angle of the sword relative to the player")]
     protected float startAngle = 90f;
 
     private void LateUpdate()
@@ -66,7 +64,7 @@ public class Sword : Weapon
     public override void Attack()
     {
         //Calculate spawn rotation so the projectile faces forward
-        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + spawnAngleOffset, 0f);
+        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + startAngle, 0f);
         //Instantiate projectile
         var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position, spawnRot);
         //Initialize projectile

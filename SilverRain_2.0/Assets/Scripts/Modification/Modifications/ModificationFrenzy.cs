@@ -43,7 +43,7 @@ public class ModificationFrenzy : Modification, IStatModifier
         return 0f;
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         if (playerHealth != null)
         {

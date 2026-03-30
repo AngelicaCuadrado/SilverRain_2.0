@@ -121,9 +121,9 @@ public abstract class Weapon : TemporaryBuff
         WeaponManager.Instance.HandleProjectileSpawn(weaponType, this, proj);
     }
 
-    public virtual void HandleWeaponHit(GameObject[] obj, Vector3 pos)
+    public virtual void HandleWeaponHit(GameObject[] obj, Vector3 pos, Projectile proj)
     {
-        WeaponManager.Instance.HandleWeaponHit(weaponType, obj, pos);
+        WeaponManager.Instance.HandleWeaponHit(weaponType, obj, pos, proj);
     }
 
     public virtual void RecalculateStats(StatType type)

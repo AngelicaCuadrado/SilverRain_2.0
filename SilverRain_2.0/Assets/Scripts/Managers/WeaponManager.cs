@@ -40,7 +40,7 @@ public class WeaponManager : MonoBehaviour
     [HideInInspector] public UnityEvent<WeaponType> OnWeaponMaxLevelReached;
     [HideInInspector] public UnityEvent<WeaponType> OnWeaponAquired;
     [HideInInspector] public UnityEvent<WeaponType, Weapon, GameObject> OnWeaponProjectileSpawn;
-    [HideInInspector] public UnityEvent<WeaponType, GameObject[], Vector3> OnWeaponHit;
+    [HideInInspector] public UnityEvent<WeaponType, GameObject[], Vector3, Projectile> OnWeaponHit;
     
     //Properties
     public Dictionary<WeaponType, Weapon> AllWeapons => allWeapons;
@@ -202,9 +202,9 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void HandleWeaponHit(WeaponType weaponType, GameObject[] hitObjects, Vector3 hitPoint)
+    public void HandleWeaponHit(WeaponType weaponType, GameObject[] hitObjects, Vector3 hitPoint, Projectile proj)
     {
-        OnWeaponHit.Invoke(weaponType, hitObjects, hitPoint);
+        OnWeaponHit.Invoke(weaponType, hitObjects, hitPoint, proj);
     }
 
     public void HandleProjectileSpawn(WeaponType weaponType, Weapon weapon, GameObject proj)

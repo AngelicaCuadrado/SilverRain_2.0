@@ -8,18 +8,13 @@ public class ModificationExplodingBullets : Modification
     float explosionRadius = 10; //Testing value, needs refinement
     [SerializeField]
     int explosionDamage = 10; //Testing value, needs refinement
-    [SerializeField]
+
+    [SerializeField, Tooltip("The layer mask for detecting hits")]
     private LayerMask hitMask;
     [SerializeField, Tooltip("The key used to access the pool containing the explosion VFX")]
     private string explosionVFXPoolKey;
-
+    [SerializeField, Tooltip("The position of the explosion for gizmo visualization")]
     private Vector3 pos;
-
-    public override void Start()
-    {
-        base.Start();
-        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
-    }
 
     public override void Activate()
     {
@@ -28,7 +23,7 @@ public class ModificationExplodingBullets : Modification
         
     }
 
-    public void OnWeaponHit(WeaponType type, GameObject[] objects, Vector3 position) 
+    public void OnWeaponHit(WeaponType type, GameObject[] objects, Vector3 position, Projectile proj) 
     {
         pos = position;
         if (type != WeaponType.Pistol) return;
@@ -52,22 +47,10 @@ public class ModificationExplodingBullets : Modification
         }
     }
 
-    public void OnRequirementMet(WeaponType type)
+    public override void OnDestroy()
     {
-        if (type == WeaponType.Pistol)
-        {
-            SetAvailable(true);
-            return;
-        }
-        return;
-    }
-
-    private void OnDestroy()
-    {
-        if (WeaponManager.Instance != null)
-        {
-            WeaponManager.Instance.OnWeaponHit.RemoveListener(OnWeaponHit);
-        }
+        base.OnDestroy();
+        WeaponManager.Instance.OnWeaponHit.RemoveListener(OnWeaponHit);
     }
 
     private void OnDrawGizmos()

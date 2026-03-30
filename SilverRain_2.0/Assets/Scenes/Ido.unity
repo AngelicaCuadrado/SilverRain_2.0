@@ -3822,7 +3822,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.26
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3830,7 +3830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 4634346121168462799, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
       propertyPath: m_LocalRotation.w
@@ -61585,13 +61585,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3823513951707495739, guid: 00f9e0202cdba85419b090485e892798, type: 3}
-      propertyPath: spawnOffsetSide
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596106329357065321, guid: 00f9e0202cdba85419b090485e892798, type: 3}
-      propertyPath: initialWeapon
-      value: 1
+    - target: {fileID: 6563765875867932003, guid: 00f9e0202cdba85419b090485e892798, type: 3}
+      propertyPath: firePointOffset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6941092582187873988, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: m_Name

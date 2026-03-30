@@ -95,9 +95,6 @@ public class ChakramEvolution : Chakram, IWeaponEvolution
             // Trigger modification for each projectile
             HandleProjectileSpawn(projObj);
         }
-
-        // Trigger modification only once per attack
-        //HandleProjectileSpawn();
     }
     #endregion
 }

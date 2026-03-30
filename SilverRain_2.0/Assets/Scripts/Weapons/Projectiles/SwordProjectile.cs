@@ -70,7 +70,7 @@ public class SwordProjectile : Projectile
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
             GameObject[] hits = new[] { other.gameObject };
-            parentWeapon.HandleWeaponHit(hits, transform.position);
+            parentWeapon.HandleWeaponHit(hits, transform.position, this);
         }
     }
 
@@ -82,13 +82,7 @@ public class SwordProjectile : Projectile
     //Called before the pool deactivates this instance
     public override void OnReturnToPool()
     {
-        //Stop any running timers and reset state
-        if (lifeCoroutine != null)
-        {
-            StopCoroutine(lifeCoroutine);
-            lifeCoroutine = null;
-        }
-
-        //angle = 0f;
+        // Let base handle coroutine stop and SpawnMetadata reset
+        base.OnReturnToPool();
     }
 }

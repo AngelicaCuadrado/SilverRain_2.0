@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class ModificationLightMetal : Modification, IWeaponModifier
 {
-    public override void Start()
-    {
-        base.Start();
-        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
-    }
-
     public override void Activate()
     {
         base.Activate();
@@ -19,7 +13,7 @@ public class ModificationLightMetal : Modification, IWeaponModifier
 
     public float GetModifyValue(WeaponType weapon, StatType stat)
     {
-        if (weapon == WeaponType.Sword) 
+        if (weapon == WeaponType.Sword)
         {
             switch (stat)
             {
@@ -31,21 +25,9 @@ public class ModificationLightMetal : Modification, IWeaponModifier
         return 0;
     }
 
-    public void OnRequirementMet(WeaponType type)
+    public override void OnDestroy()
     {
-        if (type == WeaponType.Sword)
-        {
-            SetAvailable(true);
-            return;
-        }
-        return;
-    }
-
-    public void OnDestroy()
-    {
-        if (WeaponManager.Instance != null)
-        {
-            WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
-        }
+        base.OnDestroy();
+        WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
     }
 }

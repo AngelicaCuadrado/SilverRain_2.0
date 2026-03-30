@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class BeamController : MonoBehaviour, IPoolable
 {
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The damage dealt by the beam")]
     private float damage;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The duration the beam stays active")]
     private float duration;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The cooldown time between beam activations")]
     private float cooldown;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The maximum length of the beam")]
     private float size;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The key used to access the pool containing the beam VFX")]
     private string poolKey = "BeamSword";
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The visuals for the beam")]
     private GameObject visuals;
 
     public string PoolKey { get => poolKey; set => poolKey = value; }
@@ -88,18 +88,9 @@ public class BeamController : MonoBehaviour, IPoolable
         }
     }
 
-    public void OnCreatedPool()
-    {
-        
-    }
+    public void OnCreatedPool() { }
 
-    public void OnSpawnFromPool()
-    {
-        
-    }
+    public void OnSpawnFromPool() { }
 
-    public void OnReturnToPool()
-    {
-        
-    }
+    public void OnReturnToPool() { }
 }

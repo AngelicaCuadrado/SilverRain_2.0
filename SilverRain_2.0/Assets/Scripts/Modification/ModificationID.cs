@@ -39,6 +39,6 @@ public enum ModificationID
     ChainReaction,
 
     // Chakram
-    ExplodingBoomerang,
+    ScalingChakram,
     HalfChakram,
 }

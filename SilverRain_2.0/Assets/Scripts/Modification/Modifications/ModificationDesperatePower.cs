@@ -65,7 +65,7 @@ public class ModificationDesperatePower : Modification, IStatModifier
         }
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         if (playerHealth != null)
         {

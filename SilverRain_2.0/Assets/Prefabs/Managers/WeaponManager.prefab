@@ -176,7 +176,7 @@ MonoBehaviour:
   - type: 5
     weapon: {fileID: 6563765875867932003}
   maxWeapons: 3
-  initialWeapon: 1
+  initialWeapon: 5
   projectilePool: {fileID: 3923140885524237589}
   effectsPool: {fileID: 5067260411644754154}
   OnWeaponAvailabilityChange:
@@ -1067,6 +1067,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8499395123655530304, guid: 339d21afe73a77640ab1d0ab1ede63c5, type: 3}
+      propertyPath: spawnOffsetSide
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499395123655530304, guid: 339d21afe73a77640ab1d0ab1ede63c5, type: 3}
       propertyPath: projectilePoolKey
       value: HammerEvolutionProjectile
       objectReference: {fileID: 0}
@@ -1412,7 +1416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5366437912073211424, guid: 501c019101c484d47acda4a13722f3ea, type: 3}
       propertyPath: firePointOffset.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5366437912073211424, guid: 501c019101c484d47acda4a13722f3ea, type: 3}
       propertyPath: spawnOffsetForward

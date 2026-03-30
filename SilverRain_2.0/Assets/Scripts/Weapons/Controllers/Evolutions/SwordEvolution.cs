@@ -66,7 +66,7 @@ public class SwordEvolution : Sword, IWeaponEvolution
     public override void Attack()
     {
         //Calculate spawn rotation so the projectile faces forward
-        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + spawnAngleOffset, 0f);
+        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + startAngle, 0f);
         //Instantiate projectile
         var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position, spawnRot);
         //Initialize projectile

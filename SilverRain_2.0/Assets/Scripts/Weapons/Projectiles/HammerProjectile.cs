@@ -116,7 +116,7 @@ public class HammerProjectile : Projectile
                 hitEnemies[i] = hits[i].gameObject;
             }
             //Apply modifications
-            parentWeapon.HandleWeaponHit(hitEnemies, transform.position);
+            parentWeapon.HandleWeaponHit(hitEnemies, transform.position, this);
         }
     }
 

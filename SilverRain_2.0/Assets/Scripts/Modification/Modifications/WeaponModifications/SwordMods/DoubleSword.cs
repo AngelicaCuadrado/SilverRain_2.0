@@ -1,42 +1,37 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoubleSword : Modification
 {
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The starting angle for the second sword projectile")]
     private float startAngle = 270f;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The maximum number of swords that can be spawned")]
     private int maxSwords = 1;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The current number of swords spawned")]
     private int currentSwords = 0;
-
-    public override void Start()
-    {
-        base.Start();
-        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
-        
-        // Check initial weapon
-        if(WeaponManager.Instance.InitialWeapon == WeaponType.Sword)
-        {
-            OnRequirementMet(WeaponType.Sword);
-        }
-    }
 
     public override void Activate()
     {
         base.Activate();
         WeaponManager.Instance.OnWeaponProjectileSpawn.AddListener(OnProjectileSpawn);
-
     }
+
     public void OnProjectileSpawn(WeaponType type, Weapon weapon, GameObject originalProjectile)
     {
+        if (type != WeaponType.Sword) return;
+        if (weapon == null || originalProjectile == null) return;
+
+        // Avoid re-processing projectiles this mod already handled
+        var originalMeta = originalProjectile.GetComponent<SpawnMetadata>();
+        if (originalMeta != null && originalMeta.HasProcessed(Id))
+        {
+            return;
+        }
+
         if (currentSwords >= maxSwords)
         {
             currentSwords = 0;
             return;
         }
-        
-        if (type != WeaponType.Sword) return;
 
         // Get original rotation
         Quaternion originalRot = originalProjectile.transform.rotation;
@@ -78,25 +73,20 @@ public class DoubleSword : Modification
             startAngle
         );
 
+        // Ensure metadata exists on spawned projectile, set generation and mark processed by this mod
+        var newMeta = projObj.GetComponent<SpawnMetadata>();
+        if (newMeta == null) newMeta = projObj.AddComponent<SpawnMetadata>();
+        newMeta.Generation = (originalMeta != null) ? originalMeta.Generation + 1 : 1;
+        newMeta.MarkProcessed(Id);
+
         currentSwords++;
+        // Let other mods react to this spawned projectile (DoubleSword won't process it again because it's marked)
         sword.HandleProjectileSpawn(projObj);
     }
 
-    public void OnRequirementMet(WeaponType type)
+    public override void OnDestroy()
     {
-        if (type == WeaponType.Sword)
-        {
-            SetAvailable(true);
-            WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (WeaponManager.Instance != null)
-        {
-            WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
-            WeaponManager.Instance.OnWeaponProjectileSpawn.RemoveListener(OnProjectileSpawn);
-        }
+        base.OnDestroy();
+        WeaponManager.Instance.OnWeaponProjectileSpawn.RemoveListener(OnProjectileSpawn);
     }
 }

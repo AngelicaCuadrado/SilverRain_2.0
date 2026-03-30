@@ -22,6 +22,9 @@ public class ChakramProjectile : Projectile, IPoolable
 
     private bool returning = false;
 
+    // Properties
+    public float Damage { get => damage; set => damage = value; }
+
     public void Init(Chakram parent, Transform player, Vector3 direction, float dmg, float duration, float size, float speed)
     {
         parentWeapon = parent;
@@ -30,7 +33,7 @@ public class ChakramProjectile : Projectile, IPoolable
         flightSpeed = speed;
 
         //Scale the gameobject based on size
-        if (size < 1f) size = 1f;
+        //if (size < 1f) size = 1f;
         transform.localScale = Vector3.one * size;
 
         // Find max distance based on duration
@@ -86,7 +89,7 @@ public class ChakramProjectile : Projectile, IPoolable
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
             GameObject[] hits = new[] { other.gameObject };
-            parentWeapon.HandleWeaponHit(hits, transform.position);
+            parentWeapon.HandleWeaponHit(hits, transform.position, this);
             return;
         }
 
@@ -102,12 +105,10 @@ public class ChakramProjectile : Projectile, IPoolable
 
     public override void OnReturnToPool()
     {
-        //Stop any running timers and reset state
-        if (lifeCoroutine != null)
-        {
-            StopCoroutine(lifeCoroutine);
-            lifeCoroutine = null;
-        }
+        // Let base handle coroutine stop and SpawnMetadata reset
+        base.OnReturnToPool();
+
+        // Reset chakram-specific state
         returning = false;
     }
 }

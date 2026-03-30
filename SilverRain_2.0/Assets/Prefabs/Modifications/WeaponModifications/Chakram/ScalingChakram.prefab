@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6435634718675079524
+--- !u!1 &7372799582032632372
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,68 +8,65 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5343902698497340379}
-  - component: {fileID: 5511002610423233782}
-  - component: {fileID: 8572260826941414755}
+  - component: {fileID: 3738872282481484782}
+  - component: {fileID: 8966970116793385935}
+  - component: {fileID: 4751013122064233731}
   m_Layer: 0
-  m_Name: ExplodingBullets
+  m_Name: ScalingChakram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5343902698497340379
+--- !u!4 &3738872282481484782
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6435634718675079524}
+  m_GameObject: {fileID: 7372799582032632372}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.09452, y: 1.40767, z: 1.12226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5511002610423233782
+--- !u!114 &8966970116793385935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6435634718675079524}
+  m_GameObject: {fileID: 7372799582032632372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb03097063cc6145a20bc62df60b471, type: 3}
+  m_Script: {fileID: 11500000, guid: 16295f352d6f8874f98c78320b7a485c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModificationExplodingBullets
+  m_EditorClassIdentifier: Assembly-CSharp::ScalingChakram
   level: 0
   maxLevel: 1
-  isAvailable: 1
-  isAvailableAtStart: 1
-  uiData: {fileID: 8572260826941414755}
-  modificationName: 
-  description: 
-  id: 1
-  explosionPrefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
-  explosionRadius: 100
-  explosionDamage: 1
---- !u!114 &8572260826941414755
+  isAvailable: 0
+  isAvailableAtStart: 0
+  uiData: {fileID: 4751013122064233731}
+  id: 20
+  requiredWeapon: 5
+  damageIncreasePerHit: 5
+--- !u!114 &4751013122064233731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6435634718675079524}
+  m_GameObject: {fileID: 7372799582032632372}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
-  buffName: Exploding Bullets
-  buffLevel: 
-  baseBuffDescription: Bullets Explode On Impact
+  buffName: Scaling Chakram
+  buffLevel: 0
+  baseBuffDescription: Increases the damage every hit
   finalBuffDescription: 
-  buffIcon: {fileID: 21300000, guid: 0d852f5493cecf94a90183f3f83ce947, type: 3}
+  buffIcon: {fileID: 21300000, guid: 86aefa2655c3f114ab27823c16e3f431, type: 3}

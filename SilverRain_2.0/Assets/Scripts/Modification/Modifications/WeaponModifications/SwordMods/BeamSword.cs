@@ -2,22 +2,10 @@ using UnityEngine;
 
 public class BeamSword : Modification
 {
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The key used to access the pool containing the beam VFX")]
     private string beamPoolKey;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The offset of the beam from the sword's forward direction")]
     private float forwardOffset;
-
-    public override void Start()
-    {
-        base.Start();
-        WeaponManager.Instance.OnWeaponAquired.AddListener(OnRequirementMet);
-
-        // Check initial weapon
-        if (WeaponManager.Instance.InitialWeapon == WeaponType.Sword)
-        {
-            OnRequirementMet(WeaponType.Sword);
-        }
-    }
 
     public override void Activate()
     {
@@ -29,9 +17,7 @@ public class BeamSword : Modification
     {
         if (type != WeaponType.Sword) return;
 
-        // Spawn beam as child of the sword projectile
-        //var beam = Instantiate(beamPrefab, projObj.transform);
-
+        // Spawn beam from pool
         var beam = ModificationManager.Instance.PrefabPool.Spawn(
             beamPoolKey,
             projObj.transform.position,
@@ -55,21 +41,9 @@ public class BeamSword : Modification
         );
     }
 
-    public void OnRequirementMet(WeaponType type)
-    {
-        if (type == WeaponType.Sword)
-        {
-            SetAvailable(true);
-            WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (WeaponManager.Instance != null)
-        {
-            WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
-            WeaponManager.Instance.OnWeaponProjectileSpawn.RemoveListener(OnProjectileSpawn);
-        }
+    public override void OnDestroy()
+    {   
+        base.OnDestroy();
+        WeaponManager.Instance.OnWeaponProjectileSpawn.RemoveListener(OnProjectileSpawn);       
     }
 }

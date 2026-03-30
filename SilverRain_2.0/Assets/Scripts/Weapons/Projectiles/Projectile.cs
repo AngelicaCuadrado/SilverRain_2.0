@@ -7,8 +7,8 @@ using UnityEngine;
 /// <remarks>This abstract class is intended to be inherited by specific projectile types to implement custom
 /// behavior, such as movement, collision handling, and lifetime control. The class maintains references to the weapon
 /// that fired the projectile and its damage value, and provides a mechanism for managing the projectile's active
-/// duration. Inheriting classes must implement the <see cref="LifeTimer"/> coroutine to define how the projectile's
-/// lifetime is handled.</remarks>
+/// duration. Inheriting classes may override the pool lifecycle hooks but should call base implementations when appropriate
+/// so shared cleanup (like clearing SpawnMetadata) runs consistently.</remarks>
 public abstract class Projectile : MonoBehaviour, IPoolable
 {
     [SerializeField, Tooltip("The weapon that fired this projectile")]
@@ -22,9 +22,37 @@ public abstract class Projectile : MonoBehaviour, IPoolable
     protected Coroutine lifeCoroutine;
 
     public string PoolKey { get; set; }
-    public abstract void OnCreatedPool();
-    public abstract void OnReturnToPool();
-    public abstract void OnSpawnFromPool();
+
+    // Called once when the pool initially creates the instance
+    public virtual void OnCreatedPool() { }
+
+    // Called whenever the pool spawns this instance
+    public virtual void OnSpawnFromPool() { }
+
+    // Called before the pool deactivates this instance
+    // Performs shared cleanup: stops lifetime coroutine and clears SpawnMetadata so pooled instances don't carry stale state.
+    public virtual void OnReturnToPool()
+    {
+        // Stop any running lifetime coroutine
+        if (lifeCoroutine != null)
+        {
+            try
+            {
+                StopCoroutine(lifeCoroutine);
+            }
+            catch { }
+            lifeCoroutine = null;
+        }
+
+        // Reset spawn metadata if present so pooled objects are clean when reused
+        var meta = GetComponent<SpawnMetadata>();
+        if (meta != null)
+        {
+            meta.Generation = 0;
+            meta.ProcessedModIds?.Clear();
+        }
+    }
+
     public IEnumerator LifeTimer()
     {
         yield return new WaitForSeconds(lifeTime);
