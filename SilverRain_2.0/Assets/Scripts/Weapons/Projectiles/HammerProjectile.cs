@@ -33,7 +33,8 @@ public class HammerProjectile : Projectile
     [SerializeField, Tooltip("The key used to access the pool containing the hit VFX")]
     private string hitVFXPoolKey;
 
-
+    // Properties
+    public float HitRadius => hitRadius;
 
     public void Init(Hammer parent, Transform camPos, float dmg, float size, float startRot)
     {
@@ -71,7 +72,7 @@ public class HammerProjectile : Projectile
         // After swinging up, return to pool
         else if (!swingingDown && Mathf.Approximately(currentRotation, startRotation))
         {
-            WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
+            PoolOwner.ReturnToPool(gameObject, PoolKey);
         }
     }
 

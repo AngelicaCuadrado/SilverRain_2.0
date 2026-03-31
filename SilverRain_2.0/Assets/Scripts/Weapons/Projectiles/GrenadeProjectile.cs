@@ -11,6 +11,11 @@ public class GrenadeProjectile : Projectile
     [SerializeField, Tooltip("The key used to access the pool containing the explosion VFX")]
     private string explosionVFXPoolKey;
 
+    // Properties
+    public float ExplosionRadius => explosionRadius;
+    public LayerMask HitMask => hitMask;
+    public string ExplosionVFXPoolKey => explosionVFXPoolKey;
+
     public void Init(Grenade parent, float dmg, float size)
     {
         parentWeapon = parent;
@@ -71,7 +76,7 @@ public class GrenadeProjectile : Projectile
             parentWeapon.HandleWeaponHit(hitEnemies, transform.position, this);
         }
         //Return to pool
-        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
+        PoolOwner.ReturnToPool(gameObject, PoolKey);
     }
 
     public override void OnCreatedPool() { }

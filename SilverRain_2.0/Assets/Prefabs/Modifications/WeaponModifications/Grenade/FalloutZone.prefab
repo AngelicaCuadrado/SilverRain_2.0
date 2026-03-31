@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5686787514835667759
+--- !u!1 &6022226108522150899
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,64 +8,68 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4449301254283393554}
-  - component: {fileID: 5369237885974513252}
-  - component: {fileID: 2977403045061341465}
+  - component: {fileID: 7521199232609961434}
+  - component: {fileID: 3027819336096979764}
+  - component: {fileID: 704192217125869920}
   m_Layer: 0
-  m_Name: LightMetal
+  m_Name: FalloutZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4449301254283393554
+--- !u!4 &7521199232609961434
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686787514835667759}
+  m_GameObject: {fileID: 6022226108522150899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.18233, y: 2.0717, z: 1.16238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5369237885974513252
+--- !u!114 &3027819336096979764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686787514835667759}
+  m_GameObject: {fileID: 6022226108522150899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c421c2d5869cbbb4c9f1cc625ffef9c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 95366dd3fbdf3d944a677392095413bb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModificationLightMetal
+  m_EditorClassIdentifier: Assembly-CSharp::FalloutZone
   level: 0
   maxLevel: 1
   isAvailable: 0
-  isAvailableAtStart: 1
-  uiData: {fileID: 2977403045061341465}
-  id: 0
-  requiredWeapon: 0
---- !u!114 &2977403045061341465
+  isAvailableAtStart: 0
+  uiData: {fileID: 704192217125869920}
+  id: 17
+  requiredWeapon: 3
+  damageModifier: 0.5
+  cooldownModifier: -0.2
+  damageToPlayerModifier: 0.5
+--- !u!114 &704192217125869920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686787514835667759}
+  m_GameObject: {fileID: 6022226108522150899}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
-  buffName: Light Metal
+  buffName: Fallout Zone
   buffLevel: 
-  baseBuffDescription: Reduces damage but also cooldown
+  baseBuffDescription: Reduces cooldown by 20%, increases damage by 50%, but the
+    explosion can now damage the player
   finalBuffDescription: 
-  buffIcon: {fileID: 21300000, guid: 3d4b8772a53d74a408443af996aa36f0, type: 3}
+  buffIcon: {fileID: 21300000, guid: 2531e15fe967a354d9d28c9cfc1d71ca, type: 3}

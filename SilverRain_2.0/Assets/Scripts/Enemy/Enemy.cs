@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour, IPoolable
 
     // Properties
     public string PoolKey { get => poolKey; set => poolKey = value; }
+    public ObjectPooler PoolOwner { get; set; }
     public float Damage { get => damage; }
     public int ScoreValue { get => scoreValue; }
     public float XPValue { get => xpValue; }

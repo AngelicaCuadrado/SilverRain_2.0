@@ -1,33 +1,27 @@
 using System.Collections;
 using UnityEngine;
 
-public class ModificationLightMetal : Modification, IWeaponModifier
+public class ModificationLightMetal : Modification, IStatModifier
 {
+    private bool isActive = false;
+
     public override void Activate()
     {
         base.Activate();
-        // Invoke the event to update the weapon stats
-        ModificationManager.Instance.OnWeaponStatModificationChange.Invoke(WeaponType.Sword, StatType.AttackDamage);
-        ModificationManager.Instance.OnWeaponStatModificationChange.Invoke(WeaponType.Sword, StatType.Cooldown);
+        isActive = true;
+        StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
+        StatManager.Instance.UpdateTempStats(StatType.Cooldown);
     }
 
-    public float GetModifyValue(WeaponType weapon, StatType stat)
+    public float GetModifyValue(StatType type)
     {
-        if (weapon == WeaponType.Sword)
+        if (!isActive) return 0;
+
+        switch (type)
         {
-            switch (stat)
-            {
-                case StatType.AttackDamage: return -0.5f; //50% less damage
-                case StatType.Cooldown: return -0.5f; //50% faster
-                default: return 0;
-            }
+            case StatType.AttackDamage: return -0.5f; //50% less damage
+            case StatType.Cooldown: return -0.5f; //50% faster
+            default: return 0;
         }
-        return 0;
-    }
-
-    public override void OnDestroy()
-    {
-        base.OnDestroy();
-        WeaponManager.Instance.OnWeaponAquired.RemoveListener(OnRequirementMet);
     }
 }

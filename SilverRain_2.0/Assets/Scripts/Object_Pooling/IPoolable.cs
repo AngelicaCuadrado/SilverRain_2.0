@@ -9,6 +9,8 @@ public interface IPoolable
     //The key identifying the pool this object belongs to
     public string PoolKey { get; set; }
 
+    public ObjectPooler PoolOwner { get; set; }
+
     //Called once when the object is first created
     public void OnCreatedPool();
 

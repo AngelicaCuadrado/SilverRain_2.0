@@ -55,9 +55,9 @@ public abstract class EnemyController : MonoBehaviour
     public virtual void Move()
     {
         // Guard clauses
-        if (agent == null) { return; }
-        if (targetPlayer == null) { return; }
-        if (!agent.isOnNavMesh) { Debug.LogWarning($"Enemy {name} is not on a NavMeshSurface"); return; }
+        if (agent == null) return; 
+        if (targetPlayer == null) return; 
+        if (!agent.isOnNavMesh) return;
 
         //Check if the player's position is on the NavMesh
         NavMeshHit hit;

@@ -44,7 +44,7 @@ public class PistolProjectile : Projectile
             parentWeapon.HandleWeaponHit(hits, transform.position, this);
         }
         //Return the projectile to the pool
-        WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
+        PoolOwner.ReturnToPool(gameObject, PoolKey);
     }
 
     //Called once when the pool initially creates the instance

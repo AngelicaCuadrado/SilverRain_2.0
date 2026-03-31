@@ -129,7 +129,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (enemy.PoolKey != null)
         {
-            EnemyManager.Instance.EnemyPool.ReturnToPool(gameObject, enemy.PoolKey);
+            enemy.PoolOwner.ReturnToPool(gameObject, enemy.PoolKey);
         }
         else
         {

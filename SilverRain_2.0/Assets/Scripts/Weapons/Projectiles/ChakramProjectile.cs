@@ -22,9 +22,6 @@ public class ChakramProjectile : Projectile, IPoolable
 
     private bool returning = false;
 
-    // Properties
-    public float Damage { get => damage; set => damage = value; }
-
     public void Init(Chakram parent, Transform player, Vector3 direction, float dmg, float duration, float size, float speed)
     {
         parentWeapon = parent;
@@ -70,7 +67,7 @@ public class ChakramProjectile : Projectile, IPoolable
 
             // Retun to pool when player position reached
             if (Vector3.Distance(transform.position, playerTrans.position + firePointOffset) < 0.5f)
-            { WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey); }
+            { PoolOwner.ReturnToPool(gameObject, PoolKey); }
         }
 
     }

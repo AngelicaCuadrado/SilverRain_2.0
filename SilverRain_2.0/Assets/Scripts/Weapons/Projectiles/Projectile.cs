@@ -21,7 +21,11 @@ public abstract class Projectile : MonoBehaviour, IPoolable
     [SerializeField, Tooltip("The coroutine instance that will deactivate the projectile")]
     protected Coroutine lifeCoroutine;
 
+    // Properties
+    public Weapon ParentWeapon => parentWeapon;
     public string PoolKey { get; set; }
+    public ObjectPooler PoolOwner { get; set; }
+    public float Damage { get => damage; set => damage = value; }
 
     // Called once when the pool initially creates the instance
     public virtual void OnCreatedPool() { }
@@ -58,7 +62,7 @@ public abstract class Projectile : MonoBehaviour, IPoolable
         yield return new WaitForSeconds(lifeTime);
         if (gameObject.activeInHierarchy)
         {
-            WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey);
+            PoolOwner.ReturnToPool(gameObject, PoolKey);
         }
     }
 }

@@ -17,6 +17,7 @@ public class BeamController : MonoBehaviour, IPoolable
     private GameObject visuals;
 
     public string PoolKey { get => poolKey; set => poolKey = value; }
+    public ObjectPooler PoolOwner { get; set; }
 
     public void Init(float dmg, float dur, float cd, float sz)
     {
