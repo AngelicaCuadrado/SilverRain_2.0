@@ -1196,7 +1196,7 @@ MonoBehaviour:
   moveSpeed: 3
   lastKnownPlayerPos: {x: 0, y: 0, z: 0}
   attackRange: 18
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 2.5
   attackTimer: 0
   firePoint: {fileID: 8067650495102958602}
   projectilePrefab: {fileID: 2950361553670207421, guid: cf641f75b2f8f6d499633ede35d8cc86, type: 3}

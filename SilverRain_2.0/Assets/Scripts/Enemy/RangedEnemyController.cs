@@ -25,12 +25,13 @@ public class RangedEnemyController : EnemyController
         Vector3 direction = (targetPlayer.transform.position - origin).normalized;
 
         // Raycast toward the player
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, attackRange))
+        LayerMask playerLayer = LayerMask.GetMask("Player");
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, attackRange, playerLayer))
         {
             // Only attack if the ray hits the player
             if (hit.collider.CompareTag("Player"))
             {
-                animator.SetBool("isAttacking", true);
+                //animator.SetBool("isAttacking", true);
                 Attack();
                 return;
             }
@@ -38,7 +39,7 @@ public class RangedEnemyController : EnemyController
 
         // If raycast didn't hit the player, stop attacking
         attackTimer = 0f;
-        animator.SetBool("isAttacking", false);
+        //animator.SetBool("isAttacking", false);
     }
 
     public override void Attack()
@@ -49,22 +50,28 @@ public class RangedEnemyController : EnemyController
         //Spawn projectile targetting playerTrans.
         if (attackTimer >= timeBetweenAttacks)
         {
-            Vector3 dir = (targetPlayer.transform.position - firePoint.position).normalized;
-
-            ObjectPooler pool = EnemyManager.Instance.EnemyProjectilePool;
-            if (pool == null) return;
-
-            GameObject go = pool.Spawn(projectilePoolKey, firePoint.position, Quaternion.LookRotation(dir));
-            if (go == null) return;
-
-            var projectile = go.GetComponent<EnemyProjectile>();
-            if (projectile == null) return;
-
-            projectile.Initialize(dir, enemy.Damage, playerHealth);
-            projectile.PoolKey = projectilePoolKey;
+            // Trigger the attack animation
+            animator.SetTrigger("attacking");
 
             attackTimer = 0;
         }
+    }
+
+    public void FireProjectile()
+    {
+        Vector3 dir = (targetPlayer.transform.position - firePoint.position).normalized;
+
+        ObjectPooler pool = EnemyManager.Instance.EnemyProjectilePool;
+        if (pool == null) return;
+
+        GameObject go = pool.Spawn(projectilePoolKey, firePoint.position, Quaternion.LookRotation(dir));
+        if (go == null) return;
+
+        var projectile = go.GetComponent<EnemyProjectile>();
+        if (projectile == null) return;
+
+        projectile.Initialize(dir, enemy.Damage, playerHealth);
+        projectile.PoolKey = projectilePoolKey;
     }
 
     void OnDrawGizmos()

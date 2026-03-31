@@ -81,12 +81,7 @@ public class BeamController : MonoBehaviour, IPoolable
 
     private void UpdateBeamVisual(float length)
     {
-        var lr = GetComponent<LineRenderer>();
-        if (lr != null)
-        {
-            lr.SetPosition(0, Vector3.zero);
-            lr.SetPosition(1, Vector3.forward * length);
-        }
+        visuals.transform.localScale = new Vector3(1f, 1f, length);
     }
 
     public void OnCreatedPool() { }
@@ -94,4 +89,11 @@ public class BeamController : MonoBehaviour, IPoolable
     public void OnSpawnFromPool() { }
 
     public void OnReturnToPool() { }
+
+    // Draw the beam in the editor for debugging
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * size);
+    }
 }
