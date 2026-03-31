@@ -37,6 +37,8 @@ public abstract class Weapon : TemporaryBuff
 
     //Properties
     public WeaponType WeaponType => weaponType;
+    public string ProjectilePoolKey => projectilePoolKey;
+    public WeaponStats WeaponStats => weaponStats;
 
     //Methods
     #region TemporaryBuff Implementation
@@ -114,14 +116,14 @@ public abstract class Weapon : TemporaryBuff
     #endregion
 
     #region Event Handling
-    public virtual void HandleProjectileSpawn()
+    public virtual void HandleProjectileSpawn(GameObject proj)
     {
-        WeaponManager.Instance.HandleProjectileSpawn(weaponType, this);
+        WeaponManager.Instance.HandleProjectileSpawn(weaponType, this, proj);
     }
 
-    public virtual void HandleWeaponHit(GameObject[] obj, Vector3 pos)
+    public virtual void HandleWeaponHit(GameObject[] obj, Vector3 pos, Projectile proj)
     {
-        WeaponManager.Instance.HandleWeaponHit(weaponType, obj, pos);
+        WeaponManager.Instance.HandleWeaponHit(weaponType, obj, pos, proj);
     }
 
     public virtual void RecalculateStats(StatType type)

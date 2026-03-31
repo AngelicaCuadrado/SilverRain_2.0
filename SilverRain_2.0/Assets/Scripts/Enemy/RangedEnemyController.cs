@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.UI.Image;
 
 public class RangedEnemyController : EnemyController
@@ -66,9 +67,35 @@ public class RangedEnemyController : EnemyController
         }
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
+        // Draw the detection radius
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        // Only draw the ray if we have a target to look at
+        if (targetPlayer != null)
+        {
+            Vector3 origin = transform.position;
+            Vector3 direction = (targetPlayer.transform.position - origin).normalized;
+
+            // Perform a "Preview" raycast for the gizmo
+            if (Physics.Raycast(origin, direction, out RaycastHit hit, attackRange))
+            {
+                // Green if it hits the player, Yellow if it hits an obstacle
+                Gizmos.color = hit.collider.CompareTag("Player") ? Color.green : Color.yellow;
+                Gizmos.DrawLine(origin, hit.point);
+                Gizmos.DrawWireSphere(hit.point, 0.1f);
+            }
+            else
+            {
+                // Red if the player is out of range or ray hits nothing
+                Gizmos.color = Color.red;
+                Gizmos.DrawRay(origin, direction * attackRange);
+            }
+        }
     }
+
+
+
 }

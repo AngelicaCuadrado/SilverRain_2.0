@@ -3,6 +3,13 @@ using UnityEngine.AI;
 
 public class MeleeEnemyController : EnemyController
 {
+     public override void Update()
+    {
+        if (tutorialFrozen) return;
+
+        base.Update();
+    }
+
     public override void CheckPlayerInRange()
     {
         if (targetPlayer == null) return;

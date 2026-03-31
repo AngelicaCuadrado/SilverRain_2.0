@@ -66,7 +66,7 @@ public class SwordEvolution : Sword, IWeaponEvolution
     public override void Attack()
     {
         //Calculate spawn rotation so the projectile faces forward
-        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + spawnAngleOffset, 0f);
+        Quaternion spawnRot = Quaternion.Euler(0f, playerTrans.eulerAngles.y + startAngle, 0f);
         //Instantiate projectile
         var projObj = WeaponManager.Instance.ProjectilePool.Spawn(projectilePoolKey, playerTrans.position, spawnRot);
         //Initialize projectile
@@ -77,10 +77,19 @@ public class SwordEvolution : Sword, IWeaponEvolution
             Destroy(projObj);
             return;
         }
-        // Send -1 for duration will cause it to stay active
-        proj.Init(this, playerTrans, weaponStats.Damage, -1, weaponStats.Size, weaponStats.ProjectileSpeed);
+        // Sending a negative number for duration will cause it to stay active forever
+        proj.Init(
+            this, 
+            playerTrans,
+            weaponStats.Damage,
+            // BeamSword modification divides by 6, so -18 gives the beam a cd and dur of 3 sec
+            -18, 
+            weaponStats.Size, 
+            weaponStats.ProjectileSpeed,
+            startAngle
+            );
         // Notify the WeaponManager about the projectile spawn
-        HandleProjectileSpawn();
+        HandleProjectileSpawn(projObj);
     }
     #endregion
 }

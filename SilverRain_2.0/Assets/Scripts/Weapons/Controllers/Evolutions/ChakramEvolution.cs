@@ -93,11 +93,8 @@ public class ChakramEvolution : Chakram, IWeaponEvolution
             proj.Init(this, playerTrans, direction, weaponStats.Damage, weaponStats.Duration, weaponStats.Size, weaponStats.ProjectileSpeed);
 
             // Trigger modification for each projectile
-            //HandleProjectileSpawn();
+            HandleProjectileSpawn(projObj);
         }
-
-        // Trigger modification only once per attack
-        HandleProjectileSpawn();
     }
     #endregion
 }

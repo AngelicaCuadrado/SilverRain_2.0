@@ -1,11 +1,13 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [FormerlySerializedAs("maxHealth")]
+    public static event Action<EnemyHealth> OnEnemyKilled;
+
     [Header("Health")]
     [SerializeField, Tooltip("")]
     private int baseHealth = 100;
@@ -47,6 +49,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        //if (isDead) return;
+
         currentHealth -= damage;
 
         AudioManager.Instance.PlaySFX(sfxID);
@@ -109,6 +113,8 @@ public class EnemyHealth : MonoBehaviour
 
         // Start animation
         animator.SetBool("isDead", true);
+
+        OnEnemyKilled?.Invoke(this);
     }
 
     // This will be called by "Death" animation event
@@ -119,24 +125,11 @@ public class EnemyHealth : MonoBehaviour
         ReturnToPool();
     }
 
-    IEnumerator DeathCoroutine()
-    {
-        animator.SetBool("isDead", true);
-        if (controller != null) controller.enabled = false;
-
-        playerExp.GainExp(enemy.XPValue);
-        ScoreManager.Instance.AddScore(enemy.ScoreValue);
-
-        yield return new WaitForSeconds(3);
-
-        //ReturnToPool();
-    }
-
     private void ReturnToPool()
     {
         if (enemy.PoolKey != null)
         {
-            EnemyManager.Instance.EnemyPool.ReturnToPool(gameObject, enemy.PoolKey);
+            enemy.PoolOwner.ReturnToPool(gameObject, enemy.PoolKey);
         }
         else
         {

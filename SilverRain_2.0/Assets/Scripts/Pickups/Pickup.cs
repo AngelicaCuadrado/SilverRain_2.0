@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using System;
 
 public abstract class Pickup : MonoBehaviour, IPoolable
 {
+    public static event Action<Pickup> OnAnyPickupCollected;
+
     [Header("Identification")]
     [SerializeField, Tooltip("The key used to identify this pickup in the object pool")]
     protected string poolKey;
@@ -23,6 +26,7 @@ public abstract class Pickup : MonoBehaviour, IPoolable
     
     // Properties
     public string PoolKey { get { return poolKey; } set { poolKey = value; } }
+    public ObjectPooler PoolOwner { get; set; }
     public int LocationIndex { get { return locationIndex; } set { locationIndex = value; } }
 
 
@@ -48,13 +52,14 @@ public abstract class Pickup : MonoBehaviour, IPoolable
         if (other.CompareTag("Player"))
         {
             OnPickup();
-            PickupManager.Instance.PickupPool.ReturnToPool(gameObject, poolKey);
+            PoolOwner.ReturnToPool(gameObject, poolKey);
         }
     }
 
     public virtual void OnPickup()
     {
         PickupManager.Instance.ClearSpawnSpot(locationIndex);
+        OnAnyPickupCollected?.Invoke(this);
     }
 
     public virtual void OnCreatedPool() { }

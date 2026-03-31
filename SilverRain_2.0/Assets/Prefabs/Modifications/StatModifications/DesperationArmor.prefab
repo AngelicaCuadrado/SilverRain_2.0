@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2245874679227343023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4079807071073738005}
+  - component: {fileID: 2233977755108131641}
+  - component: {fileID: 7645683673719621161}
+  m_Layer: 0
+  m_Name: DesperationArmor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4079807071073738005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245874679227343023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.08073, y: 0, z: -1.01626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2233977755108131641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245874679227343023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f691f9e4c806a46b9a4cdb242ce4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModificationDesperationArmor
+  level: 0
+  maxLevel: 1
+  isAvailable: 0
+  isAvailableAtStart: 1
+  uiData: {fileID: 7645683673719621161}
+  id: 4
+  requiredWeapon: 0
+--- !u!114 &7645683673719621161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245874679227343023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITemporary
+  buffName: Desperation Armor
+  buffLevel: 0
+  baseBuffDescription: Increases armor by 50% when hp is lower than 30%
+  finalBuffDescription: 
+  buffIcon: {fileID: 21300000, guid: e1ba674e14010ec4580da105317b7b77, type: 3}

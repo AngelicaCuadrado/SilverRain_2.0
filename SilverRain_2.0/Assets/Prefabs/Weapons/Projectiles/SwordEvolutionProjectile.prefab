@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8622294429667819228}
   - component: {fileID: 9192895888190991324}
   - component: {fileID: 217948073448938300}
+  - component: {fileID: 9027759308782750851}
   m_Layer: 8
   m_Name: SwordEvolutionProjectile
   m_TagString: PlayerProjectile
@@ -54,7 +55,7 @@ MonoBehaviour:
   rotationRadius: 0
   rotationSpeed: 0
   playerTrans: {fileID: 0}
-  heightOffset: 1
+  heightOffset: 0
 --- !u!136 &9192895888190991324
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -105,6 +106,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9027759308782750851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663858266961099884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a109f5dddec602a4b848179ecb9ee541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnMetadata
+  Generation: 0
+  ProcessedModIds: 
 --- !u!1 &8529955982914184677
 GameObject:
   m_ObjectHideFlags: 0

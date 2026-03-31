@@ -30,7 +30,7 @@ public class ChakramProjectile : Projectile, IPoolable
         flightSpeed = speed;
 
         //Scale the gameobject based on size
-        if (size < 1f) size = 1f;
+        //if (size < 1f) size = 1f;
         transform.localScale = Vector3.one * size;
 
         // Find max distance based on duration
@@ -41,9 +41,6 @@ public class ChakramProjectile : Projectile, IPoolable
         {
             lifeCoroutine = StartCoroutine(LifeTimer());
         }
-
-        //Apply modifications
-        parentWeapon.HandleProjectileSpawn();
     }
     private void Update()
     {
@@ -70,7 +67,7 @@ public class ChakramProjectile : Projectile, IPoolable
 
             // Retun to pool when player position reached
             if (Vector3.Distance(transform.position, playerTrans.position + firePointOffset) < 0.5f)
-            { WeaponManager.Instance.ProjectilePool.ReturnToPool(gameObject, PoolKey); }
+            { PoolOwner.ReturnToPool(gameObject, PoolKey); }
         }
 
     }
@@ -89,7 +86,7 @@ public class ChakramProjectile : Projectile, IPoolable
             enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
             //Apply modifications
             GameObject[] hits = new[] { other.gameObject };
-            parentWeapon.HandleWeaponHit(hits, transform.position);
+            parentWeapon.HandleWeaponHit(hits, transform.position, this);
             return;
         }
 
@@ -105,12 +102,10 @@ public class ChakramProjectile : Projectile, IPoolable
 
     public override void OnReturnToPool()
     {
-        //Stop any running timers and reset state
-        if (lifeCoroutine != null)
-        {
-            StopCoroutine(lifeCoroutine);
-            lifeCoroutine = null;
-        }
+        // Let base handle coroutine stop and SpawnMetadata reset
+        base.OnReturnToPool();
+
+        // Reset chakram-specific state
         returning = false;
     }
 }

@@ -39,11 +39,13 @@ public class ObjectPooler : MonoBehaviour
                 var obj = Instantiate(pool.Prefab, poolRoot);
                 obj.SetActive(false);
 
-                //Notify the object it has been created in the pool
+                // Notify the object it has been created in the pool
                 if (obj.TryGetComponent<IPoolable>(out var poolable))
                 {
-                    poolable.OnCreatedPool();
+                    // Assign pool key and owner before calling OnCreatedPool
                     poolable.PoolKey = pool.Key;
+                    poolable.PoolOwner = this;
+                    poolable.OnCreatedPool();
                 }
 
                 //Enqueue the object
@@ -84,9 +86,10 @@ public class ObjectPooler : MonoBehaviour
                 var extra = Instantiate(def.Prefab, poolRoot);
                 extra.SetActive(false);
 
-                if (extra.TryGetComponent<IPoolable>(out var poolable))
+                if (extra.TryGetComponent<IPoolable>(out var p))
                 {
-                    poolable.PoolKey = def.Key;
+                    p.PoolKey = def.Key;
+                    p.PoolOwner = this;
                 }
 
                 queue.Enqueue(extra);
@@ -108,8 +111,13 @@ public class ObjectPooler : MonoBehaviour
         obj.transform.rotation = rotation;
         obj.SetActive(true);
 
-        //Notify the object it has been spawned
-        obj.GetComponent<IPoolable>()?.OnSpawnFromPool();
+        // Notify the object it has been spawned from the pool
+        if (obj.TryGetComponent<IPoolable>(out var poolable))
+        {
+            poolable.PoolKey = key;
+            poolable.PoolOwner = this;
+            poolable.OnSpawnFromPool();
+        }
 
         return obj;
     }

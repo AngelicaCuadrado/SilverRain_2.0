@@ -7,6 +7,7 @@ public class HammerHitVFX : MonoBehaviour, IPoolable
     private ParticleSystem ps;
 
     public string PoolKey { get; set; }
+    public ObjectPooler PoolOwner { get; set; }
 
     public void OnCreatedPool() { }
 
@@ -27,6 +28,6 @@ public class HammerHitVFX : MonoBehaviour, IPoolable
     private IEnumerator ReturnWhenDone()
     {
         yield return new WaitForSeconds(ps.main.duration + ps.main.startLifetime.constantMax);
-        WeaponManager.Instance.EffectsPool.ReturnToPool(gameObject, PoolKey);
+        PoolOwner.ReturnToPool(gameObject, PoolKey);
     }
 }

@@ -6,24 +6,25 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour, IPoolable
 {
     [Header("Movement")]
-    [SerializeField, Tooltip("")] 
+    [SerializeField, Tooltip("")]
     private Vector3 direction;
-    [SerializeField, Tooltip("")] 
+    [SerializeField, Tooltip("")]
     private float speed = 10f;
 
     [Header("Damage")]
-    [SerializeField, Tooltip("")] 
+    [SerializeField, Tooltip("")]
     private float damage;
-    [SerializeField, Tooltip("")] 
+    [SerializeField, Tooltip("")]
     private PlayerHealth targetPlayerHealth;
 
     [Header("Pooling")]
-    [SerializeField, Tooltip("")] 
+    [SerializeField, Tooltip("")]
     private float deathTime = 10f;
     [SerializeField, Tooltip("")]
     private string poolKey;
 
     public string PoolKey { get => poolKey; set => poolKey = value; }
+    public ObjectPooler PoolOwner { get; set; }
 
     #region IPoolable Implementation
     public void OnCreatedPool() { }
@@ -38,7 +39,8 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
 
     public void OnReturnToPool()
     {
-        if (deathTime > 0f) {
+        if (deathTime > 0f)
+        {
             StopCoroutine(LifeTimer());
         }
     }
@@ -46,11 +48,7 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
 
     public void ReturnToPool(GameObject obj)
     {
-        ObjectPooler pooler = EnemyManager.Instance.EnemyProjectilePool;
-        if (pooler != null)
-            pooler.ReturnToPool(obj, PoolKey);
-        else
-            Destroy(obj);
+        PoolOwner.ReturnToPool(obj, PoolKey);
     }
 
     public void Initialize(Vector3 direction, float damage, PlayerHealth target)

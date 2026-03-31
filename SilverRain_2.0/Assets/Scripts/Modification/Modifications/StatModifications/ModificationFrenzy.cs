@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ModificationDesperationArmor : Modification, IStatModifier
+public class ModificationFrenzy : Modification, IStatModifier
 {
     private bool isActive = false;
     private PlayerHealth playerHealth;
@@ -18,7 +18,7 @@ public class ModificationDesperationArmor : Modification, IStatModifier
             if (isActive != lowHealth)
             {
                 isActive = lowHealth;
-                StatManager.Instance.UpdateTempStats(StatType.Armor);
+                StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
             }
         }
     }
@@ -28,22 +28,22 @@ public class ModificationDesperationArmor : Modification, IStatModifier
         if (isActive == lowHealth) return;
 
         isActive = lowHealth;
-        StatManager.Instance.UpdateTempStats(StatType.Armor);
+        StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
     }
 
     public float GetModifyValue(StatType type)
     {
         if (!isActive) return 0f;
 
-        if (type == StatType.Armor)
+        if (type == StatType.AttackDamage)
         {
-            return 0.5f;
+            return 0.5f; // AttackDamage +50%
         }
 
         return 0f;
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         if (playerHealth != null)
         {

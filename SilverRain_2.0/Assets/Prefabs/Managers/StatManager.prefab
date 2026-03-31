@@ -170,15 +170,6 @@ MonoBehaviour:
   - statType: 9
     temporaryUpgrade: {fileID: 6416675778297166033}
   maxTempUpgrades: 3
-  OnStatChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTempUpgradeAvailabilityChange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStatMaxLevelReached:
-    m_PersistentCalls:
-      m_Calls: []
   attackDamage: 0
   cooldown: 0
   duration: 0
@@ -189,6 +180,15 @@ MonoBehaviour:
   armor: 0
   xpMult: 0
   healthRegen: 0
+  OnStatChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTempUpgradeAvailabilityChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatMaxLevelReached:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7528563028209963181
 GameObject:
   m_ObjectHideFlags: 0
