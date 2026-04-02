@@ -1,15 +1,17 @@
 using UnityEngine;
 
-public class ModificationPanicRush : Modification, IStatModifier
+public class PanicRush : Modification, IStatModifier
 {
+    [SerializeField, Tooltip("Indicates whether the modification is currently active.")]
     private bool isActive = false;
+    [SerializeField, Tooltip("The player's health component.")]
     private PlayerHealth playerHealth;
 
     public override void Activate()
     {
         base.Activate();
 
-        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        playerHealth = PlayerFinder.Instance.Player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
             playerHealth.onLowHealthStateChanged.AddListener(OnLowHealthStateChanged);
@@ -45,6 +47,8 @@ public class ModificationPanicRush : Modification, IStatModifier
 
     public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (playerHealth != null)
         {
             playerHealth.onLowHealthStateChanged.RemoveListener(OnLowHealthStateChanged);

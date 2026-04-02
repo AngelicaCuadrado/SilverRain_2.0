@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Scaling Chakram
-  buffLevel: 0
+  buffLevel: 
   baseBuffDescription: Increases the damage every hit
   finalBuffDescription: 
   buffIcon: {fileID: 21300000, guid: 86aefa2655c3f114ab27823c16e3f431, type: 3}

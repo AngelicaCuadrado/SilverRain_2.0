@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class ModificationPerfectForm : Modification, IStatModifier
+public class StableEnergy : Modification, IStatModifier
 {
+    [SerializeField,Tooltip("Indicates whether the modification is currently active.")]
     private bool isActive = false;
+    [SerializeField, Tooltip("The player's health component.")]
     private PlayerHealth playerHealth;
+    [SerializeField, Tooltip("The percentage increase in duration when the modification is active.")]
+    private float durationModifier = 0.5f; // 50% increase in duration of energy-based effects
 
     public override void Activate()
     {
         base.Activate();
 
-        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        playerHealth = PlayerFinder.Instance.Player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
             playerHealth.onHighHealthStateChanged.AddListener(OnHighHealthStateChanged);
@@ -18,7 +22,7 @@ public class ModificationPerfectForm : Modification, IStatModifier
             if (isActive != highHealth)
             {
                 isActive = highHealth;
-                StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
+                StatManager.Instance.UpdateTempStats(StatType.Duration);
             }
         }
     }
@@ -35,7 +39,7 @@ public class ModificationPerfectForm : Modification, IStatModifier
         if (isActive)
         {
             isActive = false;
-            StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
+            StatManager.Instance.UpdateTempStats(StatType.Duration);
         }
     }
 
@@ -44,23 +48,25 @@ public class ModificationPerfectForm : Modification, IStatModifier
         if (isActive == highHealth) return;
 
         isActive = highHealth;
-        StatManager.Instance.UpdateTempStats(StatType.AttackDamage);
+        StatManager.Instance.UpdateTempStats(StatType.Duration);
     }
 
     public float GetModifyValue(StatType type)
     {
         if (!isActive) return 0f;
 
-        if (type == StatType.AttackDamage)
+        if (type == StatType.Duration)
         {
-            return 0.5f;
+            return durationModifier;
         }
 
         return 0f;
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (playerHealth != null)
         {
             playerHealth.onHighHealthStateChanged.RemoveListener(OnHighHealthStateChanged);

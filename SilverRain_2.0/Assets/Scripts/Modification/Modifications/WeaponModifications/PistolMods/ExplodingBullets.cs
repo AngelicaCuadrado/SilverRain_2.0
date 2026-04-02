@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class ModificationExplodingBullets : Modification
+public class ExplodingBullets : Modification
 {
-    [SerializeField]
-    GameObject explosionPrefab; //Testing purposes, change to vfx later
-    [SerializeField]
-    float explosionRadius = 10; //Testing value, needs refinement
-    [SerializeField]
-    int explosionDamage = 10; //Testing value, needs refinement
+    [SerializeField, Tooltip("The radius of the explosion")]
+    private float explosionRadius = 10;
+    [SerializeField, Tooltip("The damage dealt by the explosion")]
+    private int explosionDamage = 10;
 
     [SerializeField, Tooltip("The layer mask for detecting hits")]
     private LayerMask hitMask;
@@ -20,27 +18,26 @@ public class ModificationExplodingBullets : Modification
     {
         base.Activate();
         WeaponManager.Instance.OnWeaponHit.AddListener(OnWeaponHit);
-        
     }
 
-    public void OnWeaponHit(WeaponType type, GameObject[] objects, Vector3 position, Projectile proj) 
+    public void OnWeaponHit(WeaponType type, GameObject[] objects, Vector3 position, Projectile proj)
     {
         pos = position;
         if (type != WeaponType.Pistol) return;
         Explode(position);
     }
 
-    private void Explode(Vector3 position) 
+    private void Explode(Vector3 position)
     {
         var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, position, Quaternion.identity);
         explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey, explosionRadius);
 
         Collider[] hits = Physics.OverlapSphere(position, explosionRadius, hitMask);
 
-        foreach (Collider hit in hits) 
+        foreach (Collider hit in hits)
         {
             EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
-            if (enemy != null) 
+            if (enemy != null)
             {
                 enemy.TakeDamage(explosionDamage);
             }
@@ -61,5 +58,4 @@ public class ModificationExplodingBullets : Modification
             Gizmos.DrawWireSphere(pos, explosionRadius);
         }
     }
-
 }

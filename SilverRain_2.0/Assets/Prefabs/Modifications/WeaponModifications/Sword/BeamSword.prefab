@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Beam Sword
-  buffLevel: 0
+  buffLevel: 
   baseBuffDescription: Periodically shoot a laser
   finalBuffDescription: 
   buffIcon: {fileID: 21300000, guid: 62ce59ce09148c847b198159a3abc9f6, type: 3}

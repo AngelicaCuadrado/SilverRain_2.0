@@ -1,23 +1,30 @@
 using UnityEngine;
 
-public class ModificationDesperatePower : Modification, IStatModifier
+public class DesperatePower : Modification, IStatModifier
 {
+    [SerializeField, Tooltip("Indicates whether the modification is currently active.")]
     private bool isActive = false;
+    [SerializeField, Tooltip("The player's health component.")]
     private PlayerHealth playerHealth;
 
     public override void Activate()
     {
         base.Activate();
 
-        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        // Attempt to find the player's health component if it hasn't been assigned in the inspector
+        playerHealth = PlayerFinder.Instance.Player.GetComponent<PlayerHealth>();
+
+        // Subscribe to the low health state change event
         if (playerHealth != null)
         {
             playerHealth.onLowHealthStateChanged.AddListener(OnLowHealthStateChanged);
 
             bool lowHealth = playerHealth.GetHealthPercentage() <= 0.3f;
+            // Ensure the modification's active state is correctly set based on the player's current health status
             if (isActive != lowHealth)
             {
                 isActive = lowHealth;
+                // Update the stats to reflect the current state of the modification
                 StatManager.Instance.UpdateTempStats(StatType.Cooldown);
                 StatManager.Instance.UpdateTempStats(StatType.ProjectileSpeed);
             }
@@ -67,6 +74,8 @@ public class ModificationDesperatePower : Modification, IStatModifier
 
     public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (playerHealth != null)
         {
             playerHealth.onLowHealthStateChanged.RemoveListener(OnLowHealthStateChanged);

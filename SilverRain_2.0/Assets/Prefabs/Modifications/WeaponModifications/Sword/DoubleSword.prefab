@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Double Sword
-  buffLevel: 0
+  buffLevel: 
   baseBuffDescription: Spawns an extra sword
   finalBuffDescription: 
   buffIcon: {fileID: 21300000, guid: 9a32185a4d4b2d1459c58a811ed95887, type: 3}

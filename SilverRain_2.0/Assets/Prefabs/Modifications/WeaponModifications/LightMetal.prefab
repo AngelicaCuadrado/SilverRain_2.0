@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4449301254283393554}
-  - component: {fileID: 5369237885974513252}
+  - component: {fileID: 6224575332686775723}
   - component: {fileID: 2977403045061341465}
   m_Layer: 0
   m_Name: LightMetal
@@ -33,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5369237885974513252
+--- !u!114 &6224575332686775723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5686787514835667759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c421c2d5869cbbb4c9f1cc625ffef9c8, type: 3}
+  m_Script: {fileID: 11500000, guid: a3a34268674e3f64cb17d67adc95f536, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModificationLightMetal
+  m_EditorClassIdentifier: Assembly-CSharp::LightMetal
   level: 0
   maxLevel: 1
   isAvailable: 0
@@ -52,6 +52,9 @@ MonoBehaviour:
   uiData: {fileID: 2977403045061341465}
   id: 0
   requiredWeapon: 0
+  isActive: 0
+  attackDamageModifier: -0.5
+  cooldownModifier: -0.5
 --- !u!114 &2977403045061341465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Light Metal
   buffLevel: 
-  baseBuffDescription: Reduces damage but also cooldown
+  baseBuffDescription: Reduces cooldown by 50%, but also reduces damage by 50%
   finalBuffDescription: 
   buffIcon: {fileID: 21300000, guid: 3d4b8772a53d74a408443af996aa36f0, type: 3}

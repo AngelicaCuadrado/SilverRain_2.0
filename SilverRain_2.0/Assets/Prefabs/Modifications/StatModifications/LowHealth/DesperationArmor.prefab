@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7609279707839683155
+--- !u!1 &2245874679227343023
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2445874011670780975}
-  - component: {fileID: 5476099329868842429}
-  - component: {fileID: 407179830743727385}
+  - component: {fileID: 4079807071073738005}
+  - component: {fileID: 2193063319776186747}
+  - component: {fileID: 7645683673719621161}
   m_Layer: 0
-  m_Name: Frenzy
+  m_Name: DesperationArmor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2445874011670780975
+--- !u!4 &4079807071073738005
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7609279707839683155}
+  m_GameObject: {fileID: 2245874679227343023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.08073, y: 0, z: -1.01626}
@@ -33,39 +33,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5476099329868842429
+--- !u!114 &2193063319776186747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7609279707839683155}
+  m_GameObject: {fileID: 2245874679227343023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62a9ae27b81364b48a838fc5e6373fee, type: 3}
+  m_Script: {fileID: 11500000, guid: 62391a5db270b1f49b3afc428102743b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModificationFrenzy
+  m_EditorClassIdentifier: Assembly-CSharp::DesperationArmor
   level: 0
   maxLevel: 1
   isAvailable: 0
   isAvailableAtStart: 1
-  uiData: {fileID: 407179830743727385}
-  id: 2
+  uiData: {fileID: 7645683673719621161}
+  id: 4
   requiredWeapon: 0
---- !u!114 &407179830743727385
+  isActive: 0
+  playerHealth: {fileID: 0}
+--- !u!114 &7645683673719621161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7609279707839683155}
+  m_GameObject: {fileID: 2245874679227343023}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8060ec57ecb51384a8d5472a4e840b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
-  buffName: Frenzy
+  buffName: Desperation Armor
   buffLevel: 0
-  baseBuffDescription: Increases damage by 50% when hp is lower than 30%
+  baseBuffDescription: Increases armor by 50% when hp is lower than 30%
   finalBuffDescription: 
-  buffIcon: {fileID: 21300000, guid: 3253ad9deab97584d9f92d6a2fad17b4, type: 3}
+  buffIcon: {fileID: 21300000, guid: e1ba674e14010ec4580da105317b7b77, type: 3}

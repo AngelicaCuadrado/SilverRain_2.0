@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5343902698497340379}
-  - component: {fileID: 5511002610423233782}
+  - component: {fileID: 2502232529467474695}
   - component: {fileID: 8572260826941414755}
   m_Layer: 0
   m_Name: ExplodingBullets
@@ -33,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5511002610423233782
+--- !u!114 &2502232529467474695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,23 +42,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6435634718675079524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb03097063cc6145a20bc62df60b471, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bef99fe6587d8541adc2b0572a9b59d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModificationExplodingBullets
+  m_EditorClassIdentifier: Assembly-CSharp::ExplodingBullets
   level: 0
   maxLevel: 1
-  isAvailable: 1
-  isAvailableAtStart: 1
+  isAvailable: 0
+  isAvailableAtStart: 0
   uiData: {fileID: 8572260826941414755}
   id: 12
   requiredWeapon: 1
-  explosionPrefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
-  explosionRadius: 100
-  explosionDamage: 1
+  explosionRadius: 10
+  explosionDamage: 10
   hitMask:
     serializedVersion: 2
-    m_Bits: 0
-  explosionVFXPoolKey: 
+    m_Bits: 128
+  explosionVFXPoolKey: ExplodingBullets
   pos: {x: 0, y: 0, z: 0}
 --- !u!114 &8572260826941414755
 MonoBehaviour:

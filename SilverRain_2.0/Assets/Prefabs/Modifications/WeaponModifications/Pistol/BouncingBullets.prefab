@@ -52,6 +52,7 @@ MonoBehaviour:
   uiData: {fileID: 3095763047329244745}
   id: 13
   requiredWeapon: 1
+  bounceAmount: 2
   bounceRange: 15
 --- !u!114 &3095763047329244745
 MonoBehaviour:
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITemporary
   buffName: Bouncing Bullets
-  buffLevel: 0
+  buffLevel: 
   baseBuffDescription: Bounces the bullet to another target
   finalBuffDescription: 
   buffIcon: {fileID: 21300000, guid: f6b8b85cbdc82ce439a41ae3d56d57ee, type: 3}
