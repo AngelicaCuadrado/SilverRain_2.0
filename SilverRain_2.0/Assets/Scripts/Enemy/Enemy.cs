@@ -7,32 +7,33 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IPoolable
 {
     [Header("References")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The EnemyHealth component attached to this GameObject")]
     private EnemyHealth health;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The EnemyController component attached to this GameObject")]
     private EnemyController controller;
-    [SerializeField] private bool startHidden = true;
+    [SerializeField, Tooltip("Whether the enemy should start hidden")]
+    private bool startHidden = true;
 
     [Header("Rewards")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The score value awarded to the player for defeating this enemy")]
     private int scoreValue;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The experience points awarded to the player for defeating this enemy")]
     private float xpValue;
 
     [Header("Combat")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The damage value dealt by the enemy")]
     private float damage;
 
     [Header("Pooling")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The key used to identify this enemy in the object pool")]
     private string poolKey;
 
     [Header("Stage VFX")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The particle system prefab for the stage VFX")]
     private ParticleSystem stageParticlePrefab;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The instance of the stage particle system")]
     private ParticleSystem _stageParticleInstance;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The material property block used for stage VFX")]
     private MaterialPropertyBlock _mpb;
     private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
 

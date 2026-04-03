@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class RainController : MonoBehaviour
 {
@@ -6,14 +7,13 @@ public class RainController : MonoBehaviour
 
     [SerializeField, Tooltip("The player's transform, used to position the rain system above them.")]
     private Transform player;
-    [SerializeField, Tooltip("The ParticleSystem component for the rain effect.")]
-    private ParticleSystem rainSystem;
-    [SerializeField, Tooltip("Height offset for the rain system above the player.")]
-    private float heightOffset = 20f;
+
+    [SerializeField, Tooltip("The VisualEffect component for the rain effect.")]
+    private VisualEffect rainVFX;
 
     private void Awake()
     {
-        if (Instance == null) { Instance = this; }
+        if (Instance == null || Instance == this) { Instance = this; }
         else { Destroy(gameObject); return; }
     }
 
@@ -23,27 +23,29 @@ public class RainController : MonoBehaviour
         {
             player = PlayerFinder.Instance.Player.transform;
         }
-        rainSystem = GetComponent<ParticleSystem>();
-        
+
+        if (rainVFX == null)
+            rainVFX = GetComponentInChildren<VisualEffect>();
+
+        StopRain();
     }
 
     private void LateUpdate()
     {
         if (player == null) return;
-        Vector3 pos = player.position;
-        pos.y += heightOffset;
-        transform.position = pos;
+
+        transform.position = player.position;
     }
 
-    public void StartRain() 
+    public void StartRain()
     {
-        if (rainSystem == null) return;
-        if (!rainSystem.isPlaying) rainSystem.Play();
+        if (rainVFX == null) return;
+        rainVFX.Play();
     }
 
-    public void StopRain() 
+    public void StopRain()
     {
-        if (rainSystem == null) return;
-        if (rainSystem.isPlaying) rainSystem.Stop();
+        if (rainVFX == null) return;
+        rainVFX.Stop();
     }
 }

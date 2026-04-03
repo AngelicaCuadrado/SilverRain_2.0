@@ -12658,8 +12658,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   baseHealth: 5
   currentHealth: 0
-  bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
+  bloodVFXPoolKey: BloodVFX
   sfxID: sfx_enemy3_hurt
+  revealDuration: 5
+  revealRadius: 5
   enemy: {fileID: 2283378382430031975}
   rb: {fileID: 1233713196667844194}
   animator: {fileID: 8137092682179754943}

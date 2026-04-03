@@ -6,17 +6,21 @@ using UnityEngine.Events;
 public class GlobalInvisibilityManager : MonoBehaviour
 {
     public static GlobalInvisibilityManager Instance { get; private set; }
-    [SerializeField, Tooltip("")]
+
+    [SerializeField, Tooltip("The timer for the global invisibility effect")]
     private float invisibilityTimer;
     [SerializeField, Tooltip("Whether the global invisibility effect is currently active")]
     private bool isActive = false;
+    [SerializeField, Tooltip("The object pooler for blood splatter effects")]
+    private ObjectPooler bloodSplatterPool;
 
     // Properties
     public float InvisibilityTimer => invisibilityTimer;
     public bool IsActive => isActive;
+    public ObjectPooler BloodSplatterPool => bloodSplatterPool;
 
     // Events
-    public UnityEvent<float> OnGlobalReveal;
+    [HideInInspector] public UnityEvent<float> OnGlobalReveal;
 
     private void Awake()
     {
@@ -29,6 +33,8 @@ public class GlobalInvisibilityManager : MonoBehaviour
         OnGlobalReveal?.Invoke(duration);
         isActive = true;
         RainController.Instance.StartRain();
+        // Stop any existing countdown and start a new one
+        StopAllCoroutines();
         StartCoroutine(InvisibilityCountdown(duration));
     }
 

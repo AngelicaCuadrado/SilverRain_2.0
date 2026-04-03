@@ -9,29 +9,34 @@ public class EnemyHealth : MonoBehaviour
     public static event Action<EnemyHealth> OnEnemyKilled;
 
     [Header("Health")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The base health of the enemy")]
     private int baseHealth = 100;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The current health of the enemy")]
     private int currentHealth;
-    [SerializeField, Tooltip("")]
-    private ParticleSystem bloodSplatterPrefab;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The key used to identify the blood VFX in the object pool")]
+    private string bloodVFXPoolKey;
+    [SerializeField, Tooltip("The sound effect ID for when the enemy takes damage")]
     private string sfxID;
 
+    [Header("Invisibility")]
+    [SerializeField,Tooltip("The duration which the enemy reveals nearby enemies when taking damage")]
+    private float revealDuration = 5f;
+    [SerializeField,Tooltip("The radius within which the enemy reveals nearby enemies when taking damage")]
+    private float revealRadius = 5f;
+
     [Header("References")]
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The enemy component attached to this GameObject")]
     private Enemy enemy;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The Rigidbody component attached to this GameObject")]
     private Rigidbody rb;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The Animator component attached to this GameObject")]
     private Animator animator;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The EnemyController component attached to this GameObject")]
     private EnemyController controller;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The PlayerExperience component attached to the player")]
     private PlayerExperience playerExp;
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The NavMeshAgent component attached to this GameObject")]
     private NavMeshAgent agent;
-    //private AudioSource audioSource;
 
     void Start()
     {
@@ -40,36 +45,43 @@ public class EnemyHealth : MonoBehaviour
 
         if (PlayerFinder.Instance.Player == null) { Debug.Log("EnemyHealth couldn't find player"); return; }
         playerExp = PlayerFinder.Instance.Player.GetComponent<PlayerExperience>();
-
-        //enemy = GetComponent<Enemy>();
-        //animator = GetComponentInChildren<Animator>();
-        //controller = GetComponent<EnemyController>();
-        //audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void TakeDamage(int damage)
     {
-        //if (isDead) return;
-
+        // Take damage
         currentHealth -= damage;
 
+        // Play sound effect
         AudioManager.Instance.PlaySFX(sfxID);
 
+        // Check for death
         if (currentHealth <= 0)
         {
             Die();
         }
 
-        Vector3 bloodSplatterSpawn = transform.position;
-        bloodSplatterSpawn.y += 1f;
-        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
-        var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, rotation);
-
-        bloodSplatter.Play();
+        // Spawn blood VFX
+        Vector3 spawnPos = transform.position + Vector3.up * 1f;
+        Quaternion rot = Quaternion.identity;
+        GlobalInvisibilityManager.Instance.BloodSplatterPool.Spawn(bloodVFXPoolKey, spawnPos, rot);
 
         if (!GlobalInvisibilityManager.Instance.IsActive)
         {
-            enemy.RevealTimed(5f);
+            // Reveal self
+            enemy.RevealTimed(revealDuration);
+
+            // Reveal nearby enemies
+            LayerMask enemyLayer = LayerMask.GetMask("Enemy");
+            Collider[] colliders = Physics.OverlapSphere(transform.position, revealRadius, enemyLayer);
+            foreach (var col in colliders)
+            {
+                Enemy nearbyEnemy = col.GetComponent<Enemy>();
+                if (nearbyEnemy != null && nearbyEnemy != enemy)
+                {
+                    nearbyEnemy.RevealTimed(revealDuration);
+                }
+            }
         }
 
         animator.SetTrigger("hurt");

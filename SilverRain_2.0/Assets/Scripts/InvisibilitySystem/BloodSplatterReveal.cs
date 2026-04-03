@@ -1,13 +1,14 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BloodSplatterReveal : MonoBehaviour
 {
     private ParticleSystem ps;
-    //private List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
+    private List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
 
-    //private List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> enemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -19,14 +20,14 @@ public class BloodSplatterReveal : MonoBehaviour
         Destroy(this.gameObject, ps.main.duration);
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy != null && !GlobalInvisibilityManager.Instance.IsActive) 
-        {
-           enemy.RevealTimed(5f);
-        }
-    }
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    Enemy enemy = other.GetComponent<Enemy>();
+    //    if (enemy != null && !GlobalInvisibilityManager.Instance.IsActive) 
+    //    {
+    //       enemy.RevealTimed(5f);
+    //    }
+    //}
 
     //private void OnParticleTrigger()
     //{
