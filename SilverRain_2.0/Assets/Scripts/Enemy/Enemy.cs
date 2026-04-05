@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour, IPoolable
     private void OnEnable()
     {
         //Subscribe to events
-        GlobalInvisibilityManager.Instance.OnGlobalReveal.AddListener(RevealTimed);
+        if (GlobalInvisibilityManager.Instance != null) GlobalInvisibilityManager.Instance.OnGlobalReveal.AddListener(RevealTimed);
         // if (StageManager.Instance != null)
         //     StageManager.Instance.OnStageChanged.AddListener(ApplyStageVFX);
     }
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour, IPoolable
     private void OnDisable()
     {
         //Unsubscribe from events
-        GlobalInvisibilityManager.Instance.OnGlobalReveal.RemoveListener(RevealTimed);
+        if (GlobalInvisibilityManager.Instance != null) GlobalInvisibilityManager.Instance.OnGlobalReveal.RemoveListener(RevealTimed);
         // if (StageManager.Instance != null)
         //     StageManager.Instance.OnStageChanged.RemoveListener(ApplyStageVFX);
     }
