@@ -12,7 +12,9 @@ public class BuffCardsWindow : UIWindow
     [Header("Common")]
     [SerializeField] private Button rerollButton;
     [SerializeField] private Button closeButton;
-    
+    [SerializeField] private TMPro.TextMeshProUGUI rerollsAvailableText;
+    [SerializeField] private TMPro.TextMeshProUGUI bansAvailableText;
+
     private object _pauseToken;
     private object _inputToken;
 
@@ -93,5 +95,21 @@ public class BuffCardsWindow : UIWindow
     public void CloseCards()
     {
         UIManager.Instance.Pop();
+    }
+
+    public void UpdateRerollsAvailable(int rerolls)
+    {
+        if (rerollsAvailableText != null)
+        {
+            rerollsAvailableText.text = $"Rerolls Available: {rerolls}";
+        }
+    }
+
+    public void UpdateBansAvailable(int bans)
+    {
+        if (bansAvailableText != null)
+        {
+            bansAvailableText.text = $"Bans Available: {bans}";
+        }
     }
 }

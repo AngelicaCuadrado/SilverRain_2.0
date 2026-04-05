@@ -32,6 +32,8 @@ public class BuffCardManager : MonoBehaviour
     [Header("UI")]
     [SerializeField, Tooltip("BuffCardsWindow prefab to push via UIManager")]
     private UIWindow buffCardsWindowPrefab;
+    [SerializeField, Tooltip("Cached reference to the active BuffCardsWindow instance for updating rerolls and bans available")]
+    private BuffCardsWindow buffCardsWindowInstance;
 
     [Header("Level Up Queue")]
     [Tooltip("Tracks pending level ups to ensure they are processed one at a time")]
@@ -76,19 +78,24 @@ public class BuffCardManager : MonoBehaviour
                 playerExperience = playerXP;
             }
         }
-        if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(OnLevelUp); }
 
+        if (playerExperience != null) { playerExperience.OnLevelUp.AddListener(OnLevelUp); }
         //Subscribe to availability change events for weapons, temporary upgrades, and modifications
-        StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices);
-        WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices);
-        if (StatManager.Instance == null) { Debug.Log("BuffCardManager - StatManager instance is null"); }
-        ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices);
+        if (StatManager.Instance != null) { StatManager.Instance.OnTempUpgradeAvailabilityChange.AddListener(UpdateAvailableChoices); }
+        if (WeaponManager.Instance != null) { WeaponManager.Instance.OnWeaponAvailabilityChange.AddListener(UpdateAvailableChoices); }
+        if (ModificationManager.Instance != null) { ModificationManager.Instance.OnModificationAvailabilityChange.AddListener(UpdateAvailableChoices); }
 
         InitializeAvailableChoices();
 
         // Initialize rerolls and bans
         rerollsAvailable = startingRerollAmount;
         bansAvailable = startingBanAmount;
+        buffCardsWindowInstance = buffCardsWindowPrefab.GetComponent<BuffCardsWindow>();
+        if (buffCardsWindowInstance != null)
+        {
+            buffCardsWindowInstance.UpdateRerollsAvailable(rerollsAvailable);
+            buffCardsWindowInstance.UpdateBansAvailable(bansAvailable);
+        }
     }
 
     private void Update()
@@ -141,6 +148,10 @@ public class BuffCardManager : MonoBehaviour
             TemporaryBuff choice = PickRandomChoice(choicePool);
             if (choice != null) currentChoices.Add(choice);
         }
+
+        // Update the BuffCardsWindow with the current rerolls and bans available
+        buffCardsWindowInstance.UpdateRerollsAvailable(rerollsAvailable);
+        buffCardsWindowInstance.UpdateBansAvailable(bansAvailable);
 
         UIManager.Instance.Push(buffCardsWindowPrefab);
     }
@@ -209,11 +220,12 @@ public class BuffCardManager : MonoBehaviour
         {
             // Randomly choose an ITemporary
             TemporaryBuff choice = PickRandomChoice(choicePool);
-            if (choice != null)  currentChoices.Add(choice);
+            if (choice != null) currentChoices.Add(choice);
         }
 
-        UIManager.Instance.Push(buffCardsWindowPrefab);
+        buffCardsWindowInstance.UpdateRerollsAvailable(rerollsAvailable);
 
+        UIManager.Instance.Push(buffCardsWindowPrefab);
     }
 
     public void BanChoice(TemporaryBuff buffClicked)
@@ -235,8 +247,12 @@ public class BuffCardManager : MonoBehaviour
         {
             choicePool = new(availableChoices);
         }
+
         TemporaryBuff choice = PickRandomChoice(choicePool);
         if (choice != null) currentChoices.Add(choice);
+
+        buffCardsWindowInstance.UpdateBansAvailable(bansAvailable);
+
         UIManager.Instance.Push(buffCardsWindowPrefab);
     }
 
@@ -252,22 +268,21 @@ public class BuffCardManager : MonoBehaviour
     public void AddRerolls(int amount)
     {
         rerollsAvailable += amount;
+        buffCardsWindowInstance.UpdateRerollsAvailable(rerollsAvailable);
     }
 
     public void AddBans(int amount)
     {
         bansAvailable += amount;
+        buffCardsWindowInstance.UpdateBansAvailable(bansAvailable);
     }
 
     //Unsubscribe from events to prevent memory leaks
     private void OnDestroy()
     {
-        if (playerExperience != null)
-        {
-            playerExperience.OnLevelUp.RemoveListener(DisplayBuffCards);
-        }
-        WeaponManager.Instance.OnWeaponAvailabilityChange.RemoveListener(UpdateAvailableChoices);
-        StatManager.Instance.OnTempUpgradeAvailabilityChange.RemoveListener(UpdateAvailableChoices);
-        ModificationManager.Instance.OnModificationAvailabilityChange.RemoveListener(UpdateAvailableChoices);
+        if (playerExperience != null) { playerExperience.OnLevelUp.RemoveListener(DisplayBuffCards); }
+        if (WeaponManager.Instance != null) { WeaponManager.Instance.OnWeaponAvailabilityChange.RemoveListener(UpdateAvailableChoices); }
+        if (StatManager.Instance != null) { StatManager.Instance.OnTempUpgradeAvailabilityChange.RemoveListener(UpdateAvailableChoices); }
+        if (ModificationManager.Instance != null) { ModificationManager.Instance.OnModificationAvailabilityChange.RemoveListener(UpdateAvailableChoices); }
     }
 }
