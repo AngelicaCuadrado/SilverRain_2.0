@@ -36,7 +36,7 @@ public class GrenadeProjectile : Projectile
     {
         //Play the explosion VFX
         var explosion = WeaponManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, transform.position, Quaternion.identity);
-        explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey, explosionRadius);
+        explosion.GetComponent<ExplosionVFXController>().Init(explosionVFXPoolKey, explosionRadius);
 
         //Get all colliders in the explosion radius
         Collider[] hits;

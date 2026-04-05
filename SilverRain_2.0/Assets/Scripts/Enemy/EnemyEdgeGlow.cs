@@ -24,11 +24,15 @@ public class EnemyEdgeGlow : MonoBehaviour
 
     private void OnEnable()
     {
+        if (StageManager.Instance == null) return;
+
         buffLevel = StageManager.Instance.CurrentStage;
     }
 
     public void ApplyBuffVisual()
     {
+        if (StageManager.Instance == null) return;
+
         Color rimColor = StageManager.Instance.GetStageEmissionColor();
         rimIntensity = 0f;
 
@@ -53,7 +57,7 @@ public class EnemyEdgeGlow : MonoBehaviour
                 rimIntensity = 0f;
                 break;
         }
-        
+
         foreach (var r in renderers)
         {
             r.GetPropertyBlock(mpb);

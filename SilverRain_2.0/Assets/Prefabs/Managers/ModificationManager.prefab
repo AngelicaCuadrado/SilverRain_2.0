@@ -181,11 +181,11 @@ MonoBehaviour:
   poolRoot: {fileID: 2165518556898007338}
   pools:
   - key: ExplodingBullets
-    prefab: {fileID: 8157332987337599133, guid: 3ef8c9151fb4beb41b1d71201c760f53, type: 3}
+    prefab: {fileID: 3978797885945949315, guid: 1d312790336b07a46a0df9daf7767ebe, type: 3}
     initialSize: 2
     isExpandable: 1
   - key: ChainReaction
-    prefab: {fileID: 8157332987337599133, guid: 3ef8c9151fb4beb41b1d71201c760f53, type: 3}
+    prefab: {fileID: 3978797885945949315, guid: 1d312790336b07a46a0df9daf7767ebe, type: 3}
     initialSize: 2
     isExpandable: 1
 --- !u!1 &3186625611067365789

@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class GrenadeExplosionVFX : MonoBehaviour, IPoolable
+public class ExplosionVFXController : MonoBehaviour, IPoolable
 {
-    [SerializeField, Tooltip("")]
+    [SerializeField, Tooltip("The particle system for the explosion VFX")]
     private ParticleSystem ps;
-    [SerializeField, Tooltip("")]
-    private float sizeScaler = 3f;
+    [SerializeField, Tooltip("The scale factor for the explosion size")]
+    private float sizeScaler = 0f;
 
     public string PoolKey { get; set; }
     public ObjectPooler PoolOwner { get; set; }
@@ -23,8 +23,7 @@ public class GrenadeExplosionVFX : MonoBehaviour, IPoolable
         if (ps == null) { ps = GetComponent<ParticleSystem>(); }
         // Scale the explosion VFX
         var main = ps.main;
-        // Ido Isaac - I multiplied by 3 to offset the animation we have being small
-        main.startSize = new ParticleSystem.MinMaxCurve(size * sizeScaler);
+        main.startSize = new(size * sizeScaler);
         ps.Play();
         StartCoroutine(ReturnWhenDone());
     }
@@ -34,6 +33,5 @@ public class GrenadeExplosionVFX : MonoBehaviour, IPoolable
 
         // Use the PoolOwner to return to the correct pool
         PoolOwner.ReturnToPool(gameObject, PoolKey);
-        yield break;
     }
 }

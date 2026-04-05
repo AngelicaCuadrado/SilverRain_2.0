@@ -46,7 +46,7 @@ public class DoubleExplosion : Modification
 
         // Play the explosion VFX
         var explosion = WeaponManager.Instance.EffectsPool.Spawn(proj.ExplosionVFXPoolKey, position, Quaternion.identity);
-        explosion.GetComponent<GrenadeExplosionVFX>().Init(proj.ExplosionVFXPoolKey, proj.ExplosionRadius);
+        explosion.GetComponent<ExplosionVFXController>().Init(proj.ExplosionVFXPoolKey, proj.ExplosionRadius);
 
         // Get all colliders in the explosion radius
         Collider[] hits;

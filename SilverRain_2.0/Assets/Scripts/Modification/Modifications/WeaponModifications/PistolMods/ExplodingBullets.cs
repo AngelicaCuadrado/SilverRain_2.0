@@ -30,7 +30,7 @@ public class ExplodingBullets : Modification
     private void Explode(Vector3 position)
     {
         var explosion = ModificationManager.Instance.EffectsPool.Spawn(explosionVFXPoolKey, position, Quaternion.identity);
-        explosion.GetComponent<GrenadeExplosionVFX>().Init(explosionVFXPoolKey, explosionRadius);
+        explosion.GetComponent<ExplosionVFXController>().Init(explosionVFXPoolKey, explosionRadius);
 
         Collider[] hits = Physics.OverlapSphere(position, explosionRadius, hitMask);
 

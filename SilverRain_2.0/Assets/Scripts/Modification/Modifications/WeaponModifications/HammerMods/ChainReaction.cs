@@ -97,7 +97,7 @@ public class ChainReaction : Modification
         if (ModificationManager.Instance != null && ModificationManager.Instance.EffectsPool != null)
         {
             var vfxObj = ModificationManager.Instance.EffectsPool.Spawn(poolKey, position, Quaternion.identity);
-            var vfx = vfxObj?.GetComponent<GrenadeExplosionVFX>();
+            var vfx = vfxObj?.GetComponent<ExplosionVFXController>();
             if (vfx != null)
             {
                 vfx.Init(poolKey, radius);

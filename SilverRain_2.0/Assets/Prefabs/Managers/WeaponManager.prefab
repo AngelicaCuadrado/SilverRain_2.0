@@ -176,7 +176,7 @@ MonoBehaviour:
   - type: 5
     weapon: {fileID: 6563765875867932003}
   maxWeapons: 3
-  initialWeapon: 5
+  initialWeapon: 4
   projectilePool: {fileID: 3923140885524237589}
   effectsPool: {fileID: 5067260411644754154}
   OnWeaponAvailabilityChange:
@@ -255,11 +255,11 @@ MonoBehaviour:
   poolRoot: {fileID: 3297771216544915272}
   pools:
   - key: GrenadeExplosion
-    prefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
+    prefab: {fileID: 3978797885945949315, guid: 1d312790336b07a46a0df9daf7767ebe, type: 3}
     initialSize: 4
     isExpandable: 1
   - key: HammerHit
-    prefab: {fileID: 9111320563476075686, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
+    prefab: {fileID: 6950132145617103284, guid: c70a1f33682e0d74a9d65d5623d933af, type: 3}
     initialSize: 4
     isExpandable: 1
 --- !u!1 &8522673845189503727
@@ -484,6 +484,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6088385331960100227, guid: 8c912f7be2bda30468e44331b7733c66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867825171488371666, guid: 8c912f7be2bda30468e44331b7733c66, type: 3}
+      propertyPath: firePointOffset.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8237997945787266566, guid: 8c912f7be2bda30468e44331b7733c66, type: 3}

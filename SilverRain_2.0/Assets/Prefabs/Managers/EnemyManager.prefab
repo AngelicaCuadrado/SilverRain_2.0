@@ -185,9 +185,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3664973912934706085}
+  - component: {fileID: 8098673505209078407}
   - component: {fileID: 3881277904615097228}
   - component: {fileID: 7926222030811791400}
-  - component: {fileID: 8098673505209078407}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -214,6 +214,40 @@ Transform:
   - {fileID: 5591992013016753140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8098673505209078407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644271785684338871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29df3d7dda627eb4c99f27582f8bbd1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  maxStage: 5
+  stageDuration: 60
+  stageEmissionColors:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.3, g: 0.7, b: 1, a: 1}
+  - {r: 0.7, g: 0.3, b: 1, a: 1}
+  - {r: 1, g: 0.5, b: 0.1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  healthMultipliers:
+  - 1
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.4
+  OnStageChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  _elapsedTime: 0
+  _currentStage: 0
 --- !u!114 &3881277904615097228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,40 +291,6 @@ MonoBehaviour:
   - FairyEnemyPool
   - GoblinEnemyPool
   - MushroomEnemyPool
---- !u!114 &8098673505209078407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3644271785684338871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29df3d7dda627eb4c99f27582f8bbd1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageManager
-  maxStage: 5
-  stageDuration: 60
-  stageEmissionColors:
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0.3, g: 0.7, b: 1, a: 1}
-  - {r: 0.7, g: 0.3, b: 1, a: 1}
-  - {r: 1, g: 0.5, b: 0.1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  healthMultipliers:
-  - 1
-  - 1.1
-  - 1.2
-  - 1.3
-  - 1.4
-  OnStageChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTimerUpdated:
-    m_PersistentCalls:
-      m_Calls: []
-  _elapsedTime: 0
-  _currentStage: 0
 --- !u!1 &3686194681415105617
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,10 +43,6 @@ public class HammerProjectile : Projectile
         damage = dmg;
         hitRadius = size;
         startRotation = startRot;
-
-        //Scale the gameobject based on size
-        //if (size < 1f) size = 1f;
-        //transform.localScale = Vector3.one * size;
     }
 
     private void Update()
@@ -79,8 +75,11 @@ public class HammerProjectile : Projectile
     private void Hit()
     {
         //Play the hit VFX
-        //var hitEffect = WeaponManager.Instance.EffectsPool.Spawn(hitVFXPoolKey, hitPosition.position, Quaternion.identity);
-        //hitEffect.GetComponent<HammerHitVFX>().Init(hitVFXPoolKey, hitRadius);
+        if (hitVFXPoolKey != null && hitVFXPoolKey != "")
+        {
+            var hitEffect = WeaponManager.Instance.EffectsPool.Spawn(hitVFXPoolKey, hitPosition.position, Quaternion.identity);
+            hitEffect.GetComponent<HammerHitVFXController>().Init(hitVFXPoolKey, hitRadius);
+        }
 
         //Get all colliders in the hit radius
         Collider[] hits;
