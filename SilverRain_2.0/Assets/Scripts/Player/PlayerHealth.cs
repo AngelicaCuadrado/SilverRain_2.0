@@ -7,10 +7,9 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField, Tooltip("")]
-    private float maxHealth;
-    [SerializeField, Tooltip("")]
-    private float currentHealth;
+    public float maxHealth;
+    public float currentHealth;
+    public bool hasSurvivalInstinct = false;
 
     [Header("Events")]
     [HideInInspector] public UnityEvent onPlayerHealthChanged;
@@ -83,6 +82,18 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0f)
         {
+            if (hasSurvivalInstinct)
+            {
+                hasSurvivalInstinct = false; 
+
+                currentHealth = maxHealth * 0.3f;
+
+                onPlayerHealthChanged?.Invoke();
+                CheckLowHealthState();
+                CheckHighHealthState();
+
+                return;
+            }
             Die();
         }
     }

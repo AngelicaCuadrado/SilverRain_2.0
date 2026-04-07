@@ -154,7 +154,7 @@ public class UpgradeWindow : UIWindow
     {
         if (goldText != null)
         {
-            goldText.text = $"Gold: {GoldManager.Instance.CurrentGold}G";
+            goldText.text = $"{GoldManager.Instance.CurrentGold}G";
         }
         UpdateButtonState();
     }
