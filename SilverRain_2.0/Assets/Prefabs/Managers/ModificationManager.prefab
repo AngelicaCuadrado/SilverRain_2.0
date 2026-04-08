@@ -120,9 +120,11 @@ MonoBehaviour:
   - {fileID: 7257468520180544864}
   - {fileID: 3138433768556322882}
   - {fileID: 3182619889693857902}
+  - {fileID: 2401572692541235315}
   - {fileID: 8430674330278430144}
   - {fileID: 9162661891629712036}
   - {fileID: 5663025499025732886}
+  - {fileID: 5247068802707819343}
   - {fileID: 3005066988176126775}
   - {fileID: 8304087386554784021}
   - {fileID: 5338559971361278142}
@@ -418,8 +420,8 @@ Transform:
   - {fileID: 7725096878372941180}
   - {fileID: 8342078194245586519}
   - {fileID: 782463599099728896}
-  - {fileID: 7104024976521088788}
   - {fileID: 8551910690420977046}
+  - {fileID: 7104024976521088788}
   m_Father: {fileID: 7566670825032451302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8761186109694614495
@@ -453,8 +455,8 @@ Transform:
   m_Children:
   - {fileID: 1442060593840191629}
   - {fileID: 9017438509232844461}
-  - {fileID: 362820897915209323}
   - {fileID: 2563611599617811124}
+  - {fileID: 362820897915209323}
   m_Father: {fileID: 7566670825032451302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8798894260972615419
@@ -1485,6 +1487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7716167620794968763}
     m_Modifications:
+    - target: {fileID: 542158010498216805, guid: f6e8ecfcc2dec8e48813058aa774d93d, type: 3}
+      propertyPath: id
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7647890258111885547, guid: f6e8ecfcc2dec8e48813058aa774d93d, type: 3}
       propertyPath: m_Name
       value: CombatRecovery
@@ -1539,6 +1545,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7837586867200826014, guid: f6e8ecfcc2dec8e48813058aa774d93d, type: 3}
   m_PrefabInstance: {fileID: 5717166414508324906}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5247068802707819343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 542158010498216805, guid: f6e8ecfcc2dec8e48813058aa774d93d, type: 3}
+  m_PrefabInstance: {fileID: 5717166414508324906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5541c68180c9e8040885f0a23f75b998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatRecovery
 --- !u!1001 &5874871227414239762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1742,6 +1759,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea9430fa2a18b12419c68bef1705779a, type: 3}
+--- !u!114 &2401572692541235315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8849851500973418744, guid: ea9430fa2a18b12419c68bef1705779a, type: 3}
+  m_PrefabInstance: {fileID: 6594647194635634827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e141380e9d95a846af7f3e57f1b13c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SurvivalInstinct
 --- !u!4 &8551910690420977046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3254582835769566493, guid: ea9430fa2a18b12419c68bef1705779a, type: 3}

@@ -50,7 +50,7 @@ MonoBehaviour:
   isAvailable: 1
   isAvailableAtStart: 1
   uiData: {fileID: 5757803428102463322}
-  id: 0
+  id: 5
   requiredWeapon: 0
 --- !u!114 &5757803428102463322
 MonoBehaviour:
