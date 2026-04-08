@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class StageManager : MonoBehaviour
 {
-    public static StageManager Instance;
-    
+    public static StageManager Instance { get; private set; }
+
     [Header("Stage Settings")]
     [SerializeField] private int maxStage = 5;
     [SerializeField] private float stageDuration = 60f;

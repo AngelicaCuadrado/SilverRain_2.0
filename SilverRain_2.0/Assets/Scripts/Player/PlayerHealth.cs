@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public float maxHealth;
     public float currentHealth;
+    public bool hasSurvivalInstinct = false;
 
     [Header("Events")]
     [HideInInspector] public UnityEvent onPlayerHealthChanged;
@@ -17,14 +18,22 @@ public class PlayerHealth : MonoBehaviour
     [HideInInspector] public UnityEvent<bool> onLowHealthStateChanged;
     [HideInInspector] public UnityEvent<bool> onHighHealthStateChanged;
 
+    [Header("Health State")]
+    [SerializeField, Tooltip("Indicates if the player is in low health state")]
     private bool isLowHealth = false;
+    [SerializeField, Tooltip("Indicates if the player is in high health state")]
     private bool isHighHealth = false;
 
-    public bool isInvincible = false;
+    [Header("Invincibility Settings")]
+    [SerializeField, Tooltip("Indicates if the player is currently invincible")]
+    private bool isInvincible = false;
+    [SerializeField, Tooltip("Duration of invincibility in seconds")]
     private float invincibilityTimer = 0f;
+    [SerializeField, Tooltip("GameObject for the invincibility glow effect")]
+    private GameObject invincibilityGlowEffect;
 
     private object _pauseToken;
-    
+
     private void Awake()
     {
         //maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
@@ -37,10 +46,18 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible)
         {
             invincibilityTimer -= Time.deltaTime;
+
+            // Toggle the glow effect based on invincibility state
+            if (invincibilityGlowEffect != null) { invincibilityGlowEffect.SetActive(true); }
             if (invincibilityTimer <= 0f)
             {
                 isInvincible = false;
             }
+        }
+        // Disable the glow effect when invincibility ends
+        else
+        {
+            if (invincibilityGlowEffect != null) { invincibilityGlowEffect.SetActive(false); }
         }
     }
 
@@ -65,6 +82,18 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0f)
         {
+            if (hasSurvivalInstinct)
+            {
+                hasSurvivalInstinct = false; 
+
+                currentHealth = maxHealth * 0.3f;
+
+                onPlayerHealthChanged?.Invoke();
+                CheckLowHealthState();
+                CheckHighHealthState();
+
+                return;
+            }
             Die();
         }
     }
@@ -73,7 +102,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-        
+
         onPlayerHealthChanged?.Invoke();
         CheckHighHealthState();
         CheckLowHealthState();
@@ -105,14 +134,14 @@ public class PlayerHealth : MonoBehaviour
         // Death logic here
         OnDie?.Invoke();
         //GameManager.Instance.PauseGame();
-        
+
         // FOR TESTING HERE ONLY
         _pauseToken = PauseManager.Instance.Acquire("Die");
         Debug.Log("Player Died");
-        
+
         // when player die, push GameOverWindow, when UIWindow is pushed,
         // acquired pause token, when leave this window, release the token.
-        
+
         //GameManager.Instance.ChangeLevel("LevelSelector");
     }
 

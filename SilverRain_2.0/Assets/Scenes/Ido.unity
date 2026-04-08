@@ -60456,14 +60456,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5596106329357065321, guid: 00f9e0202cdba85419b090485e892798, type: 3}
-      propertyPath: initialWeapon
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6563765875867932003, guid: 00f9e0202cdba85419b090485e892798, type: 3}
-      propertyPath: firePointOffset.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6941092582187873988, guid: 00f9e0202cdba85419b090485e892798, type: 3}
       propertyPath: m_Name
       value: WeaponManager
@@ -60696,10 +60688,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8304087386554784021, guid: 9e7e7bc1fb105804184316f74c76c919, type: 3}
-      propertyPath: explosionRadius
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -60768,13 +60756,14 @@ SceneRoots:
   m_Roots:
   - {fileID: 1280090478}
   - {fileID: 135736912}
+  - {fileID: 2655300521599731110}
   - {fileID: 1430284582}
+  - {fileID: 533385621588626856}
   - {fileID: 1002890397}
   - {fileID: 2133767562}
   - {fileID: 162828484}
   - {fileID: 4838419213209670889}
   - {fileID: 2424046806802824095}
-  - {fileID: 533385621588626856}
   - {fileID: 549585950334853871}
   - {fileID: 4564271205105293030}
   - {fileID: 4276469250248895446}
@@ -60783,4 +60772,3 @@ SceneRoots:
   - {fileID: 28139403}
   - {fileID: 358472285}
   - {fileID: 151505630}
-  - {fileID: 2655300521599731110}

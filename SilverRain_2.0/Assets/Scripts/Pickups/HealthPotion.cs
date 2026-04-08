@@ -12,6 +12,8 @@ public class HealthPotion : Pickup
         if (playerHealth != null)
         {
             playerHealth.Heal(healAmount);
+            // play the VFX
+            FindAnyObjectByType<HealParticlesController>().PlayHealParticles();
         }
         base.OnPickup();
     }
