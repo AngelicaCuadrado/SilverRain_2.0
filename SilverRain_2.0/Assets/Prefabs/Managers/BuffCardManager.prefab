@@ -46,8 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuffCardManager
   currentChoices: []
   choiceAmount: 3
-  startingRerollAmount: 20
+  startingRerollAmount: 5
   rerollsAvailable: 0
-  startingBanAmount: 20
+  startingBanAmount: 5
   bansAvailable: 0
   buffCardsWindowPrefab: {fileID: 3913967386060442326, guid: f90c1f5b9b696c346ac9bb59c3343399, type: 3}
+  buffCardsWindowInstance: {fileID: 0}

@@ -32,8 +32,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField, Tooltip("GameObject for the invincibility glow effect")]
     private GameObject invincibilityGlowEffect;
 
-    private object _pauseToken;
-
     private void Awake()
     {
         //maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
@@ -133,16 +131,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Death logic here
         OnDie?.Invoke();
-        //GameManager.Instance.PauseGame();
-
-        // FOR TESTING HERE ONLY
-        _pauseToken = PauseManager.Instance.Acquire("Die");
         Debug.Log("Player Died");
-
-        // when player die, push GameOverWindow, when UIWindow is pushed,
-        // acquired pause token, when leave this window, release the token.
-
-        //GameManager.Instance.ChangeLevel("LevelSelector");
     }
 
     public float GetHealthPercentage()

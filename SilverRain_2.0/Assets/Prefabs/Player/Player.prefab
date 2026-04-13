@@ -252,6 +252,7 @@ MonoBehaviour:
   coyoteTime: 0.15
   jumpBufferTime: 0.1
   jumpSfxId: sfx_jump
+  _canMove: 1
 --- !u!114 &6304079590716785013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,8 +265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf841bfc167e45269813f51eec3417b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 10000000
+  maxHealth: 100
   currentHealth: 0
+  hasSurvivalInstinct: 0
   onPlayerHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -301,7 +303,7 @@ MonoBehaviour:
   currentLevel: 1
   currentExp: 0
   requiredExp: 100
-  expGrowthRate: 1.5
+  expGrowthRate: 2.5
   OnExpChanged:
     m_PersistentCalls:
       m_Calls: []

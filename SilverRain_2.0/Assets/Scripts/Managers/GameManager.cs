@@ -74,9 +74,6 @@ public class GameManager : MonoBehaviour
     public void ChangeLevel(string levelName)
     {
         StartCoroutine(ChangeLevelRoutine(levelName));
-        // UIManager.Instance.ShowLoading(true);
-        // SceneManager.LoadSceneAsync(levelName);
-        // UIManager.Instance.ShowLoading(false);
     }
 
     private IEnumerator ChangeLevelRoutine(string levelName)
@@ -96,8 +93,10 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Reset level timer and score
+        levelTimer = 0f;
         ScoreManager.Instance.ResetScore();
-        //Debug.Log($"[GameManager] OnSceneLoaded: {scene.name}, IsPlayable: {IsPlayableLevel(scene)}");
+
         // Clean up all UI from previous scene
         UIManager.Instance.Clear();
         UIManager.Instance.ClearAllOverlay();

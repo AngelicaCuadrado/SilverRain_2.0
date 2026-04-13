@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -41,6 +40,11 @@ public class InputManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
         
+        // Ensure events are initialized so other scripts can safely AddListener in their Start methods.
+        OnJump ??= new UnityEvent();
+        OnPause ??= new UnityEvent();
+        OnResume ??= new UnityEvent();
+
         //DontDestroyOnLoad(gameObject);
     }
 
@@ -54,7 +58,7 @@ public class InputManager : MonoBehaviour
         _jump = Actions != null ? Actions.FindAction("Gameplay/Jump", throwIfNotFound: false) : null;
         _pause = Actions != null ? Actions.FindAction("Gameplay/Pause", throwIfNotFound: false) : null;
         _resume = Actions != null ? Actions.FindAction("UI/Resume", throwIfNotFound: false) : null;
-
+    
         // Bind events only if actions exist (prevents NullReference in misconfigured projects).
         if (_jump != null)
            _jump.performed += _ => OnJump?.Invoke();
@@ -62,6 +66,11 @@ public class InputManager : MonoBehaviour
             _pause.performed += _ => OnPause?.Invoke();
         if (_resume != null)
             _resume.performed += _ => OnResume?.Invoke();
+
+        // Ensure action maps are in the correct state now that Actions are initialized.
+        // Some callers (GameManager.OnSceneLoaded) may call Apply(...) during scene load before this Start runs;
+        // applying again here guarantees the correct action maps are enabled.
+        Apply(CurrentMode);
     }
 
     /// <summary>

@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private float _xRotation;
     private float _yRotation;
+    [SerializeField]
     private bool _canMove = true;
     // private Vector2 movementInput;
     // private Vector2 lookInput;
