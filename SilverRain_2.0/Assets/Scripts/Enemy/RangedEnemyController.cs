@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 using static UnityEngine.UI.Image;
 
 public class RangedEnemyController : EnemyController
@@ -102,7 +102,4 @@ public class RangedEnemyController : EnemyController
             }
         }
     }
-
-
-
 }
