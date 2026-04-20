@@ -6310,6 +6310,7 @@ MonoBehaviour:
   - {fileID: 95624196}
   - {fileID: 80008572}
   - {fileID: 1689869473}
+  - {fileID: 1359352587}
   pickupPool: {fileID: 434055237}
   maxPickups: 3
   currentPickups: 0
@@ -16129,6 +16130,7 @@ Transform:
   - {fileID: 95624196}
   - {fileID: 80008572}
   - {fileID: 1689869473}
+  - {fileID: 1359352587}
   m_Father: {fileID: 434055239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1059582605
@@ -21328,6 +21330,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5225588796017555919, guid: 9e259f1b7ebb3e8498279637ee77d9e1, type: 3}
   m_PrefabInstance: {fileID: 1353262119}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1359352586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1359352587}
+  m_Layer: 0
+  m_Name: Location (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1359352587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359352586}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.6, y: 0.694, z: 25.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1056349576}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1369687463
 PrefabInstance:
   m_ObjectHideFlags: 0

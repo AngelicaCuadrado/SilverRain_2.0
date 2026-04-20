@@ -33,3 +33,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3cb32de8750e72c4b9837cd085bf1bbe, type: 3}
   - id: sfx_gun
     clip: {fileID: 8300000, guid: 15e422c74da95e94c8cff4a36ef5ff34, type: 3}
+  - id: bgm_level2
+    clip: {fileID: 8300000, guid: adedc6fe9c4c1b34fbc742b1bbb1f6c6, type: 3}
+  - id: bgm_level3
+    clip: {fileID: 8300000, guid: a158a9ea91a018f41b0aac081aef8e09, type: 3}

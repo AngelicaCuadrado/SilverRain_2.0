@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,29 +28,56 @@ public class AudioManager : MonoBehaviour
 
         InitializeAudioSources();
     }
-    
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        string sceneName = scene.name;
+
+        switch (sceneName)
+        {
+            case "Level_Menu":
+                PlayBGM("bgm_main");
+                break;
+            case "Level1":
+                PlayBGM("bgm_level1");
+                break;
+            case "Level2":
+                PlayBGM("bgm_level2");
+                break;
+            case "Level3":
+                PlayBGM("bgm_level3");
+                break;
+        }
+    }
     private void InitializeAudioSources()
     {
-        // Add AudioListener if not present on this object
         if (GetComponent<AudioListener>() == null)
         {
             gameObject.AddComponent<AudioListener>();
         }
 
-        // BGM source (looping)
         _bgm = gameObject.AddComponent<AudioSource>();
         _bgm.loop = true;
         _bgm.playOnAwake = false;
         _bgm.outputAudioMixerGroup = bgmGroup;
         _bgm.ignoreListenerPause = true;
 
-        // SFX source (one-shot)
         _sfx = gameObject.AddComponent<AudioSource>();
         _sfx.playOnAwake = false;
         _sfx.outputAudioMixerGroup = sfxGroup;
         _sfx.ignoreListenerPause = true;
     }
-    
+
     public void PlayBGM(string id)
     {
         var clip = library.Find(id);
@@ -59,8 +87,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        //if (_bgm.clip == clip && _bgm.isPlaying) return;
-        
         if (_bgm.isPlaying)
         {
             if (_bgm.clip == clip) return;
@@ -72,7 +98,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void StopBGM() => _bgm.Stop();
-    
+
     public void PlaySFX(string id)
     {
         var clip = library.Find(id);
@@ -83,22 +109,21 @@ public class AudioManager : MonoBehaviour
         }
         _sfx.PlayOneShot(clip);
     }
-    
+
     public void SetMixerVolume(string exposedParam, float volume01)
     {
         volume01 = Mathf.Clamp01(volume01);
 
-        // Convert linear volume to dB. Use a floor to avoid -Infinity.
         float db = (volume01 <= 0.0001f) ? -80f : Mathf.Log10(volume01) * 20f;
 
         if (!mixer.SetFloat(exposedParam, db))
             Debug.LogWarning($"[AudioManager] Mixer param not found: {exposedParam}");
     }
-    
+
     public bool TryGetMixerDb(string exposedParam, out float db)
     {
         return mixer.GetFloat(exposedParam, out db);
     }
-    
+
     public AudioMixer Mixer => mixer;
 }

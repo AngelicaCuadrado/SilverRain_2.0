@@ -52,7 +52,14 @@ public abstract class Pickup : MonoBehaviour, IPoolable
         if (other.CompareTag("Player"))
         {
             OnPickup();
-            PoolOwner.ReturnToPool(gameObject, poolKey);
+            if (PoolOwner != null)
+            {
+                PoolOwner.ReturnToPool(gameObject, poolKey);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
