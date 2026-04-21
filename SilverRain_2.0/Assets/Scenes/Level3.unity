@@ -37687,6 +37687,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9018250374305116530, guid: b8e82ee9dbc66c1408b336bca986859d, type: 3}
   m_PrefabInstance: {fileID: 688104768}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &688564147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688564149}
+  - component: {fileID: 688564148}
+  m_Layer: 0
+  m_Name: IdosTestHarness
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &688564148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688564147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2d4e5921112b049a645bd6d18bc989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IdosTestHarness
+  playerExp: {fileID: 1405251909}
+--- !u!4 &688564149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688564147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &691648049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77347,6 +77392,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 892971110221133294, guid: e40854a050198844cab76d8fcd616756, type: 3}
   m_PrefabInstance: {fileID: 1404836894}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1405251909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3776103564832455803, guid: 1e98750853bf0824c8b9692c9047dd62, type: 3}
+  m_PrefabInstance: {fileID: 1811456036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c26e8a6b2d4614935872da92c4c63b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerExperience
 --- !u!1001 &1407287801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119375,3 +119431,4 @@ SceneRoots:
   - {fileID: 1160984668}
   - {fileID: 1066568232}
   - {fileID: 1846895080}
+  - {fileID: 688564149}
