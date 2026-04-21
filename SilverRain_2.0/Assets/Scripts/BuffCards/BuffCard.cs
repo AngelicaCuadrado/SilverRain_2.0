@@ -18,19 +18,44 @@ public class BuffCard : MonoBehaviour
 
     public void OnCardClicked()
     {
+        if (assignedBuff == null)
+        {
+            Debug.LogWarning("BuffCard - Clicked card has no assigned buff.");
+            return;
+        }
         BuffCardManager.Instance.ChooseBuffCard(assignedBuff);
     }
 
     public void OnCardBanned()
     {
+        if (assignedBuff == null)
+        {
+            Debug.LogWarning("BuffCard - Tried to ban a card with no assigned buff.");
+            return;
+        }
         BuffCardManager.Instance.BanChoice(assignedBuff);
     }
 
     public void SetupCard(TemporaryBuff buffToAssign)
     {
+        if (buffToAssign == null)
+        {
+            Debug.LogWarning("BuffCard - SetupCard received a null buff.");
+            assignedBuff = null;
+            gameObject.SetActive(false);
+            return;
+        }
+
         //Assign the buff and get the UI data
         assignedBuff = buffToAssign;
         UITemporary buffInfo = buffToAssign.UIData;
+        if (buffInfo == null)
+        {
+            Debug.LogWarning($"BuffCard - Buff '{buffToAssign.name}' is missing UIData.");
+            assignedBuff = null;
+            gameObject.SetActive(false);
+            return;
+        }
 
         // Put the data in the corresponding field
         buffName.text = buffInfo.BuffName;

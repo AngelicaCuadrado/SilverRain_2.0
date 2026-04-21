@@ -6,7 +6,14 @@ public class PlayerFinder : MonoBehaviour
     [SerializeField] private GameObject player;
     private static PlayerFinder instance;
 
-    public GameObject Player => player;
+    public GameObject Player
+    {
+        get
+        {
+            EnsurePlayerReference();
+            return player;
+        }
+    }
     public static PlayerFinder Instance => instance;
 
     private void Awake()
@@ -28,6 +35,15 @@ public class PlayerFinder : MonoBehaviour
     {
         FindPlayer();
     }
+
+    public bool EnsurePlayerReference()
+    {
+        if (player != null) return true;
+
+        FindPlayer();
+        return player != null;
+    }
+
     public void FindPlayer()
     {
         player = GameObject.FindGameObjectWithTag("Player");
