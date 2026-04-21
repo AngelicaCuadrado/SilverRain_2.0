@@ -1,5 +1,4 @@
 using System.Collections;
-//using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -110,9 +109,13 @@ public class GameManager : MonoBehaviour
 
         if (IsPlayableLevel(scene))
         {
+            // Ensure duration is set before notifying listeners.
+            levelDuration = 300f;
+
             InputManager.Instance.Apply(InputMode.Gameplay);
             UIManager.Instance.ShowOverlay("HUD", hudWindowPrefab);
             OnLevelStart?.Invoke();
+
             levelDuration = 300f;
 
             if (PlayerFinder.Instance.Player.TryGetComponent<PlayerHealth>(out PlayerHealth ph))

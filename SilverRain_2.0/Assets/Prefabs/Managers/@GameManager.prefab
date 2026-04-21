@@ -55,7 +55,7 @@ MonoBehaviour:
   winWindowPrefab: {fileID: 5584736908731938592, guid: 473297ab69a69e849a09be0f46a2d8d3, type: 3}
   lostWindowPrefab: {fileID: 3098151471191658049, guid: 02dc2f12485905d439df3d5e6e5668e0, type: 3}
   levelTimer: 0
-  levelDuration: 0
+  levelDuration: 300
   playerHealth: {fileID: 0}
 --- !u!114 &8035467484488372726
 MonoBehaviour:
