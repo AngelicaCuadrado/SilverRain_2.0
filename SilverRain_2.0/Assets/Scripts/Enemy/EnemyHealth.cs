@@ -17,6 +17,8 @@ public class EnemyHealth : MonoBehaviour
     private ParticleSystem bloodSplatterPrefab;
     [SerializeField, Tooltip("")]
     private string sfxID;
+    [SerializeField, Tooltip("")]
+    private float deathCleanupDelay = 3f;
 
     [Header("References")]
     [SerializeField, Tooltip("")]
@@ -32,6 +34,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField, Tooltip("")]
     private NavMeshAgent agent;
     //private AudioSource audioSource;
+
+    private bool isDead;
+    private Coroutine deathCleanupRoutine;
 
     void Start()
     {
@@ -49,36 +54,42 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        //if (isDead) return;
+        if (isDead) return;
 
         currentHealth -= damage;
 
-        AudioManager.Instance.PlaySFX(sfxID);
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(sfxID);
+        }
+
+        SpawnBloodSplatter();
 
         if (currentHealth <= 0)
         {
             Die();
+            return;
         }
 
-        Vector3 bloodSplatterSpawn = transform.position;
-        bloodSplatterSpawn.y += 1f;
-        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
-        var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, rotation);
-
-        bloodSplatter.Play();
-
-        if (!GlobalInvisibilityManager.Instance.IsActive)
+        if (GlobalInvisibilityManager.Instance != null && !GlobalInvisibilityManager.Instance.IsActive)
         {
             enemy.RevealTimed(5f);
         }
 
-        animator.SetTrigger("hurt");
+        if (animator != null) animator.SetTrigger("hurt");
     }
 
     public void ResetHealth()
     {
         float multiplier = (StageManager.Instance != null) ? StageManager.Instance.GetHealthMultiplier() : 1f;
         currentHealth = Mathf.RoundToInt(baseHealth * multiplier);
+        isDead = false;
+
+        if (deathCleanupRoutine != null)
+        {
+            StopCoroutine(deathCleanupRoutine);
+            deathCleanupRoutine = null;
+        }
 
         // Enable collision
         foreach (var col in GetComponentsInChildren<Collider>())
@@ -95,6 +106,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         // Disable collision
         foreach (var col in GetComponentsInChildren<Collider>())
         {
@@ -107,19 +121,31 @@ public class EnemyHealth : MonoBehaviour
         if (agent != null) agent.enabled = false;
         if (controller != null) controller.enabled = false;
 
+        OnEnemyKilled?.Invoke(this);
+
         // Give player rewards
-        playerExp.GainExp(enemy.XPValue);
-        ScoreManager.Instance.AddScore(enemy.ScoreValue);
+        if (playerExp != null) playerExp.GainExp(enemy.XPValue);
+        if (ScoreManager.Instance != null) ScoreManager.Instance.AddScore(enemy.ScoreValue);
 
         // Start animation
-        animator.SetBool("isDead", true);
+        if (animator != null) animator.SetBool("isDead", true);
+
+        deathCleanupRoutine = StartCoroutine(DeathCleanupFallback());
     }
 
     // This will be called by "Death" animation event
     // Ensure the event has exactly the same name as this method
     public void DieAnimFinished()
     {
-        animator.SetBool("isDead", false);
+        if (!isDead) return;
+
+        if (deathCleanupRoutine != null)
+        {
+            StopCoroutine(deathCleanupRoutine);
+            deathCleanupRoutine = null;
+        }
+
+        if (animator != null) animator.SetBool("isDead", false);
         ReturnToPool();
     }
 
@@ -138,7 +164,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void ReturnToPool()
     {
-        if (enemy.PoolKey != null)
+        if (enemy != null && !string.IsNullOrEmpty(enemy.PoolKey) && EnemyManager.Instance != null && EnemyManager.Instance.EnemyPool != null)
         {
             EnemyManager.Instance.EnemyPool.ReturnToPool(gameObject, enemy.PoolKey);
         }
@@ -146,5 +172,24 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void SpawnBloodSplatter()
+    {
+        if (bloodSplatterPrefab == null) return;
+
+        Vector3 bloodSplatterSpawn = transform.position;
+        bloodSplatterSpawn.y += 1f;
+        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
+        var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, rotation);
+
+        bloodSplatter.Play();
+    }
+
+    private IEnumerator DeathCleanupFallback()
+    {
+        yield return new WaitForSeconds(deathCleanupDelay);
+        deathCleanupRoutine = null;
+        ReturnToPool();
     }
 }

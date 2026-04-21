@@ -31,8 +31,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Transform visibleEnemyFocusTarget;
     [SerializeField] private float visibleEnemyFocusDuration = 0.8f;
     [SerializeField] private float visibleEnemyHoldDuration = 1.2f;
-    [SerializeField] private Vector3 visibleEnemyFocusOffset = new Vector3(0f, 1.2f, 0f);
-    [SerializeField] private float visibleEnemyZoomFov = 45f;
+    [SerializeField] private Vector3 visibleEnemyFocusOffset = new Vector3(0f, 0.8f, 0f);
+    [SerializeField, Range(0f, 1f)] private float visibleEnemyUpperBodyFocus = 0.35f;
+    [SerializeField] private float visibleEnemyCenteringSpeed = 8f;
+    [SerializeField] private float visibleEnemyZoomFov = 60f;
     [SerializeField] private float visibleEnemyZoomInDuration = 0.25f;
     [SerializeField] private float visibleEnemyZoomOutDuration = 0.3f;
     [SerializeField] private float visibleEnemyShakeAmplitude = 0.08f;
@@ -63,6 +65,7 @@ public class TutorialManager : MonoBehaviour
 
     private TutorialStep currentStep = TutorialStep.None;
     private GameObject player;
+    private PlayerController playerController;
     private Vector3 lastPlayerPosition;
     private float movedDistance;
     private int jumpsCompleted;
@@ -126,6 +129,8 @@ public class TutorialManager : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+
+        playerController = player != null ? player.GetComponent<PlayerController>() : null;
     }
 
     private void BeginTutorial()
@@ -342,18 +347,12 @@ public class TutorialManager : MonoBehaviour
             ? playerController.CameraTransform.localPosition
             : Vector3.zero;
 
-        Vector3 focusPoint = visibleEnemyFocusTarget.position + visibleEnemyFocusOffset;
+        Vector3 focusPoint = GetVisibleEnemyFocusPoint();
         Vector3 lookDirection = focusPoint - playerController.CameraTransform.position;
 
         if (lookDirection.sqrMagnitude > 0.001f)
         {
-            Vector3 flatLookDirection = Vector3.ProjectOnPlane(lookDirection, Vector3.up);
-            float targetYaw = flatLookDirection.sqrMagnitude > 0.001f
-                ? Quaternion.LookRotation(flatLookDirection, Vector3.up).eulerAngles.y
-                : playerController.CurrentYaw;
-
-            float distanceXZ = new Vector2(lookDirection.x, lookDirection.z).magnitude;
-            float targetPitch = -Mathf.Atan2(lookDirection.y, distanceXZ) * Mathf.Rad2Deg;
+            GetLookAnglesToFocusPoint(playerController, focusPoint, out float targetYaw, out float targetPitch);
 
             float elapsed = 0f;
             float startYaw = playerController.CurrentYaw;
@@ -381,12 +380,15 @@ public class TutorialManager : MonoBehaviour
             holdElapsed += Time.deltaTime;
             float holdT = visibleEnemyHoldDuration > 0f ? Mathf.Clamp01(holdElapsed / visibleEnemyHoldDuration) : 1f;
 
+            KeepCameraAimedAtVisibleEnemy(playerController, visibleEnemyCenteringSpeed * 2f);
+
             if (playerCamera != null)
             {
                 float zoomInWeight = visibleEnemyZoomInDuration > 0f
                     ? Mathf.Clamp01(holdElapsed / visibleEnemyZoomInDuration)
                     : 1f;
-                playerCamera.fieldOfView = Mathf.Lerp(baseFov, visibleEnemyZoomFov, Mathf.SmoothStep(0f, 1f, zoomInWeight));
+                float targetZoomFov = Mathf.Max(visibleEnemyZoomFov, 55f);
+                playerCamera.fieldOfView = Mathf.Lerp(baseFov, targetZoomFov, Mathf.SmoothStep(0f, 1f, zoomInWeight));
             }
 
             if (playerController.CameraTransform != null)
@@ -446,6 +448,114 @@ public class TutorialManager : MonoBehaviour
 
         playerController.SetCanMove(true);
         visibleEnemyFocusRoutine = null;
+    }
+
+    private void KeepCameraAimedAtVisibleEnemy(PlayerController controller, float centeringSpeed)
+    {
+        Vector3 focusPoint = GetVisibleEnemyFocusPoint();
+        Vector3 lookDirection = focusPoint - controller.CameraTransform.position;
+        if (lookDirection.sqrMagnitude <= 0.001f) return;
+
+        GetLookAnglesToFocusPoint(controller, focusPoint, out float targetYaw, out float targetPitch);
+
+        float t = 1f - Mathf.Exp(-centeringSpeed * Time.deltaTime);
+        float yaw = Mathf.LerpAngle(controller.CurrentYaw, targetYaw, t);
+        float pitch = Mathf.Lerp(controller.CurrentPitch, targetPitch, t);
+        controller.SetViewAngles(yaw, pitch);
+    }
+
+    private Vector3 GetVisibleEnemyFocusPoint()
+    {
+        if (visibleEnemyFocusTarget == null)
+        {
+            return Vector3.zero;
+        }
+
+        Bounds bounds;
+        if (!TryGetFocusTargetBounds(out bounds))
+        {
+            return visibleEnemyFocusTarget.position + visibleEnemyFocusOffset;
+        }
+
+        Vector3 upperBodyPoint = bounds.center + Vector3.up * (bounds.extents.y * visibleEnemyUpperBodyFocus);
+        return upperBodyPoint + visibleEnemyFocusOffset;
+    }
+
+    private bool TryGetFocusTargetBounds(out Bounds bounds)
+    {
+        Transform focusRoot = GetVisibleEnemyFocusRoot();
+        Collider[] colliders = focusRoot.GetComponentsInChildren<Collider>();
+        bool hasBounds = false;
+        bounds = default;
+
+        foreach (Collider col in colliders)
+        {
+            if (col == null || !col.enabled || col.isTrigger) continue;
+
+            if (!hasBounds)
+            {
+                bounds = col.bounds;
+                hasBounds = true;
+            }
+            else
+            {
+                bounds.Encapsulate(col.bounds);
+            }
+        }
+
+        if (hasBounds)
+        {
+            return true;
+        }
+
+        Renderer[] renderers = focusRoot.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer == null || !renderer.enabled) continue;
+            if (renderer is ParticleSystemRenderer || renderer is TrailRenderer || renderer is LineRenderer) continue;
+
+            if (!hasBounds)
+            {
+                bounds = renderer.bounds;
+                hasBounds = true;
+            }
+            else
+            {
+                bounds.Encapsulate(renderer.bounds);
+            }
+        }
+
+        return hasBounds;
+    }
+
+    private Transform GetVisibleEnemyFocusRoot()
+    {
+        EnemyHealth enemyHealth = visibleEnemyFocusTarget.GetComponentInChildren<EnemyHealth>();
+        if (enemyHealth != null)
+        {
+            return enemyHealth.transform;
+        }
+
+        EnemyController enemyController = visibleEnemyFocusTarget.GetComponentInChildren<EnemyController>();
+        if (enemyController != null)
+        {
+            return enemyController.transform;
+        }
+
+        return visibleEnemyFocusTarget;
+    }
+
+    private void GetLookAnglesToFocusPoint(PlayerController controller, Vector3 focusPoint, out float yaw, out float pitch)
+    {
+        Vector3 lookDirection = focusPoint - controller.CameraTransform.position;
+        Vector3 flatLookDirection = Vector3.ProjectOnPlane(lookDirection, Vector3.up);
+
+        yaw = flatLookDirection.sqrMagnitude > 0.001f
+            ? Quaternion.LookRotation(flatLookDirection, Vector3.up).eulerAngles.y
+            : controller.CurrentYaw;
+
+        float distanceXZ = new Vector2(lookDirection.x, lookDirection.z).magnitude;
+        pitch = -Mathf.Atan2(lookDirection.y, distanceXZ) * Mathf.Rad2Deg;
     }
 
     private Transform FindFocusTarget(string objectName)

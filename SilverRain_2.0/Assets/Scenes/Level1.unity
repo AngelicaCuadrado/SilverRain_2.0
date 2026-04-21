@@ -33553,6 +33553,7 @@ MonoBehaviour:
   - FairyEnemyPool
   - GoblinEnemyPool
   - MushroomEnemyPool
+  startSpawningOnStart: 0
 --- !u!114 &1118176358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38230,19 +38231,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.10471748
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.994502
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -38250,7 +38251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 167.978
       objectReference: {fileID: 0}
     - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -49852,9 +49853,9 @@ MonoBehaviour:
   focusCameraOnVisibleEnemyStep: 1
   visibleEnemyFocusTarget: {fileID: 1149388755}
   visibleEnemyFocusDuration: 2
-  visibleEnemyHoldDuration: 4
-  visibleEnemyFocusOffset: {x: 0, y: -1.2, z: 0}
-  visibleEnemyZoomFov: 10
+  visibleEnemyHoldDuration: 5.08
+  visibleEnemyFocusOffset: {x: 0, y: 0, z: 0}
+  visibleEnemyZoomFov: 5
   visibleEnemyZoomInDuration: 0.25
   visibleEnemyZoomOutDuration: 0.3
   visibleEnemyShakeAmplitude: 0.08

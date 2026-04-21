@@ -30,6 +30,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("Object Pooling")]
     private ObjectPooler objectPooler;
     [SerializeField] private List<string> enemyPoolKeys = new List<string>();
+
+    [Header("Startup")]
+    [SerializeField] private bool startSpawningOnStart = false;
     
     bool _spawning = false;
     Bounds _areaBounds;
@@ -50,7 +53,11 @@ public class EnemySpawner : MonoBehaviour
         objectPooler = EnemyManager.Instance.EnemyPool;
 
         UpdateSpawnAreaBounds();
-        StartSpawning();
+
+        if (startSpawningOnStart)
+        {
+            StartSpawning();
+        }
     }
 
     void OnValidate()
