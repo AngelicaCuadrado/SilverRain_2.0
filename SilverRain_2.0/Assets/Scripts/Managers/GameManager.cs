@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
 
     public void ChangeLevel(string levelName)
     {
+        // Tear down current UI before scene load so stale overlays cannot leak into the next scene
+        // if scene initialization in the target scene throws.
+        UIManager.Instance.Clear();
+        UIManager.Instance.ClearAllOverlay();
         StartCoroutine(ChangeLevelRoutine(levelName));
     }
 
@@ -118,7 +122,8 @@ public class GameManager : MonoBehaviour
 
             levelDuration = 300f;
 
-            if (PlayerFinder.Instance.Player.TryGetComponent<PlayerHealth>(out PlayerHealth ph))
+            GameObject player = PlayerFinder.Instance != null ? PlayerFinder.Instance.Player : null;
+            if (player != null && player.TryGetComponent<PlayerHealth>(out PlayerHealth ph))
             {
                 playerHealth = ph;
                 playerHealth.OnDie.AddListener(LoseLevel);

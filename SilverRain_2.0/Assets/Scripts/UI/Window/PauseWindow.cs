@@ -60,6 +60,8 @@ public class PauseWindow : UIWindow
 
     private void Quit()
     {
+        UIManager.Instance.Clear();
+        UIManager.Instance.ClearAllOverlay();
         GameManager.Instance.ChangeLevel("MainMenu");
     }
 }

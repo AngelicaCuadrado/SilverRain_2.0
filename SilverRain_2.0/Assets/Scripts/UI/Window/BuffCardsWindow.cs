@@ -25,8 +25,8 @@ public class BuffCardsWindow : UIWindow
         
         UIManager.Instance.Hide("HUD");
 
-        DisplayCards();
         BindUIEvents();
+        DisplayCards();
     }
     
     public override void OnPopped()
@@ -52,19 +52,23 @@ public class BuffCardsWindow : UIWindow
     private void DisplayCards()
     {
         List<TemporaryBuff> choices = BuffCardManager.Instance.CurrentChoices;
+        int visibleCardCount = 0;
 
         for (int i = 0; i < buffCards.Count; i++)
         {
-            if (i < choices.Count)
+            if (i < choices.Count && choices[i] != null)
             {
                 buffCards[i].SetupCard(choices[i]);
                 buffCards[i].gameObject.SetActive(true);
+                visibleCardCount++;
             }
             else
             {
                 buffCards[i].gameObject.SetActive(false);
             }
         }
+
+        Debug.Log($"BuffCardsWindow - Displaying {visibleCardCount} cards from {choices.Count} queued choices.");
     }
 
     private void HideCards()

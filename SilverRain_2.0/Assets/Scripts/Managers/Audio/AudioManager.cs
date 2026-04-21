@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
 
         switch (sceneName)
         {
-            case "Level_Menu":
+            case "MainMenu":
                 PlayBGM("bgm_main");
                 break;
             case "Level1":
@@ -56,6 +56,9 @@ public class AudioManager : MonoBehaviour
                 break;
             case "Level3":
                 PlayBGM("bgm_level3");
+                break;
+            default:
+                Debug.Log($"[AudioManager] No scene BGM mapping for scene '{sceneName}'.");
                 break;
         }
     }
