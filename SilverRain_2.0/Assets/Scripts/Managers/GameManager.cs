@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
 
         if (IsPlayableLevel(scene))
         {
-<<<<<<< Updated upstream
             // Ensure duration is set before notifying listeners.
             levelDuration = 300f;
 
@@ -118,15 +117,8 @@ public class GameManager : MonoBehaviour
             OnLevelStart?.Invoke();
 
             levelDuration = 300f;
-=======
-            levelDuration = 300f;
-            InputManager.Instance.Apply(InputMode.Gameplay);
-            UIManager.Instance.ShowOverlay("HUD", hudWindowPrefab);
-            OnLevelStart?.Invoke();
->>>>>>> Stashed changes
 
-            GameObject player = PlayerFinder.Instance != null ? PlayerFinder.Instance.Player : null;
-            if (player != null && player.TryGetComponent<PlayerHealth>(out PlayerHealth ph))
+            if (PlayerFinder.Instance.Player.TryGetComponent<PlayerHealth>(out PlayerHealth ph))
             {
                 playerHealth = ph;
                 playerHealth.OnDie.AddListener(LoseLevel);

@@ -1173,7 +1173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreditsWindow
   backButton: {fileID: 3553644865528435362}
-  creditsManager: {fileID: 3726442223049730383}
 --- !u!1 &6166738813568430105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1486,7 @@ MonoBehaviour:
   m_text: "SILVER RAIN 2\n\nDeveloped by Something Studios\n\nTeam Members:\n- Ido
     Isaac\n- Shane Duffney\n- Angelica Cuadrado\n- Xiaoyu Shi\n- Zibing Xin\n- Alfonso
     Raziel Mendoza\n\nInstructor:\nProfessor Hina Tariq \nICET Department, Centennial
-    College\n\n\xA9 2026 Something Studios. All rights reserved.\n"
+    College\n\n\xA9 2025 Something Studios. All rights reserved.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b2cebfebb7ab97499912765e39bec74, type: 2}
   m_sharedMaterial: {fileID: -5263338218149616523, guid: 3b2cebfebb7ab97499912765e39bec74, type: 2}

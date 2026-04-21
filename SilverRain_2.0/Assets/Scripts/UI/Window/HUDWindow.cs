@@ -25,11 +25,26 @@ public class HUDWindow : UIWindow
     // Cached references
     private PlayerHealth _playerHealth;
     private PlayerExperience _playerExperience;
-    private bool _subscribedToPlayer;
 
     public override void OnPushed()
     {
-        TryBindPlayer();
+        // Find Player components
+        GameObject player = PlayerFinder.Instance.Player;
+        _playerHealth = player.GetComponent<PlayerHealth>();
+        _playerExperience = player.GetComponent<PlayerExperience>();
+        
+        // Subscribe to events
+        if (_playerHealth != null)
+        {
+            RefreshHealth();
+            _playerHealth.onPlayerHealthChanged.AddListener(RefreshHealth);
+        }
+
+        if (_playerExperience != null)
+        {
+            _playerExperience.OnExpChanged.AddListener(RefreshExp);
+            RefreshExp();
+        }
 
         if (StageManager.Instance != null)
         {
@@ -47,7 +62,8 @@ public class HUDWindow : UIWindow
 
     public override void OnPopped()
     {
-        UnbindPlayer();
+        if (_playerHealth != null) _playerHealth.onPlayerHealthChanged.RemoveListener(RefreshHealth);
+        if (_playerExperience != null) _playerExperience.OnExpChanged.RemoveListener(RefreshExp);
         if (StageManager.Instance != null)
         {
             StageManager.Instance.OnTimerUpdated.RemoveListener(RefreshTimer);
@@ -59,51 +75,11 @@ public class HUDWindow : UIWindow
 
     private void Update()
     {
-        if (!_subscribedToPlayer)
-        {
-            TryBindPlayer();
-        }
-
         if (StageManager.Instance != null)
         {
             TimeSpan elapsedTime = TimeSpan.FromSeconds(StageManager.Instance.ElapsedTime);
             timerText.text = elapsedTime.ToString(@"mm\:ss");
         }
-    }
-
-    private void TryBindPlayer()
-    {
-        if (_subscribedToPlayer || PlayerFinder.Instance == null) return;
-
-        GameObject player = PlayerFinder.Instance.Player;
-        if (player == null) return;
-
-        _playerHealth = player.GetComponent<PlayerHealth>();
-        _playerExperience = player.GetComponent<PlayerExperience>();
-
-        if (_playerHealth != null)
-        {
-            _playerHealth.onPlayerHealthChanged.AddListener(RefreshHealth);
-            RefreshHealth();
-        }
-
-        if (_playerExperience != null)
-        {
-            _playerExperience.OnExpChanged.AddListener(RefreshExp);
-            RefreshExp();
-        }
-
-        _subscribedToPlayer = _playerHealth != null || _playerExperience != null;
-    }
-
-    private void UnbindPlayer()
-    {
-        if (_playerHealth != null) _playerHealth.onPlayerHealthChanged.RemoveListener(RefreshHealth);
-        if (_playerExperience != null) _playerExperience.OnExpChanged.RemoveListener(RefreshExp);
-
-        _playerHealth = null;
-        _playerExperience = null;
-        _subscribedToPlayer = false;
     }
 
     private void RefreshHealth()
